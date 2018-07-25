@@ -1,5 +1,5 @@
 import React from 'react'
-import ipfsLogoText from './ipfs-logo-text.svg'
+import ipfsLogoText from '../../media/logos/ipfs-logo-text.svg'
 
 const Header = () => (
   <div className='flex items-center pa4' style={{height: '150px'}}>

@@ -5,7 +5,6 @@ import { Provider } from 'redux-bundler-react'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import getStore from './bundles'
-import './index.css'
 
 ReactDOM.render(
   <Provider store={getStore()}>

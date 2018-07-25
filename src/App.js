@@ -7,6 +7,9 @@ import navHelper from 'internal-nav-helper'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
 
+// Styles
+import './App.css'
+
 export class App extends Component {
   static propTypes = {
     doInitIpfs: PropTypes.func.isRequired,
