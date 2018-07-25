@@ -1,0 +1,7 @@
+@import "../node_modules/tachyons";
+@import "../node_modules/ipfs-css";
+
+.App {
+  background: rgb(2,46,68);
+  background: linear-gradient(120deg, rgba(2,46,68,1) 70%, rgba(102,208,219,1) 70%);
+}
