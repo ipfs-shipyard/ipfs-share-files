@@ -1,8 +1,8 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-const HomePage = () => (
-  <div data-id='HomePage'>
+const Home = () => (
+  <div data-id='Home'>
     <Helmet>
       <title>IPFS - Share Files</title>
     </Helmet>
@@ -11,4 +11,4 @@ const HomePage = () => (
   </div>
 )
 
-export default HomePage
+export default Home

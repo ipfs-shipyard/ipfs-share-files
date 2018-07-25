@@ -1,5 +1,5 @@
 import React from 'react'
-import plLogoText from './protocol-labs-text.svg'
+import plLogoText from '../../media/logos/protocol-labs-text.svg'
 
 const Footer = () => (
   <div className='flex items-center justify-between pa4' style={{height: '100px'}}>
