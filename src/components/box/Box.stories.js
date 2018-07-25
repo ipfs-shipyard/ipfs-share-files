@@ -6,7 +6,7 @@ import Box from './Box'
 storiesOf('Box', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='bg-navy'>
+    <div className='flex flex-auto bg-navy'>
       <Box />
     </div>
   ))
