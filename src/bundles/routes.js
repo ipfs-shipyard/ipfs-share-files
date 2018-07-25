@@ -1,7 +1,7 @@
 import { createRouteBundle } from 'redux-bundler'
-import HomePage from '../home/HomePage'
+import Home from '../pages/home/Home'
 
 export default createRouteBundle({
-  '/': HomePage,
-  '': HomePage
+  '/': Home,
+  '': Home
 }, { routeInfoSelector: 'selectHash' })
