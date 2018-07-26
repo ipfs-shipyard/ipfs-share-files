@@ -8,7 +8,7 @@ import Box from '../../components/box/Box'
 import uploadImg from '../../media/images/upload.svg'
 
 const HowItWorks = () => {
-  const imgHeigth = 120
+  const imgHeigth = 110
 
   return (
     <div className='pl4 pr5 w-two-thirds'>

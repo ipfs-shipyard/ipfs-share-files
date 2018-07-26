@@ -1,12 +1,19 @@
 import React from 'react'
 
 // Components
+import FileIcon from '../file/file-icon/FileIcon'
 import CopyIcon from '../../media/icons/GlyphCopy.js'
 
 // Static
 import twitterLogo from '../../media/logos/twitter.svg'
 import facebookLogo from '../../media/logos/facebook.svg'
 import githubLogo from '../../media/logos/github.svg'
+
+const FileTree = () => {
+  return (
+    <FileIcon type='video' />
+  )
+}
 
 const CopyLink = () => (
   <div className='mt4'>
@@ -25,16 +32,16 @@ const SocialShare = () => {
     <div className='mt4 mb6'>
       <div className='f6 charcoal'>Share on social media:</div>
       <div className='mt3'>
-        <img src={twitterLogo} height={logoHeight} alt='Twitter' />
-        <img src={facebookLogo} height={logoHeight} className='mh2' alt='Facebook' />
-        <img src={githubLogo} height={logoHeight} alt='GitHub' />
+        <img src={twitterLogo} height={logoHeight} className='pointer' alt='Twitter' />
+        <img src={facebookLogo} height={logoHeight} className='mh2 pointer' alt='Facebook' />
+        <img src={githubLogo} height={logoHeight} className='pointer' alt='GitHub' />
       </div>
     </div>
   )
 }
 
 const Footnote = () => (
-  <div className='f6 gray'>
+  <div className='f7 gray lh-copy'>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   </div>
 )
@@ -42,6 +49,7 @@ const Footnote = () => (
 const Box = () => {
   return (
     <div className='pa4 ba br3 b--silver shadow-1 bg-white w-third'>
+      <FileTree />
       <CopyLink />
       <SocialShare />
       <Footnote />

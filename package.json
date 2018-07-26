@@ -24,6 +24,7 @@
     "@svgr/cli": "^2.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "file-extension": "^4.0.5",
     "internal-nav-helper": "^1.0.2",
     "ipfs-css": "^0.6.0",
     "ipfs-redux-bundle": "^1.0.0",
