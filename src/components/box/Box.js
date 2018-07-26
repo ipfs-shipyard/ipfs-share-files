@@ -13,7 +13,7 @@ const CopyLink = () => (
     <div className='f6 charcoal'>Copy link:</div>
     <div className='flex mt3'>
       <input type='text' className='pa2 flex-auto ba b--moon-gray moon-gray f6' />
-      <CopyIcon className='ml1 pointer' fill='#69c4cd' height='35px' alt='Copy' />
+      <CopyIcon className='ml1 fill-aqua pointer' height='35px' alt='Copy' />
     </div>
   </div>
 )
@@ -41,7 +41,7 @@ const Footnote = () => (
 
 const Box = () => {
   return (
-    <div className='ma3 pa4 ba br3 b--silver shadow-1 bg-white w-third'>
+    <div className='pa4 ba br3 b--silver shadow-1 bg-white w-third'>
       <CopyLink />
       <SocialShare />
       <Footnote />
