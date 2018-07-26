@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import FileIcon from '../file/file-icon/FileIcon'
+import File from '../file//File'
 import CopyIcon from '../../media/icons/GlyphCopy.js'
 
 // Static
@@ -11,7 +11,11 @@ import githubLogo from '../../media/logos/github.svg'
 
 const FileTree = () => {
   return (
-    <FileIcon type='video' />
+    <File
+      hash='Qm3fsA'
+      name='game-of-thrones.mkv'
+      type='video'
+      size='265318832' />
   )
 }
 
@@ -32,9 +36,9 @@ const SocialShare = () => {
     <div className='mt4 mb6'>
       <div className='f6 charcoal'>Share on social media:</div>
       <div className='mt3'>
-        <img src={twitterLogo} height={logoHeight} className='pointer' alt='Twitter' />
-        <img src={facebookLogo} height={logoHeight} className='mh2 pointer' alt='Facebook' />
-        <img src={githubLogo} height={logoHeight} className='pointer' alt='GitHub' />
+        <img src={twitterLogo} height={logoHeight} className='pointer o-50 glow' alt='Twitter' />
+        <img src={facebookLogo} height={logoHeight} className='mh2 pointer o-50 glow' alt='Facebook' />
+        <img src={githubLogo} height={logoHeight} className='pointer o-50 glow' alt='GitHub' />
       </div>
     </div>
   )

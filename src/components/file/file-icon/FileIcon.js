@@ -1,5 +1,7 @@
 import React from 'react'
 import fileExtension from 'file-extension'
+
+// Utils
 import extToType from '../utils/extToType'
 
 // Static
@@ -17,23 +19,23 @@ const typeFromExt = (filename) => {
 }
 
 const FileIcon = ({type}) => {
-  const style = { width: '2.5rem' }
+  const iconHeight = 40
 
   switch (typeFromExt(type)) {
     case 'directory':
-      return <Folder className='fill-aqua' style={style} />
+      return <Folder className='fill-aqua' height={iconHeight} />
     case 'audio':
-      return <DocMusic className='fill-aqua' style={style} />
+      return <DocMusic className='fill-aqua' height={iconHeight} />
     case 'video':
-      return <DocMovie className='fill-aqua' style={style} />
+      return <DocMovie className='fill-aqua' height={iconHeight} />
     case 'image':
-      return <DocPicture className='fill-aqua' style={style} />
+      return <DocPicture className='fill-aqua' height={iconHeight} />
     case 'text':
-      return <DocText className='fill-aqua' style={style} />
+      return <DocText className='fill-aqua' height={iconHeight} />
     case 'calc':
-      return <DocCalc className='fill-aqua' style={style} />
+      return <DocCalc className='fill-aqua' height={iconHeight} />
     default:
-      return <Doc className='fill-aqua' style={style} />
+      return <Doc className='fill-aqua' height={iconHeight} />
   }
 }
 
