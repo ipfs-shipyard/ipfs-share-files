@@ -1,23 +1,14 @@
 import React from 'react'
 
 // Components
-import File from '../file//File'
+import FileAdd from '../file//file-add/FileAdd'
+import FileTree from '../file//file-tree/FileTree'
 import CopyIcon from '../../media/icons/GlyphCopy.js'
 
 // Static
 import twitterLogo from '../../media/logos/twitter.svg'
 import facebookLogo from '../../media/logos/facebook.svg'
 import githubLogo from '../../media/logos/github.svg'
-
-const FileTree = () => {
-  return (
-    <File
-      hash='Qm3fsA'
-      name='game-of-thrones.mkv'
-      type='video'
-      size='265318832' />
-  )
-}
 
 const CopyLink = () => (
   <div className='mt4'>
@@ -53,6 +44,7 @@ const Footnote = () => (
 const Box = () => {
   return (
     <div className='pa4 ba br3 b--silver shadow-1 bg-white w-third'>
+      <FileAdd />
       <FileTree />
       <CopyLink />
       <SocialShare />
