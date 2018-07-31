@@ -47,10 +47,10 @@ const Footnote = () => (
   </div>
 )
 
-const Box = ({ files, shareLink }) => {
+const Box = ({ files, shareLink, doAddFiles }) => {
   return (
     <div className='pa4 ba br3 b--silver shadow-1 bg-white w-third'>
-      <FileAdd />
+      <FileAdd doAddFiles={doAddFiles} />
       <FileTree files={files} />
       <CopyLink shareLink={shareLink} />
       <SocialShare />
@@ -62,5 +62,6 @@ const Box = ({ files, shareLink }) => {
 export default connect(
   'selectFiles',
   'selectShareLink',
+  'doAddFiles',
   Box
 )
