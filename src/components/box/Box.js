@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'redux-bundler-react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 // Components
 import FileAdd from '../file//file-add/FileAdd'
@@ -10,12 +12,16 @@ import twitterLogo from '../../media/logos/twitter.svg'
 import facebookLogo from '../../media/logos/facebook.svg'
 import githubLogo from '../../media/logos/github.svg'
 
-const CopyLink = () => (
+const CopyLink = ({ shareLink }) => (
   <div className='mt4'>
     <div className='f6 charcoal'>Copy link:</div>
     <div className='flex mt3'>
-      <input type='text' className='pa2 flex-auto ba b--moon-gray moon-gray f6' />
-      <CopyIcon className='ml1 fill-aqua pointer' height='35px' alt='Copy' />
+      <div className='pa2 w-90 flex items-center ba b--moon-gray moon-gray f7 truncate'>
+        { shareLink }
+      </div>
+      <CopyToClipboard text={shareLink}>
+        <CopyIcon className='ml1 w-10 fill-aqua pointer' height='35px' alt='Copy' />
+      </CopyToClipboard>
     </div>
   </div>
 )
@@ -41,16 +47,20 @@ const Footnote = () => (
   </div>
 )
 
-const Box = () => {
+const Box = ({ files, shareLink }) => {
   return (
     <div className='pa4 ba br3 b--silver shadow-1 bg-white w-third'>
       <FileAdd />
-      <FileTree />
-      <CopyLink />
+      <FileTree files={files} />
+      <CopyLink shareLink={shareLink} />
       <SocialShare />
       <Footnote />
     </div>
   )
 }
 
-export default Box
+export default connect(
+  'selectFiles',
+  'selectShareLink',
+  Box
+)

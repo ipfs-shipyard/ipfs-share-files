@@ -18,12 +18,14 @@ const typeFromExt = (filename) => {
   return extToType[ext] || ext
 }
 
-const FileIcon = ({type}) => {
+const FileIcon = ({name, type}) => {
   const iconHeight = 40
 
-  switch (typeFromExt(type)) {
-    case 'directory':
-      return <Folder className='fill-aqua' height={iconHeight} />
+  if (type === 'directory') {
+    return <Folder className=' fill-aqua' height={iconHeight} />
+  }
+
+  switch (typeFromExt(name)) {
     case 'audio':
       return <DocMusic className='fill-aqua' height={iconHeight} />
     case 'video':

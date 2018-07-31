@@ -3,14 +3,14 @@ import React from 'react'
 // Components
 import File from '../File'
 
-const FileTree = () => {
-  return (
+const FileTree = ({ files }) => (
+  files ? files.map((file, idx) =>
     <File
-      hash='Qm3fsA'
-      name='game-of-thrones.mkv'
-      type='video'
-      size='265318832' />
-  )
-}
+      key={`file-${idx}`}
+      hash={file.hash}
+      name={file.name}
+      size={file.size} />
+  ) : null
+)
 
 export default FileTree

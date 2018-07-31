@@ -8,11 +8,11 @@ storiesOf('FileIcon', module)
   .add('All', () => (
     <div className='ma3'>
       <FileIcon />
-      <FileIcon type='audio' />
-      <FileIcon type='video' />
-      <FileIcon type='image' />
-      <FileIcon type='text' />
-      <FileIcon type='cacl' />
+      <FileIcon name='audio' />
+      <FileIcon name='video' />
+      <FileIcon name='image' />
+      <FileIcon name='text' />
+      <FileIcon name='calc' />
       <FileIcon type='directory' />
     </div>
   ))
@@ -23,27 +23,27 @@ storiesOf('FileIcon', module)
   ))
   .add('Audio', () => (
     <div className='ma3'>
-      <FileIcon type='audio' />
+      <FileIcon name='audio' />
     </div>
   ))
   .add('Video', () => (
     <div className='ma3'>
-      <FileIcon type='video' />
+      <FileIcon name='video' />
     </div>
   ))
   .add('Image', () => (
     <div className='ma3'>
-      <FileIcon type='image' />
+      <FileIcon name='image' />
     </div>
   ))
   .add('Text', () => (
     <div className='ma3'>
-      <FileIcon type='text' />
+      <FileIcon name='text' />
     </div>
   ))
   .add('Calc', () => (
     <div className='ma3'>
-      <FileIcon type='calc' />
+      <FileIcon name='calc' />
     </div>
   ))
   .add('Folder', () => (

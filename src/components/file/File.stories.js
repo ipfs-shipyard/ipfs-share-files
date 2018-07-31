@@ -10,7 +10,6 @@ storiesOf('File', module)
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
-        type='video'
         size='265318832' />
     </div>
   ))

@@ -4,7 +4,7 @@ import { connect } from 'redux-bundler-react'
 // Components
 import AddIcon from '../../../media/icons/GlyphAdd.js'
 
-const File = ({ hash, name, type, size, doAddFiles }) => {
+const File = ({ hash, name, type, size, doAddFiles, files }) => {
   const onAddFiles = (ev) => {
     ev.preventDefault()
     ev.stopPropagation()
@@ -32,6 +32,7 @@ const File = ({ hash, name, type, size, doAddFiles }) => {
 }
 
 export default connect(
+  'selectFiles',
   'doAddFiles',
   File
 )
