@@ -59,7 +59,7 @@ export default {
      Action Creators
      ============================================================ */
 
-  doAddFiles: (files) => async ({ dispatch, store, getIpfs }) => {
+  doAddFiles: (files) => async ({ dispatch, store, state, getIpfs }) => {
     const ipfs = getIpfs()
     const { streams } = await filesToStreams(files)
 
@@ -81,7 +81,21 @@ export default {
       }
     }
 
-    const shareLink = `https://ipfs.io/ipfs/${12}`
+    const storedFiles = store.selectFiles()
+
+    let node = await ipfs.object.new('unixfs-dir')
+
+    for (const file of storedFiles) {
+      node = await ipfs.object.patch.addLink(node.toJSON().multihash, {
+        name: file.name,
+        size: file.size,
+        multihash: file.hash
+      })
+    }
+
+    const multihash = node.toJSON().multihash
+    const shareLink = `https://ipfs.io/ipfs/${multihash}`
+
     dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
   }
 }
