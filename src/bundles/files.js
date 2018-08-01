@@ -16,35 +16,34 @@ export default {
      ============================================================ */
 
   reducer: (state = initialState, action) => {
-    if (action.type === 'FILES_ADD_STARTED') {
-      return { ...state, loading: true }
-    }
+    switch (action.type) {
+      case 'FILES_ADD_STARTED':
+        return { ...state, loading: true }
 
-    if (action.type === 'FILES_ADD_FINISHED') {
-      return {
-        ...state,
-        files: [...state.files, action.payload.file],
-        loading: false,
-        error: null
-      }
-    }
+      case 'FILES_ADD_FINISHED':
+        return {
+          ...state,
+          files: [...state.files, action.payload.file],
+          loading: false,
+          error: null
+        }
 
-    if (action.type === 'FILES_ADD_FAILED') {
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.error
-      }
-    }
+      case 'FILES_ADD_FAILED':
+        return {
+          ...state,
+          loading: false,
+          error: action.payload.error
+        }
 
-    if (action.type === 'FILES_SHARE_LINK') {
-      return {
-        ...state,
-        shareLink: action.payload.shareLink
-      }
-    }
+      case 'FILES_SHARE_LINK':
+        return {
+          ...state,
+          shareLink: action.payload.shareLink
+        }
 
-    return state
+      default:
+        return state
+    }
   },
 
   /* ============================================================

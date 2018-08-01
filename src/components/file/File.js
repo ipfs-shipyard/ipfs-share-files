@@ -12,7 +12,7 @@ const File = ({ hash, name, type, size }) => {
   }
 
   return (
-    <div className='flex flex-start items-center'>
+    <div className='mv2 flex flex-start items-center'>
       <FileIcon name={name} type={type} />
       <span className='ph2 f6 b charcoal'>{name}</span>
       <span className='f6 charcoal-muted'>{size && `(~${size})`}</span>
