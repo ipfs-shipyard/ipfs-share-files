@@ -1,7 +1,8 @@
 import { filesToStreams } from '../lib/files'
+import shortid from 'shortid'
 
 const initialState = {
-  files: [],
+  files: {},
   shareLink: null,
   loading: false,
   error: null
@@ -18,12 +19,39 @@ export default {
   reducer: (state = initialState, action) => {
     switch (action.type) {
       case 'FILES_ADD_STARTED':
-        return { ...state, loading: true }
+        return {
+          ...state,
+          loading: true,
+          files: {
+            ...state.files,
+            ...action.payload.file
+          }
+        }
+
+      case 'FILES_ADD_PROGRESS':
+        return {
+          ...state,
+          loading: true,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              progress: action.payload.progress
+            }
+          }
+        }
 
       case 'FILES_ADD_FINISHED':
         return {
           ...state,
-          files: [...state.files, action.payload.file],
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              hash: action.payload.hash,
+              pending: false
+            }
+          },
           loading: false,
           error: null
         }
@@ -32,7 +60,13 @@ export default {
         return {
           ...state,
           loading: false,
-          error: action.payload.error
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              error: action.payload.error
+            }
+          }
         }
 
       case 'FILES_SHARE_LINK':
@@ -63,26 +97,41 @@ export default {
     const { streams } = await filesToStreams(files)
 
     for (const stream of streams) {
-      dispatch({ type: 'FILES_ADD_STARTED' })
+      const fileId = shortid.generate()
+      const fileName = stream.name
+      const fileSize = stream.size
+
+      const file = {
+        [fileId]: {
+          name: fileName,
+          size: fileSize,
+          progress: 0,
+          pending: true
+        }
+      }
+
+      dispatch({ type: 'FILES_ADD_STARTED', payload: { file: file } })
+
+      const updateProgress = (bytesLoaded) => {
+        const progress = (bytesLoaded / fileSize) * 100
+
+        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress: progress } })
+      }
 
       try {
-        const addedFile = await ipfs.add(stream, { pin: false })
+        const addedFile = await ipfs.add(stream, {
+          pin: false,
+          progress: updateProgress
+        })
 
-        const storeFile = {
-          name: stream.name,
-          size: addedFile[0].size,
-          hash: addedFile[0].hash
-        }
-
-        dispatch({ type: 'FILES_ADD_FINISHED', payload: { file: storeFile } })
+        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } })
       } catch (e) {
-        dispatch({ type: 'FILES_ADD_FAILED', payload: { error: e.message } })
+        dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: e.message } })
       }
     }
 
-    const storedFiles = store.selectFiles()
-
     let node = await ipfs.object.new('unixfs-dir')
+    const storedFiles = Object.values(store.selectFiles())
 
     for (const file of storedFiles) {
       node = await ipfs.object.patch.addLink(node.toJSON().multihash, {

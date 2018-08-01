@@ -42,6 +42,7 @@
     "react-test-renderer": "^16.4.1",
     "redux-bundler": "^21.2.2",
     "redux-bundler-react": "^1.0.1",
+    "shortid": "^2.2.12",
     "tachyons": "^4.10.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "video-extensions": "^1.1.0",
