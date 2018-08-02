@@ -17,7 +17,7 @@ const File = ({ hash, name, type, size, progress }) => {
       <span className='ph2 f6 b charcoal truncate'>{name}</span>
       <span className='f6 charcoal-muted'>{size && `(~${size})`}</span>
 
-      <span className='ml3 f5 charcoal'>{progress}/100</span>
+      <span className='ml-auto f7 charcoal-muted'>{progress}%</span>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { createSelector } from 'redux-bundler'
 import { filesToStreams } from '../lib/files'
 import shortid from 'shortid'
 
@@ -86,13 +87,39 @@ export default {
 
   selectFiles: state => state.files.files,
 
+  selectExistFiles: createSelector(
+    'selectFiles',
+    (files) => Object.keys(files).length
+  ),
+
+  selectPendingFiles: createSelector(
+    'selectFiles',
+    (files) => Object.values(files).filter((file) => file.pending)
+  ),
+
+  selectExistFilesPending: createSelector(
+    'selectPendingFiles',
+    (pendingFiles) => pendingFiles.length
+  ),
+
   selectShareLink: state => state.files.shareLink,
+
+  reactGetShareLink: createSelector(
+    'selectExistFiles',
+    'selectExistFilesPending',
+    'selectShareLink',
+    (existFiles, existFilesPending, existShareLink) => {
+      if (existFiles && !existFilesPending && !existShareLink) {
+        return { actionCreator: 'doShareLink' }
+      }
+    }
+  ),
 
   /* ============================================================
      Action Creators
      ============================================================ */
 
-  doAddFiles: (files) => async ({ dispatch, store, state, getIpfs }) => {
+  doAddFiles: (files) => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
     const { streams } = await filesToStreams(files)
 
@@ -113,22 +140,19 @@ export default {
       dispatch({ type: 'FILES_ADD_STARTED', payload: { file: file } })
 
       const updateProgress = (bytesLoaded) => {
-        const progress = (bytesLoaded / fileSize) * 100
+        const progress = Math.round((bytesLoaded / fileSize) * 100)
 
         dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress: progress } })
       }
 
-      try {
-        const addedFile = await ipfs.add(stream, {
-          pin: false,
-          progress: updateProgress
-        })
-
-        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } })
-      } catch (e) {
-        dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: e.message } })
-      }
+      ipfs.add(stream, { pin: false, progress: updateProgress })
+        .then(addedFile => dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } }))
+        .catch(err => dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } }))
     }
+  },
+
+  doShareLink: () => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
 
     let node = await ipfs.object.new('unixfs-dir')
     const storedFiles = Object.values(store.selectFiles())
