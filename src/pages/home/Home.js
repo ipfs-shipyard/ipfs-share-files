@@ -11,7 +11,7 @@ const HowItWorks = () => {
   const imgHeigth = 110
 
   return (
-    <div className='pl4 pr5 w-two-thirds'>
+    <div className='pa4 pr5-l w-100 w-two-thirds-l mw7 order-1-l'>
       <div className='mb4 f2 b white'>How it works?</div>
       <div className='mb5 f5 gray lh-copy'>
         Vulputate enim nulla aliquet porttitor lacus.
@@ -48,9 +48,9 @@ const Home = () => (
       <title>IPFS - Share Files</title>
     </Helmet>
 
-    <div className='flex'>
-      <HowItWorks />
+    <div className='flex flex-column flex-row-l justify-center items-center'>
       <Box />
+      <HowItWorks />
     </div>
   </div>
 )
