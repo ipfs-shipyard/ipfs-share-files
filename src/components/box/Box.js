@@ -49,7 +49,7 @@ const Footnote = () => (
 
 const Box = ({ files, shareLink, doAddFiles }) => {
   return (
-    <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l ba br3 b--silver shadow-1 bg-white'>
+    <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
       <FileAdd doAddFiles={doAddFiles} />
       <FileTree files={files} />
       <CopyLink shareLink={shareLink} />
