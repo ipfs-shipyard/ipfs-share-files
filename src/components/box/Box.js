@@ -13,7 +13,7 @@ import facebookLogo from '../../media/logos/facebook.svg'
 import githubLogo from '../../media/logos/github.svg'
 
 const CopyLink = ({ shareLink }) => (
-  <div className='mt4'>
+  <div className='mb4'>
     <div className='f6 charcoal'>Copy link:</div>
     <div className='flex mt3'>
       <div className='pa2 w-90 flex items-center ba b--moon-gray moon-gray f7 truncate'>
@@ -30,7 +30,7 @@ const SocialShare = () => {
   const logoHeight = 40
 
   return (
-    <div className='mt4 mb6'>
+    <div>
       <div className='f6 charcoal'>Share on social media:</div>
       <div className='mt3'>
         <img src={twitterLogo} height={logoHeight} className='pointer o-50 glow' alt='Twitter' />
@@ -52,8 +52,12 @@ const Box = ({ files, shareLink, doAddFiles }) => {
     <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
       <FileAdd doAddFiles={doAddFiles} />
       <FileTree files={files} />
-      <CopyLink shareLink={shareLink} />
-      <SocialShare />
+      { shareLink &&
+        <div className='mb4'>
+          <CopyLink shareLink={shareLink} />
+          <SocialShare />
+        </div>
+      }
       <Footnote />
     </div>
   )
