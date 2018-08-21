@@ -7,11 +7,6 @@ import FileAdd from '../file//file-add/FileAdd'
 import FileTree from '../file//file-tree/FileTree'
 import CopyIcon from '../../media/icons/GlyphCopy.js'
 
-// Static
-import twitterLogo from '../../media/logos/twitter.svg'
-import facebookLogo from '../../media/logos/facebook.svg'
-import githubLogo from '../../media/logos/github.svg'
-
 const CopyLink = ({ shareLink }) => (
   <div className='mb4'>
     <div className='f6 charcoal'>Copy link:</div>
@@ -26,21 +21,6 @@ const CopyLink = ({ shareLink }) => (
   </div>
 )
 
-const SocialShare = () => {
-  const logoHeight = 40
-
-  return (
-    <div>
-      <div className='f6 charcoal'>Share on social media:</div>
-      <div className='mt3'>
-        <img src={twitterLogo} height={logoHeight} className='pointer o-50 glow' alt='Twitter' />
-        <img src={facebookLogo} height={logoHeight} className='mh2 pointer o-50 glow' alt='Facebook' />
-        <img src={githubLogo} height={logoHeight} className='pointer o-50 glow' alt='GitHub' />
-      </div>
-    </div>
-  )
-}
-
 const Footnote = () => (
   <div className='f7 gray lh-copy'>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -52,12 +32,7 @@ const Box = ({ files, shareLink, doAddFiles }) => {
     <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
       <FileAdd doAddFiles={doAddFiles} />
       <FileTree files={files} />
-      { shareLink &&
-        <div className='mb4'>
-          <CopyLink shareLink={shareLink} />
-          <SocialShare />
-        </div>
-      }
+      { shareLink && <CopyLink shareLink={shareLink} /> }
       <Footnote />
     </div>
   )
