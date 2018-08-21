@@ -34,7 +34,7 @@ const File = ({ hash, name, type, size, progress }) => {
               path: { stroke: '#69c4cd', strokeLinecap: 'butt' },
               trail: { stroke: '#ccc' }
             }} />
-          : <GlyphTick className='ml-auto' width='30px' alt='Tick' fill='#69c4cd' /> }
+          : <GlyphTick className='ml-auto' width='32px' alt='Tick' fill='#69c4cd' /> }
       </span>
     </div>
   )
