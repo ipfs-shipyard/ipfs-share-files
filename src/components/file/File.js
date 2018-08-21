@@ -9,7 +9,7 @@ import FileIcon from '../file/file-icon/FileIcon'
 import 'react-circular-progressbar/dist/styles.css'
 
 // Static
-import GlyphSmallTick from '../../media/icons/GlyphSmallTick'
+import GlyphTick from '../../media/icons/GlyphTick'
 
 const File = ({ hash, name, type, size, progress }) => {
   if (type === 'directory') {
@@ -34,7 +34,7 @@ const File = ({ hash, name, type, size, progress }) => {
               path: { stroke: '#69c4cd', strokeLinecap: 'butt' },
               trail: { stroke: '#ccc' }
             }} />
-          : <GlyphSmallTick className='ml-auto fill-green' width='35px' alt='Tick' /> }
+          : <GlyphTick className='ml-auto' width='30px' alt='Tick' fill='#69c4cd' /> }
       </span>
     </div>
   )
