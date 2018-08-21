@@ -107,9 +107,8 @@ export default {
   reactGetShareLink: createSelector(
     'selectExistFiles',
     'selectExistFilesPending',
-    'selectShareLink',
-    (existFiles, existFilesPending, existShareLink) => {
-      if (existFiles && !existFilesPending && !existShareLink) {
+    (existFiles, existFilesPending) => {
+      if (existFiles && !existFilesPending) {
         return { actionCreator: 'doShareLink' }
       }
     }

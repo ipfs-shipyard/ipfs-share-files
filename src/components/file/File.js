@@ -8,6 +8,9 @@ import FileIcon from '../file/file-icon/FileIcon'
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
 
+// Static
+import GlyphTick from '../../media/icons/GlyphTick'
+
 const File = ({ hash, name, type, size, progress }) => {
   if (type === 'directory') {
     size = ''
@@ -22,14 +25,16 @@ const File = ({ hash, name, type, size, progress }) => {
       <span className='f6 charcoal-muted'>{size && `(~${size})`}</span>
 
       <span className='ml-auto f7 charcoal-muted'>
-        <CircularProgressbar
-          percentage={progress}
-          strokeWidth={50}
-          styles={{
-            root: { width: 20, height: 20 },
-            path: { stroke: '#69c4cd', strokeLinecap: 'butt' },
-            trail: { stroke: '#ccc' }
-          }} />
+        { progress !== 100
+          ? <CircularProgressbar
+            percentage={progress}
+            strokeWidth={50}
+            styles={{
+              root: { width: 20, height: 20 },
+              path: { stroke: '#69c4cd', strokeLinecap: 'butt' },
+              trail: { stroke: '#ccc' }
+            }} />
+          : <GlyphTick className='ml-auto' width='32px' alt='Tick' fill='#69c4cd' /> }
       </span>
     </div>
   )
