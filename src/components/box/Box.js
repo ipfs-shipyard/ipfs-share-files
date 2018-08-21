@@ -5,17 +5,18 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 // Components
 import FileAdd from '../file//file-add/FileAdd'
 import FileTree from '../file//file-tree/FileTree'
-import CopyIcon from '../../media/icons/GlyphCopy.js'
 
 const CopyLink = ({ shareLink }) => (
   <div className='mb4'>
-    <div className='f6 charcoal'>Copy link:</div>
-    <div className='flex mt3'>
-      <div className='pa2 w-90 flex items-center ba b--moon-gray moon-gray f7 truncate'>
+    <div className='f7 gray'>Copy link to send files:</div>
+    <div className='pa1 mt3 w-100 flex items-center br-pill bg-light-gray'>
+      <div className='ph2 w-80 f7 navy truncate'>
         { shareLink }
       </div>
       <CopyToClipboard text={shareLink}>
-        <CopyIcon className='ml1 w-10 fill-aqua pointer' height='35px' alt='Copy' />
+        <div className='pa2 w-20 flex items-center justify-center br-pill bg-navy f7 white o-80 glow pointer'>
+          Copy
+        </div>
       </CopyToClipboard>
     </div>
   </div>
