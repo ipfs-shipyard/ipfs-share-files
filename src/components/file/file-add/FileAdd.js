@@ -14,7 +14,7 @@ const FileAdd = ({ doAddFiles }) => {
   }
 
   return (
-    <div className='mb4'>
+    <div className='mb4 o-80 glow'>
       <label htmlFor='add-files' className='flex items-center pointer'>
         <AddIcon className='fill-aqua' height='80px' style={{ marginLeft: '-16px' }} alt='Add' />
         <div className='f5 charcoal'>Add files</div>

@@ -30,11 +30,10 @@ const File = ({ hash, name, type, size, progress }) => {
             percentage={progress}
             strokeWidth={50}
             styles={{
-              root: { width: 20, height: 20 },
-              path: { stroke: '#69c4cd', strokeLinecap: 'butt' },
-              trail: { stroke: '#ccc' }
+              root: { width: 15, height: 15, marginRight: 5 },
+              path: { stroke: '#69c4cd', strokeLinecap: 'butt' }
             }} />
-          : <GlyphTick className='ml-auto' width='32px' alt='Tick' fill='#69c4cd' /> }
+          : <GlyphTick className='ml-auto' width='25px' alt='Tick' fill='#69c4cd' /> }
       </span>
     </div>
   )
