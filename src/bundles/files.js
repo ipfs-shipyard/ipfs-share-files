@@ -76,6 +76,32 @@ export default {
           shareLink: action.payload.shareLink
         }
 
+      case 'FILES_FETCH_STARTED':
+        return {
+          ...state,
+          loading: true
+        }
+
+      case 'FILES_FETCH_FINISHED':
+        return {
+          ...state,
+          loading: false,
+          files: {
+            ...state.files,
+            ...action.payload.files
+          }
+        }
+
+      case 'FILES_FETCH_FAILED':
+        return {
+          ...state,
+          loading: true,
+          files: {
+            ...state.files,
+            error: action.payload.error
+          }
+        }
+
       default:
         return state
     }
@@ -168,5 +194,33 @@ export default {
     const shareLink = `https://ipfs.io/ipfs/${multihash}`
 
     dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
+  },
+
+  doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
+
+    dispatch({ type: 'FILES_FETCH_STARTED' })
+
+    ipfs.ls(hash)
+      .then(ipfsFiles => {
+        const files = {}
+
+        for (const file of ipfsFiles) {
+          const fileId = shortid.generate()
+          const fileName = file.name
+          const fileSize = file.size
+          const fileHash = file.hash
+
+          files[fileId] = {
+            name: fileName,
+            size: fileSize,
+            hash: fileHash,
+            progress: 100,
+            pending: false
+          }
+        }
+        dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
+      })
+      .catch(err => dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } }))
   }
 }

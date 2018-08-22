@@ -19,7 +19,9 @@ const File = ({ hash, name, type, size, progress }) => {
   }
 
   const renderFileStatus = (progress) => {
-    if (progress === 100) {
+    if (progress === undefined) {
+      return null
+    } else if (progress === 100) {
       return <GlyphTick className='ml-auto' width='25px' alt='Tick' fill='#69c4cd' />
     } else {
       return (
@@ -39,10 +41,7 @@ const File = ({ hash, name, type, size, progress }) => {
       <FileIcon name={name} type={type} />
       <span className='ph2 f6 b charcoal truncate'>{name}</span>
       <span className='f6 charcoal-muted'>{size && `(~${size})`}</span>
-
-      <span className='ml-auto f7 charcoal-muted'>
-        { progress && renderFileStatus(progress) }
-      </span>
+      <span className='ml-auto f7 charcoal-muted'>{ renderFileStatus(progress) }</span>
     </div>
   )
 }
