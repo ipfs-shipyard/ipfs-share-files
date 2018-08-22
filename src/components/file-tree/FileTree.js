@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import File from '../File'
+import File from '../file/File'
 
 const FileTree = ({ files }) => (
   <div className='mb4'>

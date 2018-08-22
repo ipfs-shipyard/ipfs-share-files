@@ -18,6 +18,22 @@ const File = ({ hash, name, type, size, progress }) => {
     size = filesize(size, { round: 0, spacer: '' })
   }
 
+  const renderFileStatus = (progress) => {
+    if (progress === 100) {
+      return <GlyphTick className='ml-auto' width='25px' alt='Tick' fill='#69c4cd' />
+    } else {
+      return (
+        <CircularProgressbar
+          percentage={progress}
+          strokeWidth={50}
+          styles={{
+            root: { width: 15, height: 15, marginRight: 5 },
+            path: { stroke: '#69c4cd', strokeLinecap: 'butt' }
+          }} />
+      )
+    }
+  }
+
   return (
     <div className='mv2 flex flex-start items-center'>
       <FileIcon name={name} type={type} />
@@ -25,15 +41,7 @@ const File = ({ hash, name, type, size, progress }) => {
       <span className='f6 charcoal-muted'>{size && `(~${size})`}</span>
 
       <span className='ml-auto f7 charcoal-muted'>
-        { progress !== 100
-          ? <CircularProgressbar
-            percentage={progress}
-            strokeWidth={50}
-            styles={{
-              root: { width: 15, height: 15, marginRight: 5 },
-              path: { stroke: '#69c4cd', strokeLinecap: 'butt' }
-            }} />
-          : <GlyphTick className='ml-auto' width='25px' alt='Tick' fill='#69c4cd' /> }
+        { progress && renderFileStatus(progress) }
       </span>
     </div>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
 
 // Components
-import AddIcon from '../../../media/icons/GlyphAdd.js'
+import AddIcon from '../../media/icons/GlyphAdd.js'
 
-const FileAdd = ({ doAddFiles }) => {
+const AddFiles = ({ doAddFiles }) => {
   const onAddFiles = (ev) => {
     ev.preventDefault()
     ev.stopPropagation()
@@ -30,4 +30,4 @@ const FileAdd = ({ doAddFiles }) => {
   )
 }
 
-export default FileAdd
+export default AddFiles

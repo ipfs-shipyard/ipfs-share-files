@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'redux-bundler-react'
 
 // Components
-import FileAdd from '../file//file-add/FileAdd'
-import FileTree from '../file//file-tree/FileTree'
+import AddFiles from '../add-files/AddFiles'
+import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link//CopyLink'
 
 const Footnote = () => (
@@ -15,7 +15,7 @@ const Footnote = () => (
 const Box = ({ files, shareLink, doAddFiles }) => {
   return (
     <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
-      <FileAdd doAddFiles={doAddFiles} />
+      <AddFiles doAddFiles={doAddFiles} />
       <FileTree files={files} />
       { shareLink && <CopyLink shareLink={shareLink} /> }
       <Footnote />
