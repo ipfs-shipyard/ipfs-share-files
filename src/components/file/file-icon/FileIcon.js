@@ -18,26 +18,27 @@ const typeFromExt = (filename) => {
   return extToType[ext] || ext
 }
 
-const FileIcon = ({name, type}) => {
+const FileIcon = ({name, type, error}) => {
+  const iconColor = error ? 'fill-gray' : 'fill-aqua'
   const iconHeight = 40
 
   if (type === 'directory') {
-    return <Folder className=' fill-aqua' height={iconHeight} />
+    return <Folder className={iconColor} height={iconHeight} />
   }
 
   switch (typeFromExt(name)) {
     case 'audio':
-      return <DocMusic className='fill-aqua' height={iconHeight} />
+      return <DocMusic className={iconColor} height={iconHeight} />
     case 'video':
-      return <DocMovie className='fill-aqua' height={iconHeight} />
+      return <DocMovie className={iconColor} height={iconHeight} />
     case 'image':
-      return <DocPicture className='fill-aqua' height={iconHeight} />
+      return <DocPicture className={iconColor} height={iconHeight} />
     case 'text':
-      return <DocText className='fill-aqua' height={iconHeight} />
+      return <DocText className={iconColor} height={iconHeight} />
     case 'calc':
-      return <DocCalc className='fill-aqua' height={iconHeight} />
+      return <DocCalc className={iconColor} height={iconHeight} />
     default:
-      return <Doc className='fill-aqua' height={iconHeight} />
+      return <Doc className={iconColor} height={iconHeight} />
   }
 }
 
