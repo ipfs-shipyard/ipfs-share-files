@@ -65,6 +65,7 @@ export default {
             ...state.files,
             [action.payload.id]: {
               ...state.files[action.payload.id],
+              pending: false,
               error: action.payload.error
             }
           }

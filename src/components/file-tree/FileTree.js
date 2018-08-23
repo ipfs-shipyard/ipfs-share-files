@@ -11,8 +11,10 @@ const FileTree = ({ files }) => (
         hash={file.hash}
         name={file.name}
         size={file.size}
-        progress={file.progress} />
+        progress={file.progress}
+        error={file.error} />
     ) : null }
   </div>
 )
+
 export default FileTree
