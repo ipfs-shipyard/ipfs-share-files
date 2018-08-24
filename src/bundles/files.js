@@ -1,5 +1,5 @@
 import { createSelector } from 'redux-bundler'
-import { filesToStreams } from '../lib/files'
+import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
 import shortid from 'shortid'
 
 const initialState = {
@@ -179,19 +179,10 @@ export default {
 
   doShareLink: () => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
+    const files = Object.values(store.selectFiles())
 
-    let node = await ipfs.object.new('unixfs-dir')
-    const storedFiles = Object.values(store.selectFiles())
+    const multihash = await makeHashFromFiles(files, ipfs)
 
-    for (const file of storedFiles) {
-      node = await ipfs.object.patch.addLink(node.toJSON().multihash, {
-        name: file.name,
-        size: file.size,
-        multihash: file.hash
-      })
-    }
-
-    const multihash = node.toJSON().multihash
     const shareLink = `https://ipfs.io/ipfs/${multihash}`
 
     dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
@@ -223,5 +214,11 @@ export default {
         dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
       })
       .catch(err => dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } }))
+  },
+
+  doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
+    dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })
+    return getDownloadLink(files, ipfs)
   }
 }

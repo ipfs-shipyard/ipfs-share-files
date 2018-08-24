@@ -6,6 +6,7 @@ import { connect } from 'redux-bundler-react'
 import AddFiles from '../add-files/AddFiles'
 import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link//CopyLink'
+import DownloadFiles from '../download-files//DownloadFiles'
 
 const Footnote = () => (
   <div className='f7 gray lh-copy'>
@@ -19,27 +20,39 @@ class Box extends React.Component {
     files: PropTypes.object.isRequired,
     shareLink: PropTypes.string,
     doAddFiles: PropTypes.func.isRequired,
-    doFetchFileTree: PropTypes.func.isRequired
+    doFetchFileTree: PropTypes.func.isRequired,
+    isDownload: PropTypes.bool.isRequired
+  }
+
+  static defaultProps = {
+    isDownload: false
   }
 
   componentDidMount () {
     const { url, params } = this.props.routeInfo
 
-    if (url.startsWith('/add')) {
+    if (url.startsWith('/add') || params.hash) {
       this.props.doFetchFileTree(params.hash)
     }
   }
 
   render () {
-    const { doAddFiles, files, shareLink } = this.props
+    const { isDownload, doAddFiles, files, shareLink } = this.props
+    const boxClass = 'mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'
 
     return (
-      <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
-        <AddFiles doAddFiles={doAddFiles} />
-        <FileTree files={files} />
-        { shareLink && <CopyLink shareLink={shareLink} /> }
-        <Footnote />
-      </div>
+      isDownload
+        ? <div className={boxClass}>
+          <FileTree files={files} isDownload />
+          <DownloadFiles />
+          <Footnote />
+        </div>
+        : <div className={boxClass}>
+          <AddFiles doAddFiles={doAddFiles} />
+          <FileTree files={files} isDownload={isDownload} />
+          { shareLink && <CopyLink shareLink={shareLink} /> }
+          <Footnote />
+        </div>
     )
   }
 }

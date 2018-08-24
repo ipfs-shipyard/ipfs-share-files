@@ -12,7 +12,7 @@ const Download = () => (
     </Helmet>
 
     <div className='flex flex-column flex-row-l justify-center items-center'>
-      <Box />
+      <Box isDownload />
       <Info />
     </div>
   </div>
