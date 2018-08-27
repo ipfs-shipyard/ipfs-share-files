@@ -72,8 +72,8 @@ async function downloadMultiple (files, apiUrl, ipfs) {
 }
 
 export async function getDownloadLink (files, ipfs) {
-  const gatewayUrl = 'https://ipfs.io/'
-  const apiUrl = 'https://ipfs.io/'
+  const gatewayUrl = 'https://ipfs.io'
+  const apiUrl = 'https://ipfs.io'
 
   if (files.length === 1) {
     return downloadSingle(files[0], gatewayUrl, apiUrl)

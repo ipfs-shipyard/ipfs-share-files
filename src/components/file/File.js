@@ -50,7 +50,7 @@ class File extends React.Component {
     if (isDownload && progress === null) {
       return <IconDownload className='pointer o-80 glow' width={glyphWidth} fill={fillColor} onClick={this.handleDownloadClick} alt='Download' />
     } else if (error) {
-      return <GlyphCancel width={glyphWidth} fill={fillColor} alt='Error' />
+      return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
     } else if (progress === 100) {
       return <GlyphTick width={glyphWidth} fill={fillColor} alt='Tick' />
     } else {
