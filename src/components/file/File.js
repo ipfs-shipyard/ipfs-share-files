@@ -47,11 +47,11 @@ class File extends React.Component {
     const glyphWidth = 25
 
     if (isDownload && progress === null) {
-      return <IconDownload className='pointer o-70 glow' fill='#3e6175' onClick={this.handleDownloadClick} width={glyphWidth} alt='Download' />
+      return <IconDownload className='pointer o-70 glow' width={glyphWidth} fill='#3e6175' onClick={this.handleDownloadClick} alt='Download' />
     } else if (error) {
-      return <GlyphCancel width={glyphWidth} alt='Error' fill='#c7cad5' />
+      return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
     } else if (progress === 100) {
-      return <GlyphTick width={glyphWidth} alt='Tick' fill='#69c4cd' />
+      return <GlyphTick width={glyphWidth} fill='#69c4cd' alt='Tick' />
     } else {
       return (
         <CircularProgressbar
