@@ -44,14 +44,15 @@ class File extends React.Component {
   renderFileStatus = () => {
     const { isDownload, error } = this.props
     const { progress } = isDownload ? this.state : this.props
+    const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
     if (isDownload && progress === null) {
-      return <IconDownload className='pointer o-70 glow' width={glyphWidth} fill='#3e6175' onClick={this.handleDownloadClick} alt='Download' />
+      return <IconDownload className='pointer o-80 glow' width={glyphWidth} fill={fillColor} onClick={this.handleDownloadClick} alt='Download' />
     } else if (error) {
-      return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
+      return <GlyphCancel width={glyphWidth} fill={fillColor} alt='Error' />
     } else if (progress === 100) {
-      return <GlyphTick width={glyphWidth} fill='#69c4cd' alt='Tick' />
+      return <GlyphTick width={glyphWidth} fill={fillColor} alt='Tick' />
     } else {
       return (
         <CircularProgressbar
@@ -59,7 +60,7 @@ class File extends React.Component {
           strokeWidth={50}
           styles={{
             root: { width: 15, height: 15, marginRight: 5 },
-            path: { stroke: '#69c4cd', strokeLinecap: 'butt' }
+            path: { stroke: fillColor, strokeLinecap: 'butt' }
           }} />
       )
     }
