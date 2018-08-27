@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import filesize from 'filesize'
 import CircularProgressbar from 'react-circular-progressbar'
 import classnames from 'classnames'
@@ -16,18 +17,37 @@ import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
 
-const File = ({ id, hash, name, type, size, progress, error, isDownload, doGetDownloadLink }) => {
-  if (type === 'directory') {
-    size = ''
-  } else {
-    size = filesize(size, { round: 0, spacer: '' })
+class File extends React.Component {
+  static propTypes = {
+    id: PropTypes.string,
+    hash: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    size: PropTypes.number,
+    progress: PropTypes.number,
+    error: PropTypes.string,
+    isDownload: PropTypes.bool,
+    doGetDownloadLink: PropTypes.func
   }
 
-  const renderFileStatus = (progress) => {
+  state = {
+    progress: null
+  }
+
+  handleDownloadClick = async () => {
+    const { name, size, hash, doGetDownloadLink } = this.props
+    const updater = (v) => this.setState({ progress: v })
+    const { url, filename } = await doGetDownloadLink([{name, size, hash}])
+    await downloadFile(url, filename, updater)
+  }
+
+  renderFileStatus = () => {
+    const { isDownload, error } = this.props
+    const { progress } = isDownload ? this.state : this.props
     const glyphWidth = 25
 
-    if (progress === undefined) {
-      return null
+    if (isDownload && progress === null) {
+      return <IconDownload className='pointer o-70 glow' fill='#3e6175' onClick={this.handleDownloadClick} width={glyphWidth} alt='Download' />
     } else if (error) {
       return <GlyphCancel width={glyphWidth} alt='Error' fill='#c7cad5' />
     } else if (progress === 100) {
@@ -45,31 +65,28 @@ const File = ({ id, hash, name, type, size, progress, error, isDownload, doGetDo
     }
   }
 
-  const renderDownload = () => {
-    const glyphWidth = 25
+  render () {
+    const { name, type, error } = this.props
+    let size = this.props.size
 
-    const handleDownloadClick = async () => {
-      const updater = (v) => console.log(v)
-      const { url, filename } = await doGetDownloadLink([{name, size, hash}])
-      const { abort } = await downloadFile(url, filename, updater)
+    if (type === 'directory') {
+      size = ''
+    } else {
+      size = filesize(size, { round: 0, spacer: '' })
     }
 
-    return <IconDownload className='pointer o-70 glow' fill='#3e6175' onClick={handleDownloadClick} width={glyphWidth} alt='Download' />
+    const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
+    const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
+
+    return (
+      <div className='mv2 flex flex-start items-center'>
+        <FileIcon name={name} type={type} error={error} />
+        <span className={fileNameClass}>{name}</span>
+        <span className={fileSizeClass}>{size && `(~${size})`}</span>
+        <span className='ml-auto'>{ this.renderFileStatus() }</span>
+      </div>
+    )
   }
-
-  const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
-  const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
-
-  return (
-    <div className='mv2 flex flex-start items-center'>
-      <FileIcon name={name} type={type} error={error} />
-      <span className={fileNameClass}>{name}</span>
-      <span className={fileSizeClass}>{size && `(~${size})`}</span>
-      { isDownload
-        ? <span className='ml-auto'>{ renderDownload() }</span>
-        : <span className='ml-auto'>{ renderFileStatus(progress) }</span> }
-    </div>
-  )
 }
 
 export default connect(
