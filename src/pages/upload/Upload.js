@@ -16,10 +16,10 @@ class Upload extends React.Component {
     doFetchFileTree: PropTypes.func.isRequired
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (prevProps) {
     const { routeInfo: { url, params }, ipfsReady, doFetchFileTree } = this.props
 
-    if (url.startsWith('/add') && !ipfsReady && nextProps.ipfsReady) {
+    if (url.startsWith('/add') && !prevProps.ipfsReady && ipfsReady) {
       doFetchFileTree(params.hash)
     }
   }
