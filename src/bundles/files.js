@@ -179,13 +179,16 @@ export default {
 
   doShareLink: () => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
+    const storeShareLink = store.selectShareLink()
     const files = Object.values(store.selectFiles())
 
     const multihash = await makeHashFromFiles(files, ipfs)
 
     const shareLink = `https://ipfs.io/ipfs/${multihash}`
 
-    dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
+    if (storeShareLink !== shareLink) {
+      dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
+    }
   },
 
   doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
