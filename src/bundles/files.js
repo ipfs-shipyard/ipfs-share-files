@@ -219,6 +219,34 @@ export default {
       .catch(err => dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } }))
   },
 
+  doFetchGatewayFileTree: (hash) => async ({ dispatch, store }) => {
+    const url = `https://ipfs.io/api/v0/ls?arg=${hash}`
+
+    dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
+
+    window.fetch(url)
+      .then(ipfsFiles => {
+        const files = {}
+
+        for (const file of ipfsFiles) {
+          const fileId = shortid.generate()
+          const fileName = file.name
+          const fileSize = file.size
+          const fileHash = file.hash
+
+          files[fileId] = {
+            name: fileName,
+            size: fileSize,
+            hash: fileHash,
+            progress: 100,
+            pending: false
+          }
+        }
+        dispatch({ type: 'FILES_FETCH_GATEWAY_FINISHED', payload: { files: files } })
+      })
+      .catch(err => dispatch({ type: 'FILES_FETCH_GATEWAY_FAILED', payload: { error: err.message } }))
+  },
+
   doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
     dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })

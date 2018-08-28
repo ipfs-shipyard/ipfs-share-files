@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'redux-bundler-react'
 
-// Components
+// Static
 import AddIcon from '../../media/icons/GlyphAdd.js'
 
 const AddFiles = ({ doAddFiles }) => {
@@ -30,4 +31,7 @@ const AddFiles = ({ doAddFiles }) => {
   )
 }
 
-export default AddFiles
+export default connect(
+  'doAddFiles',
+  AddFiles
+)
