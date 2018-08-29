@@ -1,6 +1,7 @@
 import { createSelector } from 'redux-bundler'
-import { filesToStreams } from '../lib/files'
+import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
 import shortid from 'shortid'
+import ENDPOINTS from '../constants/endpoints'
 
 const initialState = {
   files: {},
@@ -179,22 +180,16 @@ export default {
 
   doShareLink: () => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
+    const storeShareLink = store.selectShareLink()
+    const files = Object.values(store.selectFiles())
 
-    let node = await ipfs.object.new('unixfs-dir')
-    const storedFiles = Object.values(store.selectFiles())
+    const multihash = await makeHashFromFiles(files, ipfs)
 
-    for (const file of storedFiles) {
-      node = await ipfs.object.patch.addLink(node.toJSON().multihash, {
-        name: file.name,
-        size: file.size,
-        multihash: file.hash
-      })
+    const shareLink = `${ENDPOINTS.gateway}/${multihash}`
+
+    if (storeShareLink !== shareLink) {
+      dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
     }
-
-    const multihash = node.toJSON().multihash
-    const shareLink = `https://ipfs.io/ipfs/${multihash}`
-
-    dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
   },
 
   doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
@@ -223,5 +218,40 @@ export default {
         dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
       })
       .catch(err => dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } }))
+  },
+
+  doFetchGatewayFileTree: (hash) => async ({ dispatch, store }) => {
+    const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
+
+    dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
+
+    window.fetch(url)
+      .then(res => {
+        const ipfsFiles = res.Objects[0].Links
+        const files = {}
+
+        for (const file of ipfsFiles) {
+          const fileId = shortid.generate()
+          const fileName = file.Name
+          const fileSize = file.Size
+          const fileHash = file.Hash
+
+          files[fileId] = {
+            name: fileName,
+            size: fileSize,
+            hash: fileHash,
+            progress: 100,
+            pending: false
+          }
+        }
+        dispatch({ type: 'FILES_FETCH_GATEWAY_FINISHED', payload: { files: files } })
+      })
+      .catch(err => dispatch({ type: 'FILES_FETCH_GATEWAY_FAILED', payload: { error: err.message } }))
+  },
+
+  doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
+    dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })
+    return getDownloadLink(files, ipfs)
   }
 }

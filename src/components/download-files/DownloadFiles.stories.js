@@ -1,12 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
-import { AddFiles } from './AddFiles'
+import { DownloadFiles } from './DownloadFiles'
 
-storiesOf('AddFiles', module)
+storiesOf('DownloadFiles', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
     <div className='ma3'>
-      <AddFiles />
+      <DownloadFiles />
     </div>
   ))
