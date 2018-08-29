@@ -226,14 +226,15 @@ export default {
     dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
 
     window.fetch(url)
-      .then(ipfsFiles => {
+      .then(res => {
+        const ipfsFiles = res.Objects[0].Links
         const files = {}
 
         for (const file of ipfsFiles) {
           const fileId = shortid.generate()
-          const fileName = file.name
-          const fileSize = file.size
-          const fileHash = file.hash
+          const fileName = file.Name
+          const fileSize = file.Size
+          const fileHash = file.Hash
 
           files[fileId] = {
             name: fileName,
