@@ -1,6 +1,7 @@
 import { createSelector } from 'redux-bundler'
 import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
 import shortid from 'shortid'
+import ENDPOINTS from '../constants/endpoints'
 
 const initialState = {
   files: {},
@@ -184,7 +185,7 @@ export default {
 
     const multihash = await makeHashFromFiles(files, ipfs)
 
-    const shareLink = `https://ipfs.io/ipfs/${multihash}`
+    const shareLink = `${ENDPOINTS.gateway}/${multihash}`
 
     if (storeShareLink !== shareLink) {
       dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
@@ -220,7 +221,7 @@ export default {
   },
 
   doFetchGatewayFileTree: (hash) => async ({ dispatch, store }) => {
-    const url = `https://ipfs.io/api/v0/ls?arg=${hash}`
+    const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
 
     dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
 

@@ -1,4 +1,5 @@
 import fileReader from 'pull-file-reader'
+import ENDPOINTS from '../constants/endpoints'
 
 export async function filesToStreams (files) {
   if (files.hasOwnProperty('content')) {
@@ -29,14 +30,14 @@ export async function filesToStreams (files) {
   return { streams, totalSize, isDir }
 }
 
-async function downloadSingle (file, gatewayUrl, apiUrl) {
+async function downloadSingle (file) {
   let url, filename
 
   if (file.type === 'directory') {
-    url = `${apiUrl}/api/v0/get?arg=${file.hash}&archive=true&compress=true`
+    url = `${ENDPOINTS.api}/v0/get?arg=${file.hash}&archive=true&compress=true`
     filename = `${file.name}.tar.gz`
   } else {
-    url = `${gatewayUrl}/ipfs/${file.hash}`
+    url = `${ENDPOINTS.gateway}/${file.hash}`
     filename = file.name
   }
 
@@ -57,27 +58,19 @@ export async function makeHashFromFiles (files, ipfs) {
   return node.toJSON().multihash
 }
 
-async function downloadMultiple (files, apiUrl, ipfs) {
-  if (!apiUrl) {
-    const e = new Error('api url undefined')
-    return Promise.reject(e)
-  }
-
+async function downloadMultiple (files, ipfs) {
   const multihash = await makeHashFromFiles(files, ipfs)
 
   return {
-    url: `${apiUrl}/api/v0/get?arg=${multihash}&archive=true&compress=true`,
+    url: `${ENDPOINTS.api}/v0/get?arg=${multihash}&archive=true&compress=true`,
     filename: `download_${multihash}.tar.gz`
   }
 }
 
 export async function getDownloadLink (files, ipfs) {
-  const gatewayUrl = 'https://ipfs.io'
-  const apiUrl = 'https://ipfs.io'
-
   if (files.length === 1) {
-    return downloadSingle(files[0], gatewayUrl, apiUrl)
+    return downloadSingle(files[0])
   }
 
-  return downloadMultiple(files, apiUrl, ipfs)
+  return downloadMultiple(files, ipfs)
 }
