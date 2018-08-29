@@ -8,7 +8,7 @@ import downloadFile from '../file/utils/download'
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
 
-class DownloadFiles extends React.Component {
+export class DownloadFiles extends React.Component {
   static propTypes = {
     files: PropTypes.object,
     doGetDownloadLink: PropTypes.func

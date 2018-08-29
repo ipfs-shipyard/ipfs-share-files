@@ -17,7 +17,7 @@ import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
 
-class File extends React.Component {
+export class File extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     hash: PropTypes.string,

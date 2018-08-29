@@ -4,7 +4,7 @@ import { connect } from 'redux-bundler-react'
 // Static
 import AddIcon from '../../media/icons/GlyphAdd.js'
 
-const AddFiles = ({ doAddFiles }) => {
+export const AddFiles = ({ doAddFiles }) => {
   const onAddFiles = (ev) => {
     ev.preventDefault()
     ev.stopPropagation()
