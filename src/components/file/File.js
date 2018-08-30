@@ -48,7 +48,13 @@ export class File extends React.Component {
     const glyphWidth = 25
 
     if (isDownload && progress === null) {
-      return <IconDownload className='pointer o-80 glow' width={glyphWidth} fill={fillColor} onClick={this.handleDownloadClick} alt='Download' />
+      return <IconDownload
+        className='pointer o-80 glow'
+        width={glyphWidth + 5}
+        fill={fillColor}
+        style={{ marginRight: '-3px' }}
+        onClick={this.handleDownloadClick}
+        alt='Download' />
     } else if (error) {
       return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
     } else if (progress === 100) {
