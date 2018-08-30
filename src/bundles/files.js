@@ -79,12 +79,14 @@ export default {
         }
 
       case 'FILES_FETCH_STARTED':
+      case 'FILES_FETCH_GATEWAY_STARTED':
         return {
           ...state,
           loading: true
         }
 
       case 'FILES_FETCH_FINISHED':
+      case 'FILES_FETCH_GATEWAY_FINISHED':
         return {
           ...state,
           loading: false,
@@ -95,6 +97,7 @@ export default {
         }
 
       case 'FILES_FETCH_FAILED':
+      case 'FILES_FETCH_GATEWAY_FAILED':
         return {
           ...state,
           loading: true,
@@ -226,6 +229,7 @@ export default {
     dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
 
     window.fetch(url)
+      .then(res => res.json())
       .then(res => {
         const ipfsFiles = res.Objects[0].Links
         const files = {}
