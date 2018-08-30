@@ -3,12 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
 import { Helmet } from 'react-helmet'
 
+// Constants
+import PAGES from '../../constants/pages'
+
 // Components
 import Box from '../../components/box/Box'
 import Info from '../../components/info/Info'
 
 class Upload extends React.Component {
   static propTypes = {
+    currentPage: PropTypes.string.isRequired,
     routeInfo: PropTypes.object.isRequired,
     ipfsReady: PropTypes.bool.isRequired,
     files: PropTypes.object,
@@ -17,9 +21,9 @@ class Upload extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { routeInfo: { url, params }, ipfsReady, doFetchFileTree } = this.props
+    const { currentPage, routeInfo: { params }, ipfsReady, doFetchFileTree } = this.props
 
-    if (url.startsWith('/add') && !prevProps.ipfsReady && ipfsReady) {
+    if (currentPage === PAGES.upload && params.hash && !prevProps.ipfsReady && ipfsReady) {
       doFetchFileTree(params.hash)
     }
   }
@@ -43,6 +47,7 @@ class Upload extends React.Component {
 }
 
 export default connect(
+  'selectCurrentPage',
   'selectRouteInfo',
   'selectIpfsReady',
   'selectFiles',

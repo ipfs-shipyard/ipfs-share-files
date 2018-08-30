@@ -2,6 +2,7 @@ import { createSelector } from 'redux-bundler'
 import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
 import shortid from 'shortid'
 import ENDPOINTS from '../constants/endpoints'
+import PAGES from '../constants/pages'
 
 const initialState = {
   files: {},
@@ -136,10 +137,11 @@ export default {
   selectShareLink: state => state.files.shareLink,
 
   reactGetShareLink: createSelector(
+    'selectCurrentPage',
     'selectExistFiles',
     'selectExistFilesPending',
-    (existFiles, existFilesPending) => {
-      if (existFiles && !existFilesPending) {
+    (currentPage, existFiles, existFilesPending) => {
+      if (currentPage === PAGES.upload && existFiles && !existFilesPending) {
         return { actionCreator: 'doShareLink' }
       }
     }
