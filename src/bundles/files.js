@@ -6,7 +6,10 @@ import PAGES from '../constants/pages'
 
 const initialState = {
   files: {},
-  shareLink: null,
+  shareLink: {
+    outdated: false,
+    link: null
+  },
   loading: false,
   error: null
 }
@@ -55,6 +58,10 @@ export default {
               pending: false
             }
           },
+          shareLink: {
+            ...state.shareLink,
+            outdated: true
+          },
           loading: false,
           error: null
         }
@@ -62,7 +69,6 @@ export default {
       case 'FILES_ADD_FAILED':
         return {
           ...state,
-          loading: false,
           files: {
             ...state.files,
             [action.payload.id]: {
@@ -70,13 +76,21 @@ export default {
               pending: false,
               error: action.payload.error
             }
-          }
+          },
+          shareLink: {
+            ...state.shareLink,
+            outdated: false
+          },
+          loading: false
         }
 
       case 'FILES_SHARE_LINK':
         return {
           ...state,
-          shareLink: action.payload.shareLink
+          shareLink: {
+            ...state.shareLink,
+            link: action.payload.link
+          }
         }
 
       case 'FILES_FETCH_STARTED':
@@ -94,6 +108,10 @@ export default {
           files: {
             ...state.files,
             ...action.payload.files
+          },
+          shareLink: {
+            ...state.shareLink,
+            outdated: false
           }
         }
 
@@ -105,6 +123,10 @@ export default {
           files: {
             ...state.files,
             error: action.payload.error
+          },
+          shareLink: {
+            ...state.shareLink,
+            outdated: false
           }
         }
 
@@ -134,14 +156,17 @@ export default {
     (pendingFiles) => pendingFiles.length
   ),
 
-  selectShareLink: state => state.files.shareLink,
+  selectShareLink: state => state.files.shareLink.link,
+
+  selectIsShareLinkOutdated: state => state.files.shareLink.outdated,
 
   reactGetShareLink: createSelector(
+    'selectIsShareLinkOutdated',
     'selectCurrentPage',
     'selectExistFiles',
     'selectExistFilesPending',
-    (currentPage, existFiles, existFilesPending) => {
-      if (currentPage === PAGES.upload && existFiles && !existFilesPending) {
+    (isShareLinkOutdated, currentPage, existFiles, existFilesPending) => {
+      if (currentPage === PAGES.upload && isShareLinkOutdated && existFiles && !existFilesPending) {
         return { actionCreator: 'doShareLink' }
       }
     }
@@ -193,7 +218,7 @@ export default {
     const shareLink = `${ENDPOINTS.gateway}/${multihash}`
 
     if (storeShareLink !== shareLink) {
-      dispatch({ type: 'FILES_SHARE_LINK', payload: { shareLink: shareLink } })
+      dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink } })
     }
   },
 
