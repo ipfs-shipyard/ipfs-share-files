@@ -89,7 +89,8 @@ export default {
           ...state,
           shareLink: {
             ...state.shareLink,
-            link: action.payload.link
+            link: action.payload.link,
+            outdated: false
           }
         }
 
@@ -111,7 +112,7 @@ export default {
           },
           shareLink: {
             ...state.shareLink,
-            outdated: false
+            outdated: true
           }
         }
 
