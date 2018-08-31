@@ -15,6 +15,7 @@ class Upload extends React.Component {
     currentPage: PropTypes.string.isRequired,
     routeInfo: PropTypes.object.isRequired,
     ipfsReady: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     files: PropTypes.object,
     shareLink: PropTypes.string,
     doFetchFileTree: PropTypes.func.isRequired
@@ -29,7 +30,7 @@ class Upload extends React.Component {
   }
 
   render () {
-    const { files, shareLink } = this.props
+    const { files, shareLink, isLoading } = this.props
 
     return (
       <div data-id='Upload'>
@@ -38,7 +39,7 @@ class Upload extends React.Component {
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
-          <Box files={files} shareLink={shareLink} />
+          <Box files={files} shareLink={shareLink} isLoading={isLoading} />
           <Info />
         </div>
       </div>
@@ -49,6 +50,7 @@ class Upload extends React.Component {
 export default connect(
   'selectCurrentPage',
   'selectRouteInfo',
+  'selectIsLoading',
   'selectIpfsReady',
   'selectFiles',
   'selectShareLink',

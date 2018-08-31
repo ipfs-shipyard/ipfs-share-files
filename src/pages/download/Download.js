@@ -10,6 +10,7 @@ import Info from '../../components/info/Info'
 class Download extends React.Component {
   static propTypes = {
     routeInfo: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     files: PropTypes.object.isRequired,
     doFetchGatewayFileTree: PropTypes.func.isRequired
   }
@@ -21,7 +22,7 @@ class Download extends React.Component {
   }
 
   render () {
-    const { files } = this.props
+    const { files, isLoading } = this.props
 
     return (
       <div data-id='Download'>
@@ -30,7 +31,7 @@ class Download extends React.Component {
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
-          <Box files={files} isDownload />
+          <Box files={files} isDownload isLoading={isLoading} />
           <Info />
         </div>
       </div>
@@ -40,6 +41,7 @@ class Download extends React.Component {
 
 export default connect(
   'selectRouteInfo',
+  'selectIsLoading',
   'selectFiles',
   'doFetchGatewayFileTree',
   Download

@@ -27,7 +27,6 @@ export default {
       case 'FILES_ADD_STARTED':
         return {
           ...state,
-          loading: true,
           files: {
             ...state.files,
             ...action.payload.file
@@ -37,7 +36,6 @@ export default {
       case 'FILES_ADD_PROGRESS':
         return {
           ...state,
-          loading: true,
           files: {
             ...state.files,
             [action.payload.id]: {
@@ -62,7 +60,6 @@ export default {
             ...state.shareLink,
             outdated: true
           },
-          loading: false,
           error: null
         }
 
@@ -80,8 +77,7 @@ export default {
           shareLink: {
             ...state.shareLink,
             outdated: false
-          },
-          loading: false
+          }
         }
 
       case 'FILES_SHARE_LINK':
@@ -120,7 +116,7 @@ export default {
       case 'FILES_FETCH_GATEWAY_FAILED':
         return {
           ...state,
-          loading: true,
+          loading: false,
           files: {
             ...state.files,
             error: action.payload.error
@@ -139,6 +135,8 @@ export default {
   /* ============================================================
      Selectors
      ============================================================ */
+
+  selectIsLoading: state => state.files.loading,
 
   selectFiles: state => state.files.files,
 
