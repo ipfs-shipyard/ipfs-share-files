@@ -1,6 +1,7 @@
 import React from 'react'
 
 // Components
+import Loader from '../loader/Loader'
 import AddFiles from '../add-files/AddFiles'
 import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link//CopyLink'
@@ -12,23 +13,29 @@ const Footnote = () => (
   </div>
 )
 
-const Box = ({ isDownload, files, shareLink }) => {
+const Box = ({ isDownload, files, shareLink, isLoading }) => {
   const boxClass = 'mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'
 
-  return (
-    isDownload
-      ? <div className={boxClass}>
-        <FileTree files={files} isDownload />
-        <DownloadFiles />
-        <Footnote />
-      </div>
-      : <div className={boxClass}>
-        <AddFiles />
-        <FileTree files={files} isDownload={isDownload} />
-        { shareLink && <CopyLink shareLink={shareLink} /> }
-        <Footnote />
-      </div>
+  const renderUpload = () => (
+    <div className={boxClass}>
+      <AddFiles />
+      { isLoading && <Loader /> }
+      <FileTree files={files} isDownload={isDownload} />
+      { shareLink && <CopyLink shareLink={shareLink} /> }
+      <Footnote />
+    </div>
   )
+
+  const renderDownload = () => (
+    <div className={boxClass}>
+      { isLoading && <Loader /> }
+      <FileTree files={files} isDownload />
+      <DownloadFiles />
+      <Footnote />
+    </div>
+  )
+
+  return isDownload ? renderDownload() : renderUpload()
 }
 
 export default Box
