@@ -33,8 +33,8 @@ export class DownloadFiles extends React.Component {
 
     return (
       <div className={btnClass} style={{ pointerEvents: this.state.progress && 'none' }} onClick={this.handleOnClick}>
-        { this.state.progress ? <span>Packing</span> : <span>Download all</span> }
-        { this.state.progress &&
+        { this.state.progress ? <span>Packing...</span> : <span>Download all</span> }
+        { this.state.progress && this.state.progress !== Infinity &&
           <CircularProgressbar
             percentage={this.state.progress}
             strokeWidth={50}
