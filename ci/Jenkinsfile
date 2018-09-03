@@ -3,6 +3,7 @@ website([
   build_directory: 'public/',
   disable_publish: false,
   record: [
-    'master': '_dnslink.dev',
+    'master': '_dnslink',
+    'develop': '_dnslink.dev',
   ]
 ])
