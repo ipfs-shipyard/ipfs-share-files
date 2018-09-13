@@ -219,7 +219,7 @@ export default {
   },
 
   doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
-    let ifpsFiles
+    let ipfsFiles
     let files = {}
 
     dispatch({ type: 'FILES_FETCH_STARTED' })
@@ -228,15 +228,15 @@ export default {
       // determines whether to use the public gateway or the user's node.
       if (store.selectIpfsReady()) {
         const ipfs = getIpfs()
-        ifpsFiles = await ipfs.ls(hash)
+        ipfsFiles = await ipfs.ls(hash)
       } else {
         const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
         const res = await window.fetch(url)
         const objs = await res.json()
-        ifpsFiles = objs.Objects[0].Links
+        ipfsFiles = objs.Objects[0].Links
       }
 
-      for (const file of ifpsFiles) {
+      for (const file of ipfsFiles) {
         const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size

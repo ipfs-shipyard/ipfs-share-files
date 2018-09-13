@@ -28,9 +28,9 @@ export class App extends Component {
 
   render () {
     const { route: Page, ipfsReady, ipfsInitFailed } = this.props
-    // Only shows the page if IPFS is ready of if the initialization has failed.
+    // Only shows the page if IPFS is ready or if the initialization has failed.
     // This way we can make sure we always use user's own node if available and
-    // the public gatway otherwise.
+    // the public gateway otherwise.
     const ready = ipfsReady || ipfsInitFailed
 
     return (
