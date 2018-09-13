@@ -91,14 +91,12 @@ export default {
         }
 
       case 'FILES_FETCH_STARTED':
-      case 'FILES_FETCH_GATEWAY_STARTED':
         return {
           ...state,
           loading: true
         }
 
       case 'FILES_FETCH_FINISHED':
-      case 'FILES_FETCH_GATEWAY_FINISHED':
         return {
           ...state,
           loading: false,
@@ -113,7 +111,6 @@ export default {
         }
 
       case 'FILES_FETCH_FAILED':
-      case 'FILES_FETCH_GATEWAY_FAILED':
         return {
           ...state,
           loading: false,
@@ -222,61 +219,42 @@ export default {
   },
 
   doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
-    const ipfs = getIpfs()
+    let ipfsFiles
+    let files = {}
 
     dispatch({ type: 'FILES_FETCH_STARTED' })
 
-    ipfs.ls(hash)
-      .then(ipfsFiles => {
-        const files = {}
+    try {
+      // determines whether to use the public gateway or the user's node.
+      if (store.selectIpfsReady()) {
+        const ipfs = getIpfs()
+        ipfsFiles = await ipfs.ls(hash)
+      } else {
+        const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
+        const res = await window.fetch(url)
+        const objs = await res.json()
+        ipfsFiles = objs.Objects[0].Links
+      }
 
-        for (const file of ipfsFiles) {
-          const fileId = shortid.generate()
-          const fileName = file.name
-          const fileSize = file.size
-          const fileHash = file.hash
+      for (const file of ipfsFiles) {
+        const fileId = shortid.generate()
+        const fileName = file.name || file.Name
+        const fileSize = file.size || file.Size
+        const fileHash = file.hash || file.Hash
 
-          files[fileId] = {
-            name: fileName,
-            size: fileSize,
-            hash: fileHash,
-            progress: 100,
-            pending: false
-          }
+        files[fileId] = {
+          name: fileName,
+          size: fileSize,
+          hash: fileHash,
+          progress: 100,
+          pending: false
         }
-        dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
-      })
-      .catch(err => dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } }))
-  },
+      }
 
-  doFetchGatewayFileTree: (hash) => async ({ dispatch, store }) => {
-    const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
-
-    dispatch({ type: 'FILES_FETCH_GATEWAY_STARTED' })
-
-    window.fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        const ipfsFiles = res.Objects[0].Links
-        const files = {}
-
-        for (const file of ipfsFiles) {
-          const fileId = shortid.generate()
-          const fileName = file.Name
-          const fileSize = file.Size
-          const fileHash = file.Hash
-
-          files[fileId] = {
-            name: fileName,
-            size: fileSize,
-            hash: fileHash,
-            progress: 100,
-            pending: false
-          }
-        }
-        dispatch({ type: 'FILES_FETCH_GATEWAY_FINISHED', payload: { files: files } })
-      })
-      .catch(err => dispatch({ type: 'FILES_FETCH_GATEWAY_FAILED', payload: { error: err.message } }))
+      dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
+    } catch (err) {
+      dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } })
+    }
   },
 
   doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {

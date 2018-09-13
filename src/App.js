@@ -17,7 +17,9 @@ export class App extends Component {
     route: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.element
-    ]).isRequired
+    ]).isRequired,
+    ipfsReady: PropTypes.bool.isRequired,
+    ipfsInitFailed: PropTypes.bool.isRequired
   }
 
   componentWillMount () {
@@ -25,14 +27,18 @@ export class App extends Component {
   }
 
   render () {
-    const Page = this.props.route
+    const { route: Page, ipfsReady, ipfsInitFailed } = this.props
+    // Only shows the page if IPFS is ready or if the initialization has failed.
+    // This way we can make sure we always use user's own node if available and
+    // the public gateway otherwise.
+    const ready = ipfsReady || ipfsInitFailed
 
     return (
       <div className='App sans-serif' onClick={navHelper(this.props.doUpdateUrl)}>
         <div className='flex flex-column min-vh-100'>
           <Header />
           <main className='flex-auto pa4'>
-            <Page />
+            { ready && <Page /> }
           </main>
           <Footer />
         </div>
@@ -43,6 +49,8 @@ export class App extends Component {
 
 export default connect(
   'selectRoute',
+  'selectIpfsReady',
+  'selectIpfsInitFailed',
   'doUpdateUrl',
   'doInitIpfs',
   App
