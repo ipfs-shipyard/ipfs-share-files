@@ -8,10 +8,9 @@ import Upload from '../pages/upload/Upload'
 import Download from '../pages/download/Download'
 
 const bundle = createRouteBundle({
-  '': Upload,
-  '/': Upload,
-  '/add/:hash': Upload,
-  '/:hash': Download
+  '/:hash': Download,
+  '/add/:hash': Download,
+  '*': Download
 }, { routeInfoSelector: 'selectHash' })
 
 bundle.selectCurrentPage = createSelector(

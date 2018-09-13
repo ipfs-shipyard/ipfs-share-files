@@ -30,6 +30,7 @@
     "internal-nav-helper": "^1.0.2",
     "ipfs-css": "^0.8.0",
     "ipfs-redux-bundle": "^2.0.0",
+    "is-ipfs": "^0.4.2",
     "milliseconds": "^1.0.3",
     "prop-types": "^15.6.2",
     "pull-file-reader": "^1.0.2",
