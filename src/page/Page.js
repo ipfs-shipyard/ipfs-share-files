@@ -11,7 +11,7 @@ import PAGES from '../constants/pages'
 import Box from '../components/box/Box'
 import Info from '../components/info/Info'
 
-// TODO: re-render every URL change
+// TODO: update data when hash changes
 class Download extends React.Component {
   static propTypes = {
     routeInfo: PropTypes.object.isRequired,
@@ -23,16 +23,28 @@ class Download extends React.Component {
     shareLink: PropTypes.string
   }
 
-  componentDidMount () {
+  update (prevProps) {
     const { doUpdateHash, routeInfo: { params }, doFetchFileTree } = this.props
 
     if (params.hash) {
+      if (prevProps && prevProps.routeInfo.params.hash === params.hash) {
+        return
+      }
+
       if (!isIPFS.cid(params.hash)) {
         return doUpdateHash('#/')
       }
 
       doFetchFileTree(params.hash)
     }
+  }
+
+  componentDidMount () {
+    this.update()
+  }
+
+  componentDidUpdate (prevProps) {
+    this.update(prevProps)
   }
 
   render () {

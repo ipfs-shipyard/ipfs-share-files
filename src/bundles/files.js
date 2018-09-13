@@ -1,6 +1,5 @@
 import { createSelector } from 'redux-bundler'
 import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
-import shortid from 'shortid'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
 
@@ -177,12 +176,11 @@ export default {
     const { streams } = await filesToStreams(files)
 
     for (const stream of streams) {
-      const fileId = shortid.generate()
       const fileName = stream.name
       const fileSize = stream.size
 
       const file = {
-        [fileId]: {
+        [fileName]: {
           name: fileName,
           size: fileSize,
           progress: 0,
@@ -195,12 +193,12 @@ export default {
       const updateProgress = (bytesLoaded) => {
         const progress = Math.round((bytesLoaded / fileSize) * 100)
 
-        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress: progress } })
+        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileName, progress: progress } })
       }
 
       ipfs.add(stream, { pin: false, progress: updateProgress })
-        .then(addedFile => dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } }))
-        .catch(err => dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } }))
+        .then(addedFile => dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileName, hash: addedFile[0].hash } }))
+        .catch(err => dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileName, error: err.message } }))
     }
   },
 
@@ -237,12 +235,11 @@ export default {
       }
 
       for (const file of ipfsFiles) {
-        const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size
         const fileHash = file.hash || file.Hash
 
-        files[fileId] = {
+        files[fileName] = {
           name: fileName,
           size: fileSize,
           hash: fileHash,
