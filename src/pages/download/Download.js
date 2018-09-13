@@ -12,13 +12,13 @@ class Download extends React.Component {
     routeInfo: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     files: PropTypes.object.isRequired,
-    doFetchGatewayFileTree: PropTypes.func.isRequired
+    doFetchFileTree: PropTypes.func.isRequired
   }
 
   componentDidMount () {
-    const { routeInfo: { params }, doFetchGatewayFileTree } = this.props
+    const { routeInfo: { params }, doFetchFileTree } = this.props
 
-    doFetchGatewayFileTree(params.hash)
+    doFetchFileTree(params.hash)
   }
 
   render () {
@@ -43,6 +43,6 @@ export default connect(
   'selectRouteInfo',
   'selectIsLoading',
   'selectFiles',
-  'doFetchGatewayFileTree',
+  'doFetchFileTree',
   Download
 )
