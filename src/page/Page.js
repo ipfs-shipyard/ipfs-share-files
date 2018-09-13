@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet'
 import isIPFS from 'is-ipfs'
 
 // Constants
-import PAGES from '../../constants/pages'
+import PAGES from '../constants/pages'
 
 // Components
-import Box from '../../components/box/Box'
-import Info from '../../components/info/Info'
+import Box from '../components/box/Box'
+import Info from '../components/info/Info'
 
 // TODO: re-render every URL change
 class Download extends React.Component {
@@ -36,7 +36,7 @@ class Download extends React.Component {
   }
 
   render () {
-    const { currentPage, files, isLoading } = this.props
+    const { currentPage, shareLink, files, isLoading } = this.props
     const isDownload = currentPage === PAGES.download
 
     return (
@@ -46,7 +46,7 @@ class Download extends React.Component {
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
-          <Box files={files} isDownload={isDownload} isLoading={isLoading} />
+          <Box files={files} isDownload={isDownload} shareLink={shareLink} isLoading={isLoading} />
           <Info />
         </div>
       </div>

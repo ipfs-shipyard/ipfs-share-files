@@ -1,16 +1,11 @@
 import { createRouteBundle, createSelector } from 'redux-bundler'
-
-// Constants
 import PAGES from '../constants/pages'
-
-// Pages
-import Upload from '../pages/upload/Upload'
-import Download from '../pages/download/Download'
+import Page from '../page/Page'
 
 const bundle = createRouteBundle({
-  '/:hash': Download,
-  '/add/:hash': Download,
-  '*': Download
+  '/:hash': Page,
+  '/add/:hash': Page,
+  '*': Page
 }, { routeInfoSelector: 'selectHash' })
 
 bundle.selectCurrentPage = createSelector(
