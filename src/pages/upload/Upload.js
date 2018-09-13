@@ -14,17 +14,16 @@ class Upload extends React.Component {
   static propTypes = {
     currentPage: PropTypes.string.isRequired,
     routeInfo: PropTypes.object.isRequired,
-    ipfsReady: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     files: PropTypes.object,
     shareLink: PropTypes.string,
     doFetchFileTree: PropTypes.func.isRequired
   }
 
-  componentDidUpdate (prevProps) {
-    const { currentPage, routeInfo: { params }, ipfsReady, doFetchFileTree } = this.props
+  componentDidMount () {
+    const { currentPage, routeInfo: { params }, doFetchFileTree } = this.props
 
-    if (currentPage === PAGES.upload && params.hash && !prevProps.ipfsReady && ipfsReady) {
+    if (currentPage === PAGES.upload && params.hash) {
       doFetchFileTree(params.hash)
     }
   }
@@ -51,7 +50,6 @@ export default connect(
   'selectCurrentPage',
   'selectRouteInfo',
   'selectIsLoading',
-  'selectIpfsReady',
   'selectFiles',
   'selectShareLink',
   'doFetchFileTree',
