@@ -31,6 +31,7 @@
     "ipfs-css": "^0.8.0",
     "ipfs-redux-bundle": "^2.0.0",
     "milliseconds": "^1.0.3",
+    "p-queue": "3.0.0",
     "prop-types": "^15.6.2",
     "pull-file-reader": "^1.0.2",
     "react": "^16.4.2",

@@ -1,8 +1,11 @@
 import { createSelector } from 'redux-bundler'
+import PQueue from 'p-queue'
 import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
 import shortid from 'shortid'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
+
+const addQueue = new PQueue({concurrency: 2})
 
 const initialState = {
   files: {},
@@ -198,10 +201,11 @@ export default {
         dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress: progress } })
       }
 
-      ipfs.add(stream, { pin: false, progress: updateProgress })
+      addQueue.add(() => ipfs.add(stream, { pin: false, progress: updateProgress }))
         .then(addedFile => dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } }))
         .catch(err => dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } }))
     }
+    await addQueue.onIdle()
   },
 
   doShareLink: () => async ({ dispatch, store, getIpfs }) => {
