@@ -38,6 +38,6 @@ export const BoxUpload = ({ files, isLoading, shareLink }) => (
 
 export const BoxNotAvailable = () => (
   <Box>
-    <p className='mt0 b'>You need to have an IPFS daemon running to upload files.</p>
+    <p className='mt0 navy lh-copy'>You need to have an IPFS daemon running to upload files.</p>
   </Box>
 )

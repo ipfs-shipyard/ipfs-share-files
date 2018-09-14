@@ -23,28 +23,17 @@ class Page extends React.Component {
     shareLink: PropTypes.string
   }
 
-  update (prevProps) {
+  componentDidMount () {
     const { doUpdateHash, routeInfo: { params }, doFetchFileTree } = this.props
 
     if (params.hash) {
-      if (prevProps && prevProps.routeInfo.params.hash === params.hash) {
-        return
-      }
-
+      // Discard if it's not a valid hash
       if (!isIPFS.cid(params.hash)) {
         return doUpdateHash('#/')
       }
 
       doFetchFileTree(params.hash)
     }
-  }
-
-  componentDidMount () {
-    this.update()
-  }
-
-  componentDidUpdate (prevProps) {
-    this.update(prevProps)
   }
 
   render () {
@@ -61,7 +50,7 @@ class Page extends React.Component {
     }
 
     return (
-      <div data-id='Download'>
+      <div data-id='Page'>
         <Helmet>
           <title>IPFS - { isDownload ? 'Download' : 'Upload' } Files</title>
         </Helmet>
