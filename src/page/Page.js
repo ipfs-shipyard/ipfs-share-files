@@ -8,7 +8,7 @@ import isIPFS from 'is-ipfs'
 import PAGES from '../constants/pages'
 
 // Components
-import Box from '../components/box/Box'
+import { BoxUpload, BoxDownload, BoxNotAvailable } from '../components/box/Box'
 import Info from '../components/info/Info'
 
 class Page extends React.Component {
@@ -19,6 +19,7 @@ class Page extends React.Component {
     doFetchFileTree: PropTypes.func.isRequired,
     doUpdateHash: PropTypes.func.isRequired,
     currentPage: PropTypes.string.isRequired,
+    ipfsInitFailed: PropTypes.bool.isRequired,
     shareLink: PropTypes.string
   }
 
@@ -47,8 +48,17 @@ class Page extends React.Component {
   }
 
   render () {
-    const { currentPage, shareLink, files, isLoading } = this.props
+    const { currentPage, ipfsInitFailed, shareLink, files, isLoading } = this.props
     const isDownload = currentPage === PAGES.download
+    let content
+
+    if (isDownload) {
+      content = <BoxDownload files={files} shareLink={shareLink} isLoading={isLoading} />
+    } else if (ipfsInitFailed) {
+      content = <BoxNotAvailable />
+    } else {
+      content = <BoxUpload files={files} shareLink={shareLink} isLoading={isLoading} />
+    }
 
     return (
       <div data-id='Download'>
@@ -57,7 +67,7 @@ class Page extends React.Component {
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
-          <Box files={files} isDownload={isDownload} shareLink={shareLink} isLoading={isLoading} />
+          { content }
           <Info />
         </div>
       </div>
@@ -68,6 +78,7 @@ class Page extends React.Component {
 export default connect(
   'doFetchFileTree',
   'doUpdateHash',
+  'selectIpfsInitFailed',
   'selectRouteInfo',
   'selectIsLoading',
   'selectFiles',
