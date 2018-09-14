@@ -11,8 +11,7 @@ import PAGES from '../constants/pages'
 import Box from '../components/box/Box'
 import Info from '../components/info/Info'
 
-// TODO: update data when hash changes
-class Download extends React.Component {
+class Page extends React.Component {
   static propTypes = {
     routeInfo: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -74,5 +73,5 @@ export default connect(
   'selectFiles',
   'selectCurrentPage',
   'selectShareLink',
-  Download
+  Page
 )

@@ -171,7 +171,7 @@ export default {
      Action Creators
      ============================================================ */
 
-  doAddFiles: (files) => async ({ dispatch, store, getIpfs }) => {
+  doAddFiles: (files) => async ({ dispatch, getIpfs }) => {
     const ipfs = getIpfs()
     const { streams } = await filesToStreams(files)
 
@@ -196,9 +196,12 @@ export default {
         dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileName, progress: progress } })
       }
 
-      ipfs.add(stream, { pin: false, progress: updateProgress })
-        .then(addedFile => dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileName, hash: addedFile[0].hash } }))
-        .catch(err => dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileName, error: err.message } }))
+      try {
+        const addedFile = await ipfs.add(stream, { pin: false, progress: updateProgress })
+        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileName, hash: addedFile[0].hash } })
+      } catch (err) {
+        dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileName, error: err.message } })
+      }
     }
   },
 
