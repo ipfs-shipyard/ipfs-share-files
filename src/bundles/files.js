@@ -124,6 +124,9 @@ export default {
           }
         }
 
+      case 'FILES_RESET':
+        return initialState
+
       default:
         return state
     }
@@ -263,5 +266,7 @@ export default {
     const ipfs = getIpfs()
     dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })
     return getDownloadLink(files, ipfs)
-  }
+  },
+
+  doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })
 }
