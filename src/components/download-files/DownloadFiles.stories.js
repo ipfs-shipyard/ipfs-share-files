@@ -6,7 +6,7 @@ import { DownloadFiles } from './DownloadFiles'
 storiesOf('DownloadFiles', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='ma3'>
+    <div className='ma3 sans-serif'>
       <DownloadFiles />
     </div>
   ))

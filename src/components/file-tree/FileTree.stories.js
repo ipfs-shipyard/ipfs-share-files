@@ -19,7 +19,7 @@ storiesOf('FileTree', module)
     </Provider>
   ))
   .add('Default', () => (
-    <div className='ma3'>
+    <div className='ma3 sans-serif'>
       <FileTree files={files} />
     </div>
   ))

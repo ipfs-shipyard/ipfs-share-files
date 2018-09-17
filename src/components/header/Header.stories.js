@@ -6,7 +6,7 @@ import Header from './Header'
 storiesOf('Header', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='bg-navy'>
+    <div className='bg-navy sans-serif'>
       <Header />
     </div>
   ))

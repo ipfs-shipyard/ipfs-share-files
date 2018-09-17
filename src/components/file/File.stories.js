@@ -3,10 +3,12 @@ import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
 import { File } from './File'
 
+const wrapperClass = 'ma3 sans-serif'
+
 storiesOf('File', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
@@ -14,7 +16,7 @@ storiesOf('File', module)
     </div>
   ))
   .add('Uploading', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
@@ -23,7 +25,7 @@ storiesOf('File', module)
     </div>
   ))
   .add('Uploaded', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
@@ -32,7 +34,7 @@ storiesOf('File', module)
     </div>
   ))
   .add('Errored', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
@@ -42,7 +44,7 @@ storiesOf('File', module)
     </div>
   ))
   .add('Download', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones.mkv'
@@ -52,7 +54,7 @@ storiesOf('File', module)
     </div>
   ))
   .add('Folder', () => (
-    <div className='ma3'>
+    <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
         name='game-of-thrones'

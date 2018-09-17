@@ -5,15 +5,17 @@ import CopyLink from './CopyLink'
 
 const shareLink = 'share.ipfs.io/QmXAeNYRRnD8RGvxHUiVp4ffh8FDynyRMPjcGFhnVzPHUt'
 
+const wrapperClass = 'flex flex-auto pa3 bg-navy sans-serif'
+
 storiesOf('CopyLink', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='flex flex-auto pa3 bg-navy'>
+    <div className={wrapperClass}>
       <CopyLink shareLink={shareLink} />
     </div>
   ))
   .add('Without Label', () => (
-    <div className='flex flex-auto pa3 bg-navy'>
+    <div className={wrapperClass}>
       <CopyLink shareLink={shareLink} withLabel={false} />
     </div>
   ))

@@ -6,7 +6,7 @@ import { AddFiles } from './AddFiles'
 storiesOf('AddFiles', module)
   .addDecorator(checkA11y)
   .add('Default', () => (
-    <div className='ma3'>
+    <div className='ma3 sans-serif'>
       <AddFiles />
     </div>
   ))
