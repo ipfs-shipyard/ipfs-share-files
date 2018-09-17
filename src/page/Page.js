@@ -17,22 +17,29 @@ class Page extends React.Component {
     isLoading: PropTypes.bool.isRequired,
     files: PropTypes.object.isRequired,
     doFetchFileTree: PropTypes.func.isRequired,
+    doResetFiles: PropTypes.func.isRequired,
     doUpdateHash: PropTypes.func.isRequired,
     currentPage: PropTypes.string.isRequired,
     ipfsInitFailed: PropTypes.bool.isRequired,
     shareLink: PropTypes.string
   }
 
+  componentDidUpdate (prevProps) {
+    this.handleRouting(prevProps)
+  }
+
   componentDidMount () {
-    const { doUpdateHash, routeInfo: { params }, doFetchFileTree } = this.props
+    this.handleRouting()
+  }
 
-    if (params.hash) {
-      // Discard if it's not a valid hash
-      if (!isIPFS.cid(params.hash)) {
-        return doUpdateHash('#/')
-      }
+  handleRouting (prevProps) {
+    const { doUpdateHash, doFetchFileTree, doResetFiles } = this.props
+    const prevHash = prevProps && prevProps.routeInfo.params.hash
+    const currentHash = this.props.routeInfo.params.hash
 
-      doFetchFileTree(params.hash)
+    if (prevHash !== currentHash) {
+      doResetFiles()
+      isIPFS.cid(currentHash) ? doFetchFileTree(currentHash) : doUpdateHash('#/')
     }
   }
 
@@ -66,6 +73,7 @@ class Page extends React.Component {
 
 export default connect(
   'doFetchFileTree',
+  'doResetFiles',
   'doUpdateHash',
   'selectIpfsInitFailed',
   'selectRouteInfo',
