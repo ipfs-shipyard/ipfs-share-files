@@ -4,12 +4,7 @@ import { checkA11y } from '@storybook/addon-a11y'
 import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
 import FileTree from './FileTree'
-
-const files = [
-  { name: 'game-of-thrones.avi', size: 989827344, hash: 'QmSZCFFHsWbwbxU7QJ1d34HkLTVTUS6Msn3eawYjngo7yq', progress: 30 },
-  { name: 'chill-out.mp3', size: 5423424, hash: 'QmSZCFFHsWbwbxU7QJ1d34HkLTVTUS6Msn3eawYjngo7yq', progress: 60 },
-  { name: 'fate.txt', size: 4254384, hash: 'QmSZCFFHsWbwbxU7QJ1d34HkLTVTUS6Msn3eawYjngo7yq', progress: 100 }
-]
+import files from './fixtures/root.json'
 
 storiesOf('FileTree', module)
   .addDecorator(checkA11y)
