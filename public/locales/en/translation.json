@@ -1,0 +1,25 @@
+{
+  "header": "Share by IPFS",
+  "footer": "Protocol Labs | Except as noted, content licensed CC-BY 3.0",
+  "info": {
+    "title": "How does it work?",
+    "description": "Vulputate enim nulla aliquet porttitor lacus. Id interdum velit laoreet id donec ultrices tincidunt. Orci dapibus ultrices in iaculis. In massa tempor nec feugiat nisl pretium fusce. Libero id faucibus nisl tincidunt eget nullam non nisi. Suscipit tellus mauris a diam maecenas.",
+    "label": "Add files to IPFS",
+    "copy": "Donec sed odio dui. Crusto odio, dapibus ac facilis in, egestas eget quam."
+  },
+  "box": {
+    "missingDaemon": "You need to have an IPFS daemon running to upload files.",
+    "footNote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  "addFiles": "Add files",
+  "copyLink": {
+    "label": "Copy link to send files:",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "loader": "Loading file list...",
+  "downloadFiles": {
+    "downloadAll": "Download all",
+    "downloading": "Packing..."
+  }
+}

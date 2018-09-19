@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
+import { translate } from 'react-i18next'
+import classnames from 'classnames'
 import CircularProgressbar from 'react-circular-progressbar'
 import downloadFile from '../file/utils/download'
 
@@ -26,6 +27,7 @@ export class DownloadFiles extends React.Component {
   }
 
   render () {
+    const { t } = this.props
     const btnClass = classnames({
       'ba b--navy bg-white navy ': this.state.progress,
       'bg-navy white glow pointer': !this.state.progress
@@ -33,7 +35,7 @@ export class DownloadFiles extends React.Component {
 
     return (
       <div className={btnClass} style={{ pointerEvents: this.state.progress && 'none' }} onClick={this.handleOnClick}>
-        { this.state.progress ? <span>Packing...</span> : <span>Download all</span> }
+        { this.state.progress ? <span>{t('downloadFiles.downloading')}</span> : <span>{t('downloadFiles.downloadAll')}</span> }
         { this.state.progress && this.state.progress !== Infinity &&
           <CircularProgressbar
             percentage={this.state.progress}
@@ -47,8 +49,10 @@ export class DownloadFiles extends React.Component {
   }
 }
 
+export const TranslatedDownloadFiles = translate()(DownloadFiles)
+
 export default connect(
   'selectFiles',
   'doGetDownloadLink',
-  DownloadFiles
+  TranslatedDownloadFiles
 )

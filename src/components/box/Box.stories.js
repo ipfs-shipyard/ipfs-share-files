@@ -1,9 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
+import i18n from '../../i18n-decorator'
 import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
-import { BoxUpload, BoxDownload, BoxNotAvailable } from './Box'
+import { BoxUpload, BoxDownload, TranslatedBoxNotAvailable } from './Box'
 
 const files = [
   { name: 'game-of-thrones.avi', size: 989827344, hash: 'QmSZCFFHsWbwbxU7QJ1d34HkLTVTUS6Msn3eawYjngo7yq', progress: 30 },
@@ -17,6 +18,7 @@ const wrapperClass = 'flex flex-auto pa3 bg-navy sans-serif'
 
 storiesOf('Box', module)
   .addDecorator(checkA11y)
+  .addDecorator(i18n)
   .addDecorator(story => (
     <Provider store={getStore()}>
       { story() }
@@ -34,6 +36,6 @@ storiesOf('Box', module)
   ))
   .add('Not Available', () => (
     <div className={wrapperClass}>
-      <BoxNotAvailable />
+      <TranslatedBoxNotAvailable />
     </div>
   ))
