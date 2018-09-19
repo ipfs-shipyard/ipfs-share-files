@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
+import { translate } from 'react-i18next'
 
 // Static
 import AddIcon from '../../media/icons/GlyphAdd.js'
 
-export const AddFiles = ({ doAddFiles }) => {
+export const AddFiles = ({ t, doAddFiles }) => {
   const onAddFiles = (ev) => {
     ev.preventDefault()
     ev.stopPropagation()
@@ -18,7 +19,7 @@ export const AddFiles = ({ doAddFiles }) => {
     <div className='mb4 o-80 glow'>
       <label htmlFor='add-files' className='flex items-center pointer'>
         <AddIcon className='fill-aqua' height='80px' style={{ marginLeft: '-16px' }} alt='Add' />
-        <div className='f5 charcoal'>Add files</div>
+        <div className='f5 charcoal'>{t('addFiles')}</div>
         <input
           onChange={onAddFiles}
           id='add-files'
@@ -31,7 +32,9 @@ export const AddFiles = ({ doAddFiles }) => {
   )
 }
 
+export const TranslatedAddFiles = translate()(AddFiles)
+
 export default connect(
   'doAddFiles',
-  AddFiles
+  TranslatedAddFiles
 )

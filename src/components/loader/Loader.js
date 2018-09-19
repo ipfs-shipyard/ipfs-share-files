@@ -1,12 +1,14 @@
 import React from 'react'
+import { translate } from 'react-i18next'
 import LoaderSpinner from 'react-loader-spinner'
 import './Loader.css'
 
 const Loader = ({
+  t,
   loader = 'Puff',
   color = '#022e44',
   size = 25,
-  text = 'Loading file list...'
+  text = t('loader')
 }) => (
   <div className='Loader mv4 flex items-center'>
     <LoaderSpinner type={loader} color={color} height={size} width={size} />
@@ -14,4 +16,4 @@ const Loader = ({
   </div>
 )
 
-export default Loader
+export default translate()(Loader)
