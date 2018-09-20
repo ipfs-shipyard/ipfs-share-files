@@ -7,14 +7,18 @@
   "header": "Partilhar por IPFS",
   "footer": "Protocol Labs | Exceto onde anotado, conteúdo licenciado CC-BY 3.0",
   "info": {
-    "title": "Como funciona?",
-    "description": "Vulputate enim nulla aliquet porttitor lacus. Id interdum velit laoreet id donec ultrices tincidunt. Orci dapibus ultrices in iaculis. In massa tempor nec feugiat nisl pretium fusce. Libero id faucibus nisl tincidunt eget nullam non nisi. Suscipit tellus mauris a diam maecenas.",
-    "label": "Adicionar ficheiros ao IPFS",
-    "copy": "Donec sed odio dui. Crusto odio, dapibus ac facilis in, egestas eget quam."
+    "title": "InterPlanetary File System",
+    "description": "Um protocolo peer-to-peer de hypermedia para tornar a web mais rápida, segura, e mais aberta.",
+    "labelAdding": "Adicionar ficheiros",
+    "copyAdding": "O conteúdo de cada ficheiro é passado por uma função unidirecional (hash), o que significa que não há duplicados na rede.",
+    "labelNodes": "Nós de IPFS",
+    "copyNodes": "Cada nó só guarda conteúdo que lhe interessa, e alguma informação que ajuda a perceber quem guarda o quê.",
+    "labelGetting": "Obter Ficheiros",
+    "copyGetting": "Ao procurar ficheiros, estás a pedir à rede que encontre nós que tenham o conteúdo atrás de uma hash única."
   },
   "box": {
     "missingDaemon": "É necessário ter um IPFS daemon a correr para adicionar ficheiros.",
-    "footNote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "footNote": "Se outros nós não servirem os ficheiros e tu parares de os servir, eles vão desaparecer da rede."
   },
   "addFiles": "Adicionar ficheiros",
   "copyLink": {

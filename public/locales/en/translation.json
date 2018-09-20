@@ -7,14 +7,18 @@
   "header": "Share by IPFS",
   "footer": "Protocol Labs | Except as noted, content licensed CC-BY 3.0",
   "info": {
-    "title": "How does it work?",
-    "description": "Vulputate enim nulla aliquet porttitor lacus. Id interdum velit laoreet id donec ultrices tincidunt. Orci dapibus ultrices in iaculis. In massa tempor nec feugiat nisl pretium fusce. Libero id faucibus nisl tincidunt eget nullam non nisi. Suscipit tellus mauris a diam maecenas.",
-    "label": "Add files to IPFS",
-    "copy": "Donec sed odio dui. Crusto odio, dapibus ac facilis in, egestas eget quam."
+    "title": "InterPlanetary File System",
+    "description": "A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.",
+    "labelAdding": "Adding files",
+    "copyAdding": "Each file is hashed based on its content, which means there are no duplications across the network.",
+    "labelNodes": "IPFS Nodes",
+    "copyNodes": "Each node stores only content it is interested in, and some information that helps figuring out who is storing what.",
+    "labelGetting": "Getting Files",
+    "copyGetting": "When looking up files, you're asking the network to find nodes storing the content behind a unique hash."
   },
   "box": {
     "missingDaemon": "You need to have an IPFS daemon running to upload files.",
-    "footNote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "footNote": "If no other nodes pin your files and you stop serving them, they will disappear from the network."
   },
   "addFiles": "Add files",
   "copyLink": {
