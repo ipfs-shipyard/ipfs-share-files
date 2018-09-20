@@ -8,7 +8,7 @@ import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link/CopyLink'
 import DownloadFiles from '../download-files/DownloadFiles'
 
-export const Box = ({ children, t }) => {
+export const rawBox = ({ children, t }) => {
   return (
     <div className='mb4 mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
       { children }
@@ -19,30 +19,33 @@ export const Box = ({ children, t }) => {
   )
 }
 
-export const TranslatedBox = translate()(Box)
+export const Box = translate()(rawBox)
 
 export const BoxDownload = ({ files, isLoading }) => (
-  <TranslatedBox>
+  <Box>
     { isLoading && <Loader /> }
     <FileTree files={files} isDownload />
     <DownloadFiles />
-  </TranslatedBox>
+  </Box>
 )
 
 export const BoxUpload = ({ files, isLoading, shareLink }) => (
-  <TranslatedBox>
+  <Box>
     <AddFiles />
     { isLoading && <Loader /> }
     <FileTree files={files} />
     { shareLink && <CopyLink shareLink={shareLink} /> }
-  </TranslatedBox>
+  </Box>
 )
 
-export const BoxNotAvailable = ({ t }) => (
-  <TranslatedBox>
-    <p className='mt0 navy lh-copy'>
-      {t('box.missingDaemon')}</p>
-  </TranslatedBox>
-)
+export const rawBoxNotAvailable = ({ t }) => {
+  return (
+    <Box>
+      <p className='mt0 navy lh-copy'>
+        {t('box.missingDaemon')}
+      </p>
+    </Box>
+  )
+}
 
-export const TranslatedBoxNotAvailable = translate()(BoxNotAvailable)
+export const BoxNotAvailable = translate()(rawBoxNotAvailable)

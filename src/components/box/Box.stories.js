@@ -4,7 +4,7 @@ import { checkA11y } from '@storybook/addon-a11y'
 import i18n from '../../i18n-decorator'
 import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
-import { BoxUpload, BoxDownload, TranslatedBoxNotAvailable } from './Box'
+import { BoxUpload, BoxDownload, BoxNotAvailable } from './Box'
 
 const files = [
   { name: 'game-of-thrones.avi', size: 989827344, hash: 'QmSZCFFHsWbwbxU7QJ1d34HkLTVTUS6Msn3eawYjngo7yq', progress: 30 },
@@ -36,6 +36,6 @@ storiesOf('Box', module)
   ))
   .add('Not Available', () => (
     <div className={wrapperClass}>
-      <TranslatedBoxNotAvailable />
+      <BoxNotAvailable />
     </div>
   ))
