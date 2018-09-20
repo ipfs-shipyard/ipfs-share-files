@@ -1,4 +1,9 @@
 {
+  "pageTitle": {
+    "ipfs": "IPFS",
+    "upload": "Adicionar Ficheiros",
+    "download": "Descarregar Ficheiros"
+  },
   "header": "Partilhar por IPFS",
   "footer": "Protocol Labs | Exceto onde anotado, conteúdo licenciado CC-BY 3.0",
   "info": {
@@ -20,6 +25,6 @@
   "loader": "A carregar a lista de ficheiros...",
   "downloadFiles": {
     "downloadAll": "Descarregar todos",
-    "downloading": "A empacotar..."
+    "downloading": "A arquivar..."
   }
 }

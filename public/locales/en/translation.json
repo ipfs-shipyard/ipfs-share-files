@@ -1,4 +1,9 @@
 {
+  "pageTitle": {
+    "ipfs": "IPFS",
+    "upload": "Upload Files",
+    "download": "Download Files"
+  },
   "header": "Share by IPFS",
   "footer": "Protocol Labs | Except as noted, content licensed CC-BY 3.0",
   "info": {
@@ -20,6 +25,6 @@
   "loader": "Loading file list...",
   "downloadFiles": {
     "downloadAll": "Download all",
-    "downloading": "Packing..."
+    "downloading": "Archiving..."
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
+import { translate } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 import isIPFS from 'is-ipfs'
 
@@ -44,7 +45,7 @@ class Page extends React.Component {
   }
 
   render () {
-    const { currentPage, ipfsInitFailed, shareLink, files, isLoading } = this.props
+    const { currentPage, ipfsInitFailed, shareLink, files, isLoading, t } = this.props
     const isDownload = currentPage === PAGES.download
     let content
 
@@ -59,7 +60,7 @@ class Page extends React.Component {
     return (
       <div data-id='Page'>
         <Helmet>
-          <title>IPFS - { isDownload ? 'Download' : 'Upload' } Files</title>
+          <title>{t('pageTitle.ipfs')} - { isDownload ? t('pageTitle.download') : t('pageTitle.upload') }</title>
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
@@ -81,5 +82,5 @@ export default connect(
   'selectFiles',
   'selectCurrentPage',
   'selectShareLink',
-  Page
+  translate()(Page)
 )
