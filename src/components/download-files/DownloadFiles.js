@@ -31,7 +31,7 @@ export class DownloadFiles extends React.Component {
     const btnClass = classnames({
       'ba b--navy bg-white navy ': this.state.progress,
       'bg-navy white glow pointer': !this.state.progress
-    }, ['pa2 mb4 w-40 flex justify-center items-center br-pill f6 o-80'])
+    }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6 o-80'])
 
     return (
       <div className={btnClass} style={{ pointerEvents: this.state.progress && 'none' }} onClick={this.handleOnClick}>

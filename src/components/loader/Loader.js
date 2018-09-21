@@ -10,7 +10,7 @@ const Loader = ({
   size = 25,
   text = t('loader')
 }) => (
-  <div className='Loader mv4 flex items-center'>
+  <div className='Loader mv2 flex items-center'>
     <LoaderSpinner type={loader} color={color} height={size} width={size} />
     <span className='ml2 navy f6'>{text}</span>
   </div>
