@@ -17,7 +17,8 @@
     "copyGetting": "When looking up files, you're asking the network to find nodes storing the content behind a unique hash."
   },
   "box": {
-    "missingDaemon": "You need to have an IPFS daemon running to upload files.",
+    "missingDaemon": "Is your IPFS daemon running?",
+    "runDaemon": "You need a running daemon to add files to IPFS. Install IPFS and in your terminal do:",
     "footNote": "If no other nodes pin your files and you stop serving them, they will disappear from the network."
   },
   "addFiles": "Add files",

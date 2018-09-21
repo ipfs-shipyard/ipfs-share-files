@@ -17,7 +17,8 @@
     "copyGetting": "Ao procurar ficheiros, estás a pedir à rede que encontre nós que tenham o conteúdo atrás de uma hash única."
   },
   "box": {
-    "missingDaemon": "É necessário ter um IPFS daemon a correr para adicionar ficheiros.",
+    "missingDaemon": "O teu IPFS daemon está correr?",
+    "runDaemon": "Precisas de ter um daemon a correr para adicionar ficheiros. Instala o IPFS e no terminal faz:",
     "footNote": "Se outros nós não servirem os ficheiros e tu parares de os servir, eles vão desaparecer da rede."
   },
   "addFiles": "Adicionar ficheiros",
