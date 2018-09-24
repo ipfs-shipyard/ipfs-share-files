@@ -38,7 +38,7 @@ export class File extends React.Component {
     const { name, size, hash, doGetDownloadLink } = this.props
     const updater = (v) => this.setState({ progress: v })
     const { url, filename } = await doGetDownloadLink([{name, size, hash}])
-    await downloadFile(url, filename, updater)
+    downloadFile(url, filename, updater)
   }
 
   renderFileStatus = () => {

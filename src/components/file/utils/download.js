@@ -10,6 +10,7 @@ export default (srcUrl, filename, progressCallback) => {
 
   xhr.responseType = 'blob'
   xhr.open('GET', srcUrl, true)
+  progressCallback(0)
 
   xhr.onload = (e) => {
     progressCallback(100)

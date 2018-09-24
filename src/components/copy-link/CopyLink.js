@@ -22,7 +22,7 @@ class CopyLink extends React.Component {
   render () {
     const { shareLink, t } = this.props
     const copyBtnClass = classnames({
-      'o-50': this.state.copied,
+      'o-50 no-pointer-events': this.state.copied,
       'o-80 glow pointer': !this.state.copied
     }, ['pa2 w-20 flex items-center justify-center br-pill bg-navy f7 white'])
 
@@ -34,7 +34,7 @@ class CopyLink extends React.Component {
             { shareLink }
           </div>
           <CopyToClipboard text={shareLink} onCopy={this.handleOnCopyClick}>
-            <div className={copyBtnClass} style={{ pointerEvents: this.state.copied && 'none' }}>
+            <div className={copyBtnClass}>
               { this.state.copied ? t('copyLink.copied') : t('copyLink.copy') }
             </div>
           </CopyToClipboard>
