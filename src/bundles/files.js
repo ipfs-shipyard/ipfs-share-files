@@ -217,7 +217,7 @@ export default {
 
     const multihash = await makeHashFromFiles(files, ipfs)
 
-    const shareLink = `${ENDPOINTS.gateway}/${multihash}`
+    const shareLink = `${ENDPOINTS.share}/${multihash}`
 
     if (storeShareLink !== shareLink) {
       dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink } })
