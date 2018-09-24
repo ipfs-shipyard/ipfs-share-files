@@ -23,27 +23,30 @@ export class DownloadFiles extends React.Component {
     const { files, doGetDownloadLink } = this.props
     const updater = (v) => this.setState({ progress: v })
     const { url, filename } = await doGetDownloadLink(Object.values(files))
-    await downloadFile(url, filename, updater)
+    downloadFile(url, filename, updater)
   }
 
   render () {
     const { t } = this.props
     const btnClass = classnames({
-      'ba b--navy bg-white navy ': this.state.progress,
-      'bg-navy white glow pointer': !this.state.progress
+      'ba b--navy bg-white navy no-pointer-events': this.state.progress !== null,
+      'bg-navy white glow pointer': this.state.progress === null
     }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6 o-80'])
 
     return (
-      <div className={btnClass} style={{ pointerEvents: this.state.progress && 'none' }} onClick={this.handleOnClick}>
-        { this.state.progress ? <span>{t('downloadFiles.downloading')}</span> : <span>{t('downloadFiles.downloadAll')}</span> }
-        { this.state.progress && this.state.progress !== Infinity &&
-          <CircularProgressbar
-            percentage={this.state.progress}
-            strokeWidth={50}
-            styles={{
-              root: { width: 12, height: 12, marginLeft: 10 },
-              path: { stroke: '#3e6175', strokeLinecap: 'butt' }
-            }} /> }
+      <div className={btnClass} onClick={this.handleOnClick}>
+        { this.state.progress === null
+          ? <span>{t('downloadFiles.downloadAll')}</span>
+          : <div className='flex items-center'>
+            {t('downloadFiles.downloading')}
+            <CircularProgressbar
+              percentage={this.state.progress}
+              strokeWidth={50}
+              styles={{
+                root: { width: 12, height: 12, marginLeft: 10 },
+                path: { stroke: '#3e6175', strokeLinecap: 'butt' }
+              }} />
+          </div> }
       </div>
     )
   }
