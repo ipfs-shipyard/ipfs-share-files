@@ -2,6 +2,7 @@
   "name": "ipfs-share-files",
   "version": "0.0.0",
   "description": "Share files via IPFS",
+  "leadMaintainer": "Diogo Silva <fsdiogo@gmail.com>",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
