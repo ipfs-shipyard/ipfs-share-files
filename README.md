@@ -7,6 +7,10 @@
 
 > Share files via IPFS
 
+## Lead Maintainer
+
+[Diogo Silva](https://github.com/fsdiogo)
+
 ## Table of Contents
 
 - [Background](#background)
