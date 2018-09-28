@@ -55,6 +55,7 @@ To add files you need a local IPFS daemon running:
 
 ```sh
 > ipfs daemon
+# API server listening on /ip4/127.0.0.1/tcp/5001
 ```
 
 ### IPFS Daemon
