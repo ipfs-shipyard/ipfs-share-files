@@ -165,7 +165,7 @@ export default {
     'selectExistFiles',
     'selectExistFilesPending',
     (isShareLinkOutdated, currentPage, existFiles, existFilesPending) => {
-      if (currentPage === PAGES.upload && isShareLinkOutdated && existFiles && !existFilesPending) {
+      if (currentPage === PAGES.add && isShareLinkOutdated && existFiles && !existFilesPending) {
         return { actionCreator: 'doShareLink' }
       }
     }

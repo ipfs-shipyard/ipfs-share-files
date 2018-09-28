@@ -2,7 +2,7 @@ import React from 'react'
 import { translate } from 'react-i18next'
 
 // Static
-import uploadImg from '../../media/images/upload.svg'
+import addImg from '../../media/images/add.svg'
 
 const Info = ({ t, imgHeigth = 110 }) => {
   const labelClass = 'mv3 white montserrat'
@@ -16,19 +16,19 @@ const Info = ({ t, imgHeigth = 110 }) => {
 
       <div className='flex'>
         <div className='pa3 tc' style={copyStyle}>
-          <img src={uploadImg} height={imgHeigth} alt='Upload' />
+          <img src={addImg} height={imgHeigth} alt='Add' />
           <div className={labelClass}>{t('info.labelAdding')}</div>
           <div className={copyClass}>{t('info.copyAdding')}</div>
         </div>
 
         <div className='pa3 tc' style={copyStyle}>
-          <img src={uploadImg} height={imgHeigth} alt='Upload' />
+          <img src={addImg} height={imgHeigth} alt='Add' />
           <div className={labelClass}>{t('info.labelNodes')}</div>
           <div className={copyClass}>{t('info.copyNodes')}</div>
         </div>
 
         <div className='pa3 tc' style={copyStyle}>
-          <img src={uploadImg} height={imgHeigth} alt='Upload' />
+          <img src={addImg} height={imgHeigth} alt='Add' />
           <div className={labelClass}>{t('info.labelGetting')}</div>
           <div className={copyClass}>{t('info.copyGetting')}</div>
         </div>

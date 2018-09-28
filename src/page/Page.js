@@ -9,7 +9,7 @@ import isIPFS from 'is-ipfs'
 import PAGES from '../constants/pages'
 
 // Components
-import { BoxUpload, BoxDownload, BoxNotAvailable } from '../components/box/Box'
+import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/Box'
 import Info from '../components/info/Info'
 
 class Page extends React.Component {
@@ -54,13 +54,13 @@ class Page extends React.Component {
     } else if (ipfsInitFailed) {
       content = <BoxNotAvailable />
     } else {
-      content = <BoxUpload files={files} shareLink={shareLink} isLoading={isLoading} />
+      content = <BoxAdd files={files} shareLink={shareLink} isLoading={isLoading} />
     }
 
     return (
       <div data-id='Page'>
         <Helmet>
-          <title>{t('pageTitle.ipfs')} - { isDownload ? t('pageTitle.download') : t('pageTitle.upload') }</title>
+          <title>{t('pageTitle.ipfs')} - { isDownload ? t('pageTitle.download') : t('pageTitle.add') }</title>
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
