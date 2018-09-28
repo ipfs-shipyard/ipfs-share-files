@@ -22,7 +22,7 @@ export const BoxDownload = ({ files, isLoading }) => (
   </Box>
 )
 
-export const RawBoxUpload = ({ files, isLoading, shareLink, t }) => (
+export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
   <Box>
     <AddFiles />
     { isLoading && <Loader /> }
@@ -34,7 +34,7 @@ export const RawBoxUpload = ({ files, isLoading, shareLink, t }) => (
   </Box>
 )
 
-export const BoxUpload = translate()(RawBoxUpload)
+export const BoxAdd = translate()(RawBoxAdd)
 
 export const RawBoxNotAvailable = ({ t }) => (
   <Box>

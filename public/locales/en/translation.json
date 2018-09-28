@@ -1,7 +1,7 @@
 {
   "pageTitle": {
     "ipfs": "IPFS",
-    "upload": "Upload Files",
+    "add": "Add Files",
     "download": "Download Files"
   },
   "header": "Share by IPFS",

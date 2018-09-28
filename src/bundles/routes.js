@@ -10,7 +10,7 @@ const bundle = createRouteBundle({
 
 bundle.selectCurrentPage = createSelector(
   'selectRouteInfo',
-  ({ url, params }) => (url.startsWith('/add') || !params.hash) ? PAGES.upload : PAGES.download
+  ({ url, params }) => (url.startsWith('/add') || !params.hash) ? PAGES.add : PAGES.download
 )
 
 export default bundle

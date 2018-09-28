@@ -15,7 +15,7 @@ storiesOf('File', module)
         size={265318832} />
     </div>
   ))
-  .add('Uploading', () => (
+  .add('Adding', () => (
     <div className={wrapperClass}>
       <File
         hash='Qm3fsA'
@@ -24,7 +24,7 @@ storiesOf('File', module)
         progress={70} />
     </div>
   ))
-  .add('Uploaded', () => (
+  .add('Added', () => (
     <div className={wrapperClass}>
       <File
         hash='Qm3fsA'

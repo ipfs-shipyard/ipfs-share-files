@@ -4,7 +4,7 @@ import { checkA11y } from '@storybook/addon-a11y'
 import i18n from '../../i18n-decorator'
 import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
-import { BoxUpload, BoxDownload, BoxNotAvailable } from './Box'
+import { BoxAdd, BoxDownload, BoxNotAvailable } from './Box'
 import fixtures from './fixtures/root.json'
 
 const wrapperClass = 'flex flex-auto pa3 bg-navy sans-serif'
@@ -17,9 +17,9 @@ storiesOf('Box', module)
       { story() }
     </Provider>
   ))
-  .add('Upload', () => (
+  .add('Add', () => (
     <div className={wrapperClass}>
-      <BoxUpload files={fixtures.files} shareLink={fixtures.shareLink} />
+      <BoxAdd files={fixtures.files} shareLink={fixtures.shareLink} />
     </div>
   ))
   .add('Download', () => (

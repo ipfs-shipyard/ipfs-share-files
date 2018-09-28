@@ -1,4 +1,4 @@
 export default {
-  upload: 'upload',
+  add: 'add',
   download: 'download'
 }
