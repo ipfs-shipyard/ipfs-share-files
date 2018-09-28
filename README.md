@@ -51,18 +51,27 @@ To run the [storybook](https://storybook.js.org/):
 # Go to http://localhost:9009
 ```
 
-### IPFS Daemon
-
-You need to have a local IPFS daemon running if you want to upload files:
+To add files you need a local IPFS daemon running:
 
 ```sh
 > ipfs daemon
+# API server listening on /ip4/127.0.0.1/tcp/5001
 ```
 
-You also need the following configuration set to be able to communicate with the ipfs node:
+### IPFS Daemon
+
+You must configure your IPFS API to allow [cross-origin (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests from you development server and the [share.ipfs.io](https://share.ipfs.io) domain.
+
+You can either run the [cors-config.sh](./cors-config.sh) script:
 
 ```sh
-> ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3000"]'
+> ./cors-config.sh
+```
+
+Or do it manually:
+
+```sh
+> ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3000", "https://share.ipfs.io"]'
 > ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'
 > ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
 ```
