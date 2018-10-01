@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 
 // Components
 import Loader from '../loader/Loader'
@@ -39,6 +39,21 @@ export const BoxAdd = translate()(RawBoxAdd)
 export const RawBoxNotAvailable = ({ t }) => (
   <Box>
     <p className='mv0 orange f5 lh-title'>{t('box.missingDaemon')}</p>
+    <p className='mv3 navy f6 lh-copy'>
+      <Trans i18nKey='box.runningDaemon'>
+        You need a <a className='link aqua underline-hover' href='https://docs.ipfs.io/introduction/usage/' target='_blank' rel='noopener noreferrer'>running daemon</a> to add files to IPFS.
+      </Trans>
+    </p>
+    <p className='mv3 navy f6 lh-copy'>
+      <Trans i18nKey='box.configureDaemon'>
+        Make sure you <a className='link aqua underline-hover' href='https://github.com/ipfs-shipyard/ipfs-share-files#ipfs-daemon' target='_blank' rel='noopener noreferrer'>configure your IPFS API</a> to allow cross-origin (CORS) requests:
+      </Trans>
+    </p>
+    <div className='db pa3 bg-black-80 bt bw4 br2 gray-muted f7'>
+      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["{ window.location.origin }", "https://share.ipfs.io"]'</code>
+      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'</code>
+      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'</code>
+    </div>
     <p className='mv3 navy f6 lh-copy'>{t('box.runDaemon')}</p>
     <div className='db pa3 bg-black-80 bt bw4 br2 gray-muted f7'>
       <code className='db'>$ ipfs daemon</code>
