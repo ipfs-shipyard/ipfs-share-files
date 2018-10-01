@@ -18,7 +18,9 @@
   },
   "box": {
     "missingDaemon": "Is your IPFS daemon running?",
-    "runDaemon": "You need a running daemon to add files to IPFS. Install IPFS and in your terminal do:",
+    "runningDaemon": "You need a <1>running daemon</1> to add files to IPFS.",
+    "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
+    "runDaemon": "Then, start an IPFS daemon in your terminal:",
     "footNote": "If no other nodes pin your files and you stop serving them, they will disappear from the network."
   },
   "addFiles": "Add files",

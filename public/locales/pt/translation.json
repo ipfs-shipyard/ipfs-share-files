@@ -18,7 +18,9 @@
   },
   "box": {
     "missingDaemon": "O teu IPFS daemon está correr?",
-    "runDaemon": "Precisas de ter um daemon a correr para adicionar ficheiros. Instala o IPFS e no terminal faz:",
+    "runningDaemon": "Precisas de um <1>daemon a correr</1> para adicionares ficheiros ao IPFS.",
+    "configureDaemon": "Certifica-te que <1>configuras a tua IPFS API</1> para aceitar pedidos cross-origin (CORS):",
+    "runDaemon": "Depois, corre um IPFS daemon no terminal:",
     "footNote": "Se outros nós não servirem os ficheiros e tu parares de os servir, eles vão desaparecer da rede."
   },
   "addFiles": "Adicionar ficheiros",
