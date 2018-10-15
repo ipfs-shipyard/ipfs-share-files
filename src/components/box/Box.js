@@ -49,16 +49,16 @@ export const RawBoxNotAvailable = ({ t }) => (
         Make sure you <a className='link aqua underline-hover' href='https://github.com/ipfs-shipyard/ipfs-share-files#ipfs-daemon' target='_blank' rel='noopener noreferrer'>configure your IPFS API</a> to allow cross-origin (CORS) requests:
       </Trans>
     </p>
-    <div className='db pa3 bg-black-80 bt bw4 br2 gray-muted f7'>
-      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["{ window.location.origin }", "https://share.ipfs.io"]'</code>
-      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'</code>
-      <code className='db truncate'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'</code>
+    <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
+      <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["{ window.location.origin }", "https://share.ipfs.io"]'</code>
+      <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'</code>
+      <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'</code>
     </div>
     <p className='mv3 navy f6 lh-copy'>{t('box.runDaemon')}</p>
-    <div className='db pa3 bg-black-80 bt bw4 br2 gray-muted f7'>
+    <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
       <code className='db'>$ ipfs daemon</code>
       <code className='db'>Initializing daemon...</code>
-      <code className='db truncate'>API server listening on /ip4/127.0.0.1/tcp/5001</code>
+      <code className='db'>API server listening on /ip4/127.0.0.1/tcp/5001</code>
     </div>
   </Box>
 )
