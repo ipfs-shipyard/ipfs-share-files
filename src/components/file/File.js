@@ -27,23 +27,17 @@ export class File extends React.Component {
     progress: PropTypes.number,
     error: PropTypes.string,
     isDownload: PropTypes.bool,
-    doGetDownloadLink: PropTypes.func
-  }
-
-  state = {
-    progress: null
+    doDownloadFile: PropTypes.func
   }
 
   handleDownloadClick = async () => {
-    const { name, size, hash, doGetDownloadLink } = this.props
-    const updater = (v) => this.setState({ progress: v })
-    const { url, filename } = await doGetDownloadLink([{name, size, hash}])
-    downloadFile(url, filename, updater)
+    const { id, hash, name, doDownloadFile } = this.props
+    const file = await doDownloadFile(id, hash)
+    downloadFile(file, name)
   }
 
   renderFileStatus = () => {
-    const { isDownload, error } = this.props
-    const { progress } = isDownload ? this.state : this.props
+    const { isDownload, error, progress } = this.props
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
@@ -97,6 +91,6 @@ export class File extends React.Component {
 }
 
 export default connect(
-  'doGetDownloadLink',
+  'doDownloadFile',
   File
 )

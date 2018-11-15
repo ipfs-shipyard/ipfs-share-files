@@ -7,7 +7,10 @@ import filesBundle from './files'
 
 export default composeBundles(
   appIdle({idleTimeout: 5000}),
-  ipfsBundle(),
+  ipfsBundle({
+    tryJsIpfs: true,
+    getJsIpfs: () => import('ipfs')
+  }),
   routesBundle,
   redirectsBundle,
   filesBundle
