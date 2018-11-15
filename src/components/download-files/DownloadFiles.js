@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
 import { translate } from 'react-i18next'
 import classnames from 'classnames'
-import CircularProgressbar from 'react-circular-progressbar'
 import downloadFile from '../file/utils/download'
 
 // Styles
@@ -12,40 +11,38 @@ import 'react-circular-progressbar/dist/styles.css'
 export class DownloadFiles extends React.Component {
   static propTypes = {
     files: PropTypes.object,
-    doGetDownloadLink: PropTypes.func
+    doDownloadFile: PropTypes.func
   }
 
   state = {
-    progress: null
+    isDownloading: false
   }
 
   handleOnClick = async () => {
-    const { files, doGetDownloadLink } = this.props
-    const updater = (v) => this.setState({ progress: v })
-    const { url, filename } = await doGetDownloadLink(Object.values(files))
-    downloadFile(url, filename, updater)
+    const { files, doDownloadFile } = this.props
+    this.setState({ isDownloading: true })
+
+    for (const file of Object.values(files)) {
+      const fileContent = await doDownloadFile(file.id, file.hash)
+      downloadFile(fileContent, file.name)
+    }
+
+    this.setState({ isDownloading: false })
   }
 
   render () {
     const { t } = this.props
     const btnClass = classnames({
-      'ba b--navy bg-white navy no-pointer-events': this.state.progress !== null,
-      'bg-navy white glow pointer': this.state.progress === null
+      'ba b--navy bg-white navy no-pointer-events': this.state.isDownloading === true,
+      'bg-navy white glow pointer': this.state.isDownloading === false
     }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6 o-80'])
 
     return (
       <div className={btnClass} onClick={this.handleOnClick}>
-        { this.state.progress === null
+        { this.state.isDownloading === false
           ? <span>{t('downloadFiles.downloadAll')}</span>
           : <div className='flex items-center'>
             {t('downloadFiles.downloading')}
-            <CircularProgressbar
-              percentage={this.state.progress}
-              strokeWidth={50}
-              styles={{
-                root: { width: 12, height: 12, marginLeft: 10 },
-                path: { stroke: '#3e6175', strokeLinecap: 'butt' }
-              }} />
           </div> }
       </div>
     )
@@ -56,6 +53,6 @@ export const TranslatedDownloadFiles = translate()(DownloadFiles)
 
 export default connect(
   'selectFiles',
-  'doGetDownloadLink',
+  'doDownloadFile',
   TranslatedDownloadFiles
 )

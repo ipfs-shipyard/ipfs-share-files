@@ -1,6 +1,6 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
-import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
+import { filesToStreams, makeHashFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
 
@@ -362,12 +362,6 @@ export default {
         dispatch({ type: 'FILES_DOWNLOAD_FAILED', payload: { id: id } })
       }
     })
-  },
-
-  doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {
-    const ipfs = getIpfs()
-    dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })
-    return getDownloadLink(files, ipfs)
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })

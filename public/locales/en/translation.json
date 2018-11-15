@@ -32,6 +32,6 @@
   "loader": "Loading file list...",
   "downloadFiles": {
     "downloadAll": "Download all",
-    "downloading": "Archiving..."
+    "downloading": "Downloading..."
   }
 }
