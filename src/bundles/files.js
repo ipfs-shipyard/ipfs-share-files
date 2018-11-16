@@ -156,7 +156,7 @@ export default {
             ...state.files,
             [action.payload.id]: {
               ...state.files[action.payload.id],
-              progress: null,
+              progress: 100,
               pending: false
             }
           },
@@ -170,7 +170,7 @@ export default {
             ...state.files,
             [action.payload.id]: {
               ...state.files[action.payload.id],
-              progress: null,
+              progress: 100,
               pending: false
             }
           }
@@ -306,7 +306,7 @@ export default {
           name: fileName,
           size: fileSize,
           hash: fileHash,
-          progress: null,
+          progress: 100,
           pending: false
         }
       }

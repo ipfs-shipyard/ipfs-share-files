@@ -41,7 +41,7 @@ export class File extends React.Component {
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
-    if (isDownload && progress === null) {
+    if (isDownload && progress === 100) {
       return <IconDownload
         className='pointer o-80 glow'
         width={glyphWidth + 5}
