@@ -45,12 +45,12 @@ class Page extends React.Component {
   }
 
   render () {
-    const { currentPage, ipfsInitFailed, shareLink, files, isLoading, t } = this.props
+    const { currentPage, ipfsInitFailed, shareLink, files, hasExceededMaxSize, isLoading, t } = this.props
     const isDownload = currentPage === PAGES.download
     let content
 
     if (isDownload) {
-      content = <BoxDownload files={files} shareLink={shareLink} isLoading={isLoading} />
+      content = <BoxDownload files={files} showSizeWarning={hasExceededMaxSize} shareLink={shareLink} isLoading={isLoading} />
     } else if (ipfsInitFailed) {
       content = <BoxNotAvailable />
     } else {
@@ -79,6 +79,7 @@ export default connect(
   'selectIpfsInitFailed',
   'selectRouteInfo',
   'selectIsLoading',
+  'selectHasExceededMaxSize',
   'selectFiles',
   'selectCurrentPage',
   'selectShareLink',

@@ -6,6 +6,10 @@ import PAGES from '../constants/pages'
 
 const initialState = {
   files: {},
+  limits: {
+    maxSize: 1073741824, // 1GB
+    hasExceeded: false
+  },
   shareLink: {
     outdated: false,
     link: null
@@ -124,6 +128,15 @@ export default {
           }
         }
 
+      case 'FILES_MAX_SIZE_EXCEEDED':
+        return {
+          ...state,
+          limits: {
+            ...state.limits,
+            hasExceeded: true
+          }
+        }
+
       case 'FILES_DOWNLOAD_STARTED':
         return {
           ...state,
@@ -189,6 +202,10 @@ export default {
      ============================================================ */
 
   selectIsLoading: state => state.files.loading,
+
+  selectMaxFileSize: state => state.files.limits.maxSize,
+
+  selectHasExceededMaxSize: state => state.files.limits.hasExceeded,
 
   selectFiles: state => state.files.files,
 
@@ -295,6 +312,8 @@ export default {
         ipfsFiles = objs.Objects[0].Links
       }
 
+      const maxSize = store.selectMaxFileSize()
+
       for (const file of ipfsFiles) {
         const fileId = shortid.generate()
         const fileName = file.name || file.Name
@@ -308,6 +327,10 @@ export default {
           hash: fileHash,
           progress: 100,
           pending: false
+        }
+
+        if (file.size > maxSize) {
+          dispatch({ type: 'FILES_MAX_SIZE_EXCEEDED' })
         }
       }
 

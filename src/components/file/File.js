@@ -16,6 +16,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
+import GlyphAttention from '../../media/icons/GlyphAttention'
 
 export class File extends React.Component {
   static propTypes = {
@@ -36,32 +37,46 @@ export class File extends React.Component {
     downloadFile(file, name)
   }
 
+  renderWarningSign = () => {
+    const { isDownload, size, maxFileSize } = this.props
+
+    if (isDownload && size > maxFileSize) {
+      return <GlyphAttention width={25} height={25} fill='#ffcc00' alt='Warning' />
+    }
+  }
+
   renderFileStatus = () => {
     const { isDownload, error, progress } = this.props
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
     if (isDownload && progress === 100) {
-      return <IconDownload
-        className='pointer o-80 glow'
-        width={glyphWidth + 5}
-        fill={fillColor}
-        style={{ marginRight: '-3px' }}
-        onClick={this.handleDownloadClick}
-        alt='Download' />
+      return <div className='flex items-center'>
+        { this.renderWarningSign() }
+        <IconDownload
+          className='pointer o-80 glow'
+          width={glyphWidth + 5}
+          fill={fillColor}
+          style={{ marginRight: '-3px' }}
+          onClick={this.handleDownloadClick}
+          alt='Download' />
+      </div>
     } else if (error) {
       return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
     } else if (progress === 100) {
       return <GlyphTick width={glyphWidth} fill={fillColor} alt='Tick' />
     } else {
       return (
-        <CircularProgressbar
-          percentage={progress}
-          strokeWidth={50}
-          styles={{
-            root: { width: 15, height: 15, marginRight: 5 },
-            path: { stroke: fillColor, strokeLinecap: 'butt' }
-          }} />
+        <div className='flex items-center'>
+          { this.renderWarningSign() }
+          <CircularProgressbar
+            percentage={progress}
+            strokeWidth={50}
+            styles={{
+              root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
+              path: { stroke: fillColor, strokeLinecap: 'butt' }
+            }} />
+        </div>
       )
     }
   }
@@ -91,6 +106,7 @@ export class File extends React.Component {
 }
 
 export default connect(
+  'selectMaxFileSize',
   'doDownloadFile',
   File
 )
