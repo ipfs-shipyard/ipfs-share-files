@@ -73,7 +73,6 @@ Or do it manually:
 ```sh
 > ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3000", "https://share.ipfs.io"]'
 > ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'
-> ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
 ```
 
 To reset the config to its default state run:
