@@ -8,7 +8,8 @@ const initialState = {
   files: {},
   limits: {
     maxSize: 1073741824, // 1GB
-    hasExceeded: false
+    hasExceeded: false,
+    hasDirs: false
   },
   shareLink: {
     outdated: false,
@@ -137,6 +138,15 @@ export default {
           }
         }
 
+      case 'FILES_DIR_FOUND':
+        return {
+          ...state,
+          limits: {
+            ...state.limits,
+            hasDirs: true
+          }
+        }
+
       case 'FILES_DOWNLOAD_STARTED':
         return {
           ...state,
@@ -206,6 +216,8 @@ export default {
   selectMaxFileSize: state => state.files.limits.maxSize,
 
   selectHasExceededMaxSize: state => state.files.limits.hasExceeded,
+
+  selectHasDirs: state => state.files.limits.hasDirs,
 
   selectFiles: state => state.files.files,
 
@@ -331,8 +343,12 @@ export default {
           pending: false
         }
 
-        if (file.size > maxSize) {
+        if (fileSize > maxSize) {
           dispatch({ type: 'FILES_MAX_SIZE_EXCEEDED' })
+        }
+
+        if (fileType === 'dir') {
+          dispatch({ type: 'FILES_DIR_FOUND' })
         }
       }
 
@@ -387,6 +403,20 @@ export default {
         dispatch({ type: 'FILES_DOWNLOAD_FAILED', payload: { id: id } })
       }
     })
+  },
+
+  doArchiveFiles: (files) => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
+    dispatch({ type: 'FILES_ARCHIVE_FILES' })
+
+    const files = Object.values(store.selectFiles())
+
+    const hash = await makeHashFromFiles(files, ipfs)
+
+    return {
+      url: `${ENDPOINTS.api}/v0/get?arg=${hash}&archive=true&compress=true`,
+      filename: `download_${hash}.tar.gz`
+    }
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })

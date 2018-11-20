@@ -4,6 +4,7 @@ import { connect } from 'redux-bundler-react'
 import { translate } from 'react-i18next'
 import classnames from 'classnames'
 import downloadFile from '../file/utils/download'
+import archiveFiles from '../file/utils/archive'
 
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
@@ -11,7 +12,9 @@ import 'react-circular-progressbar/dist/styles.css'
 export class DownloadFiles extends React.Component {
   static propTypes = {
     files: PropTypes.object,
-    doDownloadFile: PropTypes.func
+    hasDirs: PropTypes.bool,
+    doDownloadFile: PropTypes.func,
+    doArchiveFiles: PropTypes.func
   }
 
   state = {
@@ -19,15 +22,30 @@ export class DownloadFiles extends React.Component {
   }
 
   handleOnClick = async () => {
-    const { files, doDownloadFile } = this.props
+    const { hasDirs } = this.props
+
     this.setState({ isDownloading: true })
 
-    for (const file of Object.values(files)) {
-      const fileContent = await doDownloadFile(file.id, file.hash)
-      downloadFile(fileContent, file.name)
-    }
+    if (hasDirs) {
+      // File tree has directories so we'll use the public gateway to be
+      // able to get an archive and download the folder structure as is.
+      const { doArchiveFiles } = this.props
+      const updater = (progress) => progress === 100 && this.setState({ isDownloading: false })
 
-    this.setState({ isDownloading: false })
+      const { url, filename } = await doArchiveFiles()
+      archiveFiles(url, filename, updater)
+    } else {
+      // File tree doesn't have directories so we'll download the files
+      // one by one using the best connection possible.
+      const { files, doDownloadFile } = this.props
+
+      for (const file of Object.values(files)) {
+        const fileContent = await doDownloadFile(file.id, file.hash)
+        downloadFile(fileContent, file.name)
+      }
+
+      this.setState({ isDownloading: false })
+    }
   }
 
   render () {
@@ -53,6 +71,8 @@ export const TranslatedDownloadFiles = translate()(DownloadFiles)
 
 export default connect(
   'selectFiles',
+  'selectHasDirs',
   'doDownloadFile',
+  'doArchiveFiles',
   TranslatedDownloadFiles
 )
