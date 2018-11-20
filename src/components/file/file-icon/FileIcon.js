@@ -22,7 +22,7 @@ const FileIcon = ({name, type, error}) => {
   const iconColor = error ? 'fill-gray' : 'fill-aqua'
   const iconHeight = 40
 
-  if (type === 'directory') {
+  if (type === 'dir') {
     return <Folder className={iconColor} height={iconHeight} />
   }
 

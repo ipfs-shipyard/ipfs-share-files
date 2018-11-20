@@ -318,12 +318,14 @@ export default {
         const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size
+        const fileType = file.type || file.Type
         const fileHash = file.hash || file.Hash
 
         files[fileId] = {
           id: fileId,
           name: fileName,
           size: fileSize,
+          type: fileType,
           hash: fileHash,
           progress: 100,
           pending: false

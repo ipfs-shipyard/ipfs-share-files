@@ -46,11 +46,13 @@ export class File extends React.Component {
   }
 
   renderFileStatus = () => {
-    const { isDownload, error, progress } = this.props
+    const { isDownload, type, error, progress } = this.props
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
-    if (isDownload && progress === 100) {
+    if (isDownload && type === 'dir') {
+      return null
+    } else if (isDownload && progress === 100) {
       return <div className='flex items-center'>
         { this.renderWarningSign() }
         <IconDownload
@@ -83,13 +85,7 @@ export class File extends React.Component {
 
   render () {
     const { name, type, error } = this.props
-    let size = this.props.size
-
-    if (type === 'directory') {
-      size = ''
-    } else {
-      size = filesize(size, { round: 0, spacer: '' })
-    }
+    const size = filesize(this.props.size, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
