@@ -5,17 +5,6 @@ import FileIcon from './FileIcon'
 
 storiesOf('FileIcon', module)
   .addDecorator(checkA11y)
-  .add('All', () => (
-    <div className='ma3'>
-      <FileIcon />
-      <FileIcon name='audio' />
-      <FileIcon name='video' />
-      <FileIcon name='image' />
-      <FileIcon name='text' />
-      <FileIcon name='calc' />
-      <FileIcon type='directory' />
-    </div>
-  ))
   .add('Default', () => (
     <div className='ma3'>
       <FileIcon />
@@ -48,6 +37,6 @@ storiesOf('FileIcon', module)
   ))
   .add('Folder', () => (
     <div className='ma3'>
-      <FileIcon type='directory' />
+      <FileIcon type='dir' />
     </div>
   ))
