@@ -22,23 +22,19 @@ export class DownloadFiles extends React.Component {
   }
 
   handleOnClick = async () => {
-    const { hasDirs } = this.props
+    const { hasDirs, files, doDownloadFile, doArchiveFiles } = this.props
 
     this.setState({ isDownloading: true })
 
     if (hasDirs) {
       // File tree has directories so we'll use the public gateway to be
       // able to get an archive and download the folder structure as is.
-      const { doArchiveFiles } = this.props
-      const updater = (progress) => progress === 100 && this.setState({ isDownloading: false })
-
       const { url, filename } = await doArchiveFiles()
+      const updater = (progress) => progress === 100 && this.setState({ isDownloading: false })
       archiveFiles(url, filename, updater)
     } else {
       // File tree doesn't have directories so we'll download the files
       // one by one using the best connection possible.
-      const { files, doDownloadFile } = this.props
-
       for (const file of Object.values(files)) {
         const fileContent = await doDownloadFile(file.id, file.hash)
         downloadFile(fileContent, file.name)

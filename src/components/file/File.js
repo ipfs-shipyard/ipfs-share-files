@@ -5,6 +5,7 @@ import CircularProgressbar from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
 import downloadFile from './utils/download'
+import archiveFiles from './utils/archive'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -28,13 +29,28 @@ export class File extends React.Component {
     progress: PropTypes.number,
     error: PropTypes.string,
     isDownload: PropTypes.bool,
-    doDownloadFile: PropTypes.func
+    doDownloadFile: PropTypes.func,
+    doArchiveFiles: PropTypes.func
+  }
+
+  state = {
+    progress: 100
   }
 
   handleDownloadClick = async () => {
-    const { id, hash, name, doDownloadFile } = this.props
-    const file = await doDownloadFile(id, hash)
-    downloadFile(file, name)
+    const { id, hash, name, type, doDownloadFile, doArchiveFiles } = this.props
+
+    if (type === 'dir') {
+      // This is a directory so we'll use the public gateway to
+      // be able to get an archive and download the folder.
+      const { url, filename } = await doArchiveFiles(hash)
+      const updater = (progress) => this.setState({ progress: progress })
+      archiveFiles(url, filename, updater)
+    } else {
+      // This is a file so we'll download it normally.
+      const file = await doDownloadFile(id, hash)
+      downloadFile(file, name)
+    }
   }
 
   renderWarningSign = () => {
@@ -46,13 +62,12 @@ export class File extends React.Component {
   }
 
   renderFileStatus = () => {
-    const { isDownload, type, error, progress } = this.props
+    const { isDownload, type, error } = this.props
+    const progress = isDownload && type === 'dir' ? this.state.progress : this.props.progress
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
-    if (isDownload && type === 'dir') {
-      return null
-    } else if (isDownload && progress === 100) {
+    if (isDownload && progress === 100) {
       return <div className='flex items-center'>
         { this.renderWarningSign() }
         <IconDownload
@@ -104,5 +119,6 @@ export class File extends React.Component {
 export default connect(
   'selectMaxFileSize',
   'doDownloadFile',
+  'doArchiveFiles',
   File
 )

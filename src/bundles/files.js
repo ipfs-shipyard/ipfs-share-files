@@ -1,5 +1,6 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
+import toUri from 'multiaddr-to-uri'
 import { filesToStreams, makeHashFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
@@ -405,16 +406,24 @@ export default {
     })
   },
 
-  doArchiveFiles: (files) => async ({ dispatch, store, getIpfs }) => {
+  doArchiveFiles: (hash) => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
+    const apiAddress = store.selectIpfsApiAddress()
     dispatch({ type: 'FILES_ARCHIVE_FILES' })
 
-    const files = Object.values(store.selectFiles())
+    // Try to use the HTTP API of the local daemon
+    const url = apiAddress !== null
+      ? toUri(apiAddress).replace('tcp://', 'http://').concat('/api')
+      : ENDPOINTS.api
 
-    const hash = await makeHashFromFiles(files, ipfs)
+    // If no hash was passed it is to download everything
+    if (!hash) {
+      const files = Object.values(store.selectFiles())
+      hash = await makeHashFromFiles(files, ipfs)
+    }
 
     return {
-      url: `${ENDPOINTS.api}/v0/get?arg=${hash}&archive=true&compress=true`,
+      url: `${url}/v0/get?arg=${hash}&archive=true&compress=true`,
       filename: `download_${hash}.tar.gz`
     }
   },
