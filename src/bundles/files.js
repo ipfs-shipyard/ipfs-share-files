@@ -1,11 +1,15 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
-import { filesToStreams, makeHashFromFiles, getDownloadLink } from '../lib/files'
+import { filesToStreams, makeHashFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
 
 const initialState = {
   files: {},
+  limits: {
+    maxSize: 1073741824, // 1GB
+    hasExceeded: false
+  },
   shareLink: {
     outdated: false,
     link: null
@@ -124,6 +128,67 @@ export default {
           }
         }
 
+      case 'FILES_MAX_SIZE_EXCEEDED':
+        return {
+          ...state,
+          limits: {
+            ...state.limits,
+            hasExceeded: true
+          }
+        }
+
+      case 'FILES_DOWNLOAD_STARTED':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              progress: 0,
+              pending: true
+            }
+          }
+        }
+
+      case 'FILES_DOWNLOAD_PROGRESS':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              progress: action.payload.progress
+            }
+          }
+        }
+
+      case 'FILES_DOWNLOAD_FINISHED':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              progress: 100,
+              pending: false
+            }
+          },
+          error: null
+        }
+
+      case 'FILES_DOWNLOAD_FAILED':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              progress: 100,
+              pending: false
+            }
+          }
+        }
+
       case 'FILES_RESET':
         return initialState
 
@@ -137,6 +202,10 @@ export default {
      ============================================================ */
 
   selectIsLoading: state => state.files.loading,
+
+  selectMaxFileSize: state => state.files.limits.maxSize,
+
+  selectHasExceededMaxSize: state => state.files.limits.hasExceeded,
 
   selectFiles: state => state.files.files,
 
@@ -186,6 +255,7 @@ export default {
 
       const file = {
         [fileId]: {
+          id: fileId,
           name: fileName,
           size: fileSize,
           progress: 0,
@@ -202,7 +272,7 @@ export default {
       }
 
       try {
-        const addedFile = await ipfs.add(stream, { pin: false, progress: updateProgress })
+        const addedFile = await ipfs.files.add(stream, { pin: false, progress: updateProgress })
         dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } })
       } catch (err) {
         dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } })
@@ -242,17 +312,25 @@ export default {
         ipfsFiles = objs.Objects[0].Links
       }
 
+      const maxSize = store.selectMaxFileSize()
+
       for (const file of ipfsFiles) {
+        const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size
         const fileHash = file.hash || file.Hash
 
-        files[fileName] = {
+        files[fileId] = {
+          id: fileId,
           name: fileName,
           size: fileSize,
           hash: fileHash,
           progress: 100,
           pending: false
+        }
+
+        if (file.size > maxSize) {
+          dispatch({ type: 'FILES_MAX_SIZE_EXCEEDED' })
         }
       }
 
@@ -262,10 +340,51 @@ export default {
     }
   },
 
-  doGetDownloadLink: (files) => async ({ dispatch, store, getIpfs }) => {
-    const ipfs = getIpfs()
-    dispatch({ type: 'FILES_GET_DOWNLOAD_LINK' })
-    return getDownloadLink(files, ipfs)
+  doDownloadFile: (id, hash) => async ({ dispatch, getIpfs }) => {
+    return new Promise((resolve, reject) => {
+      const ipfs = getIpfs()
+      dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id: id } })
+
+      try {
+        const stream = ipfs.files.getReadableStream(hash)
+
+        stream.on('data', (file) => {
+          let chunks = []
+          let bytesLoaded = 0
+
+          file.content
+            .on('data', (chunk) => {
+              bytesLoaded += chunk.byteLength
+              const progress = Math.round((bytesLoaded / file.size) * 100)
+
+              dispatch({ type: 'FILES_DOWNLOAD_PROGRESS', payload: { id: id, progress: progress } })
+              chunks.push(chunk)
+            })
+            .on('end', () => {
+              // Get the total length of all arrays
+              let length = 0
+              chunks.forEach(arr => {
+                length += arr.length
+              })
+
+              // Create a new array with total length and merge all source arrays
+              let mergedArray = new Uint8Array(length)
+              let offset = 0
+              chunks.forEach(item => {
+                mergedArray.set(item, offset)
+                offset += item.length
+              })
+
+              dispatch({ type: 'FILES_DOWNLOAD_FINISHED', payload: { id: id } })
+              resolve(mergedArray)
+            })
+
+          file.content.resume()
+        })
+      } catch (err) {
+        dispatch({ type: 'FILES_DOWNLOAD_FAILED', payload: { id: id } })
+      }
+    })
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })

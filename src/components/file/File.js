@@ -16,6 +16,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
+import GlyphAttention from '../../media/icons/GlyphAttention'
 
 export class File extends React.Component {
   static propTypes = {
@@ -27,47 +28,55 @@ export class File extends React.Component {
     progress: PropTypes.number,
     error: PropTypes.string,
     isDownload: PropTypes.bool,
-    doGetDownloadLink: PropTypes.func
-  }
-
-  state = {
-    progress: null
+    doDownloadFile: PropTypes.func
   }
 
   handleDownloadClick = async () => {
-    const { name, size, hash, doGetDownloadLink } = this.props
-    const updater = (v) => this.setState({ progress: v })
-    const { url, filename } = await doGetDownloadLink([{name, size, hash}])
-    downloadFile(url, filename, updater)
+    const { id, hash, name, doDownloadFile } = this.props
+    const file = await doDownloadFile(id, hash)
+    downloadFile(file, name)
+  }
+
+  renderWarningSign = () => {
+    const { isDownload, size, maxFileSize } = this.props
+
+    if (isDownload && size > maxFileSize) {
+      return <GlyphAttention width={25} height={25} fill='#ffcc00' alt='Warning' />
+    }
   }
 
   renderFileStatus = () => {
-    const { isDownload, error } = this.props
-    const { progress } = isDownload ? this.state : this.props
+    const { isDownload, error, progress } = this.props
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
-    if (isDownload && progress === null) {
-      return <IconDownload
-        className='pointer o-80 glow'
-        width={glyphWidth + 5}
-        fill={fillColor}
-        style={{ marginRight: '-3px' }}
-        onClick={this.handleDownloadClick}
-        alt='Download' />
+    if (isDownload && progress === 100) {
+      return <div className='flex items-center'>
+        { this.renderWarningSign() }
+        <IconDownload
+          className='pointer o-80 glow'
+          width={glyphWidth + 5}
+          fill={fillColor}
+          style={{ marginRight: '-3px' }}
+          onClick={this.handleDownloadClick}
+          alt='Download' />
+      </div>
     } else if (error) {
       return <GlyphCancel width={glyphWidth} fill='#c7cad5' alt='Error' />
     } else if (progress === 100) {
       return <GlyphTick width={glyphWidth} fill={fillColor} alt='Tick' />
     } else {
       return (
-        <CircularProgressbar
-          percentage={progress}
-          strokeWidth={50}
-          styles={{
-            root: { width: 15, height: 15, marginRight: 5 },
-            path: { stroke: fillColor, strokeLinecap: 'butt' }
-          }} />
+        <div className='flex items-center'>
+          { this.renderWarningSign() }
+          <CircularProgressbar
+            percentage={progress}
+            strokeWidth={50}
+            styles={{
+              root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
+              path: { stroke: fillColor, strokeLinecap: 'butt' }
+            }} />
+        </div>
       )
     }
   }
@@ -97,6 +106,7 @@ export class File extends React.Component {
 }
 
 export default connect(
-  'doGetDownloadLink',
+  'selectMaxFileSize',
+  'doDownloadFile',
   File
 )
