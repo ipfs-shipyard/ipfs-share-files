@@ -33,6 +33,6 @@
   "loader": "A carregar a lista de ficheiros...",
   "downloadFiles": {
     "downloadAll": "Descarregar todos",
-    "downloading": "A descarregar..."
+    "downloading": "A descarregar"
   }
 }

@@ -33,6 +33,6 @@
   "loader": "Loading file list...",
   "downloadFiles": {
     "downloadAll": "Download all",
-    "downloading": "Downloading..."
+    "downloading": "Downloading"
   }
 }
