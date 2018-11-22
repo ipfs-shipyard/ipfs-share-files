@@ -60,7 +60,6 @@ export const RawBoxNotAvailable = ({ t }) => (
     <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
       <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["{ window.location.origin }", "https://share.ipfs.io"]'</code>
       <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'</code>
-      <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'</code>
     </div>
     <p className='mv3 navy f6 lh-copy'>{t('box.runDaemon')}</p>
     <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
