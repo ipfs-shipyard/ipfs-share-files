@@ -5,7 +5,7 @@ import CircularProgressbar from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
 import downloadFile from './utils/download'
-import archiveFiles from './utils/archive'
+import downloadArchive from './utils/archive'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -29,8 +29,8 @@ export class File extends React.Component {
     progress: PropTypes.number,
     error: PropTypes.string,
     isDownload: PropTypes.bool,
-    doDownloadFile: PropTypes.func,
-    doArchiveFiles: PropTypes.func
+    doGetFromIPFS: PropTypes.func,
+    doGetArchiveURL: PropTypes.func
   }
 
   state = {
@@ -38,17 +38,17 @@ export class File extends React.Component {
   }
 
   handleDownloadClick = async () => {
-    const { id, hash, name, type, doDownloadFile, doArchiveFiles } = this.props
+    const { id, hash, name, type, doGetFromIPFS, doGetArchiveURL } = this.props
 
     if (type === 'dir') {
-      // This is a directory so we'll use the public gateway to
+      // This is a directory so we'll use the HTTP API to
       // be able to get an archive and download the folder.
-      const { url, filename } = await doArchiveFiles(hash)
+      const { url, filename } = await doGetArchiveURL(hash)
       const updater = (progress) => this.setState({ progress: progress })
-      archiveFiles(url, filename, updater)
+      downloadArchive(url, filename, updater)
     } else {
       // This is a file so we'll download it normally.
-      const file = await doDownloadFile(id, hash)
+      const file = await doGetFromIPFS(id, hash)
       downloadFile(file, name)
     }
   }
@@ -118,7 +118,7 @@ export class File extends React.Component {
 
 export default connect(
   'selectMaxFileSize',
-  'doDownloadFile',
-  'doArchiveFiles',
+  'doGetFromIPFS',
+  'doGetArchiveURL',
   File
 )

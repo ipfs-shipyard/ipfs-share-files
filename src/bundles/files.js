@@ -359,7 +359,7 @@ export default {
     }
   },
 
-  doDownloadFile: (id, hash) => async ({ dispatch, getIpfs }) => {
+  doGetFromIPFS: (id, hash) => async ({ dispatch, getIpfs }) => {
     return new Promise((resolve, reject) => {
       const ipfs = getIpfs()
       dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id: id } })
@@ -406,7 +406,7 @@ export default {
     })
   },
 
-  doArchiveFiles: (hash) => async ({ dispatch, store, getIpfs }) => {
+  doGetArchiveURL: (hash) => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
     const apiAddress = store.selectIpfsApiAddress()
     dispatch({ type: 'FILES_ARCHIVE_FILES' })
