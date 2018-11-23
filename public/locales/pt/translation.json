@@ -32,6 +32,7 @@
   },
   "loader": "A carregar a lista de ficheiros...",
   "downloadFiles": {
+    "download": "Descarregar",
     "downloadAll": "Descarregar todos",
     "downloading": "A descarregar"
   }

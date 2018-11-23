@@ -424,7 +424,7 @@ export default {
 
     return {
       url: `${url}/v0/get?arg=${hash}&archive=true&compress=true`,
-      filename: `download_${hash}.tar.gz`
+      filename: `shared-via-ipfs_${hash.slice(-7)}.tar.gz`
     }
   },
 

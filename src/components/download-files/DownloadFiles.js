@@ -26,7 +26,7 @@ export class DownloadFiles extends React.Component {
   }
 
   render () {
-    const { t } = this.props
+    const { existFiles, t } = this.props
     const { progress } = this.state
     const btnClass = classnames({
       'ba b--navy bg-white navy no-pointer-events': progress !== 100,
@@ -36,7 +36,7 @@ export class DownloadFiles extends React.Component {
     return (
       <div className={btnClass} onClick={this.handleOnClick}>
         { progress === 100
-          ? <span>{t('downloadFiles.downloadAll')}</span>
+          ? <span>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
           : <div className='flex items-center'>
             {t('downloadFiles.downloading')}
             <CircularProgressbar
@@ -55,6 +55,7 @@ export class DownloadFiles extends React.Component {
 export const TranslatedDownloadFiles = translate()(DownloadFiles)
 
 export default connect(
+  'selectExistFiles',
   'doGetArchiveURL',
   TranslatedDownloadFiles
 )
