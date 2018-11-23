@@ -1,5 +1,6 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
+import toUri from 'multiaddr-to-uri'
 import { filesToStreams, makeHashFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
@@ -8,7 +9,8 @@ const initialState = {
   files: {},
   limits: {
     maxSize: 1073741824, // 1GB
-    hasExceeded: false
+    hasExceeded: false,
+    hasDirs: false
   },
   shareLink: {
     outdated: false,
@@ -137,6 +139,15 @@ export default {
           }
         }
 
+      case 'FILES_DIR_FOUND':
+        return {
+          ...state,
+          limits: {
+            ...state.limits,
+            hasDirs: true
+          }
+        }
+
       case 'FILES_DOWNLOAD_STARTED':
         return {
           ...state,
@@ -206,6 +217,8 @@ export default {
   selectMaxFileSize: state => state.files.limits.maxSize,
 
   selectHasExceededMaxSize: state => state.files.limits.hasExceeded,
+
+  selectHasDirs: state => state.files.limits.hasDirs,
 
   selectFiles: state => state.files.files,
 
@@ -318,19 +331,25 @@ export default {
         const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size
+        const fileType = file.type || file.Type
         const fileHash = file.hash || file.Hash
 
         files[fileId] = {
           id: fileId,
           name: fileName,
           size: fileSize,
+          type: fileType,
           hash: fileHash,
           progress: 100,
           pending: false
         }
 
-        if (file.size > maxSize) {
+        if (fileSize > maxSize) {
           dispatch({ type: 'FILES_MAX_SIZE_EXCEEDED' })
+        }
+
+        if (fileType === 'dir') {
+          dispatch({ type: 'FILES_DIR_FOUND' })
         }
       }
 
@@ -340,7 +359,7 @@ export default {
     }
   },
 
-  doDownloadFile: (id, hash) => async ({ dispatch, getIpfs }) => {
+  doGetFromIPFS: (id, hash) => async ({ dispatch, getIpfs }) => {
     return new Promise((resolve, reject) => {
       const ipfs = getIpfs()
       dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id: id } })
@@ -385,6 +404,28 @@ export default {
         dispatch({ type: 'FILES_DOWNLOAD_FAILED', payload: { id: id } })
       }
     })
+  },
+
+  doGetArchiveURL: (hash) => async ({ dispatch, store, getIpfs }) => {
+    const ipfs = getIpfs()
+    const apiAddress = store.selectIpfsApiAddress()
+    dispatch({ type: 'FILES_ARCHIVE_FILES' })
+
+    // Try to use the HTTP API of the local daemon
+    const url = apiAddress !== null
+      ? toUri(apiAddress).replace('tcp://', 'http://').concat('/api')
+      : ENDPOINTS.api
+
+    // If no hash was passed it is to download everything
+    if (!hash) {
+      const files = Object.values(store.selectFiles())
+      hash = await makeHashFromFiles(files, ipfs)
+    }
+
+    return {
+      url: `${url}/v0/get?arg=${hash}&archive=true&compress=true`,
+      filename: `shared-via-ipfs_${hash.slice(-7)}.tar.gz`
+    }
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })

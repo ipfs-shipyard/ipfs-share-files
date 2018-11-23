@@ -12,6 +12,7 @@ const FileTree = ({ files, isDownload }) => (
         hash={file.hash}
         name={file.name}
         size={file.size}
+        type={file.type}
         progress={file.progress}
         error={file.error}
         isDownload={isDownload} />

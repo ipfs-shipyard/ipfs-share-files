@@ -5,6 +5,7 @@ import CircularProgressbar from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
 import downloadFile from './utils/download'
+import downloadArchive from './utils/archive'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -28,13 +29,28 @@ export class File extends React.Component {
     progress: PropTypes.number,
     error: PropTypes.string,
     isDownload: PropTypes.bool,
-    doDownloadFile: PropTypes.func
+    doGetFromIPFS: PropTypes.func,
+    doGetArchiveURL: PropTypes.func
+  }
+
+  state = {
+    progress: 100
   }
 
   handleDownloadClick = async () => {
-    const { id, hash, name, doDownloadFile } = this.props
-    const file = await doDownloadFile(id, hash)
-    downloadFile(file, name)
+    const { id, hash, name, type, doGetFromIPFS, doGetArchiveURL } = this.props
+
+    if (type === 'dir') {
+      // This is a directory so we'll use the HTTP API to
+      // be able to get an archive and download the folder.
+      const { url, filename } = await doGetArchiveURL(hash)
+      const updater = (progress) => this.setState({ progress: progress })
+      downloadArchive(url, filename, updater)
+    } else {
+      // This is a file so we'll download it normally.
+      const file = await doGetFromIPFS(id, hash)
+      downloadFile(file, name)
+    }
   }
 
   renderWarningSign = () => {
@@ -46,7 +62,8 @@ export class File extends React.Component {
   }
 
   renderFileStatus = () => {
-    const { isDownload, error, progress } = this.props
+    const { isDownload, type, error } = this.props
+    const progress = isDownload && type === 'dir' ? this.state.progress : this.props.progress
     const fillColor = isDownload ? '#3e6175' : '#69c4cd'
     const glyphWidth = 25
 
@@ -83,13 +100,7 @@ export class File extends React.Component {
 
   render () {
     const { name, type, error } = this.props
-    let size = this.props.size
-
-    if (type === 'directory') {
-      size = ''
-    } else {
-      size = filesize(size, { round: 0, spacer: '' })
-    }
+    const size = filesize(this.props.size, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
@@ -107,6 +118,7 @@ export class File extends React.Component {
 
 export default connect(
   'selectMaxFileSize',
-  'doDownloadFile',
+  'doGetFromIPFS',
+  'doGetArchiveURL',
   File
 )

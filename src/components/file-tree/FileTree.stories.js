@@ -13,8 +13,13 @@ storiesOf('FileTree', module)
       { story() }
     </Provider>
   ))
-  .add('Default', () => (
+  .add('Add', () => (
     <div className='ma3 sans-serif'>
-      <FileTree files={files} />
+      <FileTree files={files.add} />
+    </div>
+  ))
+  .add('Download', () => (
+    <div className='ma3 sans-serif'>
+      <FileTree files={files.download} isDownload />
     </div>
   ))

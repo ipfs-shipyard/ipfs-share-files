@@ -32,7 +32,8 @@
   },
   "loader": "Loading file list...",
   "downloadFiles": {
+    "download": "Download",
     "downloadAll": "Download all",
-    "downloading": "Downloading..."
+    "downloading": "Downloading"
   }
 }
