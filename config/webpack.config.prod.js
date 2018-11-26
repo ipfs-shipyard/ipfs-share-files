@@ -305,6 +305,8 @@ module.exports = {
           // Pending further investigation:
           // https://github.com/mishoo/UglifyJS2/issues/2011
           comparisons: false,
+          // https://github.com/ipfs/aegir/pull/214
+          unused: false
         },
         mangle: {
           safari10: true,
