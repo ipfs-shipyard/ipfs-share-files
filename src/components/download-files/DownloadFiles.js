@@ -36,7 +36,7 @@ export class DownloadFiles extends React.Component {
     return (
       <div className={btnClass} onClick={this.handleOnClick}>
         { progress === 100
-          ? <span>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
+          ? <span className='truncate'>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
           : <div className='flex items-center'>
             {t('downloadFiles.downloading')}
             <CircularProgressbar
