@@ -7,6 +7,7 @@ import { connect } from 'redux-bundler-react'
 import { translate } from 'react-i18next'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
+import ENDPOINTS from '../../constants/endpoints'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -101,7 +102,7 @@ export class File extends React.Component {
   }
 
   render () {
-    const { name, type, hash, error, gatewayURL, t } = this.props
+    const { name, type, hash, error, t } = this.props
     const size = filesize(this.props.size, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
@@ -110,10 +111,10 @@ export class File extends React.Component {
     return (
       <div className='mv2 flex items-center'>
         <a
-          title={t('box.openInGateway')}
+          title={t('box.viewOnGateway')}
           className='flex items-center link'
           style={{ outline: 'none' }}
-          href={`${gatewayURL}/${hash}`}
+          href={`${ENDPOINTS.gateway}/${hash}`}
           target='_blank'
           rel='noopener noreferrer'>
           <FileIcon name={name} type={type} error={error} />
@@ -129,7 +130,6 @@ export class File extends React.Component {
 export const TranslatedFile = translate()(File)
 
 export default connect(
-  'selectGatewayURL',
   'selectMaxFileSize',
   'doGetFromIPFS',
   'doGetArchiveURL',
