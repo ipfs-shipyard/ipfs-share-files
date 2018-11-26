@@ -253,6 +253,17 @@ export default {
     }
   ),
 
+  selectGatewayURL: createSelector(
+    'selectIpfsProvider',
+    (ipfsProvider) => {
+      if (ipfsProvider === 'js-ipfs-api' || ipfsProvider === 'window.ipfs') {
+        return 'http://127.0.0.1:8080/ipfs'
+      }
+
+      return `${ENDPOINTS.gateway}`
+    }
+  ),
+
   /* ============================================================
      Action Creators
      ============================================================ */

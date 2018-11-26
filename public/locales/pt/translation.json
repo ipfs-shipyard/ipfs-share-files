@@ -22,7 +22,8 @@
     "configureDaemon": "Certifica-te que <1>configuras a tua IPFS API</1> para aceitar pedidos cross-origin (CORS):",
     "runDaemon": "Depois, corre um IPFS daemon no terminal:",
     "footNote": "Se outros nós não servirem os ficheiros e tu parares de os servir, eles vão desaparecer da rede.",
-    "largeFilesWarning": "Se tiveres problemas a descarregar ficheiros maiores que 1GB, instala o <1>IPFS Desktop</1> ou <3>IPFS Companion</3> para uma melhor experiência."
+    "largeFilesWarning": "Se tiveres problemas a descarregar ficheiros maiores que 1GB, instala o <1>IPFS Desktop</1> ou <3>IPFS Companion</3> para uma melhor experiência.",
+    "openInGateway": "Abrir no gateway"
   },
   "addFiles": "Adicionar ficheiros",
   "copyLink": {

@@ -1,12 +1,14 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
-import { File } from './File'
+import i18n from '../../i18n-decorator'
+import { TranslatedFile as File } from './File'
 
 const wrapperClass = 'ma3 sans-serif'
 
 storiesOf('File', module)
   .addDecorator(checkA11y)
+  .addDecorator(i18n)
   .add('Adding', () => (
     <div className={wrapperClass}>
       <File
