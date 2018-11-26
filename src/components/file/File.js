@@ -4,8 +4,10 @@ import filesize from 'filesize'
 import CircularProgressbar from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
+import { translate } from 'react-i18next'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
+import ENDPOINTS from '../../constants/endpoints'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -28,6 +30,7 @@ export class File extends React.Component {
     size: PropTypes.number,
     progress: PropTypes.number,
     error: PropTypes.string,
+    gatewayURL: PropTypes.string,
     isDownload: PropTypes.bool,
     doGetFromIPFS: PropTypes.func,
     doGetArchiveURL: PropTypes.func
@@ -99,26 +102,36 @@ export class File extends React.Component {
   }
 
   render () {
-    const { name, type, error } = this.props
+    const { name, type, hash, error, t } = this.props
     const size = filesize(this.props.size, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
 
     return (
-      <div className='mv2 flex flex-start items-center'>
-        <FileIcon name={name} type={type} error={error} />
-        <span className={fileNameClass}>{name}</span>
-        <span className={fileSizeClass}>{size && `(~${size})`}</span>
+      <div className='mv2 flex items-center'>
+        <a
+          title={t('box.viewOnGateway')}
+          className='flex items-center link'
+          style={{ outline: 'none' }}
+          href={`${ENDPOINTS.gateway}/${hash}`}
+          target='_blank'
+          rel='noopener noreferrer'>
+          <FileIcon name={name} type={type} error={error} />
+          <span className={fileNameClass}>{name}</span>
+          <span className={fileSizeClass}>{size && `(~${size})`}</span>
+        </a>
         <span className='ml-auto'>{ this.renderFileStatus() }</span>
       </div>
     )
   }
 }
 
+export const TranslatedFile = translate()(File)
+
 export default connect(
   'selectMaxFileSize',
   'doGetFromIPFS',
   'doGetArchiveURL',
-  File
+  TranslatedFile
 )

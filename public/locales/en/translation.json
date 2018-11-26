@@ -22,7 +22,8 @@
     "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
     "runDaemon": "Then, start an IPFS daemon in your terminal:",
     "footNote": "If no other nodes pin your files and you stop serving them, they will disappear from the network.",
-    "largeFilesWarning": "If you experience issues when downloading files larger than 1GB, please install <1>IPFS Desktop</1> or <3>IPFS Companion</3> for improved performance."
+    "largeFilesWarning": "If you experience issues when downloading files larger than 1GB, please install <1>IPFS Desktop</1> or <3>IPFS Companion</3> for improved performance.",
+    "viewOnGateway": "View on IPFS gateway"
   },
   "addFiles": "Add files",
   "copyLink": {
