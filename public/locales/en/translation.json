@@ -7,14 +7,13 @@
   "header": "Share by IPFS",
   "footer": "Protocol Labs | Except as noted, content licensed CC-BY 3.0",
   "info": {
-    "title": "InterPlanetary File System",
-    "description": "A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.",
-    "labelAdding": "Adding files",
-    "copyAdding": "Each file is hashed based on its content, which means there are no duplications across the network.",
-    "labelNodes": "IPFS Nodes",
-    "copyNodes": "Each node stores only content it is interested in, and some information that helps figuring out who is storing what.",
-    "labelGetting": "Getting Files",
-    "copyGetting": "When looking up files, you're asking the network to find nodes storing the content behind a unique hash."
+    "title": "Share files directly from your device",
+    "labelAdd": "Add your files",
+    "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
+    "labelSend": "Send the share link",
+    "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
+    "labelKeep": "Keep this page open",
+    "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping share url open in their browser."
   },
   "box": {
     "missingDaemon": "Is your IPFS daemon running?",
