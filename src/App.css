@@ -5,3 +5,9 @@
   background: rgb(2,46,68);
   background: linear-gradient(120deg, rgba(2,46,68,1) 70%, rgba(102,208,219,1) 70%);
 }
+
+@media (max-width: 60em) {
+  .App {
+    background: rgb(2, 46, 68);
+  }
+}
