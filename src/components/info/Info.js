@@ -10,7 +10,7 @@ const Info = ({ t, imgHeigth = 110 }) => {
   const copyStyle = { flexBasis: '100%' }
 
   return (
-    <div className='pa4 pr5-l w-100 w-two-thirds-l mw7 self-start order-1-l'>
+    <div className='pa4 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
       <div className='mb3 f2 white montserrat'>{t('info.title')}</div>
       <div className='mb5 f5 gray lh-copy'>{t('info.description')}</div>
 
