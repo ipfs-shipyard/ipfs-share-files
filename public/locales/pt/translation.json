@@ -7,20 +7,33 @@
   "header": "Partilhar por IPFS",
   "footer": "Protocol Labs | Exceto onde anotado, conteúdo licenciado CC-BY 3.0",
   "info": {
-    "title": "InterPlanetary File System",
-    "labelAdd": "Adicionar ficheiros",
-    "copyAdd": "O conteúdo de cada ficheiro é passado por uma função unidirecional (hash), o que significa que não há duplicados na rede.",
-    "labelSend": "Nós de IPFS",
-    "copySend": "Cada nó só guarda conteúdo que lhe interessa, e alguma informação que ajuda a perceber quem guarda o quê.",
-    "labelKeep": "Obter Ficheiros",
-    "copyKeep": "Ao procurar ficheiros, estás a pedir à rede que encontre nós que tenham o conteúdo atrás de uma hash única."
+    "add": {
+      "title": "Partilha ficheiros directamente do teu dispositivo",
+      "labelAdd": "Adiciona os teus ficheiros",
+      "copyAdd": "Qualquer pessoa com quem partilhes o link poderá adecer aos ficheiros. Não partilhes conteúdo sensível nem ficheiros com direitos de autor.",
+      "labelSend": "Envia o link de partilha",
+      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede.",
+      "labelKeepPage": "Mantém esta página aberta",
+      "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
+      "copyKeep": "Estás a partilhar conteúdo a partir do teu dispositivo. Os teus amigos podem ajudar a partilhar o conteúdo ao manter o link de partilha aberto no seu browser."
+    },
+    "download": {
+      "title": "Recebe ficheiros directamente de outros dispositivos",
+      "labelGet": "Recebe os ficheiros",
+      "copyGet": "Podes descarregar ficheiros individualmente ou, se quiseres manter a estrutura dos mesmos, podes obter um arquivo ao descarregar todos.",
+      "labelKeepPage": "Mantém esta página aberta",
+      "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
+      "copyKeep": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
+      "labelSend": "Envia o link de partilha",
+      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede."
+    }
   },
   "box": {
     "missingDaemon": "O teu IPFS daemon está correr?",
     "runningDaemon": "Precisas de um <1>daemon a correr</1> para adicionares ficheiros ao IPFS.",
     "configureDaemon": "Certifica-te que <1>configuras a tua IPFS API</1> para aceitar pedidos cross-origin (CORS):",
     "runDaemon": "Depois, corre um IPFS daemon no terminal:",
-    "footNote": "Se outros nós não servirem os ficheiros e tu parares de os servir, eles vão desaparecer da rede.",
+    "footNote": "Se adicionares mais ficheiros depois de teres o link, ele será atualizado. Não te esqueças de copiar o mais recente para incluir a lista completa de ficheiros.",
     "largeFilesWarning": "Se tiveres problemas a descarregar ficheiros maiores que 1GB, instala o <1>IPFS Desktop</1> ou <3>IPFS Companion</3> para uma melhor experiência.",
     "viewOnGateway": "Ver no IPFS gateway"
   },
