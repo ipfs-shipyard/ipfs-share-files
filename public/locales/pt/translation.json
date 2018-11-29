@@ -5,7 +5,7 @@
     "download": "Descarregar Ficheiros"
   },
   "header": "Partilhar por IPFS",
-  "footer": "Protocol Labs | Exceto onde anotado, conteúdo licenciado CC-BY 3.0",
+  "footer": "© Protocol Labs | Exceto onde <1>anotado</1>, conteúdo licenciado por <3>CC-BY 3.0</3>",
   "info": {
     "add": {
       "title": "Partilha ficheiros directamente do teu dispositivo",
