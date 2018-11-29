@@ -23,7 +23,8 @@
       "copyGet": "Podes descarregar ficheiros individualmente ou, se quiseres manter a estrutura dos mesmos, clica no botão de descarregar todos.",
       "labelKeepPage": "Mantém esta página aberta",
       "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
-      "copyKeep": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
+      "copyKeepPage": "Podes ajudar a partilhar o conteúdo ao manter esta página aberta. Desta forma estás a partilhar o conteúdo através do teu dispositivo.",
+      "copyKeepDaemon": "Podes ajudar a partilhar o conteúdo mantendo o teu daemon a correr. Desta forma estás a partilhar o conteúdo através do teu dispositivo.",
       "labelSend": "Envia o link de partilha",
       "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede."
     },
