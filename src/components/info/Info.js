@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 
 // Static
 import DownloadIcon from '../../media/icons/StrokeDownload'
@@ -59,7 +59,13 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 <span className={numberClass}>3.</span>
                 {t('info.download.labelSend')}
               </div>
-              <div className={descriptionClass}>{t('info.download.copySend')}</div>
+              <div className={descriptionClass}>
+                <Trans i18nKey='info.download.copySend'>
+                  IPFS gives the files a unique fingerprint called a
+                  <a className='link aqua' style={{ outline: 'none' }} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>CID</a>
+                  that is used to find them again on the network.
+                </Trans>
+              </div>
             </div>
           </div>
         </div>
@@ -95,7 +101,13 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
               <span className={numberClass}>2.</span>
               {t('info.add.labelSend')}
             </div>
-            <div className={descriptionClass}>{t('info.add.copySend')}</div>
+            <div className={descriptionClass}>
+              <Trans i18nKey='info.add.copySend'>
+                IPFS gives the files a unique fingerprint called a
+                <a className='link aqua' style={{ outline: 'none' }} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>CID</a>
+                that is used to find them again on the network.
+              </Trans>
+            </div>
           </div>
         </div>
 

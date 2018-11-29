@@ -12,7 +12,7 @@
       "labelAdd": "Add your files",
       "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
       "labelSend": "Send the share link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
+      "copySend": "IPFS gives the files a unique fingerprint called a <1>CID</1> that is used to find them again on the network.",
       "labelKeepPage": "Keep this page open",
       "labelKeepDaemon": "Keep your IPFS daemon running",
       "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
@@ -26,7 +26,7 @@
       "copyKeepPage": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
       "copyKeepDaemon": "Your can help co-host the content by also keeping your daemon running. This way you are sharing the content from your device.",
       "labelSend": "Send the share link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
+      "copySend": "IPFS gives the files a unique fingerprint called a <1>CID</1> that is used to find them again on the network."
     }
   },
   "box": {
