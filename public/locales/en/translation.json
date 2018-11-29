@@ -5,23 +5,37 @@
     "download": "Download Files"
   },
   "header": "Share by IPFS",
-  "footer": "Protocol Labs | Except as noted, content licensed CC-BY 3.0",
+  "footer": "© Protocol Labs | Except as <1>noted</1>, content licensed <3>CC-BY 3.0</3>",
   "info": {
-    "title": "InterPlanetary File System",
-    "description": "A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.",
-    "labelAdding": "Adding files",
-    "copyAdding": "Each file is hashed based on its content, which means there are no duplications across the network.",
-    "labelNodes": "IPFS Nodes",
-    "copyNodes": "Each node stores only content it is interested in, and some information that helps figuring out who is storing what.",
-    "labelGetting": "Getting Files",
-    "copyGetting": "When looking up files, you're asking the network to find nodes storing the content behind a unique hash."
+    "add": {
+      "title": "Share files directly from your device",
+      "labelAdd": "Add your files",
+      "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
+      "labelSend": "Send the share link",
+      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
+      "labelKeepPage": "Keep this page open",
+      "labelKeepDaemon": "Keep your IPFS daemon running",
+      "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
+    },
+    "download": {
+      "title": "Get files directly from other devices",
+      "labelGet": "Get the files",
+      "copyGet": "You can download individual files or, if you want to keep the files structure, click on the download all button.",
+      "labelKeepPage": "Keep this page open",
+      "labelKeepDaemon": "Keep your IPFS daemon running",
+      "copyKeepPage": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
+      "copyKeepDaemon": "Your can help co-host the content by also keeping your daemon running. This way you are sharing the content from your device.",
+      "labelSend": "Send the share link",
+      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
+    },
+    "learnMore": "Learn more."
   },
   "box": {
     "missingDaemon": "Is your IPFS daemon running?",
     "runningDaemon": "You need a <1>running daemon</1> to add files to IPFS.",
     "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
     "runDaemon": "Then, start an IPFS daemon in your terminal:",
-    "footNote": "If no other nodes pin your files and you stop serving them, they will disappear from the network.",
+    "footNote": "If you add more files after getting a share link, it will be updated. Don't forget to copy the latest to get the full files list.",
     "largeFilesWarning": "If you experience issues when downloading files larger than 1GB, please install <1>IPFS Desktop</1> or <3>IPFS Companion</3> for improved performance.",
     "viewOnGateway": "View on IPFS gateway"
   },

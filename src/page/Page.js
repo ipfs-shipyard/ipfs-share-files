@@ -48,13 +48,17 @@ class Page extends React.Component {
     const { currentPage, ipfsInitFailed, shareLink, files, hasExceededMaxSize, isLoading, t } = this.props
     const isDownload = currentPage === PAGES.download
     let content
+    let info
 
     if (isDownload) {
       content = <BoxDownload files={files} showSizeWarning={hasExceededMaxSize} shareLink={shareLink} isLoading={isLoading} />
+      info = <Info isDownload />
     } else if (ipfsInitFailed) {
       content = <BoxNotAvailable />
+      info = isDownload ? <Info isDownload /> : <Info />
     } else {
       content = <BoxAdd files={files} shareLink={shareLink} isLoading={isLoading} />
+      info = <Info />
     }
 
     return (
@@ -65,7 +69,7 @@ class Page extends React.Component {
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
           { content }
-          <Info />
+          { info }
         </div>
       </div>
     )
