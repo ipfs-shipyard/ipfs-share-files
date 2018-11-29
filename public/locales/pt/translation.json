@@ -20,7 +20,7 @@
     "download": {
       "title": "Recebe ficheiros directamente de outros dispositivos",
       "labelGet": "Recebe os ficheiros",
-      "copyGet": "Podes descarregar ficheiros individualmente ou, se quiseres manter a estrutura dos mesmos, podes obter um arquivo ao descarregar todos.",
+      "copyGet": "Podes descarregar ficheiros individualmente ou, se quiseres manter a estrutura dos mesmos, clica no botão de descarregar todos.",
       "labelKeepPage": "Mantém esta página aberta",
       "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
       "copyKeep": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
