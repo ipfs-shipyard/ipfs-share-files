@@ -16,6 +16,7 @@
 - [Background](#background)
 - [Install](#install)
 - [Usage](#usage)
+- [Translations](#translations)
 - [Contribute](#contribute)
 - [License](#license)
 
@@ -23,13 +24,13 @@
 
 The `IPFS Share Files` is a **work-in-progress**. It is part of the wider [IPFS GUI](https://github.com/ipfs-shipyard/ipfs-gui) project.
 
-The app uses the IPFS HTTP API to access the local node. It will use the `window.ipfs` api provided by the [IPFS Companion](https://github.com/ipfs-shipyard/ipfs-companion) browser extension where available, and fallback to using [js-ipfs-api](https://github.com/ipfs/js-ipfs-api) where not.
+The app uses [ipfs-redux-bundle](https://github.com/ipfs-shipyard/ipfs-redux-bundle) to connect to IPFS via multiple providers. An instance of `js-pipfs` is created if no provider is available.
 
 This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents).
 
 ## Install
 
-With `node` and `npm` installed, run:
+With `node@8.12` and `npm@6.4.1` or greater installed, run:
 
 ```sh
 > npm install
@@ -51,7 +52,7 @@ To run the [storybook](https://storybook.js.org/):
 # Go to http://localhost:9009
 ```
 
-To add files you need a local IPFS daemon running:
+Optionally you may have a local IPFS daemon running:
 
 ```sh
 > ipfs daemon
@@ -100,6 +101,29 @@ To build the app for production to the `build` folder:
 ### Deploy
 
 We use [Jenkins](https://jenkins.io/) for automatic deployments. When a branch gets merged to `master`, it's deployed to [share.ipfs.io](https://share.ipfs.io). When merged to `develop`, it goes to [dev.share.ipfs.io](https://dev.share.ipfs.io).
+
+## Translations
+
+We use [Transifex](https://www.transifex.com/) to help us translate IPFS Share Files. The translations are stored on [`public/locales`](./public/locales) and the English version is the source of truth.
+
+If want to contribute, go to the [project page on Transifex](https://www.transifex.com/ipfs/ipfs-share-files/translate/), create an account, pick a language and start translating!
+
+### How to sync translations
+
+1. Install and set up the [command-line client (` tx `)](https://docs.transifex.com/client/installing-the-client)
+2. Download new translations from Transifex with `tx pull -a`
+    - this creates/updates the files in [`public/locales/*`](./public/locales) that need to be committed
+    - if a new language is created, remember to add it to [`src/i18n.js`](./src/i18n.js)
+
+### How to add or update keys
+
+1. Make sure you have the latest files from Transifex with `tx pull -a`
+2. Only change the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
+3. Commit your changes
+    - changes from the master branch are fetched by Transifex automatically
+
+
+For more info on our i18n process at IPFS, check out [ipfs/i18n](https://github.com/ipfs/i18n).
 
 ## Contribute
 
