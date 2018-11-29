@@ -14,7 +14,12 @@ i18n
   .use(XHR)
   .use(LanguageDetector)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: {
+      'zh-Hans': ['zh-CN', 'en'],
+      'zh-Hant': ['zh-TW', 'en'],
+      'zh': ['zh-CN', 'en'],
+      'default': ['en']
+    },
     debug: process.env.NODE_ENV !== 'production',
     backend: {
       // ensure a realtive path is used to look up the locales, so it works when used from /ipfs/<cid>
