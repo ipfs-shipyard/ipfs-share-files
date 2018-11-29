@@ -44,7 +44,9 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 <span className={numberClass}>2.</span>
                 { isUsingDaemon ? t('info.download.labelKeepDaemon') : t('info.download.labelKeepPage') }
               </div>
-              <div className={descriptionClass}>{t('info.download.copyKeep')}</div>
+              <div className={descriptionClass}>
+                {isUsingDaemon ? t('info.download.copyKeepDaemon') : t('info.download.copyKeepPage')}
+              </div>
             </div>
           </div>
 
