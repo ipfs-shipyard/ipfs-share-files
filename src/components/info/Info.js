@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
-import { translate, Trans } from 'react-i18next'
+import { translate } from 'react-i18next'
 
 // Static
 import DownloadIcon from '../../media/icons/StrokeDownload'
@@ -8,10 +8,16 @@ import ShareIcon from '../../media/icons/StrokeShare'
 import CubeIcon from '../../media/icons/StrokeCube'
 
 const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
+  // Classes and styles
   const iconContainerClass = 'mr3 fill-aqua'
   const labelClass = 'mb3 white montserrat'
   const numberClass = 'mr2 aqua'
   const descriptionClass = 'f6 gray lh-copy'
+  const anchorClass = 'link aqua'
+  const anchorStyle = { outline: 'none' }
+  // Links
+  const ipfsLink = <a className={anchorClass} style={anchorStyle} href='https://ipfs.io/#how' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
+  const cidLink = <a className={anchorClass} style={anchorStyle} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
 
   const isUsingDaemon = ipfsProvider === 'window.ipfs' || ipfsProvider === 'js-ipfs-api'
 
@@ -31,7 +37,9 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 <span className={numberClass}>1.</span>
                 {t('info.download.labelGet')}
               </div>
-              <div className={descriptionClass}>{t('info.download.copyGet')}</div>
+              <div className={descriptionClass}>
+                {t('info.download.copyGet')} {ipfsLink}
+              </div>
             </div>
           </div>
 
@@ -60,11 +68,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 {t('info.download.labelSend')}
               </div>
               <div className={descriptionClass}>
-                <Trans i18nKey='info.download.copySend'>
-                  IPFS gives the files a unique fingerprint called a
-                  <a className='link aqua' style={{ outline: 'none' }} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>CID</a>
-                  that is used to find them again on the network.
-                </Trans>
+                {t('info.download.copySend')} {cidLink}
               </div>
             </div>
           </div>
@@ -88,7 +92,9 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
               <span className={numberClass}>1.</span>
               {t('info.add.labelAdd')}
             </div>
-            <div className={descriptionClass}>{t('info.add.copyAdd')}</div>
+            <div className={descriptionClass}>
+              {t('info.add.copyAdd')} {ipfsLink}
+            </div>
           </div>
         </div>
 
@@ -102,11 +108,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
               {t('info.add.labelSend')}
             </div>
             <div className={descriptionClass}>
-              <Trans i18nKey='info.add.copySend'>
-                IPFS gives the files a unique fingerprint called a
-                <a className='link aqua' style={{ outline: 'none' }} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>CID</a>
-                that is used to find them again on the network.
-              </Trans>
+              {t('info.add.copySend')} {cidLink}
             </div>
           </div>
         </div>

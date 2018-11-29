@@ -12,7 +12,7 @@
       "labelAdd": "Adiciona os teus ficheiros",
       "copyAdd": "Qualquer pessoa com quem partilhes o link poderá adecer aos ficheiros. Não partilhes conteúdo sensível nem ficheiros com direitos de autor.",
       "labelSend": "Envia o link de partilha",
-      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada <1>CID</1> que é usada para os encontrar novamente na rede.",
+      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede.",
       "labelKeepPage": "Mantém esta página aberta",
       "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
       "copyKeep": "Estás a partilhar conteúdo a partir do teu dispositivo. Os teus amigos podem ajudar a partilhar o conteúdo ao manter o link de partilha aberto no seu browser."
@@ -25,8 +25,9 @@
       "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
       "copyKeep": "Your can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
       "labelSend": "Envia o link de partilha",
-      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada <1>CID</1> que é usada para os encontrar novamente na rede."
-    }
+      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede."
+    },
+    "learnMore": "Saber mais."
   },
   "box": {
     "missingDaemon": "O teu IPFS daemon está correr?",
