@@ -26,12 +26,14 @@ export class DownloadFiles extends React.Component {
   }
 
   render () {
-    const { existFiles, t } = this.props
+    const { existFiles, isLoading, t } = this.props
     const { progress } = this.state
     const btnClass = classnames({
       'ba b--navy bg-white navy no-pointer-events': progress !== 100,
-      'bg-navy white glow pointer': progress === 100
-    }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6 o-80'])
+      'bg-navy white glow pointer': progress === 100,
+      'no-pointer-events o-50': isLoading,
+      'o-80': !isLoading
+    }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6'])
 
     return (
       <div className={btnClass} onClick={this.handleOnClick}>
@@ -55,6 +57,7 @@ export class DownloadFiles extends React.Component {
 export const TranslatedDownloadFiles = translate()(DownloadFiles)
 
 export default connect(
+  'selectIsLoading',
   'selectExistFiles',
   'doGetArchiveURL',
   TranslatedDownloadFiles
