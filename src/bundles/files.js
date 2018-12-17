@@ -14,7 +14,8 @@ const initialState = {
   },
   shareLink: {
     outdated: false,
-    link: null
+    link: null,
+    hash: null
   },
   loading: false,
   error: null
@@ -92,6 +93,7 @@ export default {
           shareLink: {
             ...state.shareLink,
             link: action.payload.link,
+            hash: action.payload.hash,
             outdated: false
           }
         }
@@ -239,6 +241,8 @@ export default {
 
   selectShareLink: state => state.files.shareLink.link,
 
+  selectShareHash: state => state.files.shareLink.hash,
+
   selectIsShareLinkOutdated: state => state.files.shareLink.outdated,
 
   reactGetShareLink: createSelector(
@@ -303,7 +307,7 @@ export default {
     const shareLink = `${ENDPOINTS.share}/${multihash}`
 
     if (storeShareLink !== shareLink) {
-      dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink } })
+      dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink, hash: multihash } })
     }
   },
 
@@ -311,6 +315,7 @@ export default {
     let ipfsFiles
     let files = {}
 
+    dispatch({ type: 'FILES_SHARE_LINK', payload: { hash: hash } })
     dispatch({ type: 'FILES_FETCH_STARTED' })
 
     try {

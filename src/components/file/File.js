@@ -102,7 +102,7 @@ export class File extends React.Component {
   }
 
   render () {
-    const { name, type, hash, error, t } = this.props
+    const { name, type, shareHash, error, t } = this.props
     const size = filesize(this.props.size, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
@@ -114,7 +114,7 @@ export class File extends React.Component {
           title={t('box.viewOnGateway')}
           className='flex items-center link'
           style={{ outline: 'none' }}
-          href={`${ENDPOINTS.gateway}/${hash}`}
+          href={`${ENDPOINTS.gateway}/${shareHash}/${encodeURI(name)}`}
           target='_blank'
           rel='noopener noreferrer'>
           <FileIcon name={name} type={type} error={error} />
@@ -131,6 +131,7 @@ export const TranslatedFile = translate()(File)
 
 export default connect(
   'selectMaxFileSize',
+  'selectShareHash',
   'doGetFromIPFS',
   'doGetArchiveURL',
   TranslatedFile
