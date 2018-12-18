@@ -112,7 +112,7 @@ export class File extends React.Component {
       <div className='mv2 flex items-center'>
         <a
           title={t('box.viewOnGateway')}
-          className='flex items-center link'
+          className='flex items-center link truncate'
           style={{ outline: 'none' }}
           href={`${ENDPOINTS.gateway}/${hash}`}
           target='_blank'
@@ -121,7 +121,7 @@ export class File extends React.Component {
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
-        <span className='ml-auto'>{ this.renderFileStatus() }</span>
+        <span className='ml-auto flex items-center'>{ this.renderFileStatus() }</span>
       </div>
     )
   }
