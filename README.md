@@ -24,7 +24,7 @@
 
 The `IPFS Share Files` is a **work-in-progress**. It is part of the wider [IPFS GUI](https://github.com/ipfs-shipyard/ipfs-gui) project.
 
-The app uses [ipfs-redux-bundle](https://github.com/ipfs-shipyard/ipfs-redux-bundle) to connect to IPFS via multiple providers. An instance of `js-pipfs` is created if no provider is available.
+The app uses [ipfs-redux-bundle](https://github.com/ipfs-shipyard/ipfs-redux-bundle) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
 
 This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents).
 
