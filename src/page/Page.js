@@ -51,7 +51,7 @@ class Page extends React.Component {
     let info
 
     if (isDownload) {
-      content = <BoxDownload files={files} showSizeWarning={hasExceededMaxSize} shareLink={shareLink} isLoading={isLoading} />
+      content = <BoxDownload files={files} showSizeWarning={hasExceededMaxSize} isLoading={isLoading} />
       info = <Info isDownload />
     } else if (ipfsInitFailed) {
       content = <BoxNotAvailable />

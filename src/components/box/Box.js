@@ -17,7 +17,7 @@ export const Box = ({ children }) => (
 export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   <Box>
     { isLoading && <Loader /> }
-    {showSizeWarning && <div className='mb4' style={{ borderLeft: '3px solid #ffcc00' }}>
+    { showSizeWarning && <div className='mb4' style={{ borderLeft: '3px solid #ffcc00' }}>
       <p className='mv0 pl3 navy f6 lh-copy'>
         <Trans i18nKey='box.largeFilesWarning'>
           You may experience issues when downloading files larger than 1GB. Please use <a className='link aqua underline-hover' href='https://github.com/ipfs-shipyard/ipfs-desktop/' target='_blank' rel='noopener noreferrer'>IPFS Desktop</a>
