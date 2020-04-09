@@ -1,9 +1,0 @@
-website([
-  website: 'share.ipfs.io',
-  build_directory: 'build/',
-  disable_publish: false,
-  record: [
-    'master': '_dnslink',
-    'develop': '_dnslink.dev',
-  ]
-])

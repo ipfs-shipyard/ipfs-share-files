@@ -100,7 +100,7 @@ To build the app for production to the `build` folder:
 
 ### Deploy
 
-We use [Jenkins](https://jenkins.io/) for automatic deployments. When a branch gets merged to `master`, it's deployed to [share.ipfs.io](https://share.ipfs.io). When merged to `develop`, it goes to [dev.share.ipfs.io](https://dev.share.ipfs.io).
+We use CI for automatic deployments. When a branch gets merged to `master`, it's deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io). When merged to `production`, it goes to [share.ipfs.io](https://share.ipfs.io).
 
 ## Translations
 

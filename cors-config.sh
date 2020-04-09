@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 ALLOW_ORIGINS='"http://localhost:3000", "https://share.ipfs.io"'
 
