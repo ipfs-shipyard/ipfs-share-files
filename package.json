@@ -71,7 +71,7 @@
     "babel-runtime": "^6.26.0",
     "big.js": "^5.1.2",
     "bundlesize": "^0.17.0",
-    "ecstatic": "^3.2.1",
+    "ecstatic": "^4.1.4",
     "eslint": "^5.4.0",
     "eslint-plugin-react": "^7.11.1",
     "ipfs": "^0.33.1",
