@@ -116,7 +116,9 @@ export class File extends React.Component {
           href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
           target='_blank'
           rel='noopener noreferrer'>
-          <FileIcon className="flex-shrink-0" name={name} type={type} error={error} />
+          <div>
+            <FileIcon className="flex-shrink-0" name={name} type={type} error={error} />
+          </div>
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
