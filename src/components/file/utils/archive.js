@@ -8,7 +8,7 @@ export default (url, filename, progressCallback) => {
   }
 
   xhr.responseType = 'blob'
-  xhr.open('GET', url, true)
+  xhr.open('POST', url, true)
 
   progressCallback(0)
 

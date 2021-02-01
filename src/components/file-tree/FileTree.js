@@ -9,7 +9,7 @@ const FileTree = ({ files, isDownload }) => (
       <File
         key={`file-${id}`}
         id={file.id}
-        hash={file.hash}
+        cid={file.cid}
         name={file.name}
         size={file.size}
         type={file.type}

@@ -22,7 +22,7 @@ export class App extends Component {
     ipfsInitFailed: PropTypes.bool.isRequired
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.doInitIpfs()
   }
 
