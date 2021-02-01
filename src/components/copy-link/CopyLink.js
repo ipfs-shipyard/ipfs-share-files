@@ -28,7 +28,7 @@ class CopyLink extends React.Component {
 
     return (
       <div className='mb4'>
-        { this.props.withLabel && <div className='f7 gray'>{t('copyLink.label')}</div> }
+        { this.props.withLabel && <div className='f6'>{t('copyLink.label')}</div> }
         <div className='pa1 mt3 w-100 flex items-center br-pill bg-light-gray'>
           <div className='ph2 w-80 f7 navy truncate'>
             { shareLink }

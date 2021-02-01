@@ -21,6 +21,7 @@ import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
 import GlyphAttention from '../../media/icons/GlyphAttention'
+import GlyphLink from '../../media/icons/GlyphLink'
 
 export class File extends React.Component {
   static propTypes = {
@@ -107,7 +108,7 @@ export class File extends React.Component {
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
     return (
-      <div className='mv2 flex items-center'>
+      <div className='mv2 flex items-center justify-between'>
         <a
           title={t('box.viewOnGateway')}
           className='flex items-center link truncate FileLink'
@@ -119,7 +120,10 @@ export class File extends React.Component {
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
-        <span className='ml-auto flex items-center'>{ this.renderFileStatus() }</span>
+        <div className='flex'>
+          <span className='ml-auto flex items-center'><a href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}><GlyphLink width={25} height={25} fill='#ffcc00' alt='Link' /></a></span>
+          <span className='ml-auto flex items-center'>{ this.renderFileStatus() }</span>
+        </div>
       </div>
     )
   }
