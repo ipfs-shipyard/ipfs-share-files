@@ -25,11 +25,11 @@ export const AddFiles = ({ t, doAddFiles }) => {
   }
 
   return (
-    <div className="mb4 o-80 glow">
+    <div className="o-80 glow">
       <div className="flex flex-column justify-center items-start">
         <label className="flex items-center pointer">
           <AddIcon className="fill-aqua" height="80px" style={{ marginLeft: '-16px' }} alt={t('addFiles')}/>
-          <div className="f5 charcoal">{t('addFiles')}</div>
+          <div className="f4">{t('addFiles')}</div>
           <input
             onChange={onAddFiles}
             id="add-files"

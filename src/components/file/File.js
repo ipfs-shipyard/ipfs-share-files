@@ -8,6 +8,7 @@ import { withTranslation } from 'react-i18next'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
 import ENDPOINTS from '../../constants/endpoints'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -21,7 +22,6 @@ import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
 import GlyphAttention from '../../media/icons/GlyphAttention'
-import GlyphLink from '../../media/icons/GlyphLink'
 
 export class File extends React.Component {
   static propTypes = {
@@ -107,6 +107,11 @@ export class File extends React.Component {
     const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
+    const copyBtnClass = classnames({
+      'o-50 no-pointer-events': this.state.copied,
+      'o-80 glow pointer': !this.state.copied
+    }, ['pa2 flex items-center justify-center br-pill bg-navy f7 white'])
+
     return (
       <div className='mv2 flex items-center justify-between'>
         <a
@@ -123,10 +128,21 @@ export class File extends React.Component {
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
         <div className='flex'>
-          <span className='ml-auto flex items-center'><a href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}><GlyphLink width={25} height={25} fill='#ffcc00' alt='Link' /></a></span>
-          <span className='ml-auto flex items-center'>{ this.renderFileStatus() }</span>
+          <span className='ml-auto'>{ this.renderFileStatus() }</span>
+          <CopyToClipboard text={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`} onCopy={this.handleOnCopyClick}>
+            <div className={copyBtnClass}>
+              { this.state.copied ? t('copyLink.copied') : t('copyLink.copy') }
+            </div>
+          </CopyToClipboard>
         </div>
       </div>
+    )
+  }
+
+  handleOnCopyClick = () => {
+    this.setState(
+      { copied: true },
+      () => setTimeout(() => this.setState({ copied: false }), 2500)
     )
   }
 }
