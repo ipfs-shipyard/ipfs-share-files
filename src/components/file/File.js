@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import filesize from 'filesize'
-import CircularProgressbar from 'react-circular-progressbar'
+import { CircularProgressbar } from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
 import ENDPOINTS from '../../constants/endpoints'
@@ -127,7 +127,7 @@ export class File extends React.Component {
   }
 }
 
-export const TranslatedFile = translate()(File)
+export const TranslatedFile = withTranslation('translation')(File)
 
 export default connect(
   'selectMaxFileSize',

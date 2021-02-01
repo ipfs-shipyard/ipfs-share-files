@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -51,4 +51,4 @@ class CopyLink extends React.Component {
   }
 }
 
-export default translate()(CopyLink)
+export default withTranslation('translation')(CopyLink)

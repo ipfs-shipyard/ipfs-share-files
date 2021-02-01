@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate, Trans } from 'react-i18next'
+import { withTranslation, Trans } from 'react-i18next'
 import plLogoText from '../../media/logos/protocol-labs-text.svg'
 
 const Footer = () => {
@@ -22,4 +22,4 @@ const Footer = () => {
   )
 }
 
-export default translate()(Footer)
+export default withTranslation('translation')(Footer)

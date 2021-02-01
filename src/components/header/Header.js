@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import ipfsLogoText from '../../media/logos/ipfs-text.svg'
 
 const Header = ({ t }) => (
@@ -12,4 +12,4 @@ const Header = ({ t }) => (
   </div>
 )
 
-export default translate()(Header)
+export default withTranslation('translation')(Header)

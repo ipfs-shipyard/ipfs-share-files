@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 // Static
 import AddIcon from '../../media/icons/GlyphAdd.js'
@@ -32,7 +32,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
   )
 }
 
-export const TranslatedAddFiles = translate()(AddFiles)
+export const TranslatedAddFiles = withTranslation('translation')(AddFiles)
 
 export default connect(
   'doAddFiles',

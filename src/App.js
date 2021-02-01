@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
-import navHelper from 'internal-nav-helper'
+import {getNavHelper} from 'internal-nav-helper'
 
 // Components
 import Header from './components/header/Header'
@@ -28,6 +28,8 @@ export class App extends Component {
 
   render () {
     const { route: Page, ipfsReady, ipfsInitFailed } = this.props
+
+    const navHelper = getNavHelper()
     // Only shows the page if IPFS is ready or if the initialization has failed.
     // This way we can make sure we always use user's own node if available and
     // the public gateway otherwise.

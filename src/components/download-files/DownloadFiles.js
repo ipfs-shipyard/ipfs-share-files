@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
-import CircularProgressbar from 'react-circular-progressbar'
+import { CircularProgressbar } from 'react-circular-progressbar'
 import downloadArchive from '../file/utils/archive'
 
 // Styles
@@ -54,7 +54,7 @@ export class DownloadFiles extends React.Component {
   }
 }
 
-export const TranslatedDownloadFiles = translate()(DownloadFiles)
+export const TranslatedDownloadFiles = withTranslation('translation')(DownloadFiles)
 
 export default connect(
   'selectIsLoading',
