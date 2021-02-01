@@ -42,7 +42,7 @@
   "addFiles": "Add files",
   "addFolder": "Or add a folder",
   "copyLink": {
-    "label": "Copy link to send files:",
+    "label": "Or share all files at once with a single link:",
     "copy": "Copy",
     "copied": "Copied!"
   },
