@@ -120,13 +120,13 @@ export class File extends React.Component {
   }
 
   render () {
-    const { name, type, shareCID, error, t } = this.props
+    const { name, type, cid, error, t } = this.props
     const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
-    const url = `${ENDPOINTS.gateway}/${shareCID}?filename=${encodeURI(name)}`
+    const url = `${ENDPOINTS.gateway}/${cid}?filename=${encodeURI(name)}`
 
     return (
       <div className='mv2 flex items-center justify-between'>
