@@ -110,7 +110,7 @@ export class File extends React.Component {
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': this.state.copied,
       'o-80 glow pointer': !this.state.copied
-    }, ['pa2 flex items-center justify-center br-pill bg-navy f7 white'])
+    }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
     return (
       <div className='mv2 flex items-center justify-between'>
