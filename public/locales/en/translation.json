@@ -40,6 +40,7 @@
     "viewOnGateway": "View on IPFS gateway"
   },
   "addFiles": "Add files",
+  "addFolder": "Or add a folder",
   "copyLink": {
     "label": "Copy link to send files:",
     "copy": "Copy",

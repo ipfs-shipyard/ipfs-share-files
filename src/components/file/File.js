@@ -33,7 +33,7 @@ export class File extends React.Component {
     error: PropTypes.string,
     gatewayURL: PropTypes.string,
     isDownload: PropTypes.bool,
-    doGetFromIPFS: PropTypes.func,
+    doGetFileURL: PropTypes.func,
     doGetArchiveURL: PropTypes.func
   }
 
@@ -42,19 +42,16 @@ export class File extends React.Component {
   }
 
   handleDownloadClick = async () => {
-    const { id, cid, name, type, doGetFromIPFS, doGetArchiveURL } = this.props
+    const { cid, name, type, doGetFileURL, doGetArchiveURL } = this.props
 
     if (type === 'dir') {
-      // This is a directory so we'll use the HTTP API to
-      // be able to get an archive and download the folder.
       const { url, filename } = await doGetArchiveURL(cid)
       const updater = (progress) => this.setState({ progress: progress })
-      downloadArchive(url, filename, updater)
-    } else {
-      // This is a file so we'll download it normally.
-      const file = await doGetFromIPFS(id, cid)
-      downloadFile(file, name)
+      return downloadArchive(url, filename, updater)
     }
+
+    const { url, filename } = await doGetFileURL(name, cid)
+    downloadFile(url, filename)
   }
 
   renderWarningSign = () => {
@@ -118,7 +115,7 @@ export class File extends React.Component {
           href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
           target='_blank'
           rel='noopener noreferrer'>
-          <FileIcon name={name} type={type} error={error} />
+          <FileIcon className="flex-shrink-0" name={name} type={type} error={error} />
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
@@ -133,7 +130,7 @@ export const TranslatedFile = withTranslation('translation')(File)
 export default connect(
   'selectMaxFileSize',
   'selectShareCID',
-  'doGetFromIPFS',
+  'doGetFileURL',
   'doGetArchiveURL',
   TranslatedFile
 )

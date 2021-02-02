@@ -365,57 +365,24 @@ const bundle = {
     }
   },
 
-  doGetFromIPFS: (id, cid) => async ({ dispatch, getIpfs }) => {
-    return new Promise((resolve, reject) => {
-      const ipfs = getIpfs()
-      dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id } })
+  doGetFileURL: (filename, cid) => async ({ store }) => {
+    const url = ENDPOINTS.gateway
 
-      try {
-        const stream = ipfs.cat(cid)
+    if (!cid) {
+      const files = Object.values(store.selectFiles())
+      cid = files[0].cid
+      filename = files[0].name
+    }
 
-        stream.on('data', (file) => {
-          const chunks = []
-          let bytesLoaded = 0
-
-          file.content
-            .on('data', (chunk) => {
-              bytesLoaded += chunk.byteLength
-              const progress = Math.round((bytesLoaded / file.size) * 100)
-
-              dispatch({ type: 'FILES_DOWNLOAD_PROGRESS', payload: { id: id, progress } })
-              chunks.push(chunk)
-            })
-            .on('end', () => {
-              // Get the total length of all arrays
-              let length = 0
-              chunks.forEach(arr => {
-                length += arr.length
-              })
-
-              // Create a new array with total length and merge all source arrays
-              const mergedArray = new Uint8Array(length)
-              let offset = 0
-              chunks.forEach(item => {
-                mergedArray.set(item, offset)
-                offset += item.length
-              })
-
-              dispatch({ type: 'FILES_DOWNLOAD_FINISHED', payload: { id: id } })
-              resolve(mergedArray)
-            })
-
-          file.content.resume()
-        })
-      } catch (err) {
-        dispatch({ type: 'FILES_DOWNLOAD_FAILED', payload: { id: id } })
-      }
-    })
+    return {
+      url: `${url}/${cid.string}?download=true&filename=${encodeURIComponent(filename)}`,
+      filename
+    }
   },
 
-  doGetArchiveURL: (cid) => async ({ dispatch, store, getIpfs }) => {
+  doGetArchiveURL: (cid) => async ({ store, getIpfs }) => {
     const ipfs = getIpfs()
     const apiAddress = store.selectIpfsApiAddress()
-    dispatch({ type: 'FILES_ARCHIVE_FILES' })
 
     // Try to use the HTTP API of the local daemon
     const url = apiAddress !== null
