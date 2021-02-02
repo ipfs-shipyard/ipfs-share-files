@@ -127,7 +127,7 @@ export class File extends React.Component {
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
-        <div className='flex'>
+        <div className='flex items-center'>
           <span className='ml-auto'>{ this.renderFileStatus() }</span>
           <CopyToClipboard text={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`} onCopy={this.handleOnCopyClick}>
             <div className={copyBtnClass}>
