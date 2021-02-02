@@ -1,7 +1,8 @@
 .DownloadFilesButton {
     outline: none;
+    border: 3px solid transparent;
 }
 
 .DownloadFilesButton:focus {
-    border-color: black;
+    border: 3px solid #69c4cd;
 }
