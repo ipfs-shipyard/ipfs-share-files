@@ -4,9 +4,12 @@ import { withTranslation, Trans } from 'react-i18next'
 // Components
 import File from '../file/File'
 
-const FileTree = ({ files, isDownload }) => (
+const FileTree = ({ files, isDownload }) => {
+  const filesMap = Object.entries(files)
+
+  return (
   <div>
-     {!isDownload && (
+     {!isDownload && filesMap.length > 1 && (
      <div className='f6 fw6 charcoal mt4 mb2'>
       <Trans i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
     </div>)}
@@ -24,7 +27,6 @@ const FileTree = ({ files, isDownload }) => (
           isDownload={isDownload} />
       )
       : null }
-  </div>
-)
-
+  </div>)
+}
 export default withTranslation('translation')(FileTree)
