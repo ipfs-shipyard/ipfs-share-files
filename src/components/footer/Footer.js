@@ -7,7 +7,7 @@ const Footer = () => {
   const anchorStyle = { outline: 'none' }
 
   return (
-    <div className='flex items-center justify-between pa4' style={{height: '100px'}}>
+    <div className='flex items-center justify-between pa4' style={{ height: '100px' }}>
       <div className='f7 white'>
         <Trans i18nKey='footer'>
           © Protocol Labs | Except as

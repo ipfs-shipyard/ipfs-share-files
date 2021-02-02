@@ -6,7 +6,7 @@ import redirectsBundle from './redirects'
 import filesBundle from './files'
 
 export default composeBundles(
-  appIdle({idleTimeout: 5000}),
+  appIdle({ idleTimeout: 5000 }),
   ipfsProvider,
   routesBundle,
   redirectsBundle,

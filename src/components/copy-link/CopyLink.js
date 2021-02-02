@@ -45,8 +45,8 @@ class CopyLink extends React.Component {
 
   handleOnCopyClick = () => {
     this.setState(
-      {copied: true},
-      () => setTimeout(() => this.setState({copied: false}), 2500)
+      { copied: true },
+      () => setTimeout(() => this.setState({ copied: false }), 2500)
     )
   }
 }

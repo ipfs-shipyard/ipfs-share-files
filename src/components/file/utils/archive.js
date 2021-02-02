@@ -1,5 +1,5 @@
-export default (url, filename, progressCallback) => {
-  let xhr = new window.XMLHttpRequest()
+const archive = (url, filename, progressCallback) => {
+  const xhr = new window.XMLHttpRequest()
   let total = 0
 
   const abort = () => {
@@ -37,3 +37,5 @@ export default (url, filename, progressCallback) => {
   xhr.send()
   return { abort }
 }
+
+export default archive

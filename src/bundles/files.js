@@ -21,7 +21,7 @@ const initialState = {
   error: null
 }
 
-export default {
+const bundle = {
   name: 'files',
   actionBaseType: 'FILES',
 
@@ -313,9 +313,9 @@ export default {
 
   doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs }) => {
     let ipfsFiles
-    let files = {}
+    const files = {}
 
-    dispatch({ type: 'FILES_SHARE_LINK', payload: { cid} })
+    dispatch({ type: 'FILES_SHARE_LINK', payload: { cid } })
     dispatch({ type: 'FILES_FETCH_STARTED' })
 
     try {
@@ -374,7 +374,7 @@ export default {
         const stream = ipfs.cat(cid)
 
         stream.on('data', (file) => {
-          let chunks = []
+          const chunks = []
           let bytesLoaded = 0
 
           file.content
@@ -393,7 +393,7 @@ export default {
               })
 
               // Create a new array with total length and merge all source arrays
-              let mergedArray = new Uint8Array(length)
+              const mergedArray = new Uint8Array(length)
               let offset = 0
               chunks.forEach(item => {
                 mergedArray.set(item, offset)
@@ -436,3 +436,5 @@ export default {
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })
 }
+
+export default bundle

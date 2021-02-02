@@ -1,6 +1,6 @@
 import { createSelector } from 'redux-bundler'
 
-export default {
+const bundle = {
   name: 'redirects',
 
   reactToEmptyHash: createSelector(
@@ -12,3 +12,5 @@ export default {
     }
   )
 }
+
+export default bundle

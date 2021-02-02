@@ -13,6 +13,7 @@ import ENDPOINTS from '../../constants/endpoints'
 import FileIcon from '../file/file-icon/FileIcon'
 
 // Styles
+import './File.css'
 import 'react-circular-progressbar/dist/styles.css'
 
 // Static
@@ -90,7 +91,7 @@ export class File extends React.Component {
         <div className='flex items-center'>
           { this.renderWarningSign() }
           <CircularProgressbar
-            percentage={progress}
+            value={progress}
             strokeWidth={50}
             styles={{
               root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
@@ -105,14 +106,14 @@ export class File extends React.Component {
     const { name, type, shareCID, error, t } = this.props
     const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
 
-    const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
-    const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
+    const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
+    const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
     return (
       <div className='mv2 flex items-center'>
         <a
           title={t('box.viewOnGateway')}
-          className='flex items-center link truncate'
+          className='flex items-center link truncate FileLink'
           style={{ outline: 'none' }}
           href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
           target='_blank'
