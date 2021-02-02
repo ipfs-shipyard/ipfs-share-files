@@ -12,7 +12,7 @@ storiesOf('File', module)
   .add('Adding', () => (
     <div className={wrapperClass}>
       <File
-        hash='Qm3fsA'
+        cid='Qm3fsA'
         name='game-of-thrones.mkv'
         size={265318832}
         progress={70} />
@@ -21,7 +21,7 @@ storiesOf('File', module)
   .add('Added', () => (
     <div className={wrapperClass}>
       <File
-        hash='Qm3fsA'
+        cid='Qm3fsA'
         name='game-of-thrones.mkv'
         size={265318832}
         progress={100} />
@@ -30,7 +30,7 @@ storiesOf('File', module)
   .add('Errored', () => (
     <div className={wrapperClass}>
       <File
-        hash='Qm3fsA'
+        cid='Qm3fsA'
         name='game-of-thrones.mkv'
         size={265318832}
         progress={100}
@@ -40,7 +40,7 @@ storiesOf('File', module)
   .add('Download', () => (
     <div className={wrapperClass}>
       <File
-        hash='Qm3fsA'
+        cid='Qm3fsA'
         name='game-of-thrones.mkv'
         size={265318832}
         progress={100}

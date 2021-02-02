@@ -13,6 +13,7 @@ import ENDPOINTS from '../../constants/endpoints'
 import FileIcon from '../file/file-icon/FileIcon'
 
 // Styles
+import './File.css'
 import 'react-circular-progressbar/dist/styles.css'
 
 // Static
@@ -24,7 +25,7 @@ import GlyphAttention from '../../media/icons/GlyphAttention'
 export class File extends React.Component {
   static propTypes = {
     id: PropTypes.string,
-    hash: PropTypes.string,
+    cid: PropTypes.object,
     name: PropTypes.string,
     type: PropTypes.string,
     size: PropTypes.number,
@@ -41,17 +42,17 @@ export class File extends React.Component {
   }
 
   handleDownloadClick = async () => {
-    const { id, hash, name, type, doGetFromIPFS, doGetArchiveURL } = this.props
+    const { id, cid, name, type, doGetFromIPFS, doGetArchiveURL } = this.props
 
     if (type === 'dir') {
       // This is a directory so we'll use the HTTP API to
       // be able to get an archive and download the folder.
-      const { url, filename } = await doGetArchiveURL(hash)
+      const { url, filename } = await doGetArchiveURL(cid)
       const updater = (progress) => this.setState({ progress: progress })
       downloadArchive(url, filename, updater)
     } else {
       // This is a file so we'll download it normally.
-      const file = await doGetFromIPFS(id, hash)
+      const file = await doGetFromIPFS(id, cid)
       downloadFile(file, name)
     }
   }
@@ -90,7 +91,7 @@ export class File extends React.Component {
         <div className='flex items-center'>
           { this.renderWarningSign() }
           <CircularProgressbar
-            percentage={progress}
+            value={progress}
             strokeWidth={50}
             styles={{
               root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
@@ -102,19 +103,19 @@ export class File extends React.Component {
   }
 
   render () {
-    const { name, type, shareHash, error, t } = this.props
-    const size = filesize(this.props.size, { round: 0, spacer: '' })
+    const { name, type, shareCID, error, t } = this.props
+    const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
 
-    const fileNameClass = classnames({ 'charcoal': !error, 'gray': error }, ['ph2 f6 b truncate'])
-    const fileSizeClass = classnames({ 'charcoal-muted': !error, 'gray': error }, ['f6'])
+    const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
+    const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
     return (
       <div className='mv2 flex items-center'>
         <a
           title={t('box.viewOnGateway')}
-          className='flex items-center link truncate'
+          className='flex items-center link truncate FileLink'
           style={{ outline: 'none' }}
-          href={`${ENDPOINTS.gateway}/${shareHash}/${encodeURI(name)}`}
+          href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
           target='_blank'
           rel='noopener noreferrer'>
           <FileIcon name={name} type={type} error={error} />
@@ -131,7 +132,7 @@ export const TranslatedFile = withTranslation('translation')(File)
 
 export default connect(
   'selectMaxFileSize',
-  'selectShareHash',
+  'selectShareCID',
   'doGetFromIPFS',
   'doGetArchiveURL',
   TranslatedFile

@@ -18,7 +18,7 @@ const typeFromExt = (filename) => {
   return extToType[ext] || ext
 }
 
-const FileIcon = ({name, type, error}) => {
+const FileIcon = ({ name, type, error }) => {
   const iconColor = error ? 'fill-gray' : 'fill-aqua'
   const iconHeight = 40
 

@@ -1,4 +1,4 @@
-export default (fileContent, fileName) => {
+const download = (fileContent, fileName) => {
   const blob = new window.Blob([fileContent], { type: 'application/octet-binary' })
   const url = window.URL.createObjectURL(blob)
   const link = document.createElement('a')
@@ -7,3 +7,5 @@ export default (fileContent, fileName) => {
   link.setAttribute('download', fileName)
   link.click()
 }
+
+export default download
