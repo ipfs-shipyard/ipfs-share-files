@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import downloadArchive from '../file/utils/archive'
+import downloadFile from '../file/utils/download'
 
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
@@ -12,7 +13,9 @@ import './DownloadFiles.css'
 
 export class DownloadFiles extends React.Component {
   static propTypes = {
-    doGetArchiveURL: PropTypes.func
+    doGetArchiveURL: PropTypes.func,
+    doGetFileURL: PropTypes.func,
+    length: PropTypes.number
   }
 
   state = {
@@ -20,10 +23,16 @@ export class DownloadFiles extends React.Component {
   }
 
   handleOnClick = async () => {
-    const { doGetArchiveURL } = this.props
-    const { url, filename } = await doGetArchiveURL()
-    const updater = (progress) => this.setState({ progress: progress })
-    downloadArchive(url, filename, updater)
+    const { doGetArchiveURL, doGetFileURL, existFiles } = this.props
+
+    if (existFiles === 1) {
+      const { url, filename } = await doGetFileURL()
+      downloadFile(url, filename)
+    } else {
+      const { url, filename } = await doGetArchiveURL()
+      const updater = (progress) => this.setState({ progress: progress })
+      downloadArchive(url, filename, updater)
+    }
   }
 
   render () {
@@ -61,5 +70,6 @@ export default connect(
   'selectIsLoading',
   'selectExistFiles',
   'doGetArchiveURL',
+  'doGetFileURL',
   TranslatedDownloadFiles
 )

@@ -1,5 +1,6 @@
 import React from 'react'
 import fileExtension from 'file-extension'
+import classNames from 'classnames'
 
 // Utils
 import extToType from '../utils/extToType'
@@ -18,8 +19,8 @@ const typeFromExt = (filename) => {
   return extToType[ext] || ext
 }
 
-const FileIcon = ({ name, type, error }) => {
-  const iconColor = error ? 'fill-gray' : 'fill-aqua'
+const FileIcon = ({ className = '', name, type, error }) => {
+  const iconColor = classNames(className, error ? 'fill-gray' : 'fill-aqua')
   const iconHeight = 40
 
   if (type === 'dir') {
