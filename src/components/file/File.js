@@ -8,6 +8,7 @@ import { withTranslation } from 'react-i18next'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
 import ENDPOINTS from '../../constants/endpoints'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 // Components
 import FileIcon from '../file/file-icon/FileIcon'
@@ -99,28 +100,61 @@ export class File extends React.Component {
     }
   }
 
+  renderCopyButton = ({ url, t }) => {
+    if (this.props.isDownload) {
+      return null
+    }
+
+    const copyBtnClass = classnames({
+      'o-50 no-pointer-events': this.state.copied,
+      'o-80 glow pointer': !this.state.copied
+    }, ['pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5'])
+
+    return (
+      <CopyToClipboard text={url} onCopy={this.handleOnCopyClick}>
+        <div className={copyBtnClass}>
+          {this.state.copied ? t('copyLink.copied') : t('copyLink.copy')}
+        </div>
+      </CopyToClipboard>
+    )
+  }
+
   render () {
-    const { name, type, shareCID, error, t } = this.props
+    const { name, type, cid, error, t } = this.props
     const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
 
     const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
+    const url = cid ? `${ENDPOINTS.gateway}/${cid.toV1()}?filename=${encodeURI(name)}` : undefined
+
     return (
-      <div className='mv2 flex items-center'>
+      <div className='mv2 flex items-center justify-between'>
         <a
           title={t('box.viewOnGateway')}
           className='flex items-center link truncate FileLink'
           style={{ outline: 'none' }}
-          href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
+          href={url}
           target='_blank'
           rel='noopener noreferrer'>
-          <FileIcon className="flex-shrink-0" name={name} type={type} error={error} />
+          <div>
+            <FileIcon className="flex-shrink-0" name={name} type={type} error={error} />
+          </div>
           <span className={fileNameClass}>{name}</span>
           <span className={fileSizeClass}>{size && `(~${size})`}</span>
         </a>
-        <span className='ml-auto flex items-center'>{ this.renderFileStatus() }</span>
+        <div className='flex items-center'>
+          <span className='ml-auto'>{ this.renderFileStatus() }</span>
+          { this.renderCopyButton({ url, t }) }
+        </div>
       </div>
+    )
+  }
+
+  handleOnCopyClick = () => {
+    this.setState(
+      { copied: true },
+      () => setTimeout(() => this.setState({ copied: false }), 2500)
     )
   }
 }

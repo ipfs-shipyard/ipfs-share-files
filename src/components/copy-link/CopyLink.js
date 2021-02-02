@@ -24,12 +24,15 @@ class CopyLink extends React.Component {
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': this.state.copied,
       'o-80 glow pointer': !this.state.copied
-    }, ['pa2 w-20 flex items-center justify-center br-pill bg-navy f7 white'])
+    }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
     return (
-      <div className='mb4'>
-        { this.props.withLabel && <div className='f7 gray'>{t('copyLink.label')}</div> }
-        <div className='pa1 mt3 w-100 flex items-center br-pill bg-light-gray'>
+      <div>
+        { this.props.withLabel && <div className='f6 fw6 charcoal mt4 mb1'>{t('copyLink.labelAll')}</div> }
+        <div className='f7 charcoal-muted lh-copy'>
+          {t('copyLink.footNote')}
+        </div>
+        <div className='pa1 mt2 mb4 w-100 flex items-center justify-between br-pill bg-light-gray'>
           <div className='ph2 w-80 f7 navy truncate'>
             { shareLink }
           </div>

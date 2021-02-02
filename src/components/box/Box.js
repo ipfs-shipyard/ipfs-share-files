@@ -36,9 +36,6 @@ export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
     { isLoading && <Loader /> }
     <FileTree files={files} />
     { shareLink && <CopyLink shareLink={shareLink} /> }
-    <div className='f7 gray lh-copy'>
-      {t('box.footNote')}
-    </div>
   </Box>
 )
 
