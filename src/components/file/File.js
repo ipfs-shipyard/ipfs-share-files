@@ -100,12 +100,10 @@ export class File extends React.Component {
     }
   }
 
-  render () {
-    const { name, type, shareCID, error, t } = this.props
-    const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
-
-    const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
-    const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
+  renderCopyButton = ({ url, t }) => {
+    if (this.props.isDownload) {
+      return null
+    }
 
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': this.state.copied,
@@ -113,12 +111,30 @@ export class File extends React.Component {
     }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
     return (
+      <CopyToClipboard text={url} onCopy={this.handleOnCopyClick}>
+        <div className={copyBtnClass}>
+          {this.state.copied ? t('copyLink.copied') : t('copyLink.copy')}
+        </div>
+      </CopyToClipboard>
+    )
+  }
+
+  render () {
+    const { name, type, shareCID, error, t } = this.props
+    const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
+
+    const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
+    const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
+
+    const url = `${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`
+
+    return (
       <div className='mv2 flex items-center justify-between'>
         <a
           title={t('box.viewOnGateway')}
           className='flex items-center link truncate FileLink'
           style={{ outline: 'none' }}
-          href={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`}
+          href={url}
           target='_blank'
           rel='noopener noreferrer'>
           <div>
@@ -129,11 +145,7 @@ export class File extends React.Component {
         </a>
         <div className='flex items-center'>
           <span className='ml-auto'>{ this.renderFileStatus() }</span>
-          <CopyToClipboard text={`${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`} onCopy={this.handleOnCopyClick}>
-            <div className={copyBtnClass}>
-              { this.state.copied ? t('copyLink.copied') : t('copyLink.copy') }
-            </div>
-          </CopyToClipboard>
+          { this.renderCopyButton({ url, t }) }
         </div>
       </div>
     )
