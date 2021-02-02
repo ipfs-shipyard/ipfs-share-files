@@ -6,12 +6,12 @@ import File from '../file/File'
 
 const FileTree = ({ files, isDownload }) => (
   <div>
+     {!isDownload && (
+     <div className='f6 fw6 charcoal mt4 mb2'>
+      <Trans i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
+    </div>)}
     { files
       ? Object.entries(files).map(([id, file]) =>
-      <div>
-        <div className='f6 fw6 charcoal mt4 mb2'>
-          <Trans i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
-        </div>
         <File
           key={`file-${id}`}
           id={file.id}
@@ -22,7 +22,6 @@ const FileTree = ({ files, isDownload }) => (
           progress={file.progress}
           error={file.error}
           isDownload={isDownload} />
-        </div>
       )
       : null }
   </div>
