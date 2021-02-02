@@ -108,7 +108,7 @@ export class File extends React.Component {
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': this.state.copied,
       'o-80 glow pointer': !this.state.copied
-    }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
+    }, ['pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5'])
 
     return (
       <CopyToClipboard text={url} onCopy={this.handleOnCopyClick}>
