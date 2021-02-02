@@ -43,23 +43,25 @@ export class DownloadFiles extends React.Component {
       'bg-navy white glow pointer': progress === 100,
       'no-pointer-events o-50': isLoading,
       'o-80': !isLoading
-    }, ['DownloadFilesButton pa2 mb2 flex justify-center items-center br-pill f6'])
+    }, ['DownloadFilesButton w-100 pv2 ph3 mb2 mt3 flex justify-center items-center br-pill f4'])
 
     return (
-      <button className={btnClass} onClick={this.handleOnClick}>
-        { progress === 100
-          ? <span className='truncate'>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
-          : <div className='flex items-center'>
-            {t('downloadFiles.downloading')}
-            <CircularProgressbar
-              value={progress}
-              strokeWidth={50}
-              styles={{
-                root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
-                path: { stroke: '#3e6175', strokeLinecap: 'butt' }
-              }} />
-          </div> }
-      </button>
+      <div className='w5 center'>
+        <button className={btnClass} onClick={this.handleOnClick}>
+          { progress === 100
+            ? <span className='truncate'>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
+            : <div className='flex items-center'>
+              {t('downloadFiles.downloading')}
+              <CircularProgressbar
+                value={progress}
+                strokeWidth={50}
+                styles={{
+                  root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
+                  path: { stroke: '#3e6175', strokeLinecap: 'butt' }
+                }} />
+            </div> }
+        </button>
+      </div>
     )
   }
 }
