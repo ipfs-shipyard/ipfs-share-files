@@ -304,7 +304,7 @@ const bundle = {
 
     const cid = await makeCIDFromFiles(files, ipfs)
 
-    const shareLink = `${ENDPOINTS.share}/${cid}`
+    const shareLink = `${ENDPOINTS.share}/${cid.toV1()}`
 
     if (storeShareLink !== shareLink) {
       dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink, cid } })
