@@ -126,7 +126,7 @@ export class File extends React.Component {
     const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
-    const url = `${ENDPOINTS.gateway}/${shareCID}/${encodeURI(name)}`
+    const url = `${ENDPOINTS.gateway}/${shareCID}?filename=${encodeURI(name)}`
 
     return (
       <div className='mv2 flex items-center justify-between'>
