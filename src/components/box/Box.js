@@ -1,5 +1,6 @@
 import React from 'react'
 import { withTranslation, Trans } from 'react-i18next'
+import { connect } from 'redux-bundler-react'
 
 // Components
 import Loader from '../loader/Loader'
@@ -31,7 +32,7 @@ export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
 )
 
 export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
-  <Box>
+  <Box onDrop={doAddFiles} >
     <AddFiles />
     { isLoading && <Loader /> }
     <FileTree files={files} />
@@ -71,3 +72,7 @@ export const RawBoxNotAvailable = ({ t }) => (
 )
 
 export const BoxNotAvailable = withTranslation('translation')(RawBoxNotAvailable)
+
+export default connect(
+  'doAddFiles'
+)
