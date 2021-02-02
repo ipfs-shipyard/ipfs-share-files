@@ -1,11 +1,11 @@
 {
   "pageTitle": {
-    "ipfs": "IPFS",
+    "ipfs": "IPFS Share",
     "add": "Add Files",
     "download": "Download Files"
   },
-  "header": "Share by IPFS",
-  "footer": "© Protocol Labs | Except as <1>noted</1>, content licensed <3>CC-BY 3.0</3>",
+  "header": "Share",
+  "footer": "Licensed <1>CC-BY 3.0</1> except as <3>noted</3>",
   "info": {
     "add": {
       "title": "Share files directly from your device",

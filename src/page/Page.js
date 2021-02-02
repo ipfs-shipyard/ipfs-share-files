@@ -64,7 +64,7 @@ class Page extends React.Component {
     return (
       <div data-id='Page'>
         <Helmet>
-          <title>{t('pageTitle.ipfs')} - { isDownload ? t('pageTitle.download') : t('pageTitle.add') }</title>
+          <title>{t('pageTitle.ipfs')} | { isDownload ? t('pageTitle.download') : t('pageTitle.add') }</title>
         </Helmet>
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
