@@ -1,7 +1,7 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
 import toUri from 'multiaddr-to-uri'
-import { filesToStreams, makeHashFromFiles } from '../lib/files'
+import { makeCIDFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
 
@@ -15,13 +15,13 @@ const initialState = {
   shareLink: {
     outdated: false,
     link: null,
-    hash: null
+    cid: null
   },
   loading: false,
   error: null
 }
 
-export default {
+const bundle = {
   name: 'files',
   actionBaseType: 'FILES',
 
@@ -59,7 +59,7 @@ export default {
             ...state.files,
             [action.payload.id]: {
               ...state.files[action.payload.id],
-              hash: action.payload.hash,
+              cid: action.payload.cid,
               pending: false
             }
           },
@@ -93,7 +93,7 @@ export default {
           shareLink: {
             ...state.shareLink,
             link: action.payload.link,
-            hash: action.payload.hash,
+            cid: action.payload.cid,
             outdated: false
           }
         }
@@ -241,7 +241,7 @@ export default {
 
   selectShareLink: state => state.files.shareLink.link,
 
-  selectShareHash: state => state.files.shareLink.hash,
+  selectShareCID: state => state.files.shareLink.cid,
 
   selectIsShareLinkOutdated: state => state.files.shareLink.outdated,
 
@@ -263,12 +263,11 @@ export default {
 
   doAddFiles: (files) => async ({ dispatch, getIpfs }) => {
     const ipfs = getIpfs()
-    const { streams } = await filesToStreams(files)
 
-    for (const stream of streams) {
+    for (const _file of files) {
       const fileId = shortid.generate()
-      const fileName = stream.name
-      const fileSize = stream.size
+      const fileName = _file.name
+      const fileSize = _file.size
 
       const file = {
         [fileId]: {
@@ -280,18 +279,19 @@ export default {
         }
       }
 
-      dispatch({ type: 'FILES_ADD_STARTED', payload: { file: file } })
+      dispatch({ type: 'FILES_ADD_STARTED', payload: { file } })
 
       const updateProgress = (bytesLoaded) => {
         const progress = Math.round((bytesLoaded / fileSize) * 100)
 
-        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress: progress } })
+        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress } })
       }
 
       try {
-        const addedFile = await ipfs.files.add(stream, { pin: false, progress: updateProgress })
-        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, hash: addedFile[0].hash } })
+        const addedFile = await ipfs.add(_file, { pin: false, progress: updateProgress })
+        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, cid: addedFile.cid } })
       } catch (err) {
+        console.error(err)
         dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } })
       }
     }
@@ -302,29 +302,29 @@ export default {
     const storeShareLink = store.selectShareLink()
     const files = Object.values(store.selectFiles())
 
-    const multihash = await makeHashFromFiles(files, ipfs)
+    const cid = await makeCIDFromFiles(files, ipfs)
 
-    const shareLink = `${ENDPOINTS.share}/${multihash}`
+    const shareLink = `${ENDPOINTS.share}/${cid}`
 
     if (storeShareLink !== shareLink) {
-      dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink, hash: multihash } })
+      dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink, cid } })
     }
   },
 
-  doFetchFileTree: (hash) => async ({ dispatch, store, getIpfs }) => {
+  doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs }) => {
     let ipfsFiles
-    let files = {}
+    const files = {}
 
-    dispatch({ type: 'FILES_SHARE_LINK', payload: { hash: hash } })
+    dispatch({ type: 'FILES_SHARE_LINK', payload: { cid } })
     dispatch({ type: 'FILES_FETCH_STARTED' })
 
     try {
       // determines whether to use the public gateway or the user's node.
       if (store.selectIpfsReady()) {
         const ipfs = getIpfs()
-        ipfsFiles = await ipfs.ls(hash)
+        ipfsFiles = await ipfs.ls(cid)
       } else {
-        const url = `${ENDPOINTS.api}/v0/ls?arg=${hash}`
+        const url = `${ENDPOINTS.api}/v0/ls?arg=${cid}`
         const res = await window.fetch(url)
         const objs = await res.json()
         ipfsFiles = objs.Objects[0].Links
@@ -332,19 +332,19 @@ export default {
 
       const maxSize = store.selectMaxFileSize()
 
-      for (const file of ipfsFiles) {
+      for await (const file of ipfsFiles) {
         const fileId = shortid.generate()
         const fileName = file.name || file.Name
         const fileSize = file.size || file.Size
         const fileType = file.type || file.Type
-        const fileHash = file.hash || file.Hash
+        const fileCid = file.cid || file.Cid
 
         files[fileId] = {
           id: fileId,
           name: fileName,
           size: fileSize,
           type: fileType,
-          hash: fileHash,
+          cid: fileCid,
           progress: 100,
           pending: false
         }
@@ -360,20 +360,21 @@ export default {
 
       dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
     } catch (err) {
+      console.error(err)
       dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } })
     }
   },
 
-  doGetFromIPFS: (id, hash) => async ({ dispatch, getIpfs }) => {
+  doGetFromIPFS: (id, cid) => async ({ dispatch, getIpfs }) => {
     return new Promise((resolve, reject) => {
       const ipfs = getIpfs()
-      dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id: id } })
+      dispatch({ type: 'FILES_DOWNLOAD_STARTED', payload: { id } })
 
       try {
-        const stream = ipfs.files.getReadableStream(hash)
+        const stream = ipfs.cat(cid)
 
         stream.on('data', (file) => {
-          let chunks = []
+          const chunks = []
           let bytesLoaded = 0
 
           file.content
@@ -381,7 +382,7 @@ export default {
               bytesLoaded += chunk.byteLength
               const progress = Math.round((bytesLoaded / file.size) * 100)
 
-              dispatch({ type: 'FILES_DOWNLOAD_PROGRESS', payload: { id: id, progress: progress } })
+              dispatch({ type: 'FILES_DOWNLOAD_PROGRESS', payload: { id: id, progress } })
               chunks.push(chunk)
             })
             .on('end', () => {
@@ -392,7 +393,7 @@ export default {
               })
 
               // Create a new array with total length and merge all source arrays
-              let mergedArray = new Uint8Array(length)
+              const mergedArray = new Uint8Array(length)
               let offset = 0
               chunks.forEach(item => {
                 mergedArray.set(item, offset)
@@ -411,7 +412,7 @@ export default {
     })
   },
 
-  doGetArchiveURL: (hash) => async ({ dispatch, store, getIpfs }) => {
+  doGetArchiveURL: (cid) => async ({ dispatch, store, getIpfs }) => {
     const ipfs = getIpfs()
     const apiAddress = store.selectIpfsApiAddress()
     dispatch({ type: 'FILES_ARCHIVE_FILES' })
@@ -421,17 +422,19 @@ export default {
       ? toUri(apiAddress).replace('tcp://', 'http://').concat('/api')
       : ENDPOINTS.api
 
-    // If no hash was passed it is to download everything
-    if (!hash) {
+    // If no cid was passed it is to download everything
+    if (!cid) {
       const files = Object.values(store.selectFiles())
-      hash = await makeHashFromFiles(files, ipfs)
+      cid = await makeCIDFromFiles(files, ipfs)
     }
 
     return {
-      url: `${url}/v0/get?arg=${hash}&archive=true&compress=true`,
-      filename: `shared-via-ipfs_${hash.slice(-7)}.tar.gz`
+      url: `${url}/v0/get?arg=${cid}&archive=true&compress=true`,
+      filename: `shared-via-ipfs_${cid.string.slice(-7)}.tar.gz`
     }
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })
 }
+
+export default bundle

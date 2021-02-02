@@ -11,3 +11,26 @@
     background: rgb(2, 46, 68);
   }
 }
+
+.link {
+  position: relative;
+}
+
+.link::after {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  background-color: white;
+}
+
+.link:focus::after,
+.link:hover::after {
+  opacity: 1;
+}

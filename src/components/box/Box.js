@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate, Trans } from 'react-i18next'
+import { withTranslation, Trans } from 'react-i18next'
 
 // Components
 import Loader from '../loader/Loader'
@@ -42,7 +42,7 @@ export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
   </Box>
 )
 
-export const BoxAdd = translate()(RawBoxAdd)
+export const BoxAdd = withTranslation('translation')(RawBoxAdd)
 
 export const RawBoxNotAvailable = ({ t }) => (
   <Box>
@@ -70,4 +70,4 @@ export const RawBoxNotAvailable = ({ t }) => (
   </Box>
 )
 
-export const BoxNotAvailable = translate()(RawBoxNotAvailable)
+export const BoxNotAvailable = withTranslation('translation')(RawBoxNotAvailable)

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 import isIPFS from 'is-ipfs'
 
@@ -87,5 +87,5 @@ export default connect(
   'selectFiles',
   'selectCurrentPage',
   'selectShareLink',
-  translate()(Page)
+  withTranslation('translation')(Page)
 )

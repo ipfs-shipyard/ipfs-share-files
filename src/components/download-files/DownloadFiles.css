@@ -1,0 +1,7 @@
+.DownloadFilesButton {
+    outline: none;
+}
+
+.DownloadFilesButton:focus {
+    border-color: black;
+}

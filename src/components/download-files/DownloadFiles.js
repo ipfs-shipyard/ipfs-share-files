@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
-import CircularProgressbar from 'react-circular-progressbar'
+import { CircularProgressbar } from 'react-circular-progressbar'
 import downloadArchive from '../file/utils/archive'
 
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
+import './DownloadFiles.css'
 
 export class DownloadFiles extends React.Component {
   static propTypes = {
@@ -33,28 +34,28 @@ export class DownloadFiles extends React.Component {
       'bg-navy white glow pointer': progress === 100,
       'no-pointer-events o-50': isLoading,
       'o-80': !isLoading
-    }, ['pa2 mb2 w-40 flex justify-center items-center br-pill f6'])
+    }, ['DownloadFilesButton pa2 mb2 flex justify-center items-center br-pill f6'])
 
     return (
-      <div className={btnClass} onClick={this.handleOnClick}>
+      <button className={btnClass} onClick={this.handleOnClick}>
         { progress === 100
           ? <span className='truncate'>{ existFiles > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
           : <div className='flex items-center'>
             {t('downloadFiles.downloading')}
             <CircularProgressbar
-              percentage={progress}
+              value={progress}
               strokeWidth={50}
               styles={{
                 root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
                 path: { stroke: '#3e6175', strokeLinecap: 'butt' }
               }} />
           </div> }
-      </div>
+      </button>
     )
   }
 }
 
-export const TranslatedDownloadFiles = translate()(DownloadFiles)
+export const TranslatedDownloadFiles = withTranslation('translation')(DownloadFiles)
 
 export default connect(
   'selectIsLoading',

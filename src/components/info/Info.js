@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 // Static
 import DownloadIcon from '../../media/icons/StrokeDownload'
@@ -19,7 +19,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   const ipfsLink = <a className={anchorClass} style={anchorStyle} href='https://ipfs.io/#how' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
   const cidLink = <a className={anchorClass} style={anchorStyle} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
 
-  const isUsingDaemon = ipfsProvider === 'window.ipfs' || ipfsProvider === 'js-ipfs-api'
+  const isUsingDaemon = ipfsProvider === 'js-ipfs-api'
 
   // Info for the Download page
   if (isDownload) {
@@ -130,7 +130,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   )
 }
 
-export const TranslatedInfo = translate()(Info)
+export const TranslatedInfo = withTranslation('translation')(Info)
 
 export default connect(
   'selectIpfsProvider',

@@ -1,0 +1,4 @@
+.FileLink:focus .FileLinkName,
+.FileLink:hover .FileLinkName {
+    text-decoration: underline;
+}

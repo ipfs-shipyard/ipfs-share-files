@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import LoaderSpinner from 'react-loader-spinner'
 import './Loader.css'
 
@@ -16,4 +16,4 @@ const Loader = ({
   </div>
 )
 
-export default translate()(Loader)
+export default withTranslation('translation')(Loader)

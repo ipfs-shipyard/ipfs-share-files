@@ -1,4 +1,4 @@
-export default {
+const extensionsToType = {
   wav: 'audio',
   bwf: 'audio',
   aiff: 'audio',
@@ -161,7 +161,7 @@ export default {
   sid: 'image',
   ras: 'image',
   sun: 'image',
-  '123': 'calc',
+  123: 'calc',
   '12m': 'calc',
   _xls: 'calc',
   _xlsx: 'calc',
@@ -504,3 +504,5 @@ export default {
   zrtf: 'text',
   zw: 'text'
 }
+
+export default extensionsToType

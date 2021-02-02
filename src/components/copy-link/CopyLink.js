@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -45,10 +45,10 @@ class CopyLink extends React.Component {
 
   handleOnCopyClick = () => {
     this.setState(
-      {copied: true},
-      () => setTimeout(() => this.setState({copied: false}), 2500)
+      { copied: true },
+      () => setTimeout(() => this.setState({ copied: false }), 2500)
     )
   }
 }
 
-export default translate()(CopyLink)
+export default withTranslation('translation')(CopyLink)
