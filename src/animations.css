@@ -1,0 +1,14 @@
+@keyframes appear-from-below  {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+.appear-from-below {
+    animation: appear-from-below 0.5s ease-in-out both;
+}

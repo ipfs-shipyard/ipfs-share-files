@@ -8,9 +8,9 @@ const FileTree = ({ files, isDownload }) => {
   const filesMap = Object.entries(files)
 
   return (
-  <div>
+  <div className='mt4'>
      {!isDownload && filesMap.length > 1 && (
-     <div className='f5 montserrat fw4 charcoal mt4 mb2'>
+     <div className='f5 montserrat fw4 charcoal mb2'>
       <Trans i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
     </div>)}
     { files
