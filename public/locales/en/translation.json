@@ -1,42 +1,41 @@
 {
   "pageTitle": {
     "ipfs": "IPFS Share",
-    "add": "Add Files",
+    "add": "Share Files",
     "download": "Download Files"
   },
   "header": "Share",
   "footer": "Licensed <1>CC-BY 3.0</1> except as <3>noted</3>",
   "info": {
     "add": {
-      "title": "Share files directly from your device",
+      "title": "Share files using IPFS",
+      "subtitle": "Share directly from your device — no cloud needed!",
       "labelAdd": "Add your files",
-      "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
-      "labelSend": "Send the share link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
-      "labelKeepPage": "Keep this page open",
-      "labelKeepDaemon": "Keep your IPFS daemon running",
-      "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
+      "copyAdd": "Add files to share them directly from your device over the IPFS network. Anyone with the unique code in your share link can download your files, so don't add sensitive or copyrighted material.",
+      "labelKeepPage": "Keep this page open!",
+      "labelKeepDaemon": "Keep your IPFS node running!",
+      "copyKeepPage": "Because you're sharing directly from your device, it's important to keep this page open until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by also keeping the share page open in their browsers.",
+      "copyKeepDaemon": "Because you're sharing directly from your device, it's important to keep your IPFS node running until the recipient downloads the files. If you're sharing with a group, anyone in the group can help co-host the files by keeping the share page open in their browser, or if they're running an IPFS node, pinning the content identifier (CID) from your share link to their node.",
+      "labelSend": "Share the link",
+      "copySend": "Every share link contains a unique fingerprint called a CID that enables the recipient's device to find that content on the IPFS network."
     },
     "download": {
-      "title": "Get files directly from other devices",
-      "labelGet": "Get the files",
-      "copyGet": "You can download individual files or, if you want to keep the files structure, click on the download all button.",
-      "labelKeepPage": "Keep this page open",
-      "labelKeepDaemon": "Keep your IPFS daemon running",
-      "copyKeepPage": "You can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
-      "copyKeepDaemon": "You can help co-host the content by also keeping your daemon running. This way you are sharing the content from your device.",
-      "labelSend": "Send the share link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
-    },
+      "title": "You've got files!",
+      "subtitle": "Download directly from the sender — no cloud needed.",
+      "labelHow": "How does IPFS Share work?",
+      "copyHow": "IPFS Share uses the global IPFS network to enable people to share files directly with each other — no cloud or third-party server needed. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content the sender intended.",
+      "labelKeep": "Want to share these files with someone else?",
+      "copyKeepPage": "You can be part of the IPFS network and share these files directly from your device simply by keeping this page open. Just share the link you received, and don't close this page until the recipient downloads the files.",
+      "copyKeepDaemon": "You can share these files directly from your device simply by keeping your IPFS node running. Just share the link you received, and be sure to keep your node running until the recipient downloads the files."    },
     "learnMore": "Learn more."
   },
   "box": {
-    "missingDaemon": "Is your IPFS daemon running?",
-    "runningDaemon": "You need a <1>running daemon</1> to add files to IPFS.",
+    "missingDaemon": "Is your IPFS node running?",
+    "runningDaemon": "You need a <1>running node</1> to add files to IPFS.",
     "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
     "runDaemon": "Then, start an IPFS daemon in your terminal:",
-    "largeFilesWarning": "If you experience issues when downloading files larger than 1GB, please install <1>IPFS Desktop</1> or <3>IPFS Companion</3> for improved performance.",
-    "viewOnGateway": "View on IPFS gateway"
+    "largeFilesWarning": "If you have issues downloading files larger than 1GB, installing <1>IPFS Desktop</1> or <3>IPFS Companion</3> can improve performance.",
+    "viewOnGateway": "View on IPFS"
   },
   "addFiles": "Add files",
   "addFolder": "Or add a folder",
@@ -47,10 +46,10 @@
     "copy": "Copy",
     "copied": "Copied!"
   },
-  "loader": "Loading file list...",
+  "loader": "Loading file list…",
   "downloadFiles": {
     "download": "Download",
     "downloadAll": "Download all",
-    "downloading": "Downloading"
+    "downloading": "Downloading…"
   }
 }

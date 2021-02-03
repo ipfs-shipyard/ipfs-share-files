@@ -37,7 +37,7 @@ export class App extends Component {
       <div className='App sans-serif'>
         <div className='flex flex-column min-vh-100'>
           <Header />
-          <main className='flex-auto pa4'>
+          <main className='flex-auto ph4'>
             { ready && <Page /> }
           </main>
           <Footer />

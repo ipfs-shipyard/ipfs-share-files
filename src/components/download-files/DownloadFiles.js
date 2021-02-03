@@ -43,7 +43,7 @@ export class DownloadFiles extends React.Component {
       'bg-navy white glow pointer': progress === 100,
       'no-pointer-events o-50': isLoading,
       'o-80': !isLoading
-    }, ['DownloadFilesButton w-100 pv2 ph3 mb2 mt3 flex justify-center items-center br-pill f4'])
+    }, ['DownloadFilesButton w-100 pv2 ph3 mb2 mt3 flex justify-center items-center br-pill f4 montserrat'])
 
     return (
       <div className='w5 center'>

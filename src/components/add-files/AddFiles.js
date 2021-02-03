@@ -29,7 +29,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
       <div className="flex flex-column justify-center items-start">
         <label className="flex items-center pointer">
           <AddIcon className="fill-aqua" height="80px" style={{ marginLeft: '-16px' }} alt={t('addFiles')}/>
-          <div className="f4">{t('addFiles')}</div>
+          <div className="f3 fw4 montserrat">{t('addFiles')}</div>
           <input
             onChange={onAddFiles}
             id="add-files"
@@ -40,7 +40,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
           />
         </label>
         <label htmlFor="add-folder" className="flex items-center pointer" style={{ marginLeft: '64px', marginTop: -20 }}>
-          <div className="f6 charcoal underline mb3">{t('addFolder')}</div>
+          <div className="f6 charcoal underline-hover mb3">{t('addFolder')}</div>
           <input
             onChange={onAddFolder}
             id="add-folder"

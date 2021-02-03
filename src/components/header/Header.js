@@ -7,8 +7,8 @@ const Header = ({ t }) => (
     <a href='/'>
       <img src={ipfsLogoText} style={{ height: 65 }} alt='IPFS' />
     </a>
-    <div className='h3 ba mh2 teal' />
-    <div className='ml2 pb2 f2 fw1 white montserrat'>{t('header')}</div>
+    <div className='h3 ba mh2 aqua' />
+    <div className='ml2 pb2 f2 fw1 aqua montserrat'>{t('header')}</div>
   </div>
 )
 
