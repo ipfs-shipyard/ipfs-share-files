@@ -50,6 +50,7 @@
     "react-i18next": "^11.8.5",
     "react-intl": "^5.11.0",
     "react-loader-spinner": "^4.0.0",
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-test-renderer": "^17.0.1",
