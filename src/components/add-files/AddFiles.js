@@ -32,7 +32,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
           <input
             onChange={onAddFiles}
             id="add-files"
-            className="o-0 absolute"
+            className="dn"
             style={{ pointerEvents: 'none' }}
             type="file"
             multiple
@@ -43,7 +43,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
           <input
             onChange={onAddFolder}
             id="add-folder"
-            className="o-0 absolute"
+            className="dn"
             style={{ pointerEvents: 'none' }}
             type="file"
             multiple directory="true" webkitdirectory="true" mozdirectory="true"
