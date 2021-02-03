@@ -15,7 +15,7 @@
       "labelKeepPage": "Keep this page open!",
       "labelKeepDaemon": "Keep your IPFS node running!",
       "copyKeepPage": "Because you're sharing directly from your device, it's important to keep this page open until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by also keeping the share page open in their browsers.",
-      "copyKeepDaemon": "Because you're sharing directly from your device, it's important to keep your IPFS node running until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by keeping the share page open in their browsers.",
+      "copyKeepDaemon": "Because you're sharing directly from your device, it's important to keep your IPFS node running until the recipient downloads the files. If you're sharing with a group, anyone in the group can help co-host the files by keeping the share page open in their browser, or if they're running an IPFS node, pinning the content identifier (CID) from your share link to their node.",
       "labelSend": "Share the link",
       "copySend": "Every share link contains a unique fingerprint called a CID that enables the recipient's device to find that content on the IPFS network."
     },
