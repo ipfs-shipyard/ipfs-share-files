@@ -10,7 +10,9 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   const anchorClass = 'no-underline underline-hover aqua'
   const anchorStyle = { outline: 'none' }
   // Links
-  const ipfsLink = <a className={anchorClass} style={anchorStyle} href='https://ipfs.io/#how' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
+  const howLink = <a className={anchorClass} style={anchorStyle} href='https://docs.ipfs.io/concepts/how-ipfs-works/' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
+  const reprovideLink = <a className={anchorClass} style={anchorStyle} href='https://ipfs.io/#install' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
+  const privacyLink = <a className={anchorClass} style={anchorStyle} href='https://docs.ipfs.io/concepts/privacy' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
   const cidLink = <a className={anchorClass} style={anchorStyle} href='https://docs.ipfs.io/guides/concepts/cid/' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>
 
   const isUsingDaemon = ipfsProvider === 'js-ipfs-api'
@@ -29,7 +31,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 {t('info.download.labelHow')}
               </div>
               <div className={descriptionClass}>
-                {t('info.download.copyHow')} {cidLink}
+                {t('info.download.copyHow')} {howLink}
               </div>
             </div>
           </div>
@@ -43,7 +45,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
                 {t('info.download.labelKeep')}
               </div>
               <div className={descriptionClass}>
-                {isUsingDaemon ? t('info.download.copyKeepDaemon') : t('info.download.copyKeepPage')} {cidLink}
+                {isUsingDaemon ? t('info.download.copyKeepDaemon') : t('info.download.copyKeepPage')} {reprovideLink}
               </div>
             </div>
           </div>
@@ -65,7 +67,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
               {t('info.add.labelAdd')}
             </div>
             <div className={descriptionClass}>
-              {t('info.add.copyAdd')} {ipfsLink}
+              {t('info.add.copyAdd')} {privacyLink}
             </div>
           </div>
         </div>
