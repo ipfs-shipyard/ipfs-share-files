@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import QRCode from 'qrcode.react'
 
 class CopyLink extends React.Component {
   static propTypes = {
@@ -32,7 +33,7 @@ class CopyLink extends React.Component {
         <div className='f7 charcoal-muted lh-copy'>
           {t('copyLink.footNote')}
         </div>
-        <div className='pa1 mt2 mb4 w-100 flex items-center justify-between br-pill bg-light-gray'>
+        <div className='pa1 mt2 mb3 w-100 flex items-center justify-between br-pill bg-light-gray'>
           <div className='ph2 w-80 f7 navy truncate'>
             { shareLink }
           </div>
@@ -41,6 +42,12 @@ class CopyLink extends React.Component {
               { this.state.copied ? t('copyLink.copied') : t('copyLink.copy') }
             </div>
           </CopyToClipboard>
+        </div>
+        <div className="overflow-hidden">
+          <div className="flex flex-column items-center mb3 appear-from-below">
+            <span className="f7 charcoal-muted lh-copy pb2">{t('copyLink.qrLabel')}</span>
+            <QRCode value={shareLink}/>
+          </div>
         </div>
       </div>
     )

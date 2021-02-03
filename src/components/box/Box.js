@@ -9,7 +9,7 @@ import CopyLink from '../copy-link/CopyLink'
 import DownloadFiles from '../download-files/DownloadFiles'
 
 export const Box = ({ children }) => (
-  <div className='center ml0-l mb4 mt2-l mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
+  <div className='center ml0-l mb4 mt2-l mb0-l pa4 pb3 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
     { children }
   </div>
 )

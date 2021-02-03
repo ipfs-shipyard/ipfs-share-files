@@ -31,13 +31,13 @@ jobs:
 
             hash=$(pin-to-cluster.sh "$pin_name" /tmp/workspace/$BUILD_DIR)
 
-            echo "Website added to IPFS: https://ipfs.io/ipfs/$hash"
+            echo "Website added to IPFS: https://dweb.link/ipfs/$hash"
 
             # Update DNSlink for prod or dev domain
             if [ "$CIRCLE_BRANCH" == "production" ] ; then
               dnslink-dnsimple -d $PROD_DOMAIN -r _dnslink -l /ipfs/$hash
             fi
-            if [ "$CIRCLE_BRANCH" == "master" ] ; then
+            if [ "$CIRCLE_BRANCH" == "main" ] ; then
               dnslink-dnsimple -d $DEV_DOMAIN -r _dnslink -l /ipfs/$hash
             fi
 

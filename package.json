@@ -42,6 +42,7 @@
     "multiaddr-to-uri": "^6.0.0",
     "prop-types": "^15.7.2",
     "pull-file-reader": "^1.0.2",
+    "qrcode.react": "^1.0.1",
     "react": "^17.0.1",
     "react-circular-progressbar": "^2.0.3",
     "react-copy-to-clipboard": "^5.0.3",
