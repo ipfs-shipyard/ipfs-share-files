@@ -13,7 +13,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   const labelClass = 'mb3 white montserrat'
   const numberClass = 'mr2 aqua'
   const descriptionClass = 'f6 gray lh-copy'
-  const anchorClass = 'link aqua'
+  const anchorClass = 'no-underline underline-hover aqua'
   const anchorStyle = { outline: 'none' }
   // Links
   const ipfsLink = <a className={anchorClass} style={anchorStyle} href='https://ipfs.io/#how' target='_blank' rel='noopener noreferrer'>{t('info.learnMore')}</a>

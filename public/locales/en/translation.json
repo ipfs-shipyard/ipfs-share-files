@@ -15,7 +15,7 @@
       "labelSend": "Send the share link",
       "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
       "labelKeepPage": "Keep this page open",
-      "labelKeepDaemon": "Keep your IPFS daemon running",
+      "labelKeepDaemon": "Keep your IPFS node running",
       "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
     },
     "download": {
@@ -24,9 +24,9 @@
       "labelGet": "Get the files",
       "copyGet": "You can download individual files or, if you want to keep the files structure, click on the download all button.",
       "labelKeepPage": "Keep this page open",
-      "labelKeepDaemon": "Keep your IPFS daemon running",
+      "labelKeepDaemon": "Keep your IPFS node running",
       "copyKeepPage": "You can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
-      "copyKeepDaemon": "You can help co-host the content by also keeping your daemon running. This way you are sharing the content from your device.",
+      "copyKeepDaemon": "You can help co-host the content by also keeping your IPFS node running. This way you are sharing the content from your device.",
       "labelSend": "Send the share link",
       "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
     },

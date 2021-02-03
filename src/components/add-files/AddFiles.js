@@ -40,7 +40,7 @@ export const AddFiles = ({ t, doAddFiles }) => {
           />
         </label>
         <label htmlFor="add-folder" className="flex items-center pointer" style={{ marginLeft: '64px', marginTop: -20 }}>
-          <div className="f6 charcoal underline mb3">{t('addFolder')}</div>
+          <div className="f6 charcoal underline-hover mb3">{t('addFolder')}</div>
           <input
             onChange={onAddFolder}
             id="add-folder"

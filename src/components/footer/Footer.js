@@ -3,7 +3,7 @@ import { withTranslation, Trans } from 'react-i18next'
 import plLogoText from '../../media/logos/protocol-labs-text.svg'
 
 const Footer = () => {
-  const anchorClass = 'no-underline aqua'
+  const anchorClass = 'no-underline underline-hover aqua'
 
   return (
     <div className='flex-ns items-center pt5 pb3 ph4 f7 white '>
