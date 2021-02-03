@@ -45,7 +45,7 @@ class CopyLink extends React.Component {
         </div>
         <div className="overflow-hidden">
           <div className="flex flex-column items-center appear-from-below">
-            <span className="charcoal f5 pb2">{t('copyLink.qrLabel')}</span>
+            <span className="f7 charcoal-muted lh-copy pb2">{t('copyLink.qrLabel')}</span>
             <QRCode value={shareLink}/>
           </div>
         </div>

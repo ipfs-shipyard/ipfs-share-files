@@ -45,7 +45,7 @@
     "footNote": "This link changes if you add more files, so be sure to share the latest version.",
     "copy": "Copy",
     "copied": "Copied!",
-    "qrLabel": "QR Code for all files:"
+    "qrLabel": "Or scan to share all files"
   },
   "loader": "Loading file list…",
   "downloadFiles": {
