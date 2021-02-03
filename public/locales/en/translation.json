@@ -1,14 +1,15 @@
 {
   "pageTitle": {
     "ipfs": "IPFS Share",
-    "add": "Add Files",
+    "add": "Share Files",
     "download": "Download Files"
   },
   "header": "Share",
   "footer": "Licensed <1>CC-BY 3.0</1> except as <3>noted</3>",
   "info": {
     "add": {
-      "title": "Share files directly from your device",
+      "title": "Share files using IPFS",
+      "subtitle": "Share directly from your device — no cloud needed!",
       "labelAdd": "Add your files",
       "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
       "labelSend": "Send the share link",
@@ -18,7 +19,8 @@
       "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
     },
     "download": {
-      "title": "Get files directly from other devices",
+      "title": "Get your files",
+      "subtitle": "Download straight from the sender's device using IPFS.",
       "labelGet": "Get the files",
       "copyGet": "You can download individual files or, if you want to keep the files structure, click on the download all button.",
       "labelKeepPage": "Keep this page open",
