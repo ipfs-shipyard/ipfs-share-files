@@ -31,17 +31,45 @@ export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   </Box>
 )
 
-export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
-  <Box onDrop={doAddFiles} >
-    <AddFiles />
-    { isLoading && <Loader /> }
-    <FileTree files={files} />
-    { shareLink && <CopyLink shareLink={shareLink} /> }
-    <div className='f7 gray lh-copy'>
-      {t('box.footNote')}
+export const RawBoxAdd = ({ files, isLoading, shareLink, doAddFiles, t }) => {
+  const handleDragEnter = ev => {
+    ev.preventDefault()
+    ev.stopPropagation()
+  }
+  const handleDragLeave = ev => {
+    ev.preventDefault()
+    ev.stopPropagation()
+  }
+  const handleDragOver = ev => {
+    ev.preventDefault()
+    ev.stopPropagation()
+  }
+  const handleDrop = ev => {
+    ev.preventDefault()
+    ev.stopPropagation()
+    const fileList = ev && ev.target && ev.target.files
+    doAddFiles(fileList)
+  }
+
+  return (
+    <div className={'drag-drop-zone'}
+      onDrop={e => handleDrop(e)}
+      onDragOver={e => handleDragOver(e)}
+      onDragEnter={e => handleDragEnter(e)}
+      onDragLeave={e => handleDragLeave(e)}
+    >
+      <Box>
+        <AddFiles />
+        { isLoading && <Loader /> }
+        <FileTree files={files} />
+        { shareLink && <CopyLink shareLink={shareLink} /> }
+        <div className='f7 gray lh-copy'>
+          {t('box.footNote')}
+        </div>
+      </Box>
     </div>
-  </Box>
-)
+  )
+}
 
 export const BoxAdd = withTranslation('translation')(RawBoxAdd)
 
