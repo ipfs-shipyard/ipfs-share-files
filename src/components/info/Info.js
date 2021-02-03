@@ -2,10 +2,6 @@ import React from 'react'
 import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 
-// Static
-import ShareIcon from '../../media/icons/StrokeInfo'
-import CubeIcon from '../../media/icons/StrokeCube'
-
 const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   // Classes and styles
   const iconContainerClass = 'mr3 fill-aqua'
@@ -22,13 +18,11 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   // Info for the Download page
   if (isDownload) {
     return (
-      <div className='pa4 pl0 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
-
-        <div className='flex flex-column'>
-
-          <div className='pa3 flex'>
+      <div className='pr5-l w-100 w-two-thirds-l mw7-l'>
+        <div className='mv4 mv2-l flex flex-column'>
+          <div className='flex items-center'>
             <div className={iconContainerClass}>
-              <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 100 100"><path d="M50 4A46 46 0 114 50 46.06 46.06 0 0150 4m0-4a50 50 0 1050 50A50 50 0 0050 0z" /><path d="M55.44 24.71a4.76 4.76 0 01-5.07 4.9 4.69 4.69 0 01-4.81-4.9 4.86 4.86 0 015-5 4.79 4.79 0 014.88 5zm-8.89 56.23V37h8v43.9z"/></svg>
             </div>
             <div>
               <div className={labelClass}>
@@ -40,9 +34,9 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
             </div>
           </div>
 
-          <div className='pa3 mv2 flex'>
+          <div className='mt4 pt2 flex items-center'>
             <div className={iconContainerClass}>
-              <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 100 100"><path d="M50 4A46 46 0 114 50 46.06 46.06 0 0150 4m0-4a50 50 0 1050 50A50 50 0 0050 0z" /><path d="M65.69 55.44a9.37 9.37 0 00-7.86 4.26l-17.29-8a9 9 0 000-3.38l17.29-8a9.38 9.38 0 10-1.53-5.13v.68l-17.72 8.2a9.39 9.39 0 100 11.87l17.75 8.21v.68a9.39 9.39 0 109.39-9.39z"/></svg>
             </div>
             <div>
             <div className={labelClass}>
@@ -61,7 +55,6 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   // Info for the Add page
   return (
     <div className='pr5-l w-100 w-two-thirds-l mw7-l'>
-
       <div className='mv4 mv2-l flex flex-column'>
         <div className='flex items-center'>
           <div className={iconContainerClass}>

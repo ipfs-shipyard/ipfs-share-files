@@ -23,7 +23,7 @@
       "title": "Get your files",
       "subtitle": "Download directly from the sender's device using IPFS.",
       "labelHow": "How does IPFS Share work?",
-      "copyHow": "IPFS Share uses the global IPFS network to enable people to share files directly with each other — no cloud or other third-party server needed. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content that the sender intended.",
+      "copyHow": "IPFS Share uses the global IPFS network to enable people to share files directly with each other — no cloud or third-party server needed. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content that the sender intended.",
       "labelKeep": "Want to share these files with others?",
       "copyKeepPage": "You can be part of the IPFS network and share these files directly from your device simply by keeping this page open. Just share the link you received, and don't close this page until the recipient downloads the files.",
       "copyKeepDaemon": "You can share these files directly from your device simply by keeping your IPFS node running. Just share the link you received, and be sure to keep your node running until the recipient downloads the files."    },
