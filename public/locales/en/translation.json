@@ -11,12 +11,13 @@
       "title": "Share files using IPFS",
       "subtitle": "Share directly from your device — no cloud needed!",
       "labelAdd": "Add your files",
-      "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
-      "labelSend": "Share the link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
+      "copyAdd": "Add files to share them directly from your device over the IPFS network. Anyone with the share link can download your files, so don't add sensitive or copyrighted material.",
       "labelKeepPage": "Keep this page open!",
-      "labelKeepDaemon": "Keep your IPFS node running",
-      "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
+      "labelKeepDaemon": "Keep your IPFS node running!",
+      "copyKeepPage": "Because you're sharing directly from your device, it's important to keep this page open until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by also keeping the share page open in their browsers.",
+      "copyKeepDaemon": "Because you're sharing directly from your device, it's important to keep your IPFS node running until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by keeping the share page open in their browsers.",
+      "labelSend": "Share the link",
+      "copySend": "Every share link contains a unique fingerprint called a CID that enables the recipient's device to find that content on the IPFS network."
     },
     "download": {
       "title": "Get your files",
@@ -28,7 +29,7 @@
       "copyKeepPage": "You can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
       "copyKeepDaemon": "You can help co-host the content by also keeping your IPFS node running. This way you are sharing the content from your device.",
       "labelSend": "Share the link",
-      "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
+      "copySend": "Every link contains a unique fingerprint called a CID that enables the recipient to find that content on the IPFS network."
     },
     "learnMore": "Learn more."
   },
