@@ -98,29 +98,29 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
 
         <div className='mv4 flex'>
           <div className={iconContainerClass}>
-            <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
+            <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
           </div>
           <div>
             <div className={labelClass}>
               <span className={numberClass}>2.</span>
-              {t('info.add.labelSend')}
+              {isUsingDaemon ? t('info.add.labelKeepDaemon') : t('info.add.labelKeepPage')}
             </div>
-            <div className={descriptionClass}>
-              {t('info.add.copySend')} {cidLink}
-            </div>
+            <div className={descriptionClass}>{t('info.add.copyKeep')}</div>
           </div>
         </div>
 
         <div className='flex'>
           <div className={iconContainerClass}>
-            <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
+            <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
           </div>
           <div>
             <div className={labelClass}>
               <span className={numberClass}>3.</span>
-              {isUsingDaemon ? t('info.add.labelKeepDaemon') : t('info.add.labelKeepPage')}
+              {t('info.add.labelSend')}
             </div>
-            <div className={descriptionClass}>{t('info.add.copyKeep')}</div>
+            <div className={descriptionClass}>
+              {t('info.add.copySend')} {cidLink}
+            </div>
           </div>
         </div>
       </div>
