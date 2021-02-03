@@ -10,6 +10,7 @@ import PAGES from '../constants/pages'
 
 // Components
 import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/Box'
+import Headline from '../components/headline/Headline'
 import Info from '../components/info/Info'
 
 class Page extends React.Component {
@@ -47,17 +48,21 @@ class Page extends React.Component {
   render () {
     const { currentPage, ipfsInitFailed, shareLink, files, hasExceededMaxSize, isLoading, t } = this.props
     const isDownload = currentPage === PAGES.download
+    let headline
     let content
     let info
 
     if (isDownload) {
       content = <BoxDownload files={files} showSizeWarning={hasExceededMaxSize} isLoading={isLoading} />
+      headline = <Headline isDownload />
       info = <Info isDownload />
     } else if (ipfsInitFailed) {
       content = <BoxNotAvailable />
+      headline = isDownload ? <Headline isDownload /> : <Headline />
       info = isDownload ? <Info isDownload /> : <Info />
     } else {
       content = <BoxAdd files={files} shareLink={shareLink} isLoading={isLoading} />
+      headline = <Headline />
       info = <Info />
     }
 
@@ -66,6 +71,7 @@ class Page extends React.Component {
         <Helmet>
           <title>{t('pageTitle.ipfs')} | { isDownload ? t('pageTitle.download') : t('pageTitle.add') }</title>
         </Helmet>
+        { headline }
 
         <div className='flex flex-column flex-row-l justify-center items-center'>
           { content }

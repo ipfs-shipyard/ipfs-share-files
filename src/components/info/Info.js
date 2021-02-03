@@ -25,8 +25,6 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   if (isDownload) {
     return (
       <div className='pa4 pl0 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
-        <div className='mb3 f2 white montserrat'>{t('info.download.title')}</div>
-        <div className='mb5 f4 fw1 white montserrat'>{t('info.download.subtitle')}</div>
 
         <div className='flex flex-column'>
           <div className='pa3 flex'>
@@ -81,8 +79,6 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   // Info for the Add page
   return (
     <div className='pa4 pl0 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
-      <div className='mb3 f2 white montserrat'>{t('info.add.title')}</div>
-      <div className='mb5 f4 fw1 white montserrat'>{t('info.add.subtitle')}</div>
 
       <div className='flex flex-column'>
         <div className='pa3 flex'>
