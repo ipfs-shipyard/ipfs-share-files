@@ -10,7 +10,7 @@ const FileTree = ({ files, isDownload }) => {
   return (
   <div>
      {!isDownload && filesMap.length > 1 && (
-     <div className='f6 fw6 charcoal mt4 mb2'>
+     <div className='f5 montserrat fw4 charcoal mt4 mb2'>
       <Trans i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
     </div>)}
     { files

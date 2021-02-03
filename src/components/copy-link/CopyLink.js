@@ -28,7 +28,7 @@ class CopyLink extends React.Component {
 
     return (
       <div>
-        { this.props.withLabel && <div className='f6 fw6 charcoal mt4 mb1'>{t('copyLink.labelAll')}</div> }
+        { this.props.withLabel && <div className='f5 montserrat fw4 charcoal mt4 mb1'>{t('copyLink.labelAll')}</div> }
         <div className='f7 charcoal-muted lh-copy'>
           {t('copyLink.footNote')}
         </div>
