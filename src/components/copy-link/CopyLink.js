@@ -33,7 +33,7 @@ class CopyLink extends React.Component {
         <div className='f7 charcoal-muted lh-copy'>
           {t('copyLink.footNote')}
         </div>
-        <div className='pa1 mt2 mb4 w-100 flex items-center justify-between br-pill bg-light-gray'>
+        <div className='pa1 mt2 mb3 w-100 flex items-center justify-between br-pill bg-light-gray'>
           <div className='ph2 w-80 f7 navy truncate'>
             { shareLink }
           </div>
@@ -43,8 +43,11 @@ class CopyLink extends React.Component {
             </div>
           </CopyToClipboard>
         </div>
-        <div className="flex justify-center">
-          <QRCode value={shareLink}/>
+        <div className="overflow-hidden">
+          <div className="flex flex-column items-center appear-from-below">
+            <span className="charcoal f5 pb2">{t('copyLink.qrLabel')}</span>
+            <QRCode value={shareLink}/>
+          </div>
         </div>
       </div>
     )
