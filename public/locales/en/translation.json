@@ -21,7 +21,7 @@
     },
     "download": {
       "title": "You've got files!",
-      "subtitle": "Download directly from the sender — no cloud needed!",
+      "subtitle": "Download directly from the sender — no cloud needed.",
       "labelHow": "How does IPFS Share work?",
       "copyHow": "IPFS Share uses the global IPFS network to enable people to share files directly with each other — no cloud or third-party server needed. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content the sender intended.",
       "labelKeep": "Want to share these files with someone else?",
