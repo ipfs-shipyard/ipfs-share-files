@@ -43,7 +43,7 @@
     "labelIndividual": "Share individual files",
     "labelAll": "Share all files",
     "footNote": "This link changes if you add more files, so be sure to share the latest version.",
-    "copy": "Copy",
+    "copy": "Share",
     "copied": "Copied!"
   },
   "loader": "Loading file list…",
