@@ -11,7 +11,7 @@
       "title": "Share files using IPFS",
       "subtitle": "Share directly from your device — no cloud needed!",
       "labelAdd": "Add your files",
-      "copyAdd": "Add files to share them directly from your device over the IPFS network. Anyone with the share link can download your files, so don't add sensitive or copyrighted material.",
+      "copyAdd": "Add files to share them directly from your device over the IPFS network. Anyone with the unique code in your share link can download your files, so don't add sensitive or copyrighted material.",
       "labelKeepPage": "Keep this page open!",
       "labelKeepDaemon": "Keep your IPFS node running!",
       "copyKeepPage": "Because you're sharing directly from your device, it's important to keep this page open until the recipient downloads the files. If you're sharing with a group, others in the group can help you co-host the files by also keeping the share page open in their browsers.",
