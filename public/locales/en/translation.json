@@ -21,25 +21,21 @@
     },
     "download": {
       "title": "Get your files",
-      "subtitle": "Download straight from the sender's device using IPFS.",
-      "labelGet": "Get the files",
-      "copyGet": "You can download individual files or, if you want to keep the files structure, click on the download all button.",
-      "labelKeepPage": "Keep this page open",
-      "labelKeepDaemon": "Keep your IPFS node running",
-      "copyKeepPage": "You can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
-      "copyKeepDaemon": "You can help co-host the content by also keeping your IPFS node running. This way you are sharing the content from your device.",
-      "labelSend": "Share the link",
-      "copySend": "Every link contains a unique fingerprint called a CID that enables the recipient to find that content on the IPFS network."
-    },
+      "subtitle": "Download directly from the sender's device using IPFS.",
+      "labelHow": "How does IPFS Share work?",
+      "copyHow": "IPFS Share uses the global IPFS network to enable people to share files directly with each other — no cloud or other third-party server needed. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content that the sender intended.",
+      "labelKeep": "Want to share these files with others?",
+      "copyKeepPage": "You can be part of the IPFS network and share these files directly from your device simply by keeping this page open. Just share the link you received, and don't close this page until the recipient downloads the files.",
+      "copyKeepDaemon": "You can share these files directly from your device simply by keeping your IPFS node running. Just share the link you received, and be sure to keep your node running until the recipient downloads the files."    },
     "learnMore": "Learn more."
   },
   "box": {
-    "missingDaemon": "Is your IPFS daemon running?",
-    "runningDaemon": "You need a <1>running daemon</1> to add files to IPFS.",
+    "missingDaemon": "Is your IPFS node running?",
+    "runningDaemon": "You need a <1>running node</1> to add files to IPFS.",
     "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
     "runDaemon": "Then, start an IPFS daemon in your terminal:",
-    "largeFilesWarning": "If you experience issues when downloading files larger than 1GB, please install <1>IPFS Desktop</1> or <3>IPFS Companion</3> for improved performance.",
-    "viewOnGateway": "View on IPFS gateway"
+    "largeFilesWarning": "If you have issues downloading files larger than 1GB, installing <1>IPFS Desktop</1> or <3>IPFS Companion</3> can improve performance.",
+    "viewOnGateway": "View on IPFS"
   },
   "addFiles": "Add files",
   "addFolder": "Or add a folder",
@@ -50,10 +46,10 @@
     "copy": "Copy",
     "copied": "Copied!"
   },
-  "loader": "Loading file list...",
+  "loader": "Loading file list…",
   "downloadFiles": {
     "download": "Download",
     "downloadAll": "Download all",
-    "downloading": "Downloading"
+    "downloading": "Downloading…"
   }
 }

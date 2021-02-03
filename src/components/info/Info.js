@@ -3,8 +3,7 @@ import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 
 // Static
-import DownloadIcon from '../../media/icons/StrokeDownload'
-import ShareIcon from '../../media/icons/StrokeShare'
+import ShareIcon from '../../media/icons/StrokeInfo'
 import CubeIcon from '../../media/icons/StrokeCube'
 
 const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
@@ -26,44 +25,31 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
       <div className='pa4 pl0 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
 
         <div className='flex flex-column'>
-          <div className='pa3 flex'>
-            <div className={iconContainerClass}>
-              <DownloadIcon height={imgHeight} style={{ marginTop: '-11px' }} alt='Download' />
-            </div>
-            <div>
-              <div className={labelClass}>
-                {t('info.download.labelGet')}
-              </div>
-              <div className={descriptionClass}>
-                {t('info.download.copyGet')} {ipfsLink}
-              </div>
-            </div>
-          </div>
 
           <div className='pa3 flex'>
             <div className={iconContainerClass}>
-              <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
+              <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
             </div>
             <div>
               <div className={labelClass}>
-                { isUsingDaemon ? t('info.download.labelKeepDaemon') : t('info.download.labelKeepPage') }
+                {t('info.download.labelHow')}
               </div>
               <div className={descriptionClass}>
-                {isUsingDaemon ? t('info.download.copyKeepDaemon') : t('info.download.copyKeepPage')}
+                {t('info.download.copyHow')} {cidLink}
               </div>
             </div>
           </div>
 
           <div className='pa3 mv2 flex'>
             <div className={iconContainerClass}>
-              <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
+              <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
             </div>
             <div>
-              <div className={labelClass}>
-                {t('info.download.labelSend')}
+            <div className={labelClass}>
+                {t('info.download.labelKeep')}
               </div>
               <div className={descriptionClass}>
-                {t('info.download.copySend')} {cidLink}
+                {isUsingDaemon ? t('info.download.copyKeepDaemon') : t('info.download.copyKeepPage')} {cidLink}
               </div>
             </div>
           </div>
