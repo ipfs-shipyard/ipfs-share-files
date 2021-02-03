@@ -78,10 +78,10 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
 
   // Info for the Add page
   return (
-    <div className='pa4 pl0 pr5-l w-100 w-two-thirds-l mw7-l self-start order-1-l'>
+    <div className='pr5-l w-100 w-two-thirds-l mw7-l'>
 
-      <div className='flex flex-column'>
-        <div className='pa3 flex'>
+      <div className='mv4 mv2-l flex flex-column'>
+        <div className='flex'>
           <div className={iconContainerClass}>
             <DownloadIcon height={imgHeight} style={{ marginTop: '-11px' }} alt='Download' />
           </div>
@@ -96,7 +96,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
           </div>
         </div>
 
-        <div className='pa3 mv2 flex'>
+        <div className='mv4 flex'>
           <div className={iconContainerClass}>
             <ShareIcon height={imgHeight} style={{ marginTop: '-13px' }} alt='Share' />
           </div>
@@ -111,7 +111,7 @@ const Info = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
           </div>
         </div>
 
-        <div className='pa3 flex'>
+        <div className='flex'>
           <div className={iconContainerClass}>
             <CubeIcon height={imgHeight} style={{ marginTop: '-3px' }} alt='Cube' />
           </div>

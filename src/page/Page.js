@@ -73,7 +73,7 @@ class Page extends React.Component {
         </Helmet>
         { headline }
 
-        <div className='flex flex-column flex-row-l justify-center items-center'>
+        <div className='flex flex-column flex-row-l items-start'>
           { content }
           { info }
         </div>

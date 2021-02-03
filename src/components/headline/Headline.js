@@ -8,7 +8,7 @@ const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
     return (
       <div className='pv4'>
         <div className='mb3 f2 white montserrat'>{t('info.download.title')}</div>
-        <div className='f4 fw1 white montserrat'>{t('info.download.subtitle')}</div>
+        <div className='mb4 f4 fw1 white montserrat'>{t('info.download.subtitle')}</div>
       </div>
     )
   }
@@ -17,7 +17,7 @@ const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   return (
     <div className='pv4'>
       <div className='mb3 f2 white montserrat'>{t('info.add.title')}</div>
-      <div className='f4 fw1 white montserrat'>{t('info.add.subtitle')}</div>
+      <div className='mb4 f4 fw1 white montserrat'>{t('info.add.subtitle')}</div>
     </div>
   )
 }
