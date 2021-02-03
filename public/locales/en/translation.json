@@ -12,9 +12,9 @@
       "subtitle": "Share directly from your device — no cloud needed!",
       "labelAdd": "Add your files",
       "copyAdd": "Anyone you give the link to will be able to get the files. Don't add sensitive or copyrighted files.",
-      "labelSend": "Send the share link",
+      "labelSend": "Share the link",
       "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network.",
-      "labelKeepPage": "Keep this page open",
+      "labelKeepPage": "Keep this page open!",
       "labelKeepDaemon": "Keep your IPFS node running",
       "copyKeep": "You are sharing the content from your device. Your friends can help you co-host the content by also keeping the share link open in their browser."
     },
@@ -27,7 +27,7 @@
       "labelKeepDaemon": "Keep your IPFS node running",
       "copyKeepPage": "You can help co-host the content by also keeping this page open in the browser. This way you are sharing the content from your device.",
       "copyKeepDaemon": "You can help co-host the content by also keeping your IPFS node running. This way you are sharing the content from your device.",
-      "labelSend": "Send the share link",
+      "labelSend": "Share the link",
       "copySend": "IPFS gives the files a unique fingerprint called a CID that is used to find them again on the network."
     },
     "learnMore": "Learn more."
