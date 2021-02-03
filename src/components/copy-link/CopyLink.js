@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import QRCode from 'qrcode.react'
 
 class CopyLink extends React.Component {
   static propTypes = {
@@ -41,6 +42,9 @@ class CopyLink extends React.Component {
               { this.state.copied ? t('copyLink.copied') : t('copyLink.copy') }
             </div>
           </CopyToClipboard>
+        </div>
+        <div className="flex justify-center">
+          <QRCode value={shareLink}/>
         </div>
       </div>
     )
