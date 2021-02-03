@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { withTranslation, Trans } from 'react-i18next'
+import { useDrop } from 'react-dnd'
+import { NativeTypes } from 'react-dnd-html5-backend'
+import classNames from 'classnames'
+import { connect } from 'redux-bundler-react'
 
 // Components
 import Loader from '../loader/Loader'
@@ -30,16 +34,34 @@ export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   </Box>
 )
 
-export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
-  <Box>
+export const RawBoxAdd = ({ files, isLoading, shareLink, doAddFiles, t }) => {
+  const [{ isOver }, drop] = useDrop({
+    accept: [NativeTypes.FILE],
+    collect: (monitor) => ({
+      isOver: monitor.isOver()
+    }),
+    drop: async ({ files }) => {
+      console.log(files)
+      if (!files) return null
+      // check: https://react-dnd.github.io/react-dnd/docs/api/use-drop
+      // this is the handler that lets you call the function `doAddFiles`
+    }
+  })
+
+  return <Box ref={drop} className={isOver && 'isOver'} >
     <AddFiles />
     { isLoading && <Loader /> }
     <FileTree files={files} />
     { shareLink && <CopyLink shareLink={shareLink} /> }
   </Box>
-)
+}
 
-export const BoxAdd = withTranslation('translation')(RawBoxAdd)
+export const BoxAdd = withTranslation('translation')(
+  connect(
+    'doAddFiles',
+    RawBoxAdd
+  )
+)
 
 export const RawBoxNotAvailable = ({ t }) => (
   <Box>
