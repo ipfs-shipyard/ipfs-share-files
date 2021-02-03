@@ -6,7 +6,7 @@ const Footer = () => {
   const anchorClass = 'no-underline aqua'
 
   return (
-    <div className='flex-ns items-center pa4 f7 white '>
+    <div className='flex-ns items-center pt5 pb3 ph4 f7 white '>
       <div>
         <a href='https://protocol.ai' target='_blank' rel='noopener noreferrer'>
           <img src={plLogoText} height='50px' alt='Protocol Labs' />
