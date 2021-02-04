@@ -24,7 +24,7 @@ function Modal ({ isOpen, title, onClose, children, ...props }) {
       <ReactModal
           isOpen={isOpen}
           style={customStyles}
-          className='sans-serif lh-copy f6 bn br3 w-80 mw7 center pa4 pt3 pr3 mh4 mv5 bg-white shadow-4 charcoal'
+          className='sans-serif lh-copy f6 bn br3 w-80 mw7 h-75 h-auto-ns center pa4 pt3 pr3 mh4 mv5 bg-white shadow-4 charcoal'
           contentLabel="Modal"
           shouldCloseOnOverlayClick={true}
           {...props}
