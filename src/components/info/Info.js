@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'redux-bundler-react'
-import { withTranslation } from 'react-i18next'
+import { withTranslation, Trans } from 'react-i18next'
 
 import Modal from '../modal/Modal'
 
@@ -67,7 +67,6 @@ class Info extends React.Component {
     const anchorClass = 'no-underline underline-hover aqua bg-transparent pointer bn pa0'
     const anchorStyle = { outline: 'none' }
     // Links
-    // TODO: convert these to open relevant modals instead of existing links. (First just using buttons to prove modals work.)
     const howLink = <button className={anchorClass} style={anchorStyle} onClick={() => this.handleOpenModalHow(true)}>{t('info.learnMore')}</button>
     const cidLink = <button className={anchorClass} style={anchorStyle} onClick={() => this.handleOpenModalCid(true)}>{t('info.learnMore')}</button>
     const reprovideLink = <button className={anchorClass} style={anchorStyle} onClick={() => this.handleOpenModalReprovide(true)}>{t('info.learnMore')}</button>
@@ -113,20 +112,24 @@ class Info extends React.Component {
           <Modal // controlled by howLink
               isOpen={this.state.showModalHow}
               onClose={this.handleCloseModalHow}
-              title="How IPFS works"
-              contentLabel="Modal describing how IPFS works"
+              title={t('modal.how.title')}
+              contentLabel={t('modal.how.ariaLabel')}
           >
-              <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
-              <p>There could be even more content!</p>
+              <p>{t('modal.how.copy')}</p>
+              <p><Trans i18nKey='modal.how.learnMore'>
+                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+              </Trans></p>
           </Modal>
           <Modal // controlled by reprovideLink
               isOpen={this.state.showModalReprovide}
               onClose={this.handleCloseModalReprovide}
-              title="Reproviding is kind" // pulls in as an H1, this is optional
-              contentLabel="Modal describing reproviding" // this gets turned into an aria-label
+              title={t('modal.reprovide.title')}
+              contentLabel={t('modal.reprovide.ariaLabel')}
           >
-              <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
-              <p>You could use Tachyons or classes to style these elements, importing the CSS into this file. To affect styling of ALL instances of the modal container and not its elements, do it in the Modal component.</p>
+              <p>{t('modal.reprovide.copy')}</p>
+              <p><Trans i18nKey='modal.reprovide.learnMore'>
+                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+              </Trans></p>
           </Modal>
         </div>
       )
@@ -181,20 +184,24 @@ class Info extends React.Component {
           <Modal // controlled by privacyLink
               isOpen={this.state.showModalPrivacy}
               onClose={this.handleCloseModalPrivacy}
-              title="Privacy + file sharing"
-              contentLabel="Modal describing privacy" // this gets turned into an aria-label
+              title={t('modal.privacy.title')}
+              contentLabel={t('modal.privacy.ariaLabel')}
           >
-              <p>IPFS is a public, peer-to-peer network, which means that when you share content over IPFS, you're enabling anyone with the content identifier to retrieve it. This means you should avoid sharing copyrighted material or sensitive material.</p>
-              <p>Learn more of the details about IPFS and privacy in the <a href="https://docs.ipfs.io" target="blank" className="no-underline underline-hover teal" rel="noopener noreferrer">official IPFS documentation</a>.</p>
+              <p>{t('modal.privacy.copy')}</p>
+              <p><Trans i18nKey='modal.privacy.learnMore'>
+                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+              </Trans></p>
           </Modal>
           <Modal // controlled by cidLink
               isOpen={this.state.showModalCid}
               onClose={this.handleCloseModalCid}
-              title="What's a CID?"
-              contentLabel="Modal describing CIDs" // this gets turned into an aria-label
+              title={t('modal.cid.title')}
+              contentLabel={t('modal.cid.ariaLabel')}
           >
-              <p>A <em>content identifier</em>, or CID, is the special sauce that makes IPFS tick. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content the sender intended.</p>
-              <p>Want to dig deeper and learn more about content addressing? Check out these resources in the <a href="https://docs.ipfs.io" target="blank" className="no-underline underline-hover teal" rel="noopener noreferrer">official IPFS documentation</a>.</p>
+              <p>{t('modal.cid.copy')}</p>
+              <p><Trans i18nKey='modal.cid.learnMore'>
+                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+              </Trans></p>
           </Modal>
         </div>
       </div>
