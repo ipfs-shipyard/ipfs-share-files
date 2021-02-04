@@ -9,7 +9,7 @@
 
 ## Lead Maintainer
 
-[Diogo Silva](https://github.com/fsdiogo)
+No DRI, best-effort support provided by [IPFS GUI Team](https://github.com/ipfs/ipfs-gui)
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@
 
 The `IPFS Share Files` is a **work-in-progress**. It is part of the wider [IPFS GUI](https://github.com/ipfs-shipyard/ipfs-gui) project.
 
-The app uses [ipfs-redux-bundle](https://github.com/ipfs-shipyard/ipfs-redux-bundle) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
+The app uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
 
 This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/template/README.md#table-of-contents).
 
