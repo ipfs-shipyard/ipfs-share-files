@@ -4,7 +4,15 @@ import ReactModal from 'react-modal'
 // these styles will apply to all modals created using this component
 const customStyles = {
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.25)'
+    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+  },
+  content: {
+    position: 'relative',
+    top: '40%',
+    transform: 'translateY(-60%)',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    outline: 'none'
   }
 }
 
@@ -16,7 +24,7 @@ function Modal ({ isOpen, title, onClose, children, ...props }) {
       <ReactModal
           isOpen={isOpen}
           style={customStyles}
-          className='sans-serif f6 bn br3 w-80 mw7 center pa4 pt3 pr3 ma4 bg-white charcoal'
+          className='sans-serif f6 bn br3 w-80 mw7 center pa4 pt3 pr3 mh4 mv5 bg-white shadow-4 charcoal'
           contentLabel="Modal"
           {...props}
       >
