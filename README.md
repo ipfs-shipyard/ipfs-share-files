@@ -102,6 +102,8 @@ To build the app for production to the `build` folder:
 
 We use CI for automatic deployments. When a branch gets merged to `main`, it's deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io). When merged to `production`, it goes to [share.ipfs.io](https://share.ipfs.io).
 
+One can create a PR  from `main` to `production` [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
+
 ## Translations
 
 We use [Transifex](https://www.transifex.com/) to help us translate IPFS Share Files. The translations are stored on [`public/locales`](./public/locales) and the English version is the source of truth.
