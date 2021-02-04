@@ -16,17 +16,22 @@ function Modal ({ isOpen, title, onClose, children, ...props }) {
       <ReactModal
           isOpen={isOpen}
           style={customStyles}
-          className='sans-serif f6 bn br3 w-80 mw7 center pa4 ma4 bg-white charcoal'
+          className='sans-serif f6 bn br3 w-80 mw7 center pa4 pt3 pr3 ma4 bg-white charcoal'
           contentLabel="Modal"
           {...props}
       >
+          <div className="tr">
           <button // could be changed to an X if we prefer
             onClick={onClose}
+            className='bn bg-transparent ma0 pa0'
           >
-          Close
+            <svg width="18" className='fill-gray' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.88 97.88"><path d="M98.94,85l-14,14L50,64,15,98.94l-14-14L36,50,1.06,15l14-14L50,36,85,1.06l14,14L64,50Z" transform="translate(-1.06 -1.06)"/></svg>
           </button>
-          { title ? <h2 className='f3 fw4 mt0 montserrat'>{title}</h2> : null }
-          { children }
+          </div>
+          { title ? <h2 className='f3 fw4 mt0 montserrat pr4'>{title}</h2> : null }
+          <div className='pr3'>
+            { children }
+          </div>
       </ReactModal>
   )
 }
