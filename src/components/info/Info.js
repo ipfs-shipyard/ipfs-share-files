@@ -117,7 +117,7 @@ class Info extends React.Component {
           >
               <p>{t('modal.how.copy')}</p>
               <p><Trans i18nKey='modal.how.learnMore'>
-                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+                Learn more about IPFS and how it's changing the internet by visiting the <a className='link aqua underline-hover' href='https://ipfs.io' target='_blank' rel='noopener noreferrer'>IPFS website</a>.
               </Trans></p>
           </Modal>
           <Modal // controlled by reprovideLink
@@ -128,7 +128,7 @@ class Info extends React.Component {
           >
               <p>{t('modal.reprovide.copy')}</p>
               <p><Trans i18nKey='modal.reprovide.learnMore'>
-                Learn more in the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
+              Curious how this works under the hood? Check out the <a className='link aqua underline-hover' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a> for everything from basic explainers to developer tools.
               </Trans></p>
           </Modal>
         </div>

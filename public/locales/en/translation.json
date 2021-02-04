@@ -42,13 +42,13 @@
       "title": "How IPFS Share works",
       "ariaLabel": "Modal explaining how IPFS Share works",
       "copy": "Here is how IPFS works.",
-      "learnMore": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:"
+      "learnMore": "Learn more about IPFS and how it's changing the internet by visiting the  <1>IPFS website</1>."
     },
       "reprovide": {
-      "title": "Reproviding is kind",
+      "title": "Re-sharing files you've received",
       "ariaLabel": "Modal explaining how to share these files with someone else",
-      "copy": "Learn about reproviding.",
-      "learnMore": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:"
+      "copy": "It's easy to share these files with someone else by making your device part of the IPFS network. All you need to do is keep this page open; by doing so, your device becomes a node on the network and makes those files available directly to others. Then, share the link that you received — and be sure to keep this page open until you know your recipient has downloaded the files.",
+      "learnMore": "Curious how this works under the hood? Check out the <1>official IPFS documentation</1> for everything from basic explainers to developer tools."
     },
     "privacy": {
       "title": "Privacy + file sharing",

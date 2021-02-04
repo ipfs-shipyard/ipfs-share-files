@@ -36,7 +36,7 @@ function Modal ({ isOpen, title, onClose, children, ...props }) {
             <svg width="18" className='fill-gray' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.88 97.88"><path d="M98.94,85l-14,14L50,64,15,98.94l-14-14L36,50,1.06,15l14-14L50,36,85,1.06l14,14L64,50Z" transform="translate(-1.06 -1.06)"/></svg>
           </button>
           </div>
-          { title ? <h2 className='f3 fw4 mt0 montserrat pr4'>{title}</h2> : null }
+          { title ? <h2 className='f3 fw4 mt0 montserrat lh-title pr4'>{title}</h2> : null }
           <div className='pr3'>
             { children }
           </div>
