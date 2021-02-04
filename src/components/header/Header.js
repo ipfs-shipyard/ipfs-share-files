@@ -5,7 +5,7 @@ import { localesList } from '../../i18n'
 import i18n from 'i18next'
 import Dropdown from '../dropdown/Dropdown'
 
-import LanguageIcon from '../../media/icons/Language'
+import LanguagePicker from '../../media/images/Language'
 
 const Header = ({ t }) => {
   const defaultLanguage = window.localStorage.getItem('i18nextLng')?.split('-')[0]
@@ -26,7 +26,7 @@ const Header = ({ t }) => {
       <div className='ml2 pb2 f2 fw1 aqua montserrat'>{t('header')}</div>
     </div>
 
-    <Dropdown options={localesList} Icon={LanguageIcon} onChange={onLocaleChange} selectedOption={selectedLanguage}/>
+    <Dropdown options={localesList} Icon={LanguagePicker} onChange={onLocaleChange} selectedOption={selectedLanguage}/>
   </div>
 }
 
