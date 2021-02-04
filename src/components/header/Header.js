@@ -8,7 +8,7 @@ import Dropdown from '../dropdown/Dropdown'
 import LanguageIcon from '../../media/icons/Language'
 
 const Header = ({ t }) => {
-  const defaultLanguage = window.localStorage.getItem('i18nextLng').split('-')[0]
+  const defaultLanguage = window.localStorage.getItem('i18nextLng')?.split('-')[0]
   const [selectedLanguage, setLanguage] = useState(defaultLanguage)
 
   const onLocaleChange = (locale) => {

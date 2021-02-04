@@ -35,7 +35,6 @@ const Dropdown = ({ className, options, Icon, t, onChange, selectedOption }) => 
 }
 
 Dropdown.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
   Icon: PropTypes.element
 }
 

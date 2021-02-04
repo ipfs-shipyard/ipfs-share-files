@@ -11,6 +11,7 @@ const localeData = [en, pt]
 
 export const localesList = [
   { value: 'en', name: 'English' },
+  { value: 'fr', name: 'French' },
   { value: 'pt', name: 'Portuguese' }
 ]
 
