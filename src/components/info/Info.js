@@ -184,17 +184,17 @@ class Info extends React.Component {
               title="Privacy + file sharing"
               contentLabel="Modal describing privacy" // this gets turned into an aria-label
           >
-              <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
-              <p>You could use Tachyons or classes to style these elements, importing the CSS into this file. To affect styling of ALL instances of the modal container and not its elements, do it in the Modal component.</p>
+              <p>IPFS is a public, peer-to-peer network, which means that when you share content over IPFS, you're enabling anyone with the content identifier to retrieve it. This means you should avoid sharing copyrighted material or sensitive material.</p>
+              <p>Learn more of the details about IPFS and privacy in the <a href="https://docs.ipfs.io" target="blank" className="no-underline underline-hover teal" rel="noopener noreferrer">official IPFS documentation</a>.</p>
           </Modal>
           <Modal // controlled by cidLink
               isOpen={this.state.showModalCid}
               onClose={this.handleCloseModalCid}
-              title="CIDs are awesome!"
+              title="What's a CID?"
               contentLabel="Modal describing CIDs" // this gets turned into an aria-label
           >
-              <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
-              <p>You could use Tachyons or classes to style these elements, importing the CSS into this file. To affect styling of ALL instances of the modal container and not its elements, do it in the Modal component.</p>
+              <p>A <em>content identifier</em>, or CID, is the special sauce that makes IPFS tick. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content the sender intended.</p>
+              <p>Want to dig deeper and learn more about content addressing? Check out these resources in the <a href="https://docs.ipfs.io" target="blank" className="no-underline underline-hover teal" rel="noopener noreferrer">official IPFS documentation</a>.</p>
           </Modal>
         </div>
       </div>
