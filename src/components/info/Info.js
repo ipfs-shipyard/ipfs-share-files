@@ -112,6 +112,7 @@ class Info extends React.Component {
           <Modal // controlled by howLink
               isOpen={this.state.showModalHow}
               onClose={this.handleCloseModalHow}
+              onRequestClose={this.handleCloseModalHow}
               title={t('modal.how.title')}
               contentLabel={t('modal.how.ariaLabel')}
           >
@@ -123,6 +124,7 @@ class Info extends React.Component {
           <Modal // controlled by reprovideLink
               isOpen={this.state.showModalReprovide}
               onClose={this.handleCloseModalReprovide}
+              onRequestClose={this.handleCloseModalReprovide}
               title={t('modal.reprovide.title')}
               contentLabel={t('modal.reprovide.ariaLabel')}
           >
@@ -184,6 +186,7 @@ class Info extends React.Component {
           <Modal // controlled by privacyLink
               isOpen={this.state.showModalPrivacy}
               onClose={this.handleCloseModalPrivacy}
+              onRequestClose={this.handleCloseModalPrivacy}
               title={t('modal.privacy.title')}
               contentLabel={t('modal.privacy.ariaLabel')}
           >
@@ -195,6 +198,7 @@ class Info extends React.Component {
           <Modal // controlled by cidLink
               isOpen={this.state.showModalCid}
               onClose={this.handleCloseModalCid}
+              onRequestClose={this.handleCloseModalCid}
               title={t('modal.cid.title')}
               contentLabel={t('modal.cid.ariaLabel')}
           >
