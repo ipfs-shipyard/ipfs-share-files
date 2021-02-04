@@ -118,7 +118,7 @@ class Info extends React.Component {
           >
               <p>{t('modal.how.copy')}</p>
               <p><Trans i18nKey='modal.how.learnMore'>
-                Learn more about IPFS and how it's changing the internet by visiting the <a className='no-underline underline-hover teal' href='https://ipfs.io' target='_blank' rel='noopener noreferrer'>IPFS website</a>.
+                Learn how IPFS is changing the internet by visiting the <a className='no-underline underline-hover teal' href='https://ipfs.io' target='_blank' rel='noopener noreferrer'>IPFS website</a>. Curious about how content addressing works? Visit <a className='no-underline underline-hover teal' href='https://proto.school/content-addressing' target='_blank' rel='noopener noreferrer'>ProtoSchool</a> for tutorials and other resources.
               </Trans></p>
           </Modal>
           <Modal // controlled by reprovideLink
