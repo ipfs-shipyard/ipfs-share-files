@@ -64,7 +64,7 @@ class Info extends React.Component {
     const iconContainerClass = 'mr3 fill-aqua'
     const labelClass = 'f4 fw1 mb2 ml1 white montserrat'
     const descriptionClass = 'f6 ml1 gray-muted lh-copy'
-    const anchorClass = 'no-underline underline-hover aqua'
+    const anchorClass = 'no-underline underline-hover aqua bg-transparent bn pa0'
     const anchorStyle = { outline: 'none' }
     // Links
     // TODO: convert these to open relevant modals instead of existing links. (First just using buttons to prove modals work.)
@@ -113,8 +113,8 @@ class Info extends React.Component {
           <Modal // controlled by howLink
               isOpen={this.state.showModalHow}
               onClose={this.handleCloseModalHow}
-              title="How IPFS Works" // pulls in as an H1, this is optional
-              contentLabel="Modal describing how IPFS works" // this gets turned into an aria-label
+              title="How IPFS works"
+              contentLabel="Modal describing how IPFS works"
           >
               <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
               <p>There could be even more content!</p>
@@ -181,7 +181,7 @@ class Info extends React.Component {
           <Modal // controlled by privacyLink
               isOpen={this.state.showModalPrivacy}
               onClose={this.handleCloseModalPrivacy}
-              title="Ssssshhh, don't share secrets" // pulls in as an H1, this is optional
+              title="Privacy + file sharing"
               contentLabel="Modal describing privacy" // this gets turned into an aria-label
           >
               <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
@@ -190,7 +190,7 @@ class Info extends React.Component {
           <Modal // controlled by cidLink
               isOpen={this.state.showModalCid}
               onClose={this.handleCloseModalCid}
-              title="CIDs are awesome!" // pulls in as an H1, this is optional
+              title="CIDs are awesome!"
               contentLabel="Modal describing CIDs" // this gets turned into an aria-label
           >
               <p>This is the content of a modal. You can use any HTML elements in here, which will be passed to the `Modal` component as `children`.</p>
