@@ -52,5 +52,8 @@
     "download": "Download",
     "downloadAll": "Download all",
     "downloading": "Downloading…"
+  },
+  "dropdown": {
+    "clickLabel": "Click here to open the dropdown"
   }
 }

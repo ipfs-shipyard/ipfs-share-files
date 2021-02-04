@@ -7,9 +7,16 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import en from 'i18next-icu/locale-data/en'
 import pt from 'i18next-icu/locale-data/pt'
 
+const localeData = [en, pt]
+
+export const localesList = [
+  { value: 'en', name: 'English' },
+  { value: 'pt', name: 'Portuguese' }
+]
+
 i18n
   .use(new ICU({
-    localeData: [en, pt]
+    localeData
   }))
   .use(XHR)
   .use(LanguageDetector)
