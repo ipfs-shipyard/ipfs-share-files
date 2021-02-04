@@ -59,7 +59,7 @@
     "cid": {
       "title": "What's a CID?",
       "ariaLabel": "Modal describing content identifiers",
-      "copy": "Content identifiers (CIDs) are cryptographically generated fingerprints that allow IPFS to find and deliver files. Because IPFS identifies files by what they contain, not where they're located, a CID points not only to a particular file, but also a specific version — if the file is modified, the CID changes too. You can see a file's CID by looking in its share link for the long string of characters starting with \"bafy\".",
+      "copy": "Content identifiers (CIDs) are cryptographically generated fingerprints that allow IPFS to find and deliver files. Because IPFS identifies files by what they contain, not where they're located, a CID points not only to a particular file, but also a specific version — if the file is modified, the CID changes too. When you share a file using IPFS Share, you can see its CID by looking in the share link for the long string of characters starting with \"bafy\".",
       "learnMore": "Want to dig deeper into how content identifiers work? Visit <1>ProtoSchool</1> for tutorials and other resources on the decentralized web tech that makes IPFS tick."
     }
   },
