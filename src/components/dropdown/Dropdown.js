@@ -19,12 +19,12 @@ const Dropdown = ({ className, options, Icon, t, onChange, selectedOption }) => 
 
   return <div className={classNames('relative dib', className)}>
       <button className="pointer unstyled-button" onClick={handleIconClick}>
-        { Icon && <Icon width="50" className="fill-white" aria-label={t('dropdown.clickLabel')} /> }
+        { Icon && <Icon width="26" className="fill-white" aria-label={t('dropdown.clickLabel')} /> }
       </button>
       {isOpen && (
-      <div className="absolute right-0 pa2 bg-white" role="menu" style={{ top: '100%' }}>
+      <div className="absolute right-0 pa2 bg-white" role="menu" style={{ bottom: '100%' }}>
         { options.map((option, index) =>
-            <button className="unstyled-button pointer w-100 db pa2 f4 tl flex items-center" key={option.name} role="menuitem" onClick={() => onChange?.(option.value)}>
+            <button className="unstyled-button pointer w-100 db pa2 f6 charcoal tl flex items-center" key={option.name} role="menuitem" onClick={() => onChange?.(option.value)}>
                 <div className={classNames('dropdown-item-indicator mr3', selectedOptionIndex === index && 'active')}/>
                 {option.name}
             </button>
