@@ -3,13 +3,8 @@ import ReactModal from 'react-modal'
 
 // these styles will apply to all modals created using this component
 const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.25)'
   }
 }
 
@@ -21,16 +16,17 @@ function Modal ({ isOpen, title, onClose, children, ...props }) {
       <ReactModal
           isOpen={isOpen}
           style={customStyles}
+          className='sans-serif f6 bn br3 w-80 mw7 center pa4 ma4 bg-white charcoal'
           contentLabel="Modal"
           {...props}
       >
-          { title ? <h2>{title}</h2> : null }
-          { children }
           <button // could be changed to an X if we prefer
             onClick={onClose}
           >
           Close
           </button>
+          { title ? <h2 className='f3 fw4 mt0 montserrat'>{title}</h2> : null }
+          { children }
       </ReactModal>
   )
 }
