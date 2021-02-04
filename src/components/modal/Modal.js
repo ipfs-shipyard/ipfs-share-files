@@ -17,30 +17,20 @@ const customStyles = {
 ReactModal.setAppElement('#root')
 
 function Modal ({ isOpen, title, onClose, children, ...props }) {
-  // function openModal () {
-  //   setIsOpen(true)
-  // }
-  //
-  // function afterOpenModal () {
-  //   // references are now sync'd and can be accessed.
-  //   subtitle.style.color = '#f00'
-  // }
-  //
-  // function closeModal () {
-  //   setIsOpen(false)
-  // }
-
   return (
       <ReactModal
           isOpen={isOpen}
-          // onAfterOpen={afterOpenModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Modal"
           {...props}
       >
           { title ? <h2>{title}</h2> : null }
           { children }
-          <button onClick={onClose}>close</button> //could be changed to an X if we prefer
+          <button // could be changed to an X if we prefer
+            onClick={onClose}
+          >
+          Close
+          </button>
       </ReactModal>
   )
 }
