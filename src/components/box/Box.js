@@ -41,8 +41,9 @@ export const RawBoxAdd = ({ files, isLoading, shareLink, doAddFiles, t }) => {
       isOver: monitor.isOver()
     }),
     drop: async ({ files }) => {
-      console.log(files)
       if (!files) return null
+      // still can't tell a dir from a file on the web web in 2021 XD  https://stackoverflow.com/a/25095250/11518426
+      files = files.filter(f => !(!f.type && f.size % 4096 === 0))
       // check: https://react-dnd.github.io/react-dnd/docs/api/use-drop
       // this is the handler that lets you call the function `doAddFiles`
       doAddFiles(files)
