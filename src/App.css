@@ -35,3 +35,14 @@
 .link:hover::after {
   opacity: 1;
 }
+
+.unstyled-button {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.unstyled-button:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.2);
+}
