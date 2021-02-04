@@ -41,7 +41,7 @@
     "how": {
       "title": "How IPFS Share works",
       "ariaLabel": "Modal explaining how IPFS Share works",
-      "copy": "Here is how IPFS works.",
+      "copy": "IPFS Share is a simple, free way to share files without needing to rely on services run by big corporations. Instead, it uses the peer-to-peer IPFS protocol for sharing directly between devices. IPFS is built around content addressing — keeping track of files based on what they contain, not where they're located — which means that files can't be modified without changing their addresses too. In other words, when you download a file using IPFS, you can be sure that it's exactly the same as the sender intended.",
       "learnMore": "Learn more about IPFS and how it's changing the internet by visiting the  <1>IPFS website</1>."
     },
       "reprovide": {
