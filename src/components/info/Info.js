@@ -64,7 +64,7 @@ class Info extends React.Component {
     const iconContainerClass = 'mr3 fill-aqua'
     const labelClass = 'f4 fw1 mb2 ml1 white montserrat'
     const descriptionClass = 'f6 ml1 gray-muted lh-copy'
-    const anchorClass = 'no-underline underline-hover aqua bg-transparent bn pa0'
+    const anchorClass = 'no-underline underline-hover aqua bg-transparent pointer bn pa0'
     const anchorStyle = { outline: 'none' }
     // Links
     // TODO: convert these to open relevant modals instead of existing links. (First just using buttons to prove modals work.)
