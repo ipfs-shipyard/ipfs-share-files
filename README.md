@@ -9,7 +9,7 @@
 
 ## Lead Maintainer
 
-[Diogo Silva](https://github.com/fsdiogo)
+No DRI, best-effort support provided by [IPFS GUI Team](https://github.com/ipfs/ipfs-gui)
 
 ## Table of Contents
 
@@ -24,9 +24,9 @@
 
 The `IPFS Share Files` is a **work-in-progress**. It is part of the wider [IPFS GUI](https://github.com/ipfs-shipyard/ipfs-gui) project.
 
-The app uses [ipfs-redux-bundle](https://github.com/ipfs-shipyard/ipfs-redux-bundle) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
+The app uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
 
-This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents).
+This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/template/README.md#table-of-contents).
 
 ## Install
 
@@ -100,7 +100,9 @@ To build the app for production to the `build` folder:
 
 ### Deploy
 
-We use CI for automatic deployments. When a branch gets merged to `master`, it's deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io). When merged to `production`, it goes to [share.ipfs.io](https://share.ipfs.io).
+We use CI for automatic deployments. When a branch gets merged to `main`, it's deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io). When merged to `production`, it goes to [share.ipfs.io](https://share.ipfs.io).
+
+One can create a PR  from `main` to `production` [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
 
 ## Translations
 
@@ -120,7 +122,7 @@ If want to contribute, go to the [project page on Transifex](https://www.transif
 1. Make sure you have the latest files from Transifex with `tx pull -a`
 2. Only change the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
 3. Commit your changes
-    - changes from the master branch are fetched by Transifex automatically
+    - changes from the `main` branch are fetched by Transifex automatically
 
 
 For more info on our i18n process at IPFS, check out [ipfs/i18n](https://github.com/ipfs/i18n).
