@@ -7,13 +7,14 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import en from 'i18next-icu/locale-data/en'
 import pt from 'i18next-icu/locale-data/pt'
 
+import locales from './lib/languages.json'
+
 const localeData = [en, pt]
 
-export const localesList = [
-  { value: 'en', name: 'English' },
-  { value: 'fr', name: 'French' },
-  { value: 'pt', name: 'Portuguese' }
-]
+export const localesList = Object.values(locales).map(locale => ({
+  value: locale.locale,
+  name: locale.nativeName
+}))
 
 i18n
   .use(new ICU({
