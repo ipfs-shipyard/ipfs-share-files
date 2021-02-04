@@ -51,16 +51,16 @@
       "learnMore": "Curious how this works under the hood? Check out the <1>official IPFS documentation</1> for everything from basic explainers to developer tools."
     },
     "privacy": {
-      "title": "Privacy + file sharing",
-      "ariaLabel": "Modal describing privacy and sharing on IPFS",
-      "copy": "IPFS is a public, peer-to-peer network, which means that when you share content over IPFS, you're enabling anyone with the content identifier to retrieve it. This means you should avoid sharing copyrighted material or sensitive material.",
-      "learnMore": "Learn more of the details about IPFS and privacy in the <1>official IPFS documentation</1>."
+      "title": "Sharing files on IPFS",
+      "ariaLabel": "Modal describing sharing and privacy on IPFS",
+      "copy": "This site uses IPFS, a peer-to-peer protocol for storing and serving data directly between users without relying on cloud storage or other services run by big corporations. Because IPFS is a public network, when you share content using IPFS Share, you're enabling anyone who knows the unique CID in your share link to retrieve it. This means you should avoid sharing sensitive files or copyrighted material.",
+      "learnMore": "Want to learn more about IPFS? Visit the <1>website</1> for the basics, or dig into the details of IPFS and privacy in the <3>official documentation</3>."
     },
     "cid": {
       "title": "What's a CID?",
       "ariaLabel": "Modal describing content identifiers",
-      "copy": "A <em>content identifier</em>, or CID, is the special sauce that makes IPFS tick. And because files on IPFS are identified by what they contain, not where they're located, you can be sure what you download is the same content the sender intended.",
-      "learnMore": "Want to dig deeper and learn more about content addressing? Check out these resources in the <1>official IPFS documentation</1>."
+      "copy": "Content identifiers (CIDs) are cryptographically generated fingerprints that allow IPFS to find and deliver files. Because IPFS identifies files by what they contain, not where they're located, a CID points not only to a particular file, but also a specific version — if the file is modified, the CID changes too. You can see a file's CID by looking in its share link for the long string of characters starting with \"bafy\".",
+      "learnMore": "Want to dig deeper into how content identifiers work? Visit <1>ProtoSchool</1> for tutorials and other resources on the decentralized web tech that makes IPFS tick."
     }
   },
   "addFiles": "Add files",
