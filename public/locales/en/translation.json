@@ -53,7 +53,7 @@
     "privacy": {
       "title": "Sharing files on IPFS",
       "ariaLabel": "Modal describing sharing and privacy on IPFS",
-      "copy": "This site uses IPFS, a peer-to-peer protocol for storing and serving data directly between users without relying on cloud storage or other services run by big corporations. Because IPFS is a public network, when you share content using IPFS Share, you're enabling anyone who knows the unique CID in your share link to retrieve it. This means you should avoid sharing sensitive files or copyrighted material.",
+      "copy": "This site uses IPFS, a peer-to-peer protocol for storing and sharing data directly between users without relying on cloud storage or other services run by big corporations. Because IPFS is a public network, when you share content using IPFS Share, you're enabling anyone who knows the unique CID in your share link to retrieve it. This means you should avoid sharing sensitive files or copyrighted material.",
       "learnMore": "Want to learn more about IPFS? Visit the <1>website</1> for the basics, or dig into the details of IPFS and privacy in the <3>official documentation</3>."
     },
     "cid": {
