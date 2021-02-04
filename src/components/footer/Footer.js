@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withTranslation, Trans } from 'react-i18next'
-import plLogoText from '../../media/logos/protocol-labs-text.svg'
+import { localesList } from '../../i18n'
+import i18n from 'i18next'
+import Dropdown from '../dropdown/Dropdown'
 
-const Footer = () => {
+import plLogoText from '../../media/logos/protocol-labs-text.svg'
+import LanguagePicker from '../../media/images/Language'
+
+const Footer = ({ t }) => {
   const anchorClass = 'no-underline underline-hover aqua'
+  const defaultLanguage = window.localStorage.getItem('i18nextLng')?.split('-')[0]
+  const [selectedLanguage, setLanguage] = useState(defaultLanguage)
+
+  const onLocaleChange = (locale) => {
+    window.localStorage.setItem('i18nextLng', locale)
+    setLanguage(locale)
+    i18n.changeLanguage(locale)
+  }
 
   return (
     <div className='flex-ns items-center pt5 pb3 ph4 f7 white '>
@@ -32,6 +45,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      <Dropdown options={localesList} Icon={LanguagePicker} onChange={onLocaleChange} selectedOption={selectedLanguage}/>
     </div>
   )
 }
