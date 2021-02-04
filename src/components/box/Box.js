@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react'
 import { withTranslation, Trans } from 'react-i18next'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import classNames from 'classnames'
 import { connect } from 'redux-bundler-react'
+import classNames from 'classnames'
 
 // Components
 import Loader from '../loader/Loader'
@@ -12,11 +12,11 @@ import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link/CopyLink'
 import DownloadFiles from '../download-files/DownloadFiles'
 
-export const Box = ({ children }) => (
-  <div className='center ml0-l mb4 mt2-l mb0-l pa4 pb3 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
+export const Box = forwardRef(({ children, className }, ref) => (
+  <div ref={ref} className={classNames('center ml0-l mb4 mt2-l mb0-l pa4 pb3 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white', className)}>
     { children }
   </div>
-)
+))
 
 export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   <Box>
@@ -45,10 +45,11 @@ export const RawBoxAdd = ({ files, isLoading, shareLink, doAddFiles, t }) => {
       if (!files) return null
       // check: https://react-dnd.github.io/react-dnd/docs/api/use-drop
       // this is the handler that lets you call the function `doAddFiles`
+      doAddFiles(files)
     }
   })
 
-  return <Box ref={drop} className={isOver && 'isOver'} >
+  return <Box ref={drop} className={isOver && 'bg-gray-muted'} >
     <AddFiles />
     { isLoading && <Loader /> }
     <FileTree files={files} />
