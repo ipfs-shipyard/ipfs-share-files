@@ -22,11 +22,11 @@ const Dropdown = ({ className, options, Icon, t, onChange, selectedOption }) => 
         { Icon && <Icon width="26" className="fill-white" aria-label={t('dropdown.clickLabel')} /> }
       </button>
       {isOpen && (
-      <div className="absolute right-0 pa2 bg-white" role="menu" style={{ bottom: '100%' }}>
+      <div className="absolute left-0 mb1 pa2 bg-white" role="menu" style={{ bottom: '100%' }}>
         { options.map((option, index) =>
             <button className="unstyled-button pointer w-100 db pa2 f6 charcoal tl flex items-center" key={option.name} role="menuitem" onClick={() => onChange?.(option.value)}>
-                <div className={classNames('dropdown-item-indicator mr3', selectedOptionIndex === index && 'active')}/>
-                {option.name}
+                <div className={classNames('dropdown-item-indicator mr2', selectedOptionIndex === index && 'active')}/>
+                <span className='ml1'>{option.name}</span>
             </button>
         )}
       </div>

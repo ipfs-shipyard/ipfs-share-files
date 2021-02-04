@@ -1,5 +1,5 @@
 :root {
-    --dropdown-size: 14px;
+    --dropdown-size: 10px;
     --dropdown-distance: 4px;
 }
 
@@ -19,13 +19,13 @@
     height: calc(var(--dropdown-size) + var(--dropdown-distance));
     border-radius: 50%;
  
-    border: 2px solid lightgray;
+    border: 2px solid #d9dbe2;
 }
 
 .dropdown-item-indicator.active {
-    background-color: teal;
+    background-color: #378085;
 }
 
 .dropdown-item-indicator.active::after {
-    border-color: teal
+    border-color: #378085
 }
