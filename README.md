@@ -1,6 +1,8 @@
 # IPFS Share
 
-![Screenshot of IPFS Share](./public/share.png)
+| Sender view  | Recipient view |
+| ------------- | ------------- |
+| ![Screenshot of IPFS Share sender view](https://gateway.ipfs.io/ipfs/QmPFxiRfnxucPbW9bXVKRPTn6ZvaDATjy4c3aPtmBHuGeJ)  | ![Screenshot of IPFS Share recipient view](https://gateway.ipfs.io/ipfs/QmYcitvEc1xsJDMQr7UpKfcYWddR6ocboBbVesp6Gp8cBo)  |
 
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg)](https://protocol.ai/) [![](https://img.shields.io/badge/project-IPFS-blue.svg)](http://ipfs.io/) [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg)](http://webchat.freenode.net/?channels=%23ipfs)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-blue.svg)](http://standardjs.com/)
@@ -25,14 +27,26 @@ Best-effort support provided by the [IPFS GUI Team](https://github.com/ipfs/ipfs
 
 ### Features
 
+- Share and receive files using IPFS without needing to install a local node
+- Upload or drag-and-drop individual files or entire directories
+- For multiple-file uploads, generate share/download links for individual files or a single all-in-one link (downloads as a .tar file)
+- Preview files in-browser (browser-supported formats only) before sharing or downloading
+- Generates a QR code for share links for easy distribution
+- Supports browser-specified language or manual choice of language via menu
+- 100% mobile-friendly
 - Supports installation as a mobile shortcut or desktop standalone app
+- Includes brief explainers on how IPFS Share works, with links to more details for the curious
 
 ### How it works
-The app uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
+IPFS Share uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. If no provider is available (for example, if you're using IPFS Share on your phone), an instance of `js-ipfs` is created.
 
-This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/template/README.md#table-of-contents).
+The app itself is built using [`create-react-app`](https://github.com/facebook/create-react-app), so if you're comfortable building ordinary React web apps, you'll feel right at home in this codebase. Not familiar with React or `create-react-app`? There are extensive [docs](https://create-react-app.dev/docs/getting-started/) available. Visual styling is handled through [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
 
-## Install
+## For developers
+
+It's easy to get a local copy of IPFS Share up and running, even if you don't have a local IPFS node installed.
+
+### Installation
 
 With `node@8.12` and `npm@6.4.1` or greater installed, run:
 
@@ -40,25 +54,26 @@ With `node@8.12` and `npm@6.4.1` or greater installed, run:
 > npm install
 ```
 
-## Usage
+### Usage
 
-To run the app in development mode:
+To run IPFS Share in development mode:
 
 ```sh
-> npm run start
-# Go to http://localhost:3000
+> npm start
+# You can now view ipfs-share-files in the browser.
+# Local: http://localhost:3000
 ```
 
-Optionally you may have a local IPFS daemon running:
+### Using with a local IPFS node
+
+If you have a local IPFS node, you may also want to run it simultaneously. Use [IPFS Desktop](https://github.com/ipfs-shipyard/ipfs-desktop) or start a daemon in the terminal:
 
 ```sh
 > ipfs daemon
 # API server listening on /ip4/127.0.0.1/tcp/5001
 ```
 
-### IPFS Daemon
-
-You must configure your IPFS API to allow [cross-origin (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests from you development server and the [share.ipfs.io](https://share.ipfs.io) domain.
+If you are running a local node, you must configure your IPFS API to allow [cross-origin (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests from you development server and the [share.ipfs.io](https://share.ipfs.io) domain.
 
 You can either run the [cors-config.sh](./cors-config.sh) script:
 
@@ -73,64 +88,68 @@ Or do it manually:
 > ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'
 ```
 
-To reset the config to its default state run:
+To reset the config to its default state, run:
 
 ```sh
 > ipfs config --json API.HTTPHeaders {}
 ```
 
-### Lint
+### Linting
 
-To validate the code using [StandardJS](https://standardjs.com/) run:
+To validate the code using [StandardJS](https://standardjs.com/), run:
 
 ```sh
 > npm run lint
 ```
 
-### Build
+This is highly recommended to avoid automated CI failures when submitting a pull request to this repo.
 
-To build the app for production to the `build` folder:
+### Building
+
+To build IPFS Share for production to the `build` folder:
 
 ```sh
 > npm run build
 ```
 
-### Deploy
+### Deployment
 
-We use CI for automatic deployments. When a branch gets merged to `main`, it's deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io). When merged to `production`, it goes to [share.ipfs.io](https://share.ipfs.io).
+We use CI for automatic deployments when merged to the following branches:
+- Branch `main` is automatically deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io)
+- Branch `production` is automatically deployed to [share.ipfs.io](https://share.ipfs.io).
 
-One can create a PR  from `main` to `production` [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
+If you just want to PR `main` to `production` for go-live, there's a handy shortcut for that [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
+
+Note that it's always a good idea to clear one's caches when double-checking a successful deployment.
 
 ## Translations
 
-We use [Transifex](https://www.transifex.com/) to help us translate IPFS Share Files. The translations are stored on [`public/locales`](./public/locales) and the English version is the source of truth.
+The entire IPFS project, including IPFS Share, uses [Transifex](https://www.transifex.com/) to help us source and manage translations. We very much welcome your contributions! Simply go to the [project page on Transifex](https://www.transifex.com/ipfs/ipfs-share-files/translate/), create an account, pick a language and start translating.
 
-If want to contribute, go to the [project page on Transifex](https://www.transifex.com/ipfs/ipfs-share-files/translate/), create an account, pick a language and start translating!
+On the app side, translations are stored in [`public/locales`](./public/locales), and the English version is the source of truth. Transifex automatically syncs new translations into that directory, so if you want to add translations, do so in Transifex — **not** this repo.
 
-### How to sync translations
+### To sync translations
 
 1. Install and set up the [command-line client (` tx `)](https://docs.transifex.com/client/installing-the-client)
 2. Download new translations from Transifex with `tx pull -a`
-    - this creates/updates the files in [`public/locales/*`](./public/locales) that need to be committed
-    - if a new language is created, remember to add it to [`src/i18n.js`](./src/i18n.js)
+    - This creates/updates the files in [`public/locales/*`](./public/locales) that need to be committed
+    - If a new language is created, remember to add it to [`src/i18n.js`](./src/i18n.js)
 
-### How to add or update keys
+### To add or update English source-of-truth translation keys
 
-1. Make sure you have the latest files from Transifex with `tx pull -a`
-2. Only change the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
-3. Commit your changes
-    - changes from the `main` branch are fetched by Transifex automatically
+1. Make sure you have the latest files from Transifex using `tx pull -a`
+2. Change **only** the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
+3. Commit your changes; changes from the `main` branch are fetched by Transifex automatically
 
-
-For more info on our i18n process at IPFS, check out [ipfs/i18n](https://github.com/ipfs/i18n).
+To learn more about internationalization on the IPFS project as a whole, or contribute translations to other IPFS repos, check out [ipfs/i18n](https://github.com/ipfs/i18n).
 
 ## Contribute
 
-Feel free to dive in! [Open an issue](https://github.com/ipfs-shipyard/ipfs-share-files/issues/new) or submit PRs.
+Contributions are more than welcome! Check out the [currently open issues](https://github.com/ipfs-shipyard/ipfs-share-files/issues) and start hacking on anything that sounds interesting. Issues are labeled with a variety of tags to help you find a good fit — you may wish to start with the [`help-wanted`](https://github.com/ipfs-shipyard/ipfs-share-files/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) tag.
 
-To contribute to IPFS in general, see the [contributing guide](https://github.com/ipfs/community/blob/master/CONTRIBUTING.md).
+To contribute to IPFS in general, check out the wide variety of opportunities [here](https://docs.ipfs.io/community/contribute/ways-to-contribute).
 
-[![](https://cdn.rawgit.com/jbenet/contribute-ipfs-gif/master/img/contribute.gif)](https://github.com/ipfs/community/blob/master/CONTRIBUTING.md)
+The IPFS community believes that our mission is best served in an environment that is friendly, safe, and accepting, and free from intimidation or harassment. To that end, we ask that everyone involved in IPFS read and respect our [code of conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
 
 ## License
 
