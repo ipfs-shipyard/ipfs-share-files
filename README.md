@@ -1,29 +1,33 @@
-# IPFS Share Files
+# IPFS Share
 
-![IPFS Share Files](./public/share.png)
+![Screenshot of IPFS Share](./public/share.png)
 
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg)](https://protocol.ai/) [![](https://img.shields.io/badge/project-IPFS-blue.svg)](http://ipfs.io/) [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg)](http://webchat.freenode.net/?channels=%23ipfs)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-blue.svg)](http://standardjs.com/)
 
-> Share files via IPFS
+> Share files directly from your device's browser using IPFS — no cloud needed. Fast, free, easy file sharing for IPFS novices and veterans alike, available at https://share.ipfs.io.
 
-## Lead Maintainer
+## Maintainers
 
-No DRI, best-effort support provided by [IPFS GUI Team](https://github.com/ipfs/ipfs-gui)
+Best-effort support provided by the [IPFS GUI Team](https://github.com/ipfs/ipfs-gui). Maintainers welcome!
 
 ## Table of Contents
 
-- [Background](#background)
-- [Install](#install)
-- [Usage](#usage)
+- [About IPFS Share](#about-ipfs-share)
+- [For Developers](#for-developers)
 - [Translations](#translations)
 - [Contribute](#contribute)
 - [License](#license)
 
-## Background
+## About IPFS Share
 
-The `IPFS Share Files` is a **work-in-progress**. It is part of the wider [IPFS GUI](https://github.com/ipfs-shipyard/ipfs-gui) project.
+[IPFS Share](https://share.ipfs.io) is a simple, easy-to-use tool for sharing files directly from your device without having to rely on third-party intermediaries like big corporate cloud providers. It's simple enough for anyone to use, but it's also a great under-the-hood demonstration of a common IPFS use case.
 
+### Features
+
+- Supports installation as a mobile shortcut or desktop standalone app
+
+### How it works
 The app uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. An instance of `js-ipfs` is created if no provider is available.
 
 This app is built with [`create-react-app`](https://github.com/facebook/create-react-app). Please read the [docs](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/template/README.md#table-of-contents).
@@ -43,13 +47,6 @@ To run the app in development mode:
 ```sh
 > npm run start
 # Go to http://localhost:3000
-```
-
-To run the [storybook](https://storybook.js.org/):
-
-```sh
-> npm run storybook
-# Go to http://localhost:9009
 ```
 
 Optionally you may have a local IPFS daemon running:
