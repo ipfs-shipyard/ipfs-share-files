@@ -9,7 +9,7 @@
   "info": {
     "add": {
       "title": "Share files using IPFS",
-      "subtitle": "Share directly from your device — no cloud needed!",
+      "subtitle": "Share directly from your device — no cloud needed.",
       "labelAdd": "Add your files",
       "copyAdd": "Add files to share them directly from your device over the IPFS network. Anyone with the unique code in your share link can download your files, so don't add sensitive or copyrighted material.",
       "labelKeepPage": "Keep this page open!",
@@ -36,6 +36,32 @@
     "runDaemon": "Then, start an IPFS daemon in your terminal:",
     "largeFilesWarning": "If you have issues downloading files larger than 1GB, installing <1>IPFS Desktop</1> or <3>IPFS Companion</3> can improve performance.",
     "viewOnGateway": "View on IPFS"
+  },
+  "modal": {
+    "how": {
+      "title": "How IPFS Share works",
+      "ariaLabel": "Modal explaining how IPFS Share works",
+      "copy": "IPFS Share is a simple, free way to share files without needing to rely on services run by big corporations. Instead, it uses the peer-to-peer IPFS protocol for sharing directly between devices. IPFS is built around content addressing — keeping track of files based on what they contain, not where they're located — which means that files can't be modified without changing their addresses too. In other words, when you download a file using IPFS, you can be sure that it's exactly the same as the sender intended.",
+      "learnMore": "Learn how IPFS is changing the internet by visiting the <1>IPFS website</1>. Curious about how content addressing works? Visit <3>ProtoSchool</3> for tutorials and other resources."
+    },
+      "reprovide": {
+      "title": "Re-sharing files you've received",
+      "ariaLabel": "Modal explaining how to share these files with someone else",
+      "copy": "It's easy to share these files with someone else by making your device part of the IPFS network. All you need to do is keep this page open; by doing so, your device becomes a node on the network and makes those files available directly to others. Then, share the link that you received — and be sure to keep this page open until you know your recipient has downloaded the files.",
+      "learnMore": "Curious how this works under the hood? Check out the <1>official IPFS documentation</1> for everything from basic explainers to developer tools."
+    },
+    "privacy": {
+      "title": "Sharing files on IPFS",
+      "ariaLabel": "Modal describing sharing and privacy on IPFS",
+      "copy": "This site uses IPFS, a peer-to-peer protocol for storing and sharing data directly between users without relying on cloud storage or other services run by big corporations. Because IPFS is a public network, when you share content using IPFS Share, you're enabling anyone who knows the unique CID in your share link to retrieve it. This means you should avoid sharing sensitive files or copyrighted material.",
+      "learnMore": "Want to learn more about IPFS? Visit the <1>website</1> for the basics, or dig into the details of IPFS and privacy in the <3>official documentation</3>."
+    },
+    "cid": {
+      "title": "What's a CID?",
+      "ariaLabel": "Modal describing content identifiers",
+      "copy": "Content identifiers (CIDs) are cryptographically generated fingerprints that allow IPFS to find and deliver files. Because IPFS identifies files by what they contain, not where they're located, a CID points not only to a particular file, but also a specific version — if the file is modified, the CID changes too. When you share a file using IPFS Share, you can see its CID by looking in the share link for the long string of characters starting with \"bafy\".",
+      "learnMore": "Want to dig deeper into how content identifiers work? Visit <1>ProtoSchool</1> for tutorials and other resources on the decentralized web tech that makes IPFS tick."
+    }
   },
   "addFiles": "Add files",
   "addFolder": "Or add a folder",
