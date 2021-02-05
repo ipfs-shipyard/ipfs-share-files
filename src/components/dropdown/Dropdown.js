@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
 import './Dropdown.css'
@@ -32,14 +31,6 @@ const Dropdown = ({ className, options, Icon, t, onChange, selectedOption }) => 
       </div>
       )}
     </div>
-}
-
-Dropdown.propTypes = {
-  Icon: PropTypes.element
-}
-
-Dropdown.defaultProps = {
-  options: []
 }
 
 export default withTranslation('translation')(Dropdown)
