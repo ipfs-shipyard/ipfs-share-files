@@ -365,7 +365,7 @@ const bundle = {
     }
   },
 
-  doGetFileURL: (filename, cid) => async ({ store }) => {
+  doGetFileURL: (filename, cid, opts = { download: true }) => async ({ store }) => {
     const url = ENDPOINTS.gateway
 
     if (!cid) {
@@ -375,7 +375,7 @@ const bundle = {
     }
 
     return {
-      url: `${url}/${cid.string}?download=true&filename=${encodeURIComponent(filename)}`,
+      url: `${url}/${cid.string}?${opts.download ? 'download=true&' : ''}filename=${encodeURIComponent(filename)}`,
       filename
     }
   },
