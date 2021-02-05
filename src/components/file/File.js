@@ -5,6 +5,7 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
+import viewFile from './utils/view'
 import downloadFile from './utils/download'
 import downloadArchive from './utils/archive'
 import ENDPOINTS from '../../constants/endpoints'
@@ -21,6 +22,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import GlyphTick from '../../media/icons/GlyphTick'
 import GlyphCancel from '../../media/icons/GlyphCancel'
 import IconDownload from '../../media/icons/Download'
+import IconView from '../../media/icons/View'
 import GlyphAttention from '../../media/icons/GlyphAttention'
 
 export class File extends React.Component {
@@ -40,6 +42,12 @@ export class File extends React.Component {
 
   state = {
     progress: 100
+  }
+
+  handleViewClick = async () => {
+    const { cid, name, doGetFileURL } = this.props
+    const { url, filename } = await doGetFileURL(name, cid, { download: false })
+    viewFile(url, filename)
   }
 
   handleDownloadClick = async () => {
@@ -72,6 +80,13 @@ export class File extends React.Component {
     if (isDownload && progress === 100) {
       return <div className='flex items-center'>
         { this.renderWarningSign() }
+        <IconView
+          className='pointer o-80 glow'
+          width={glyphWidth + 5}
+          fill={fillColor}
+          style={{ marginRight: '-3px' }}
+          onClick={this.handleViewClick}
+          alt='View' />
         <IconDownload
           className='pointer o-80 glow'
           width={glyphWidth + 5}
