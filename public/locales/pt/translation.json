@@ -1,54 +1,55 @@
 {
   "pageTitle": {
-    "ipfs": "IPFS",
-    "add": "Adicionar Ficheiros",
+    "ipfs": "IPFS Partilha",
+    "add": "Partilhar Ficheiros",
     "download": "Descarregar Ficheiros"
   },
-  "header": "Partilhar por IPFS",
-  "footer": "© Protocol Labs | Exceto onde <1>anotado</1>, conteúdo licenciado por <3>CC-BY 3.0</3>",
+  "header": "Partilhar",
+  "footer": "Licenciado por <1> CC-BY 3.0 </1> com excepção <3>indicada</3>",
   "info": {
     "add": {
-      "title": "Partilha ficheiros directamente do teu dispositivo",
+      "title": "Partilhe ficheiros com IPFS",
+      "subtitle": "Partilhe directamente do seu dispositivo - não necessita de cloud!",
       "labelAdd": "Adiciona os teus ficheiros",
-      "copyAdd": "Qualquer pessoa com quem partilhes o link poderá adecer aos ficheiros. Não partilhes conteúdo sensível nem ficheiros com direitos de autor.",
-      "labelSend": "Envia o link de partilha",
-      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede.",
-      "labelKeepPage": "Mantém esta página aberta",
-      "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
-      "copyKeep": "Estás a partilhar conteúdo a partir do teu dispositivo. Os teus amigos podem ajudar a partilhar o conteúdo ao manter o link de partilha aberto no seu browser."
+      "copyAdd": "Adicione ficheiros para os partilhar diretamente do seu dispositivo pela rede IPFS. Qualquer pessoa com o código único presente no seu link de partilha consegue descarregar os seus ficheiros, por isso não adicione material sensível ou com copyright. ",
+      "labelKeepPage": "Mantenha esta página aberta!",
+      "labelKeepDaemon": "Mantenha o seu nó de IPFS a correr!",
+      "copyKeepPage": "Como está a partilhar diretamente do seu dispositivo, é importante manter esta página aberta até o recipiente descarregar os ficheiros. Se quiser partilhar com um grupo, outros membros do grupo podem ajudar a partilha mantendo a página aberta nos seus navegadores.",
+      "copyKeepDaemon": "Como está a partilhar diretamente do seu dispositivo, é importante manter esta página aberta até o recipiente descarregar os ficheiros. Se quiser partilhar com um grupo, outros membros do grupo podem ajudar a partilha mantendo a página aberta nos seus navegadores, ou caso estejam a correr um nó de IPFS, fazendo pin no CID presente no link nos seus nós.",
+      "labelSend": "Partilhe o link",
+      "copySend": "Cada link de partilha contem um identificador único chamado CID que permite o recipiente encontrar o conteúdo na rede IPFS."
     },
     "download": {
-      "title": "Recebe ficheiros directamente de outros dispositivos",
-      "labelGet": "Recebe os ficheiros",
-      "copyGet": "Podes descarregar ficheiros individualmente ou, se quiseres manter a estrutura dos mesmos, clica no botão de descarregar todos.",
-      "labelKeepPage": "Mantém esta página aberta",
-      "labelKeepDaemon": "Mantém o teu daemon IPFS a correr",
-      "copyKeepPage": "Podes ajudar a partilhar o conteúdo ao manter esta página aberta. Desta forma estás a partilhar o conteúdo através do teu dispositivo.",
-      "copyKeepDaemon": "Podes ajudar a partilhar o conteúdo mantendo o teu daemon a correr. Desta forma estás a partilhar o conteúdo através do teu dispositivo.",
-      "labelSend": "Envia o link de partilha",
-      "copySend": "O IPFS dá aos ficheiros uma impressão digital única chamada CID que é usada para os encontrar novamente na rede."
-    },
+      "title": "Recebeu os ficheiros!",
+      "subtitle": "Descarregue diretamente de quem enviou - sem necessitar da cloud.",
+      "labelHow": "Como funciona o IPFS Share?",
+      "copyHow": "O IPFS Share usa a rede global IPFS para permitir partilhar ficheiros diretamente entre pessoas sem necessitar de cloud ou de servidores terceiros. E como no IPFS os ficheiros são identificados com o que contêm, e não onde estão localizados, pode ter a certeza que o recipiente descarrega é o mesmo que o enviado.",
+      "labelKeep": "Quer partilhar estes ficheiros com alguém?",
+      "copyKeepPage": "Pode fazer parte da rede IPFS e partilhar estes ficheiros diretamente do seu dispositivo mantendo esta página aberta. Apenas partilhe o link que recebeu e não feche esta página até o recipiente descarregar os ficheiros.",
+      "copyKeepDaemon": "Pode partilhar estes ficheiros diretamente do seu dispositivo mantendo esta página aberta. Apenas partilhe o link que recebeu e não feche esta página até o recipiente descarregar os ficheiros."    },
     "learnMore": "Saber mais."
   },
   "box": {
-    "missingDaemon": "O teu IPFS daemon está correr?",
-    "runningDaemon": "Precisas de um <1>daemon a correr</1> para adicionares ficheiros ao IPFS.",
+    "missingDaemon": "O seu nó de IPFS está a correr?",
+    "runningDaemon": "Precisa de <1>um nó a correr</1> para adicionar ficheiros ao IPFS",
     "configureDaemon": "Certifica-te que <1>configuras a tua IPFS API</1> para aceitar pedidos cross-origin (CORS):",
     "runDaemon": "Depois, corre um IPFS daemon no terminal:",
-    "footNote": "Se adicionares mais ficheiros depois de teres o link, ele será atualizado. Não te esqueças de copiar o mais recente para incluir a lista completa de ficheiros.",
-    "largeFilesWarning": "Se tiveres problemas a descarregar ficheiros maiores que 1GB, instala o <1>IPFS Desktop</1> ou <3>IPFS Companion</3> para uma melhor experiência.",
-    "viewOnGateway": "Ver no IPFS gateway"
+    "largeFilesWarning": "Se tiver problemas a descarregar ficheiros superiores a 1 GB, instale o <1>IPFS Desktop</1> ou o <3>IPFS Companion</3> para melhorar a velocidade e desempenho.",
+    "viewOnGateway": "Ver no IPFS"
   },
   "addFiles": "Adicionar ficheiros",
+  "addFolder": "Ou adicione um ficheiro",
   "copyLink": {
-    "label": "Copiar link para enviar ficheiros:",
+    "labelIndividual": "Partilhe ficheiros individuais",
+    "labelAll": "Partilhe todos os ficheiros",
+    "footNote": "Este link muda se adicionar mais ficheiro, por isso garanta que partilha sempre a última versão.",
     "copy": "Copiar",
     "copied": "Copiado!"
   },
-  "loader": "A carregar a lista de ficheiros...",
+  "loader": "Carregando a lista de ficheiros...",
   "downloadFiles": {
     "download": "Descarregar",
     "downloadAll": "Descarregar todos",
-    "downloading": "A descarregar"
+    "downloading": "Descarregando..."
   }
 }

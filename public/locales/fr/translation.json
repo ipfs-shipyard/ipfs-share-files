@@ -1,0 +1,56 @@
+{
+  "pageTitle": {
+    "ipfs": "IPFS Share",
+    "add": "Partager des fichiers",
+    "download": "Télécharger des fichiers"
+  },
+  "header": "Partager",
+  "footer": "License <1>CC-BY 3.0</1> sauf <3>mention contraire</3>",
+  "info": {
+    "add": {
+      "title": "Partagez des fichiers grâce à IPFS",
+      "subtitle": "Partagez directement depuis votre appareil, pas besoin du Cloud !",
+      "labelAdd": "Ajoutez vos fichiers",
+      "copyAdd": "Ajoutez des fichiers pour les partager directement depuis votre appareil grâce qu réseau IPFS. Tous ceux qui ont le coe unique dans votre lien de partage peuvent télécharger vos fichiers, donc n'ajoutez pas d'informations confidentielles ou protégées par un copyright.",
+      "labelKeepPage": "Gardez cette page ouverte !",
+      "labelKeepDaemon": "Gardez votre nœud IPFS actif !",
+      "copyKeepPage": "Comme vous partagez directement depuis votre appareil, il est important de garder cette page ouverte jusqu'à ce que le destinataire ait téléchargé les fichiers. Si vous partagez avec un groupe, les autres membres peuvent vous aider à co-héberger les fichiers en gardant aussi la page de partage ouverte dans leur navigateur.",
+      "copyKeepDaemon": "Comme vous partagez directement depuis votre appareil, il est important de garder votre nœud IPFS actif jusqu'à ce le destinataire ait téléchargé les fichiers. Si vous partagez avec un groupe, les autres membres peuvent vous aider à co-héberger les fichiers en gardant la page de partage ouverte dans leur navigateur, ou s'ils utilisent un nœud IPFS, épingler le \"content identifier\" (CID) de votre lien de partage sur leur nœud.",
+      "labelSend": "Partagez le lien",
+      "copySend": "Chaque lien de partage contient un identifiant unique appelé un CID qui permet à l'appareil du destinataire de trouver le contenu sur le réseau IPFS."
+    },
+    "download": {
+      "title": "Vous avez des fichiers !",
+      "subtitle": "Téléchargez directement depuis l'envoyeur, pas besoin du Cloud !",
+      "labelHow": "Comment marche IPFS Share ?",
+      "copyHow": "IPFS Share utilise le réseau mondial IPFS pour permettre aux gens de partager leurs fichiers directement entre eux, sans utiliser Cloud ou le serveur d'un tiers. Et puisque les fichiers sur IPFS sont identifiés grâce à leur contenu, et pas là où ils se trouvent, vous pouvez être sûr(e) que le contenu téléchargé est bien le même que le contenu envoyé.",
+      "labelKeep": "Vous voulez partager ces fichiers avec quelqu'un d'autre ?",
+      "copyKeepPage": "Vous pouvez faire partie du réseau IPFS et partager ces fichiers directement depuis votre appareil simplement en gardant cette page ouverte. Partagez simplement le lien que vous avez reçu, et ne fermez pas cette page jusqu'à ce que le destinataire ait téléchargé les fichiers.",
+      "copyKeepDaemon": "Vous pouvez partager ces fichiers directement depuis votre appareil en gardant votre nœud IPFS actif. Partagez simplement le lien que vous avez reçu, et gardez votre nœud actif jusqu'à ce que le destinataire ait téléchargé les fichiers."    },
+    "learnMore": "En savoir plus."
+  },
+  "box": {
+    "missingDaemon": "Votre nœud IPFS est-il actif ?",
+    "runningDaemon": "Vous avez besoin d'un <1>nœud actif</1> pour ajouter des fichiers dans IPFS.",
+    "configureDaemon": "Assurez-vous de <1>configurer votre API IPFS </1> pour autoriser les demandes CORS (cross-origin):",
+    "runDaemon": "Ensuite, démarrez un daemon IPFS dans votre terminal :",
+    "largeFilesWarning": "Si vous avez des problèmes pour télécharger des fichiers de plus d'1 GB, installer <1>IPFS Desktop</1> ou <3>IPFS Companion</3> peut améliorer les performances.",
+    "viewOnGateway": "Voir sur IPFS"
+  },
+  "addFiles": "Ajoutez des fichiers",
+  "addFolder": "Ou ajouter un dossier",
+  "copyLink": {
+    "labelIndividual": "Partagez des fichiers",
+    "labelAll": "Partager tous les fichiers",
+    "footNote": "Ce lien change si vous ajoutez d'autres fichiers. Vérifiez que vous partagez la dernière version.",
+    "copy": "Partager",
+    "copied": "Copié !",
+    "qrLabel": "Ou scanner pour partager tous les fichiers"
+  },
+  "loader": "Chargement de la liste des fichiers...",
+  "downloadFiles": {
+    "download": "Télécharger",
+    "downloadAll": "Tout télécharger",
+    "downloading": "Téléchargement..."
+  }
+}

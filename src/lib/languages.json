@@ -1,0 +1,17 @@
+{
+  "en": {
+    "locale": "en",
+    "nativeName": "English",
+    "englishName": "English"
+  },
+  "fr": {
+    "locale": "fr",
+    "nativeName": "Français",
+    "englishName": "French"
+  },
+  "pt": {
+    "locale": "pt",
+    "nativeName": "Português",
+    "englishName": "Portuguese"
+  }
+}

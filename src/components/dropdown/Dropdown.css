@@ -1,0 +1,31 @@
+:root {
+    --dropdown-size: 10px;
+    --dropdown-distance: 4px;
+}
+
+.dropdown-item-indicator {
+    position: relative;
+    border-radius: 50%;
+    width: var(--dropdown-size);
+    height:var(--dropdown-size);
+}
+
+.dropdown-item-indicator::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--dropdown-distance) * -1);
+    left: calc(var(--dropdown-distance) * -1);
+    width: calc(var(--dropdown-size) + var(--dropdown-distance));
+    height: calc(var(--dropdown-size) + var(--dropdown-distance));
+    border-radius: 50%;
+ 
+    border: 2px solid #d9dbe2;
+}
+
+.dropdown-item-indicator.active {
+    background-color: #378085;
+}
+
+.dropdown-item-indicator.active::after {
+    border-color: #378085
+}

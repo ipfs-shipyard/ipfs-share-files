@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { withTranslation, Trans } from 'react-i18next'
+import { useDrop } from 'react-dnd'
+import { NativeTypes } from 'react-dnd-html5-backend'
+import { connect } from 'redux-bundler-react'
+import classNames from 'classnames'
 
 // Components
 import Loader from '../loader/Loader'
@@ -8,11 +12,11 @@ import FileTree from '../file-tree/FileTree'
 import CopyLink from '../copy-link/CopyLink'
 import DownloadFiles from '../download-files/DownloadFiles'
 
-export const Box = ({ children }) => (
-  <div className='center ml0-l mb4 mt2-l mb0-l pa4 pb3 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white'>
+export const Box = forwardRef(({ children, className }, ref) => (
+  <div ref={ref} className={classNames('center ml0-l mb4 mt2-l mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white', className)}>
     { children }
   </div>
-)
+))
 
 export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   <Box>
@@ -30,16 +34,36 @@ export const BoxDownload = ({ files, isLoading, showSizeWarning }) => (
   </Box>
 )
 
-export const RawBoxAdd = ({ files, isLoading, shareLink, t }) => (
-  <Box>
+export const RawBoxAdd = ({ files, isLoading, shareLink, doAddFiles, t }) => {
+  const [{ isOver }, drop] = useDrop({
+    accept: [NativeTypes.FILE],
+    collect: (monitor) => ({
+      isOver: monitor.isOver()
+    }),
+    drop: async ({ files }) => {
+      if (!files) return null
+      // still can't tell a dir from a file on the web web in 2021 XD  https://stackoverflow.com/a/25095250/11518426
+      files = files.filter(f => !(!f.type && f.size % 4096 === 0))
+      // check: https://react-dnd.github.io/react-dnd/docs/api/use-drop
+      // this is the handler that lets you call the function `doAddFiles`
+      doAddFiles(files)
+    }
+  })
+
+  return <Box ref={drop} className={isOver && 'bg-gray-muted'} >
     <AddFiles />
     { isLoading && <Loader /> }
     <FileTree files={files} />
     { shareLink && <CopyLink shareLink={shareLink} /> }
   </Box>
-)
+}
 
-export const BoxAdd = withTranslation('translation')(RawBoxAdd)
+export const BoxAdd = withTranslation('translation')(
+  connect(
+    'doAddFiles',
+    RawBoxAdd
+  )
+)
 
 export const RawBoxNotAvailable = ({ t }) => (
   <Box>
