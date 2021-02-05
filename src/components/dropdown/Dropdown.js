@@ -42,4 +42,4 @@ Dropdown.defaultProps = {
   options: []
 }
 
-export default withTranslation('translations')(Dropdown)
+export default withTranslation('translation')(Dropdown)
