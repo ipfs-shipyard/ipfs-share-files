@@ -40,7 +40,7 @@ Best-effort support provided by the [IPFS GUI Team](https://github.com/ipfs/ipfs
 ### How it works
 IPFS Share uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. If no provider is available (for example, if you're using IPFS Share on your phone), an instance of `js-ipfs` is created.
 
-The app itself is built using [`create-react-app`](https://github.com/facebook/create-react-app), so if you're comfortable building ordinary React web apps, you'll feel right at home in this codebase. Not familiar with React or `create-react-app`? There are extensive [docs](https://create-react-app.dev/docs/getting-started/) available. Visual styling is handled through [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
+The app itself is built using [`create-react-app`](https://github.com/facebook/create-react-app), so if you're comfortable building ordinary React web apps, you'll feel right at home in this codebase. Not familiar with React or `create-react-app`? There are extensive [docs](https://create-react-app.dev/docs/getting-started/) available. Visual styling is done using [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
 
 ## For developers
 
@@ -116,7 +116,7 @@ To build IPFS Share for production to the `build` folder:
 
 We use CI for automatic deployments when merged to the following branches:
 - Branch `main` is automatically deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io)
-- Branch `production` is automatically deployed to [share.ipfs.io](https://share.ipfs.io).
+- Branch `production` is automatically deployed to [share.ipfs.io](https://share.ipfs.io)
 
 If you just want to PR `main` to `production` for go-live, there's a handy shortcut for that [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
 
