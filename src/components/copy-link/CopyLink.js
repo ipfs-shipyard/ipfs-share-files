@@ -50,7 +50,7 @@ class CopyLink extends React.Component {
               value={shareLink}
               bgColor={'#ffffff'}
               fgColor={'#022E44'}
-              level={'L'}
+              level={'M'}
               renderAs={'svg'}
               imageSettings={{
                 src: 'favicon-32x32.png',
