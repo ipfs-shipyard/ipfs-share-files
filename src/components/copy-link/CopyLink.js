@@ -46,7 +46,21 @@ class CopyLink extends React.Component {
         <div className="overflow-hidden">
           <div className="flex flex-column items-center mb3 appear-from-below">
             <span className="f7 charcoal-muted lh-copy pb2">{t('copyLink.qrLabel')}</span>
-            <QRCode value={shareLink}/>
+            <QRCode
+              value={shareLink}
+              bgColor={'#ffffff'}
+              fgColor={'#022E44'}
+              level={'L'}
+              renderAs={'svg'}
+              imageSettings={{
+                src: 'favicon-32x32.png',
+                x: null,
+                y: null,
+                height: 32,
+                width: 32,
+                excavate: true
+              }}
+            />
           </div>
         </div>
       </div>
