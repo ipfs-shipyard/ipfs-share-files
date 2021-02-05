@@ -7,12 +7,13 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 // Locales
 import en from 'i18next-icu/locale-data/en'
+import ar from 'i18next-icu/locale-data/ar'
 import fr from 'i18next-icu/locale-data/fr'
 import pt from 'i18next-icu/locale-data/pt'
 
 import locales from './lib/languages.json'
 
-const localeData = [en, pt, fr]
+const localeData = [en, ar, pt, fr]
 
 export const localesList = Object.values(locales).map(locale => ({
   value: locale.locale,
