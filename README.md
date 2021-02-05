@@ -38,7 +38,7 @@ Best-effort support provided by the [IPFS GUI Team](https://github.com/ipfs/ipfs
 - Includes brief explainers on how IPFS Share works, with links to more details for the curious
 
 ### How it works
-IPFS Share uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. If no provider is available (for example, if you're using IPFS Share on your phone), an instance of `js-ipfs` is created.
+IPFS Share uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. If local IPFS node is not available (for example, if you're using IPFS Share on your phone, or due to CORS), an instance of [`js-ipfs`](https://github.com/ipfs/js-ipfs/) is created.
 
 The app itself is built using [`create-react-app`](https://github.com/facebook/create-react-app), so if you're comfortable building ordinary React web apps, you'll feel right at home in this codebase. Not familiar with React or `create-react-app`? There are extensive [docs](https://create-react-app.dev/docs/getting-started/) available. Visual styling is done using [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
 
@@ -48,10 +48,10 @@ It's easy to get a local copy of IPFS Share up and running, even if you don't ha
 
 ### Installation
 
-With `node@8.12` and `npm@6.4.1` or greater installed, run:
+With `node@14` and `npm@6.4.1` or greater installed, run:
 
 ```sh
-> npm install
+> npm ci
 ```
 
 ### Usage
@@ -133,13 +133,14 @@ On the app side, translations are stored in [`public/locales`](./public/locales)
 1. Install and set up the [command-line client (` tx `)](https://docs.transifex.com/client/installing-the-client)
 2. Download new translations from Transifex with `tx pull -a`
     - This creates/updates the files in [`public/locales/*`](./public/locales) that need to be committed
-    - If a new language is created, remember to add it to [`src/i18n.js`](./src/i18n.js)
+    - If a new language is created, remember to
+      - add it to [`src/i18n.js`](./src/i18n.js)
+      - run `npx -q @olizilla/lol public/locales > src/lib/languages.json`
 
 ### To add or update English source-of-truth translation keys
 
-1. Make sure you have the latest files from Transifex using `tx pull -a`
-2. Change **only** the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
-3. Commit your changes; changes from the `main` branch are fetched by Transifex automatically
+1. Change **only** the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
+2. Commit your changes; changes from the `main` branch are fetched by Transifex automatically once a day
 
 To learn more about internationalization on the IPFS project as a whole, or contribute translations to other IPFS repos, check out [ipfs/i18n](https://github.com/ipfs/i18n).
 
