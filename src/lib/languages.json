@@ -1,4 +1,9 @@
 {
+  "ar": {
+    "locale": "ar",
+    "nativeName": "العربية",
+    "englishName": "Arabic"
+  },
   "en": {
     "locale": "en",
     "nativeName": "English",
