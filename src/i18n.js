@@ -5,15 +5,7 @@ import LocalStorageBackend from 'i18next-localstorage-backend'
 import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-// Locales
-import en from 'i18next-icu/locale-data/en'
-import ar from 'i18next-icu/locale-data/ar'
-import fr from 'i18next-icu/locale-data/fr'
-import pt from 'i18next-icu/locale-data/pt'
-
 import locales from './lib/languages.json'
-
-const localeData = [en, ar, pt, fr]
 
 export const localesList = Object.values(locales).map(locale => ({
   value: locale.locale,
@@ -21,7 +13,7 @@ export const localesList = Object.values(locales).map(locale => ({
 }))
 
 i18n
-  .use(new ICU({ localeData }))
+  .use(ICU)
   .use(Backend)
   .use(LanguageDetector)
   .init({
