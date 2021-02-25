@@ -1,7 +1,6 @@
 import { getIpfs, providers } from 'ipfs-provider'
-import Libp2p from 'libp2p'
-import { FaultTolerance } from 'libp2p/src/transport-manager'
 import ENDPOINTS from '../constants/endpoints'
+import { libp2pBundle } from '../lib/libp2p'
 
 const initialState = {
   apiAddress: ENDPOINTS.apiMultiAddr,
@@ -47,24 +46,7 @@ const actions = {
         providers.jsIpfs({
           loadJsIpfsModule: () => require('ipfs-core'),
           options: {
-            config: {
-              Addresses: {
-                Swarm: [
-                  // '/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star',
-                  // '/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star',
-                  // '/dns4/wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star'
-                  '/dns4/invalid-wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star'
-                ]
-              }
-            },
-            libp2p: ({ libp2pOptions }) => {
-              libp2pOptions.transportManager = {
-                // TODO: below seems ignored
-                // https://github.com/libp2p/js-libp2p/blob/0a6bc0d1013dfd80ab600e8f74c1544b433ece29/doc/CONFIGURATION.md#configuring-transport-manager
-                faultTolerance: FaultTolerance.NO_FATAL
-              }
-              return new Libp2p(libp2pOptions)
-            }
+            libp2p: libp2pBundle
           }
         })
       ]
