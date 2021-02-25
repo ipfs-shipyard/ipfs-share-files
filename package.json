@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "cp config/webpack.config.prod.js node_modules/react-scripts/config/",
+    "prebuild": "cp config/webpack.config.prod.js node_modules/react-scripts/config/ && lol public/locales > src/lib/languages.json",
     "build": "react-scripts build",
     "build:icons": "svgr -d src/icons node_modules/ipfs-css/icons && eslint --fix src/icons/*",
     "lint": "eslint --ignore-path .gitignore .",
@@ -35,8 +35,9 @@
     "i18next-icu": "^1.4.2",
     "i18next-localstorage-backend": "^3.1.2",
     "internal-nav-helper": "^3.1.0",
+    "ipfs-core": "0.5.2",
     "ipfs-css": "^1.3.0",
-    "ipfs-http-client": "^49.0.0",
+    "ipfs-http-client": "^49.0.2",
     "ipfs-provider": "^1.1.0",
     "is-ipfs": "^2.0.0",
     "milliseconds": "^1.0.3",
@@ -67,6 +68,7 @@
     "video-extensions": "^1.1.0"
   },
   "devDependencies": {
+    "@olizilla/lol": "2.0.0",
     "@storybook/addon-a11y": "^6.1.15",
     "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-knobs": "^6.1.15",
@@ -87,7 +89,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "ipfs": "^0.54.0",
     "ipfsd-ctl": "^7.2.0",
     "multihashing-async": "^2.0.1",
     "npm-run-all": "^4.1.5",

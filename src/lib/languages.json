@@ -14,9 +14,19 @@
     "nativeName": "Français",
     "englishName": "French"
   },
+  "it": {
+    "locale": "it",
+    "nativeName": "Italiano",
+    "englishName": "Italian"
+  },
   "pt": {
     "locale": "pt",
     "nativeName": "Português",
     "englishName": "Portuguese"
+  },
+  "zh-CN": {
+    "locale": "zh-CN",
+    "nativeName": "中文（中国）",
+    "englishName": "Chinese Simplified (China)"
   }
 }

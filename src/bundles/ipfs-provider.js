@@ -1,5 +1,6 @@
 import { getIpfs, providers } from 'ipfs-provider'
 import ENDPOINTS from '../constants/endpoints'
+import { libp2pBundle } from '../lib/libp2p'
 
 const initialState = {
   apiAddress: ENDPOINTS.apiMultiAddr,
@@ -43,7 +44,11 @@ const actions = {
     const result = await getIpfs({
       providers: [
         providers.jsIpfs({
-          loadJsIpfsModule: () => require('ipfs')
+          loadJsIpfsModule: () => require('ipfs-core'),
+          options: {
+            // we use custom libp2p bundle for fine-grained control
+            libp2p: libp2pBundle
+          }
         })
       ]
     })
