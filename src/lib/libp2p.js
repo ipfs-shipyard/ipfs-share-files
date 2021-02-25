@@ -14,12 +14,8 @@ export const libp2pBundle = (opts) => {
     peerId,
     addresses: {
       listen: [
-        /*
         '/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star',
-        '/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star',
-        '/dns4/wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star',
-        */
-        '/dns4/invalid-wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star'
+        '/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star'
       ]
     },
     dialer: {
