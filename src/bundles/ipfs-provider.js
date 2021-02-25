@@ -46,6 +46,7 @@ const actions = {
         providers.jsIpfs({
           loadJsIpfsModule: () => require('ipfs-core'),
           options: {
+            // we use custom libp2p bundle for fine-grained control
             libp2p: libp2pBundle
           }
         })
