@@ -5,13 +5,13 @@
     "download": "Télécharger des fichiers"
   },
   "header": "Partager",
-  "footer": "License <1>CC-BY 3.0</1> sauf <3>mention contraire</3>",
+  "footer": "Licence <1>CC-BY 3.0</1> sauf <3>mention contraire</3>",
   "info": {
     "add": {
-      "title": "Partagez des fichiers grâce à IPFS",
-      "subtitle": "Partagez directement depuis votre appareil, pas besoin du Cloud !",
+      "title": "Partager des fichiers grâce à IPFS",
+      "subtitle": "Partagez directement depuis votre appareil, pas besoin du Cloud.",
       "labelAdd": "Ajoutez vos fichiers",
-      "copyAdd": "Ajoutez des fichiers pour les partager directement depuis votre appareil grâce qu réseau IPFS. Tous ceux qui ont le coe unique dans votre lien de partage peuvent télécharger vos fichiers, donc n'ajoutez pas d'informations confidentielles ou protégées par un copyright.",
+      "copyAdd": "Ajoutez des fichiers pour les partager directement depuis votre appareil grâce qu réseau IPFS. Tous ceux qui ont le code unique dans votre lien de partage peuvent télécharger vos fichiers, donc n'ajoutez pas d'informations confidentielles ou protégées par un copyright.",
       "labelKeepPage": "Gardez cette page ouverte !",
       "labelKeepDaemon": "Gardez votre nœud IPFS actif !",
       "copyKeepPage": "Comme vous partagez directement depuis votre appareil, il est important de garder cette page ouverte jusqu'à ce que le destinataire ait téléchargé les fichiers. Si vous partagez avec un groupe, les autres membres peuvent vous aider à co-héberger les fichiers en gardant aussi la page de partage ouverte dans leur navigateur.",
@@ -25,8 +25,8 @@
       "labelHow": "Comment marche IPFS Share ?",
       "copyHow": "IPFS Share utilise le réseau mondial IPFS pour permettre aux gens de partager leurs fichiers directement entre eux, sans utiliser Cloud ou le serveur d'un tiers. Et puisque les fichiers sur IPFS sont identifiés grâce à leur contenu, et pas là où ils se trouvent, vous pouvez être sûr(e) que le contenu téléchargé est bien le même que le contenu envoyé.",
       "labelKeep": "Vous voulez partager ces fichiers avec quelqu'un d'autre ?",
-      "copyKeepPage": "Vous pouvez faire partie du réseau IPFS et partager ces fichiers directement depuis votre appareil simplement en gardant cette page ouverte. Partagez simplement le lien que vous avez reçu, et ne fermez pas cette page jusqu'à ce que le destinataire ait téléchargé les fichiers.",
-      "copyKeepDaemon": "Vous pouvez partager ces fichiers directement depuis votre appareil en gardant votre nœud IPFS actif. Partagez simplement le lien que vous avez reçu, et gardez votre nœud actif jusqu'à ce que le destinataire ait téléchargé les fichiers."    },
+      "copyKeepPage": "Vous pouvez faire partie du réseau IPFS et partager ces fichiers directement depuis votre appareil simplement en gardant cette page ouverte. Partagez justele lien que vous avez reçu, et ne fermez pas cette page jusqu'à ce que le destinataire ait téléchargé les fichiers.",
+      "copyKeepDaemon": "Vous pouvez partager ces fichiers directement depuis votre appareil en gardant votre nœud IPFS actif. Partagez juste le lien que vous avez reçu, et gardez votre nœud actif jusqu'à ce que le destinataire ait téléchargé les fichiers."    },
     "learnMore": "En savoir plus."
   },
   "box": {
@@ -37,7 +37,33 @@
     "largeFilesWarning": "Si vous avez des problèmes pour télécharger des fichiers de plus d'1 GB, installer <1>IPFS Desktop</1> ou <3>IPFS Companion</3> peut améliorer les performances.",
     "viewOnGateway": "Voir sur IPFS"
   },
-  "addFiles": "Ajoutez des fichiers",
+  "modal": {
+    "how": {
+      "title": "Comment fonctionne IPFS Share",
+      "ariaLabel": "Fenêtre modale expliquant comment fonctionne IPFS",
+      "copy": "iPFS Share est un moyen simple et gratuit de partager des fichiers sans utiliser de services tiers opéré par de grosses entreprises. À la place, il utilise le protocole pair-à-pair IPFS pour échanger directement entre les appareil. IPFS est construit autour de l'adressage par le contenu (gérer les fichiers en fonction de ce qu'ils contiennent, pas d'où ils se trouvent), ce qui veut dire que les fichiers ne peuvent pas être modifiés sans que leur adresse change aussi. En d'autres termes, quand vous téléchargez un fichier grâce à IPFS, vous pouvez être sûr(e) qu'il s'agit du fichier exact envoyé par l'envoyeur.",
+      "learnMore": "Apprenez comment IPFS est en train de changer Internet en visitant le <1>site web d'IPFS</1>. Vous êtes curieux de savoir comment fonctionne l'adressage par le contenu? Allez sur <3>ProtoSchool</3> pour trouver des tutoriaux et d'autres ressources."
+    },
+      "reprovide": {
+      "title": "Repartager les fichiers que vous avez reçus",
+      "ariaLabel": "Fenêtre modale expliquant comment partager ces fichiers avec quelqu'un d'autre",
+      "copy": "Il est simple de partager ces fichiers avec une autre personne en intégrant votre appareil au réseau IPFS. Tout ce que vous devez faire, c'est garder cette page ouverte. En faisant cela, votre appareil devient un nœud sur le réseau et rend ces fichiers disponibles directement pour les autres. Ensuite, partagez simplement le lien que vous avez reçu, et veillez à garder cette page ouverte jusqu'à ce que vous soyez sûr(e) que le destinataire a téléchargé le fichier.",
+      "learnMore": "Curieux de savoir comment ça marche en coulisse? Allez voir la <1>documentation officielle d\"IPFS</1> pour tout savoir, des simples explications aux outils pour les développeurs."
+    },
+    "privacy": {
+      "title": "Partager des fichiers avec IPFS",
+      "ariaLabel": "Fenêtre modale décrivant le partage et la confidentialité sur IPFS",
+      "copy": "Ce site utilise IPFS, un protocole pair-à-pair pour stocker et partager des données directement entre les utilisateurs sans s'appuyer sur du stockage dans le Cloud ou aucun autre service opéré par des entreprises. Puisqu'IPFS est un réseau public, quand vous partagez un contenu en utilisant IPFS Share, vous permettez à quiconque connaissant le CID unique présent dans votre lien de partage de le récupérer. Cela signifie que vous devriez éviter de partager des fichiers sensibles ou protégés par un copyright.",
+      "learnMore": "Vous voulez en savoir plus sur IPFS? Visitez le <1>site web</1> pour apprendre les bases, ou explorez en détail IPFS et la confidentialité dans la <3>documentation officielle</3>."
+    },
+    "cid": {
+      "title": "Qu'est-ce qu'un CID?",
+      "ariaLabel": "Fenêtre modale décrivant les identifiants de contenu",
+      "copy": "Les \"Content Identifiers\" (Identifiants de Contenu, ou CID) sont des empreintes cryptographiques générées pour permettre à IPFS de trouver et transmettre des fichiers. Puisqu'IPFS identifie les fichiers par ce qu'ils contiennent et non par l'endroit où ils se trouvent, un CID pointe non seulement vers un fichier en particulier, mais vers une version spécifique. Si le fichier est modifié, le CID change aussi. Quand vous partagez un fichier avec IPFS Share, vous pouvez voir son CID en regardant dans le lien de partage la longue suite de charactères commençant par \"bafy\".",
+      "learnMore": "Vous voulez en savoir encore plus sur le fonctionnement des Identifiants de Contenu? Allez sur <1>ProtoSchool</1> pour trouver des tutoriaux et d'autres ressources sur les technologies du web decentralisé qui font fonctionner IPFS."
+    }
+  },
+  "addFiles": "Ajouter des fichiers",
   "addFolder": "Ou ajouter un dossier",
   "copyLink": {
     "labelIndividual": "Partagez des fichiers",
@@ -52,5 +78,8 @@
     "download": "Télécharger",
     "downloadAll": "Tout télécharger",
     "downloading": "Téléchargement..."
+  },
+  "dropdown": {
+    "clickLabel": "Cliquez ici pour dérouler le menu"
   }
 }

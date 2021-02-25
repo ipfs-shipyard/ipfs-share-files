@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "cp config/webpack.config.prod.js node_modules/react-scripts/config/",
+    "prebuild": "cp config/webpack.config.prod.js node_modules/react-scripts/config/ && lol public/locales > src/lib/languages.json",
     "build": "react-scripts build",
     "build:icons": "svgr -d src/icons node_modules/ipfs-css/icons && eslint --fix src/icons/*",
     "lint": "eslint --ignore-path .gitignore .",
@@ -68,6 +68,7 @@
     "video-extensions": "^1.1.0"
   },
   "devDependencies": {
+    "@olizilla/lol": "2.0.0",
     "@storybook/addon-a11y": "^6.1.15",
     "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-knobs": "^6.1.15",
