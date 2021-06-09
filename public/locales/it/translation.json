@@ -1,31 +1,31 @@
 {
   "pageTitle": {
-    "ipfs": "Condividi con IPFS",
-    "add": "Condividi Files",
+    "ipfs": "IPFS Share",
+    "add": "Condividi file",
     "download": "Scarica File"
   },
   "header": "Condividi",
-  "footer": "Rilasciato sotto licenza <1>CC-BY 3.0</1> tranne per <3>questo</3>",
+  "footer": "Rilasciato sotto licenza <1>CC-BY 3.0</1> tranne se <3>segnalato</3> diversamente",
   "info": {
     "add": {
       "title": "Condividi file via IPFS",
       "subtitle": "Condividi file direttamente dal tuo dispositivo — il cloud non è necessario.",
       "labelAdd": "Aggiungi i tuoi file",
-      "copyAdd": "Aggiungi i file per condividerli direttamente dal tuo dispositivo sulla rete IPFS. Chiunque abbia il codice unico nel tuo link di condivisione può scaricare i tuoi file, quindi non aggiungere materiale sensibile o protetto da copyright.",
+      "copyAdd": "Aggiungi i file per condividerli direttamente dal tuo dispositivo sulla rete IPFS. Chiunque abbia il codice univoco nel tuo collegamento di condivisione può scaricare i tuoi file, quindi non aggiungere materiale sensibile o protetto da copyright.",
       "labelKeepPage": "Mantieni questa pagina aperta!",
-      "labelKeepDaemon": "Mantieni il tuo nodo IPFS attivo!",
+      "labelKeepDaemon": "Mantieni in esecuzione il tuo nodo IPFS!",
       "copyKeepPage": "Poiché stai condividendo direttamente dal tuo dispositivo, è importante tenere questa pagina aperta fino a quando il destinatario non scarica i file. Se stai condividendo con un gruppo, gli altri nel gruppo possono aiutarti a co-ospitare i file tenendo aperta la pagina di condivisione nei loro browser.",
-      "copyKeepDaemon": "Poiché stai condividendo direttamente dal tuo dispositivo, è importante mantenere il tuo nodo IPFS in esecuzione fino a quando il destinatario non scarica i file. Se stai condividendo con un gruppo, chiunque nel gruppo può aiutare a co-ospitare i file tenendo aperta la pagina di condivisione nel proprio browser, o se sta eseguendo un nodo IPFS, appuntando l'identificatore di contenuto (CID) dal tuo link di condivisione al loro nodo.",
-      "labelSend": "Condividi il link",
-      "copySend": "Ogni link di condivisione contiene un'impronta digitale unica chiamata CID che permette al dispositivo del destinatario di trovare quel contenuto sulla rete IPFS."
+      "copyKeepDaemon": "Poiché stai condividendo direttamente dal tuo dispositivo, è importante mantenere il tuo nodo IPFS in esecuzione fino a quando il destinatario non avrà scaricato i file. Se stai condividendo con un gruppo, chiunque nel gruppo può aiutare a co-ospitare i file tenendo aperta la pagina di condivisione nel proprio browser o, se stanno eseguendo un nodo IPFS, appuntando l'identificatore di contenuto (CID) dal tuo collegamento di condivisione al loro nodo.",
+      "labelSend": "Condividi il collegamento",
+      "copySend": "Ogni collegamento di condivisione contiene un'impronta digitale univoca chiamata CID che permette al dispositivo del destinatario di trovare quel contenuto sulla rete IPFS."
     },
     "download": {
-      "title": "Hai ricevuto i files!",
-      "subtitle": "Scarica direttamente i file dal mittente — il cloud non è necessario",
+      "title": "Hai ricevuto i file!",
+      "subtitle": "Scarica direttamente i file dal mittente — il cloud non è necessario.",
       "labelHow": "Come funziona IPFS Share?",
       "copyHow": "IPFS Share utilizza la rete globale IPFS per consentire alle persone di condividere i file direttamente tra loro, senza bisogno di cloud o server di terze parti. E poiché i file su IPFS sono identificati da ciò che contengono, non da dove si trovano, puoi essere sicuro che ciò che scarichi è lo stesso contenuto che intendeva il mittente.",
       "labelKeep": "Vuoi condividere questi file con qualcun altro?",
-      "copyKeepPage": "Puoi far parte della rete IPFS e condividere questi file direttamente dal tuo dispositivo semplicemente tenendo aperta questa pagina. Basta condividere il link che hai ricevuto e non chiudere questa pagina finché il destinatario non scarica i file.",
+      "copyKeepPage": "Puoi far parte della rete IPFS e condividere questi file direttamente dal tuo dispositivo semplicemente tenendo aperta questa pagina. Basta condividere il collegamento che hai ricevuto e non chiudere questa pagina finché il destinatario non avrà scaricato i file.",
       "copyKeepDaemon": "Puoi condividere questi file direttamente dal tuo dispositivo semplicemente mantenendo il tuo nodo IPFS in funzione. Basta condividere il link che hai ricevuto, e assicurarti di mantenere il tuo nodo in funzione fino a quando il destinatario non scarica i file."    },
     "learnMore": "Per saperne di più."
   },
@@ -68,7 +68,7 @@
   "copyLink": {
     "labelIndividual": "Condividere singoli file",
     "labelAll": "Condividi tutti i file",
-    "footNote": "Questo link cambia se aggiungi altri file, quindi assicurati di condividere l'ultima versione.",
+    "footNote": "Questo collegamento cambia se aggiungi altri file, quindi assicurati di condividere l'ultima versione.",
     "copy": "Condividi",
     "copied": "Copiato!",
     "qrLabel": "O scansionare per condividere tutti i file"

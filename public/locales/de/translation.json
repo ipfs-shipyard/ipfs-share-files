@@ -1,0 +1,85 @@
+{
+  "pageTitle": {
+    "ipfs": "IPFS Share",
+    "add": "Dateien teilen",
+    "download": "Dateien herunterladen"
+  },
+  "header": "Teilen",
+  "footer": "<1>CC-BY 3.0</1>-lizensiert, außer wie <3>beschrieben</3>",
+  "info": {
+    "add": {
+      "title": "Teile Dateien mit IPFS",
+      "subtitle": "Teile direkt von deinem Gerät — ganz ohne Cloud.",
+      "labelAdd": "Deine Dateien hinzufügen",
+      "copyAdd": "Füge Dateien hinzu, um sie direkt von Deinem Gerät über das IPFS-Netzwerk zu teilen. Jeder mit dem eindeutigen Code in Deinem Freigabelink kann Deine Dateien herunterladen. Teile also kein sensibles oder urheberrechtlich geschütztes Material.",
+      "labelKeepPage": "Lass' die Seite offen!",
+      "labelKeepDaemon": "Lass' Deinen IPFS-Knoten am Laufen!",
+      "copyKeepPage": "Da direkt von Deinem Gerät aus geteilt wird, ist es wichtig, diese Seite geöffnet zu lassen, bis der Empfänger die Dateien herunterlädt. Wenn Du die Dateien mit mehreren Personen teilst, können sie Dir helfen, diese zu teilen, indem sie auch die Freigabeseite in ihren Browsern geöffnet lassen.",
+      "copyKeepDaemon": "Da direkt von Deinem Gerät aus geteilt wird, ist es wichtig, deinen IPFS-Knoten laufen zu lassen, bis der Empfänger die Dateien herunterlädt. Wenn Du die Dateien mit mehreren Personen teilst, können sie Dir helfen, diese zu teilen, indem sie entweder auch die Freigabeseite in ihren Browsern geöffnet lassen oder, wenn sie selbst einen IPFS-Knoten am laufen haben, die Inhaltskennung (CID) in deinem Freigabelink auf ihrem Knoten anzuheften.",
+      "labelSend": "Den Link teilen",
+      "copySend": "Jeder Freigabelink enthält einen eindeutigen Fingerabdruck namens CID, der es dem Gerät des Empfängers ermöglicht, diesen Inhalt im IPFS-Netzwerk zu finden."
+    },
+    "download": {
+      "title": "Du hast Dateien bekommen!",
+      "subtitle": "Direkt vom Absender herunterladen — ganz ohne Cloud.",
+      "labelHow": "Wie funktioniert IPFS Share?",
+      "copyHow": "IPFS Share verwendet das globale IPFS-Netzwerk, um es Menschen zu ermöglichen, Dateien direkt miteinander zu teilen — ganz ohne Cloud oder Server von Drittanbietern. Und da Dateien auf IPFS anhand ihres Inhalts und nicht ihres Speicherorts identifiziert werden, kannst Du sicher sein, dass der heruntergeladene Inhalt derselbe ist, den der Absender beabsichtigt hat.",
+      "labelKeep": "Möchtest Du diese Dateien mit jemand anderem teilen?",
+      "copyKeepPage": "Du kannst Teil des IPFS-Netzwerks werden und diese Dateien direkt von Deinem Gerät aus teilen, indem Du einfach diese Seite geöffnet lässt. Teile dann den erhaltenen Link und schließe diese Seite nicht, bis der Empfänger die Dateien heruntergeladen hat.",
+      "copyKeepDaemon": "Du kannst diese Dateien direkt von Deinem Gerät aus teilen, indem Du einfach deinen IPFS-Knoten weiter laufen lässt. Teile dann den erhaltenen Link und lasse deinen IPFS-Knoten laufen, bis der Empfänger die Dateien heruntergeladen hat."    },
+    "learnMore": "Mehr erfahren."
+  },
+  "box": {
+    "missingDaemon": "Läuft Dein IPFS-Knoten?",
+    "runningDaemon": "Du benötigst einen <1>laufenden Knoten</1>, um Dateien zu IPFS hinzuzufügen.",
+    "configureDaemon": "Stelle sicher, dass <1>Deine IPFS-API so konfiguriert ist</1>, dass sie Cross-Origin-Anfragen (CORS) erlaubt:",
+    "runDaemon": "Starte danach einen IPFS-Daemon in Deinem Terminal:",
+    "largeFilesWarning": "Falls Du Probleme beim Herunterladen von Dateien hast, die größer als 1 GB sind, kann die Installation von <1>IPFS Desktop</1> oder <3>IPFS Companion</3> die Leistung verbessern.",
+    "viewOnGateway": "Auf IPFS anzeigen"
+  },
+  "modal": {
+    "how": {
+      "title": "So funktioniert IPFS Share",
+      "ariaLabel": "Modal zur Erklärung der Funktionsweise von IPFS Share",
+      "copy": "IPFS Share ist eine einfache, kostenlose Möglichkeit, Dateien freizugeben, ohne sich auf Dienste großer Unternehmen verlassen zu müssen. Stattdessen verwendet es das Peer-to-Peer IPFS-Protokoll für die direkte Freigabe zwischen Geräten. IPFS basiert auf Inhaltsadressierung — es behält den Überblick über Dateien basierend auf ihrem Inhalt und nicht auf ihrem Speicherort — was bedeutet, dass Dateien nicht geändert werden können, ohne auch ihre Adressen zu ändern. Mit anderen Worten, wenn Du eine Datei mit IPFS herunterlädst, kannst du sicher sein, dass sie genau die gleiche ist, die der Absender auch teilen wollte.",
+      "learnMore": "Erfahre, wie IPFS das Internet verändert, indem Du die <1>IPFS-Website</1> besuchst. Möchtest Du wissen, wie die Inhaltsadressierung funktioniert? Besuche <3>ProtoSchool</3> für Tutorials und andere Ressourcen."
+    },
+      "reprovide": {
+      "title": "Erhaltene Dateien weiter teilen",
+      "ariaLabel": "Modal zur Erklärung, wie man diese Dateien mit jemand anderem teilt",
+      "copy": "Du kannst diese Dateien ganz einfach mit anderen teilen, indem Du Dein Gerät zu einem ein Teil des IPFS-Netzwerks machst. Alles was Du tun musst, ist diese Seite offen zu lassen; Dadurch wird Dein Gerät zu einem Knoten im Netzwerk und stellt diese Dateien anderen direkt zur Verfügung. Gib dann den erhaltenen Link weiter — und lasse diese Seite geöffnet, bis Du weißt, dass der Empfänger die Dateien heruntergeladen hat.",
+      "learnMore": "Neugierig, wie alles unter der Haube funktioniert? In der <1>offiziellen IPFS-Dokumentation</1> findest Du alles, von grundlegenden Erklärungen bis hin zu Entwicklertools."
+    },
+    "privacy": {
+      "title": "Dateien mit IPFS teilen",
+      "ariaLabel": "Modal zur Beschreibung der Freigabe und des Datenschutzes in IPFS",
+      "copy": "Diese Seite verwendet IPFS, ein Peer-to-Peer Protokoll zum Speichern und Austauschen von Daten direkt zwischen Benutzern, ohne auf Cloud-Speicher oder andere Dienste großer Unternehmen angewiesen zu sein. Da IPFS ein öffentliches Netzwerk ist, ermöglichst Du beim Freigeben von Inhalten mit IPFS Share jedem, der die eindeutige CID in Deinem Freigabelink kennt, diese abzurufen. Das bedeutet, dass Du vermeiden solltest, sensible Dateien oder urheberrechtlich geschütztes Material zu teilen.",
+      "learnMore": "Du möchtest mehr über IPFS erfahren? Besuche die <1>Website</1>, um die Grundlagen zu erfahren, oder informiere Dich mit der <3>offiziellen Dokumentation</3> über die Details zu IPFS und Datenschutz."
+    },
+    "cid": {
+      "title": "Was ist eine CID?",
+      "ariaLabel": "Modal zur Beschreibung von Inhaltskennungen (CID)",
+      "copy": "Inhaltsadressierer (CIDs) sind kryptografisch generierte Fingerabdrücke, die es IPFS ermöglichen, Dateien zu finden und zu übertragen. Da IPFS Dateien nach ihrem Inhalt und nicht nach ihrem Speicherort identifiziert, verweist ein CID nicht nur auf eine bestimmte Datei, sondern auch auf eine bestimmte Version — wenn die Datei geändert wird, ändert sich auch die CID. Wenn Du eine Datei mit IPFS Share freigibst, kannst Du ihre CID sehen, indem Du im Freigabelink nach der langen Zeichenfolge suchst, die mit \"bafy\" beginnt.",
+      "learnMore": "Du möchtest mehr über die Funktionsweise von Inhaltskennungen erfahren? Besuche <1>ProtoSchool</1> für Tutorials und andere Ressourcen zur dezentralisierten Webtechnologie, die IPFS antreibt."
+    }
+  },
+  "addFiles": "Dateien hinzufügen",
+  "addFolder": "Oder einen Ordner hinzufügen",
+  "copyLink": {
+    "labelIndividual": "Einzelne Dateien teilen",
+    "labelAll": "Alle Dateien teilen",
+    "footNote": "Dieser Link ändert sich, wenn Du weitere Dateien hinzufügst. Stelle also sicher, dass Du die neueste Version teilst.",
+    "copy": "Teilen",
+    "copied": "Kopiert!",
+    "qrLabel": "Oder scanne, um alle Dateien zu teilen"
+  },
+  "loader": "Dateiliste wird geladen…",
+  "downloadFiles": {
+    "download": "Herunterladen",
+    "downloadAll": "Alles herunterladen",
+    "downloading": "Wird heruntergeladen…"
+  },
+  "dropdown": {
+    "clickLabel": "Klicke hier, um das Dropdown-Menü zu öffnen"
+  }
+}
