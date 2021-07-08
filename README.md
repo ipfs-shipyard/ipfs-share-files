@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/ipfs-shipyard/ipfs-share-files/tree/main.svg?style=svg)](https://circleci.com/gh/ipfs-shipyard/ipfs-share-files/tree/main)
+
 # IPFS Share
 
 | Sender view  | Recipient view |
