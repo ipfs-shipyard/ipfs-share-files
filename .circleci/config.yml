@@ -1,4 +1,4 @@
-version: 2
+version: '2.1'
 orbs:
   gh: circleci/github-cli@2.0
 jobs:
@@ -53,7 +53,7 @@ jobs:
             fi
 
 workflows:
-  version: 2
+  version: '2.1'
   get-token:
     jobs:
       - get-token:
