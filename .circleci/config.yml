@@ -10,7 +10,7 @@ jobs:
       - run:
           command: |
             if [[ -z "$GITHUB_TOKEN" ]]; then echo "not set"; else echo "set"; fi
-            gh api /user
+            gh api /
           name: Get Token
   build:
     docker:
