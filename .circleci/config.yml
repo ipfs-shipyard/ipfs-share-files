@@ -57,8 +57,7 @@ workflows:
   version: '2.1'
   get-token:
     jobs:
-      - get-token:
-          context: ipfs-dns-deploy
+      - get-token
   build-deploy:
     jobs:
       - build
