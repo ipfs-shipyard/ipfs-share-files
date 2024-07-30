@@ -1,0 +1,85 @@
+name: Build and Deploy to IPFS
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - production
+      - github-actions
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.*'
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+  deploy:
+    if: github.event_name == 'push'
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ipfs-shipyard/ipfs-dns-deploy
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+      - run: ls -la build
+      - env:
+          CIRCLE_PROJECT_USERNAME: ipfs-shipyard
+          CIRCLE_PROJECT_REPONAME: ipfs-share-files
+          CIRCLE_SHA1: ${{ github.sha }}
+          CLUSTER_USER: ${{ secrets.CLUSTER_USER }}
+          CLUSTER_PASSWORD: ${{ secrets.CLUSTER_PASSWORD }}
+          GITHUB_TOKEN: ${{ github.token }}
+          BUILD_DIR: build
+          SCRIPT: |
+            set -e
+            set -o pipefail
+            set -x
+
+            apk add --no-cache jq curl
+
+            pin_name="$CIRCLE_PROJECT_REPONAME $BUILD_DIR $GITHUB_RUN_ID"
+
+            hash=$(pin-to-cluster.sh "$pin_name" $BUILD_DIR)
+
+            echo "Website added to IPFS: https://dweb.link/ipfs/$hash"
+
+            # Update DNSlink for prod or dev domain
+            if [ "$GITHUB_REF_NAME" == "production" ] ; then
+              dnslink-dnsimple -d share.ipfs.io -r _dnslink -l /ipfs/$hash
+            fi
+            if [ "$GITHUB_REF_NAME" == "main" ] ; then
+              dnslink-dnsimple -d dev.share.ipfs.io -r _dnslink -l /ipfs/$hash
+            fi
+        run: |
+          docker build -t ipfs-dns-deploy .
+          docker run --rm -v $PWD:/tmp \
+            -w /tmp \
+            -e GITHUB_TOKEN \
+            -e GITHUB_RUN_ID \
+            -e GITHUB_REF_NAME \
+            -e CIRCLE_PROJECT_USERNAME \
+            -e CIRCLE_PROJECT_REPONAME \
+            -e CIRCLE_SHA1 \
+            -e CLUSTER_USER \
+            -e CLUSTER_PASSWORD \
+            -e BUILD_DIR \
+            ipfs-dns-deploy \
+            bash -c "$SCRIPT"
