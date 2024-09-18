@@ -25,7 +25,7 @@ i18n
       backendOptions: [
         { // LocalStorageBackend
           defaultVersion: 'v1',
-          expirationTime: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 1 : 7 * 24 * 60 * 60 * 1000
+          expirationTime: (!import.meta.env.NODE_ENV || import.meta.env.NODE_ENV === 'development') ? 1 : 7 * 24 * 60 * 60 * 1000
         },
         { // HttpBackend
           // ensure a relative path is used to look up the locales, so it works when loaded from /ipfs/<cid>
@@ -41,7 +41,7 @@ i18n
       zh: ['zh-CN', 'en'],
       default: ['en']
     },
-    debug: process.env.DEBUG,
+    debug: import.meta.env.DEBUG,
     // react i18next special options (optional)
     react: {
       wait: true,

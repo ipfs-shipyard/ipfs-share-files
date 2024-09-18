@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet'
-import isIPFS from 'is-ipfs'
+import { cid } from 'is-ipfs'
 
 // Constants
 import PAGES from '../constants/pages'
@@ -41,7 +41,8 @@ class Page extends React.Component {
 
     if (prevHash !== currentHash) {
       doResetFiles()
-      isIPFS.cid(currentHash) ? doFetchFileTree(currentHash) : doUpdateHash('#/')
+      cid(currentHash) ? doFetchFileTree(currentHash) : doUpdateHash('#/')
+      // doFetchFileTree(currentHash)
     }
   }
 

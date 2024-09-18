@@ -12,7 +12,7 @@ import ENDPOINTS from '../../constants/endpoints'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 // Components
-import FileIcon from '../file/file-icon/FileIcon'
+import FileIcon from './file-icon/FileIcon'
 
 // Styles
 import './File.css'
