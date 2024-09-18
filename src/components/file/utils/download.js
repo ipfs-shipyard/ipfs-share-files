@@ -3,6 +3,7 @@ const download = (url, fileName) => {
 
   link.setAttribute('href', url)
   link.setAttribute('download', fileName)
+  // link.setAttribute()
   link.click()
 }
 

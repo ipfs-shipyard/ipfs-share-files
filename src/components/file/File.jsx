@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import filesize from 'filesize'
+// import filesize from 'filesize'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import classnames from 'classnames'
 import { connect } from 'redux-bundler-react'
@@ -37,7 +37,8 @@ export class File extends React.Component {
     gatewayURL: PropTypes.string,
     isDownload: PropTypes.bool,
     doGetFileURL: PropTypes.func,
-    doGetArchiveURL: PropTypes.func
+    doGetArchiveURL: PropTypes.func,
+    filename: PropTypes.string,
   }
 
   state = {
@@ -45,22 +46,37 @@ export class File extends React.Component {
   }
 
   handleViewClick = async () => {
-    const { cid, name, doGetFileURL } = this.props
-    const { url, filename } = await doGetFileURL(name, cid, { download: false })
+    const { cid, name, doGetFileURL, filename } = this.props
+    const { url } = await doGetFileURL(name, cid, { download: false })
     viewFile(url, filename)
   }
 
   handleDownloadClick = async () => {
-    const { cid, name, type, doGetFileURL, doGetArchiveURL } = this.props
+    const { cid, name, type, doGetArchiveURL, doGetFile, filename } = this.props
+    console.log('handleDownloadClick cid, filename', cid, filename)
+    /**
+     * @type {import('@helia/unixfs').UnixFS}
+     */
+    // const fs = selectUnixFs()
 
     if (type === 'dir') {
-      const { url, filename } = await doGetArchiveURL(cid)
+      const { url } = await doGetArchiveURL(cid)
       const updater = (progress) => this.setState({ progress: progress })
       return downloadArchive(url, filename, updater)
     }
 
-    const { url, filename } = await doGetFileURL(name, cid)
-    downloadFile(url, filename)
+    // const file = new globalThis.File()
+    // for await (const buf of fs.cat(cid)) {
+
+    // }
+    // const { url, filename } = await doGetFileURL(name, cid)
+    // const filename = selectFileName()
+    const file = await doGetFile(cid, filename)
+    console.log(file)
+    const url = URL.createObjectURL(file)
+    console.log(url, name)
+    downloadFile(url, name)
+    alert('FIX_ME')
   }
 
   renderWarningSign = () => {
@@ -136,12 +152,13 @@ export class File extends React.Component {
 
   render () {
     const { name, type, cid, error, t } = this.props
-    const size = filesize(this.props.size || 0, { round: 0, spacer: '' })
+    console.log('cid', cid)
+    const size = Number(BigInt(this.props.size ?? 0))
 
     const fileNameClass = classnames({ charcoal: !error, gray: error }, ['FileLinkName ph2 f6 b truncate'])
     const fileSizeClass = classnames({ 'charcoal-muted': !error, gray: error }, ['f6'])
 
-    const url = cid ? `${ENDPOINTS.gateway}/${cid.toV1()}?filename=${encodeURI(name)}` : undefined
+    const url = cid ? `${ENDPOINTS.gateway}/${cid}?filename=${encodeURI(name)}` : undefined
 
     return (
       <div className='mv2 flex items-center justify-between'>
@@ -181,5 +198,7 @@ export default connect(
   'selectShareCID',
   'doGetFileURL',
   'doGetArchiveURL',
+  'doGetFile',
+  'selectFilename',
   TranslatedFile
 )

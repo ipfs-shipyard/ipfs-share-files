@@ -1,10 +1,9 @@
-import ENDPOINTS from '../constants/endpoints'
 import { createHelia } from 'helia'
-// import { unixfs } from '@helia/unixfs'
+import { unixfs } from '@helia/unixfs'
 import { mfs } from '@helia/mfs'
+import { devToolsMetrics } from '@libp2p/devtools-metrics'
 
 const initialState = {
-  apiAddress: ENDPOINTS.apiMultiAddr,
   failed: false,
   ready: false
 }
@@ -31,38 +30,33 @@ const extra = {
     return ipfs
   },
   getFs () {
-    if (fs === null) {
+    if (fs == null) {
       fs = mfs(ipfs)
     }
     return fs
   },
+  getUnixFs () {
+    return unixfs(ipfs)
+  }
 }
 
 const selectors = {
   selectIpfsReady: state => state.ipfs.ready,
   selectIpfsProvider: state => state.ipfs.provider,
   selectIpfsApiAddress: state => state.ipfs.apiAddress,
-  selectIpfsInitFailed: state => state.ipfs.failed
+  selectIpfsInitFailed: state => state.ipfs.failed,
 }
 
 const actions = {
   doInitIpfs: () => async ({ getState, dispatch }) => {
     dispatch({ type: 'INIT_IPFS' })
 
-    // const result = await getIpfs({
-    //   providers: [
-    //     providers.jsIpfs({
-    //       loadJsIpfsModule: () => require('ipfs-core'),
-    //       options: {
-    //         // we use custom libp2p bundle for fine-grained control
-    //         libp2p: libp2pBundle
-    //       }
-    //     })
-    //   ]
-    // })
-
     try {
-      ipfs = await createHelia()
+      ipfs = await createHelia({
+        libp2p: {
+          metrics: devToolsMetrics()
+        }
+      })
     } catch (err) {
       dispatch({ type: 'IPFS_ERRORED' })
       throw Error('Could not connect to JS-IPFS')

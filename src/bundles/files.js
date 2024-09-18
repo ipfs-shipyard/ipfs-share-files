@@ -3,8 +3,9 @@ import shortid from 'shortid'
 import toUri from 'multiaddr-to-uri'
 // import { makeCIDFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
-import PAGES from '../constants/pages'
+// import PAGES from '../constants/pages'
 import blobToIt from 'blob-to-it'
+import { asyncItToFile } from '../components/file/utils/async-it-to-file'
 
 /**
  * @typedef {object} FileState
@@ -275,7 +276,7 @@ const bundle = {
     'selectExistFiles',
     'selectExistFilesPending',
     (isShareLinkOutdated, currentPage, existFiles, existFilesPending) => {
-      if (currentPage === PAGES.add && isShareLinkOutdated && existFiles && !existFilesPending) {
+      if (currentPage === 'add' && isShareLinkOutdated && existFiles && !existFilesPending) {
         return { actionCreator: 'doShareLink' }
       }
     }
@@ -361,11 +362,14 @@ const bundle = {
     }
   },
 
-  doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs, getFs }) => {
+  /**
+   * This function fetches the CIDs from the network using Helia and unixfs.
+   */
+  doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs, getUnixFs }) => {
     /**
      * @type {import('@helia/unixfs').UnixFS}
      */
-    const fs = getFs()
+    const fs = getUnixFs()
     // const ipfsFiles = []
     const files = {}
 
@@ -430,14 +434,18 @@ const bundle = {
       const files = Object.values(store.selectFiles())
       cid = files[0].cid
       filename = files[0].name
+      throw Error('No CID provided. fix me')
     }
 
     return {
-      url: `${url}/${cid.string}?${opts.download ? 'download=true&' : ''}filename=${encodeURIComponent(filename)}`,
+      url: `${url}/${cid}?${opts.download ? 'download=true&' : ''}filename=${encodeURIComponent(filename)}`,
       filename
     }
   },
 
+  /**
+   * @deprecated
+   */
   doGetArchiveURL: (cid) => async ({ store, getIpfs, getFs }) => {
     // const ipfs = getIpfs()
     const fs = getFs()
@@ -458,6 +466,23 @@ const bundle = {
       url: `${url}/v0/get?arg=${cid}&archive=true&compress=true`,
       filename: `shared-via-ipfs_${cid.string.slice(-7)}.tar.gz`
     }
+  },
+
+  /**
+   *
+   * @param {import('multiformats/cid').CID} cid
+   * @returns
+   */
+  doGetFile: (cid, filename) => async ({ getIpfs, getUnixFs }) => {
+    /**
+     * @type {import('@helia/unixfs').UnixFS}
+     */
+    const fs = getUnixFs()
+
+    // const stats = await fs.stat(cid)
+    const file = asyncItToFile(fs.cat(cid), filename)
+
+    return file
   },
 
   doResetFiles: () => ({ dispatch }) => dispatch({ type: 'FILES_RESET' })

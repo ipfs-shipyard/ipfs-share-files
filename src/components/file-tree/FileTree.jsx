@@ -20,7 +20,7 @@ const FileTree = ({ files, isDownload }) => {
           id={file.id}
           cid={file.cid}
           name={file.name}
-          size={file.size}
+          size={Number(file.size)}
           type={file.type}
           progress={file.progress}
           error={file.error}

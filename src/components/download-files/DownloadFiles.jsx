@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import downloadArchive from '../file/utils/archive'
-import downloadFile from '../file/utils/download'
+// import downloadFile from '../file/utils/download'
 
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
@@ -24,11 +24,17 @@ export class DownloadFiles extends React.Component {
 
   handleOnClick = async () => {
     const { doGetArchiveURL, doGetFileURL, existFiles } = this.props
+    // const fs = selectUnixFs()
+    // console.log('download click fs', fs)
+
 
     if (existFiles === 1) {
-      const { url, filename } = await doGetFileURL()
-      downloadFile(url, filename)
+      // just create a file object from Helia unixfs
+      // const { url, filename } = await doGetFileURL()
+      // downloadFile(url, filename)
+      alert('FIX_ME')
     } else {
+      // create a directory
       const { url, filename } = await doGetArchiveURL()
       const updater = (progress) => this.setState({ progress: progress })
       downloadArchive(url, filename, updater)

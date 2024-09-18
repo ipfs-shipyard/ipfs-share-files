@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { cid } from 'is-ipfs'
 
 // Constants
-import PAGES from '../constants/pages'
+// import PAGES from '../constants/pages'
 
 // Components
 import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/Box'
@@ -42,13 +42,12 @@ class Page extends React.Component {
     if (prevHash !== currentHash) {
       doResetFiles()
       cid(currentHash) ? doFetchFileTree(currentHash) : doUpdateHash('#/')
-      // doFetchFileTree(currentHash)
     }
   }
 
   render () {
     const { currentPage, ipfsInitFailed, shareLink, files, hasExceededMaxSize, isLoading, t } = this.props
-    const isDownload = currentPage === PAGES.download
+    const isDownload = currentPage === 'download'
     let headline
     let content
     let info
