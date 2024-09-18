@@ -69,3 +69,4 @@ build/
 
 # Misc
 .DS_Store
+dist
