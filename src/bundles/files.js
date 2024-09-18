@@ -1,9 +1,10 @@
 import { createSelector } from 'redux-bundler'
 import shortid from 'shortid'
 import toUri from 'multiaddr-to-uri'
-import { makeCIDFromFiles } from '../lib/files'
+// import { makeCIDFromFiles } from '../lib/files'
 import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
+import blobToIt from 'blob-to-it'
 
 const initialState = {
   files: {},
@@ -261,8 +262,16 @@ const bundle = {
      Action Creators
      ============================================================ */
 
-  doAddFiles: (files) => async ({ dispatch, getIpfs }) => {
-    const ipfs = getIpfs()
+  /**
+   *
+   * @param {File[]} files
+   */
+  doAddFiles: (files) => async ({ dispatch, getIpfs, getFs }) => {
+    // const ipfs = getIpfs()
+    /**
+     * @type {import('@helia/mfs').MFS}
+     */
+    const fs = getFs()
 
     for (const _file of files) {
       const fileId = shortid.generate()
@@ -288,31 +297,42 @@ const bundle = {
       }
 
       try {
-        const addedFile = await ipfs.add(_file, { pin: false, progress: updateProgress })
-        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, cid: addedFile.cid } })
-      } catch (err) {
+        const content = await blobToIt(_file)
+
+        await fs.writeByteStream(content, fileName, { onProgress: updateProgress })
+        const { cid } = await fs.stat(`/${fileName}`)
+        // const addedFile = await fs.addFile({ path: fileName, content }, { onProgress: updateProgress })
+        // const addedFile = await fs.add(_file, { pin: false, progress: updateProgress })
+        dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, cid } })
+      } catch (/** @type {any} */err) {
         console.error(err)
         dispatch({ type: 'FILES_ADD_FAILED', payload: { id: fileId, error: err.message } })
       }
     }
   },
 
-  doShareLink: () => async ({ dispatch, store, getIpfs }) => {
-    const ipfs = getIpfs()
+  doShareLink: () => async ({ dispatch, store, getIpfs, getFs }) => {
+    /**
+     * @type {import('@helia/mfs').MFS}
+     */
+    const fs = getFs()
     const storeShareLink = store.selectShareLink()
-    const files = Object.values(store.selectFiles())
 
-    const cid = await makeCIDFromFiles(files, ipfs)
+    const { cid } = await fs.stat('/')
 
-    const shareLink = `${ENDPOINTS.share}/${cid.toV1()}`
+    const shareLink = `${ENDPOINTS.share}/${cid}`
 
     if (storeShareLink !== shareLink) {
       dispatch({ type: 'FILES_SHARE_LINK', payload: { link: shareLink, cid } })
     }
   },
 
-  doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs }) => {
-    let ipfsFiles
+  doFetchFileTree: (cid) => async ({ dispatch, store, getIpfs, getFs }) => {
+    /**
+     * @type {import('@helia/unixfs').UnixFS}
+     */
+    const fs = getFs()
+    // const ipfsFiles = []
     const files = {}
 
     dispatch({ type: 'FILES_SHARE_LINK', payload: { cid } })
@@ -321,23 +341,27 @@ const bundle = {
     try {
       // determines whether to use the public gateway or the user's node.
       if (store.selectIpfsReady()) {
-        const ipfs = getIpfs()
-        ipfsFiles = await ipfs.ls(cid)
+        // ipfsFiles = await fs.ls
+        // for await (const file of fs.ls(cid)) {
+        //   ipfsFiles.push(file)
+        // }
       } else {
-        const url = `${ENDPOINTS.api}/v0/ls?arg=${cid}`
-        const res = await window.fetch(url)
-        const objs = await res.json()
-        ipfsFiles = objs.Objects[0].Links
+        // const url = `${ENDPOINTS.api}/v0/ls?arg=${cid}`
+        // const res = await window.fetch(url)
+        // const objs = await res.json()
+        // ipfsFiles = objs.Objects[0].Links
+        console.error('IPFS not ready')
+        return
       }
 
       const maxSize = store.selectMaxFileSize()
 
-      for await (const file of ipfsFiles) {
+      for await (const file of fs.ls(cid)) {
         const fileId = shortid.generate()
-        const fileName = file.name || file.Name
-        const fileSize = file.size || file.Size
-        const fileType = file.type || file.Type
-        const fileCid = file.cid || file.Cid
+        const fileName = file.name
+        const fileSize = file.size
+        const fileType = file.type
+        const fileCid = file.cid
 
         files[fileId] = {
           id: fileId,
@@ -353,13 +377,13 @@ const bundle = {
           dispatch({ type: 'FILES_MAX_SIZE_EXCEEDED' })
         }
 
-        if (fileType === 'dir') {
+        if (fileType === 'directory') {
           dispatch({ type: 'FILES_DIR_FOUND' })
         }
       }
 
       dispatch({ type: 'FILES_FETCH_FINISHED', payload: { files: files } })
-    } catch (err) {
+    } catch (/** @type {any} */err) {
       console.error(err)
       dispatch({ type: 'FILES_FETCH_FAILED', payload: { error: err.message } })
     }
@@ -380,8 +404,9 @@ const bundle = {
     }
   },
 
-  doGetArchiveURL: (cid) => async ({ store, getIpfs }) => {
-    const ipfs = getIpfs()
+  doGetArchiveURL: (cid) => async ({ store, getIpfs, getFs }) => {
+    // const ipfs = getIpfs()
+    const fs = getFs()
     const apiAddress = store.selectIpfsApiAddress()
 
     // Try to use the HTTP API of the local daemon
@@ -391,8 +416,8 @@ const bundle = {
 
     // If no cid was passed it is to download everything
     if (!cid) {
-      const files = Object.values(store.selectFiles())
-      cid = await makeCIDFromFiles(files, ipfs)
+      // const files = Object.values(store.selectFiles())
+      cid = await fs.stat('/')
     }
 
     return {

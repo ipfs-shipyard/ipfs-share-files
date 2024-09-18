@@ -3,7 +3,10 @@ import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 import { IGNORED_FILES } from '../../constants/files'
 
-const parseFiles = ev => {
+/**
+ * @returns {File[]}
+ */
+const parseFiles = (ev) => {
   ev.preventDefault()
   ev.stopPropagation()
 

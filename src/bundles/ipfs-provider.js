@@ -1,5 +1,7 @@
 import ENDPOINTS from '../constants/endpoints'
 import { createHelia } from 'helia'
+// import { unixfs } from '@helia/unixfs'
+import { mfs } from '@helia/mfs'
 
 const initialState = {
   apiAddress: ENDPOINTS.apiMultiAddr,
@@ -22,11 +24,18 @@ const reducer = (state = initialState, action) => {
 }
 
 let ipfs = null
+let fs = null
 
 const extra = {
   getIpfs () {
     return ipfs
-  }
+  },
+  getFs () {
+    if (fs === null) {
+      fs = mfs(ipfs)
+    }
+    return fs
+  },
 }
 
 const selectors = {
