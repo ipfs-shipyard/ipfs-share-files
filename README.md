@@ -144,6 +144,32 @@ On the app side, translations are stored in [`public/locales`](./public/locales)
 
 To learn more about internationalization on the IPFS project as a whole, or contribute translations to other IPFS repos, check out [ipfs/i18n](https://github.com/ipfs/i18n).
 
+## REFRESH - TODO
+
+### UI
+
+1. Update the "progress bar" circular progress bar to be a loading indicator for record publishing
+1. Disable share buttons when:
+    * no listening webrtc address
+    * CID is not published
+1. Remove protocol labs footer -> replace with "powered by Helia"
+1. Show the users what is actually happening in the background:
+    * Finding closest peers
+    * asking them to publish our provider record
+
+### Functionality
+
+1. publish directory CID
+1. Make sure that when share.ipfs.io link with CID deeplink is shared, that browser retrieval client can get the file.
+1. On self:update, we need to check if the listening webrtc address has changed, and republish all "files" and "directory" if so.
+1. Ability to remove individual files from share list
+1. Fix downloading the files filename
+
+### debugging
+
+1. Add libp2p-devtools
+
+
 ## Contribute
 
 Contributions are more than welcome! Check out the [currently open issues](https://github.com/ipfs-shipyard/ipfs-share-files/issues) and start hacking on anything that sounds interesting. Issues are labeled with a variety of tags to help you find a good fit — you may wish to start with the [`help-wanted`](https://github.com/ipfs-shipyard/ipfs-share-files/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) tag.
