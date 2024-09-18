@@ -1,6 +1,5 @@
-import { getIpfs, providers } from 'ipfs-provider'
 import ENDPOINTS from '../constants/endpoints'
-import { libp2pBundle } from '../lib/libp2p'
+import { create } from 'ipfs-core'
 
 const initialState = {
   apiAddress: ENDPOINTS.apiMultiAddr,
@@ -41,28 +40,28 @@ const actions = {
   doInitIpfs: () => async ({ getState, dispatch }) => {
     dispatch({ type: 'INIT_IPFS' })
 
-    const result = await getIpfs({
-      providers: [
-        providers.jsIpfs({
-          loadJsIpfsModule: () => require('ipfs-core'),
-          options: {
-            // we use custom libp2p bundle for fine-grained control
-            libp2p: libp2pBundle
-          }
-        })
-      ]
-    })
+    // const result = await getIpfs({
+    //   providers: [
+    //     providers.jsIpfs({
+    //       loadJsIpfsModule: () => require('ipfs-core'),
+    //       options: {
+    //         // we use custom libp2p bundle for fine-grained control
+    //         libp2p: libp2pBundle
+    //       }
+    //     })
+    //   ]
+    // })
 
-    if (!result) {
+    try {
+      ipfs = await create()
+    } catch (err) {
       dispatch({ type: 'IPFS_ERRORED' })
       throw Error('Could not connect to JS-IPFS')
     }
 
-    ipfs = result.ipfs
-
     dispatch({ type: 'IPFS_STARTED' })
 
-    return result
+    return { ipfs }
   }
 }
 
