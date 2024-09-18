@@ -6,6 +6,17 @@ import ENDPOINTS from '../constants/endpoints'
 import PAGES from '../constants/pages'
 import blobToIt from 'blob-to-it'
 
+/**
+ * @typedef {object} FileState
+ * @property {string} id
+ * @property {string} name
+ * @property {number} size
+ * @property {number} progress
+ * @property {boolean} pending
+ * @property {import('multiformats/cid').CID} [cid]
+ * @property {true} [published]
+ *
+ */
 const initialState = {
   files: {},
   limits: {
@@ -19,7 +30,7 @@ const initialState = {
     cid: null
   },
   loading: false,
-  error: null
+  error: null,
 }
 
 const bundle = {
@@ -38,18 +49,6 @@ const bundle = {
           files: {
             ...state.files,
             ...action.payload.file
-          }
-        }
-
-      case 'FILES_ADD_PROGRESS':
-        return {
-          ...state,
-          files: {
-            ...state.files,
-            [action.payload.id]: {
-              ...state.files[action.payload.id],
-              progress: action.payload.progress
-            }
           }
         }
 
@@ -85,6 +84,30 @@ const bundle = {
           shareLink: {
             ...state.shareLink,
             outdated: false
+          }
+        }
+
+      case 'FILES_ADD_PUBLISH_FINISHED':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              published: true,
+              progress: 100
+            }
+          }
+        }
+      case 'FILES_ADD_PUBLISH_ERROR':
+        return {
+          ...state,
+          files: {
+            ...state.files,
+            [action.payload.id]: {
+              ...state.files[action.payload.id],
+              error: action.payload.error
+            }
           }
         }
 
@@ -267,7 +290,10 @@ const bundle = {
    * @param {File[]} files
    */
   doAddFiles: (files) => async ({ dispatch, getIpfs, getFs }) => {
-    // const ipfs = getIpfs()
+    /**
+     * @type {import('helia').Helia}
+     */
+    const ipfs = getIpfs()
     /**
      * @type {import('@helia/mfs').MFS}
      */
@@ -278,6 +304,10 @@ const bundle = {
       const fileName = _file.name
       const fileSize = _file.size
 
+
+      /**
+       * @type {Record<string, FileState>}
+       */
       const file = {
         [fileId]: {
           id: fileId,
@@ -290,19 +320,23 @@ const bundle = {
 
       dispatch({ type: 'FILES_ADD_STARTED', payload: { file } })
 
-      const updateProgress = (bytesLoaded) => {
-        const progress = Math.round((bytesLoaded / fileSize) * 100)
-
-        dispatch({ type: 'FILES_ADD_PROGRESS', payload: { id: fileId, progress } })
-      }
-
       try {
-        const content = await blobToIt(_file)
+        const content = blobToIt(_file)
 
-        await fs.writeByteStream(content, fileName, { onProgress: updateProgress })
+        await fs.writeByteStream(content, fileName)
         const { cid } = await fs.stat(`/${fileName}`)
-        // const addedFile = await fs.addFile({ path: fileName, content }, { onProgress: updateProgress })
-        // const addedFile = await fs.add(_file, { pin: false, progress: updateProgress })
+
+        ipfs.routing.provide(cid, {
+          onProgress: (evt) => {
+            console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
+          }
+        }).then(() => {
+            dispatch({ type: 'FILES_ADD_PUBLISH_FINISHED', payload: { id: fileId } })
+          })
+          .catch((/** @type {any} */err) => {
+            console.error(err)
+            dispatch({ type: 'FILES_ADD_PUBLISH_ERROR', payload: { id: fileId, error: err.message } })
+          })
         dispatch({ type: 'FILES_ADD_FINISHED', payload: { id: fileId, cid } })
       } catch (/** @type {any} */err) {
         console.error(err)
