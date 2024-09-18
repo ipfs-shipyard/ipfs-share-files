@@ -1,5 +1,5 @@
 import ENDPOINTS from '../constants/endpoints'
-import { create } from 'ipfs-core'
+import { createHelia } from 'helia'
 
 const initialState = {
   apiAddress: ENDPOINTS.apiMultiAddr,
@@ -53,7 +53,7 @@ const actions = {
     // })
 
     try {
-      ipfs = await create()
+      ipfs = await createHelia()
     } catch (err) {
       dispatch({ type: 'IPFS_ERRORED' })
       throw Error('Could not connect to JS-IPFS')
