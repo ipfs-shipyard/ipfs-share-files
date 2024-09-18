@@ -4,7 +4,7 @@ import { localesList } from '../../i18n'
 import i18n from 'i18next'
 import Dropdown from '../dropdown/Dropdown'
 
-import plLogoText from '../../media/logos/protocol-labs-text.svg'
+// import plLogoText from '../../media/logos/protocol-labs-text.svg'
 import LanguagePicker from '../../media/images/Language'
 
 const Footer = ({ t }) => {
@@ -20,10 +20,16 @@ const Footer = ({ t }) => {
 
   return (
     <div className='flex-ns items-center pt5 pb3 ph4 f7 white '>
-      <div>
-        <a href='https://protocol.ai' target='_blank' rel='noopener noreferrer'>
-          <img src={plLogoText} height='50px' alt='Protocol Labs' />
-        </a>
+      <div className="mr2 pb1">
+        {/* <div className=''> */}
+
+          {/* <div className="dib v-mid"> */}
+            <Trans i18nKey='powered-by-helia'>
+              Powered by <a className={anchorClass} href="https://github.com/ipfs/helia" title="Helia" target='_blank' rel='noopener noreferrer'>Helia</a>
+            </Trans>
+
+          {/* </div>
+        </div> */}
       </div>
       <div className='mr2 pb1 dn dib-ns'>
           |
@@ -36,6 +42,11 @@ const Footer = ({ t }) => {
       <div className='flex items-center pv2'>
         <div className='mh2 pb1 dn dib-ns'>
           |
+        </div>
+        <div className="mh1">
+          <a className="mr1" href="https://github.com/ipfs/helia" title="Helia" target='_blank' rel='noopener noreferrer'>
+            <img src="https://raw.githubusercontent.com/ipfs/helia/main/assets/helia.png" alt="Helia logo" height="30px" />
+          </a>
         </div>
         <div className="mh1">
           <a href="https://github.com/ipfs-shipyard/ipfs-share-files" target='_blank' rel='noopener noreferrer'>

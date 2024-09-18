@@ -6,6 +6,7 @@
   },
   "header": "Share",
   "footer": "Licensed <1>CC-BY 3.0</1> except as <3>noted</3>",
+  "powered-by-helia": "Powered by <1>Helia</1>",
   "info": {
     "add": {
       "title": "Share files using IPFS",
