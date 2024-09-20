@@ -1,4 +1,4 @@
-const view = (url, fileName) => {
+const view = (url: string, fileName?: any) => {
   const link = document.createElement('a')
 
   link.setAttribute('href', url)

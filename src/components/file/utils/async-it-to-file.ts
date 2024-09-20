@@ -3,11 +3,8 @@ import toBrowserReadableStream from 'it-to-browser-readablestream'
 /**
  * This function takes an async iterable, and creates a file object that
  * does not load the full content of the AsyncIterable into memory.
- *
- * @param {AsyncIterable<Uint8Array>} asyncIt
- * @returns {Promise<File>}
  */
-export async function asyncItToFile (asyncIt, filename) {
+export async function asyncItToFile (asyncIt: AsyncIterable<Uint8Array>, filename: string) {
   const stream = toBrowserReadableStream(asyncIt)
   const responseFromStream = new Response(stream)
   const blob = await responseFromStream.blob()

@@ -1,4 +1,4 @@
-const archive = (url, filename, progressCallback) => {
+const archive = (url: string, filename: string, progressCallback: (n: number | null) => void) => {
   const xhr = new window.XMLHttpRequest()
   let total = 0
 
@@ -21,7 +21,6 @@ const archive = (url, filename, progressCallback) => {
     progressCallback(100)
 
     document.body.appendChild(a)
-    a.style = 'display:none'
     a.href = url
     a.download = filename
     a.click()
@@ -30,7 +29,7 @@ const archive = (url, filename, progressCallback) => {
   }
 
   xhr.onprogress = (e) => {
-    total = e.lengthComputable ? e.total : (total || xhr.getResponseHeader('X-Content-Length') || xhr.getResponseHeader('Content-Length'))
+    total = e.lengthComputable ? e.total : (total || Number(xhr.getResponseHeader('X-Content-Length') || xhr.getResponseHeader('Content-Length') || 0))
     progressCallback((e.loaded / total) * 100)
   }
 

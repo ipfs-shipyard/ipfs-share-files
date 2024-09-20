@@ -1,19 +1,16 @@
-import React from 'react'
-import { connect } from 'redux-bundler-react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { IGNORED_FILES } from '../../constants/files'
+import { ChangeEvent } from 'react'
 
-/**
- * @returns {File[]}
- */
-const parseFiles = (ev) => {
+const parseFiles = (ev: ChangeEvent<HTMLInputElement>) => {
   ev.preventDefault()
   ev.stopPropagation()
 
   return Object.values(ev?.target?.files || {})
 }
 
-export const AddFiles = ({ t, doAddFiles }) => {
+export const AddFiles = ({ doAddFiles }: { doAddFiles: (files: File[]) => void }) => {
+  const { t } = useTranslation()
   const onAddFiles = (ev) => {
     const filesList = parseFiles(ev)
     doAddFiles(filesList)
@@ -29,7 +26,10 @@ export const AddFiles = ({ t, doAddFiles }) => {
       <div className="flex flex-column justify-center items-start">
         <label className="flex items-center pointer">
           <div className='mw3 fill-navy'>
-            <svg xmlns="http://www.w3.org/2000/svg" alt={t('addFiles')} width="68" viewBox="20 10 80 74"><path d="M71.13 28.87a29.88 29.88 0 100 42.26 29.86 29.86 0 000-42.26zm-18.39 37.6h-5.48V52.74H33.53v-5.48h13.73V33.53h5.48v13.73h13.73v5.48H52.74z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="20 10 80 74">
+              <title>{t('addFiles')}</title>
+              <path d="M71.13 28.87a29.88 29.88 0 100 42.26 29.86 29.86 0 000-42.26zm-18.39 37.6h-5.48V52.74H33.53v-5.48h13.73V33.53h5.48v13.73h13.73v5.48H52.74z"/>
+            </svg>
           </div>
           <div className="f3 fw4 montserrat">{t('addFiles')}</div>
           <input
@@ -49,14 +49,12 @@ export const AddFiles = ({ t, doAddFiles }) => {
             className="dn"
             style={{ pointerEvents: 'none' }}
             type="file"
-            multiple directory="true" webkitdirectory="true" mozdirectory="true"
+            multiple
+            // @ts-expect-error react types don't know about these attributes
+            directory="true" webkitdirectory="true" mozdirectory="true"
           />
         </label>
       </div>
     </div>
   )
 }
-
-export const TranslatedAddFiles = withTranslation('translation')(AddFiles)
-
-export default connect('doAddFiles', TranslatedAddFiles)

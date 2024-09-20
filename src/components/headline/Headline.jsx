@@ -1,8 +1,6 @@
-import React from 'react'
-import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 
-const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
+const Headline = ({ t, imgHeight = 70, isDownload }) => {
   // Download page
   if (isDownload) {
     return (
@@ -22,9 +20,4 @@ const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   )
 }
 
-export const TranslatedHeadline = withTranslation('translation')(Headline)
-
-export default connect(
-  'selectIpfsProvider',
-  TranslatedHeadline
-)
+export default withTranslation('translation')(Headline)
