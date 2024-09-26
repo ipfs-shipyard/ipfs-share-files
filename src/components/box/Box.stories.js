@@ -19,12 +19,12 @@ storiesOf('Box', module)
   ))
   .add('Add', () => (
     <div className={wrapperClass}>
-      <BoxAdd files={fixtures.files} shareLink={fixtures.shareLink} />
+      <BoxAdd />
     </div>
   ))
   .add('Download', () => (
     <div className={wrapperClass}>
-      <BoxDownload files={fixtures.files} isDownload />
+      <BoxDownload isDownload />
     </div>
   ))
   .add('Not Available', () => (

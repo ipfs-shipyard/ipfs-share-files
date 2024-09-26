@@ -1,12 +1,12 @@
 import React from 'react'
 import { useTranslation, Trans } from 'react-i18next'
-// Components
-import { type FileState } from '../../providers/FilesProvider'
+import { useFiles } from '../../hooks/useFiles'
 import { File } from '../file/File'
 
-export const FileTree = ({ files, isDownload }: { files: Record<string, FileState>, isDownload?: boolean }) => {
-  const filesMap = Object.entries(files)
+export const FileTree = ({ isDownload }: { isDownload?: boolean }): React.ReactNode => {
   const { t } = useTranslation()
+  const { files } = useFiles()
+  const filesMap = Object.entries(files)
 
   return (
   <div className='mt4'>

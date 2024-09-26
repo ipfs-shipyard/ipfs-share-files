@@ -2,16 +2,15 @@ import classnames from 'classnames'
 import React, { useCallback, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { useTranslation } from 'react-i18next'
-import { type FileState } from '../../providers/FilesProvider'
+import { useFiles } from '../../hooks/useFiles'
 import downloadArchive from '../file/utils/archive'
 // import downloadFile from '../file/utils/download'
-
-// Styles
 import 'react-circular-progressbar/dist/styles.css'
 import './DownloadFiles.css'
 
-export const DownloadFiles = ({ files, isLoading }: { files: Record<string, FileState>, isLoading: boolean }) => {
+export const DownloadFiles = ({ isLoading }: { isLoading: boolean }) => {
   const [progress, setProgress] = useState(100)
+  const { files } = useFiles()
 
   const handleOnClick = useCallback(async () => {
     // const fs = selectUnixFs()

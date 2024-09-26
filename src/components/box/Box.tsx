@@ -5,7 +5,6 @@ import { NativeTypes } from 'react-dnd-html5-backend'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAddFiles, useFilesDispatch } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
-import { type FileState, type ShareLinkState } from '../../providers/FilesProvider'
 import { AddFiles } from '../add-files/AddFiles'
 import { CopyLink } from '../copy-link/CopyLink'
 import { DownloadFiles } from '../download-files/DownloadFiles'
@@ -23,15 +22,17 @@ export const Box = forwardRef<HTMLDivElement, { children: any, className?: strin
 // Component definition is missing display [nameeslintreact/display-name](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md)
 Box.displayName = 'Box'
 
-export const BoxDownload = ({ files, isLoading }: { files: Record<string, FileState>, isLoading: boolean }) => (
-  <Box>
-    { isLoading && <Loader /> }
-    <FileTree files={files} isDownload />
-    <DownloadFiles files={files} isLoading={isLoading} />
-  </Box>
-)
+export const BoxDownload = ({ isLoading }: { isLoading: boolean }): React.JSX.Element => {
+  return (
+    <Box>
+      { isLoading && <Loader /> }
+      <FileTree isDownload />
+      <DownloadFiles isLoading={isLoading} />
+    </Box>
+  )
+}
 
-export const BoxAdd = ({ files, isLoading, shareLink }: { files: Record<string, FileState>, isLoading: boolean, shareLink: ShareLinkState }) => {
+export const BoxAdd = ({ isLoading }: { isLoading: boolean }): React.JSX.Element => {
   const dispatch = useFilesDispatch()
   const heliaState = useHelia()
   const doAddFiles = useAddFiles(dispatch, heliaState)
@@ -56,8 +57,8 @@ export const BoxAdd = ({ files, isLoading, shareLink }: { files: Record<string, 
   return <Box ref={drop} className={isOver ? '' : 'bg-gray-muted'} >
     <AddFiles doAddFiles={doAddFiles} />
     { isLoading && <Loader /> }
-    <FileTree files={files} />
-    <CopyLink shareLink={shareLink.link} />
+    <FileTree />
+    <CopyLink />
   </Box>
 }
 

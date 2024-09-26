@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import Modal from '../modal/Modal'
 
-export const Info = ({ isDownload }: { isDownload?: boolean }) => {
+export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Element => {
   const { t } = useTranslation()
   // Modals created by links
   const [showModalReprovide, setShowModalReprovide] = useState(false)

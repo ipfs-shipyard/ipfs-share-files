@@ -13,16 +13,16 @@ export const Page = (): React.JSX.Element => {
   const [t] = useTranslation()
   const currentPage = useCurrentPage()
   const heliaState = useHelia()
-  const { shareLink, files, fetch } = useFiles()
+  const { fetch } = useFiles()
   const isDownload = currentPage === 'download'
   let content
   // debugger
   if (heliaState.error) {
     content = <BoxNotAvailable />
   } else if (isDownload) {
-    content = <BoxDownload files={files} isLoading={fetch.loading} />
+    content = <BoxDownload isLoading={fetch.loading} />
   } else {
-    content = <BoxAdd files={files} shareLink={shareLink} isLoading={fetch.loading} />
+    content = <BoxAdd isLoading={fetch.loading} />
   }
   const headline = <Headline isDownload={isDownload} />
   const info = <Info isDownload={isDownload} />
