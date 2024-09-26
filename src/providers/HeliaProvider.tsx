@@ -4,7 +4,6 @@ import { mfs as _mfs, type MFS } from '@helia/mfs'
 import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
 import { devToolsMetrics } from '@libp2p/devtools-metrics'
 import { createHelia, type HeliaLibp2p } from 'helia'
-import PropTypes from 'prop-types'
 import React, {
   useEffect,
   useState,
@@ -79,8 +78,4 @@ export const HeliaProvider = ({ children }): React.JSX.Element => {
       {children}
     </HeliaContext.Provider>
   )
-}
-
-HeliaProvider.propTypes = {
-  children: PropTypes.any
 }

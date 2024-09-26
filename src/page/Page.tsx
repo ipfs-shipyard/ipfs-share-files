@@ -20,7 +20,7 @@ export const Page = (): React.JSX.Element => {
   if (heliaState.error) {
     content = <BoxNotAvailable />
   } else if (isDownload) {
-    content = <BoxDownload isLoading={fetch.loading} />
+    content = <BoxDownload />
   } else {
     content = <BoxAdd isLoading={fetch.loading} />
   }

@@ -1,10 +1,11 @@
 import classNames from 'classnames'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { Trans, useTranslation } from 'react-i18next'
-import { useAddFiles, useFilesDispatch } from '../../hooks/useFiles'
+import { useAddFiles, useFiles, useFilesDispatch } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
+import { useDownloadInfo } from '../../providers/download-provider'
 import { AddFiles } from '../add-files/AddFiles'
 import { DownloadFiles } from '../download-files/DownloadFiles'
 import { FileTree } from '../file-tree/FileTree'
@@ -22,7 +23,25 @@ export const Box = forwardRef<HTMLDivElement, { children: any, className?: strin
 // Component definition is missing display [nameeslintreact/display-name](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md)
 Box.displayName = 'Box'
 
-export const BoxDownload = ({ isLoading }: { isLoading: boolean }): React.JSX.Element => {
+export const BoxDownload = (): React.JSX.Element => {
+  // TODO: we have a CID in the URL, so we're in download mode. Trigger helia to fetch the file tree
+
+  const dispatch = useFilesDispatch()
+  const { fetch, files } = useFiles()
+  // const heliaState = useHelia()
+  // const doAddFiles = useAddFiles(dispatch, heliaState)
+  const { cid, filename } = useDownloadInfo()
+  const isLoading = fetch.loading || Object.keys(files).length === 0
+
+  useEffect(() => {
+    if (cid == null) return
+    //   if (heliaState.helia == null) {
+    //     return
+    //   }
+    //   // fetch the file tree
+    dispatch({ type: 'fetch_start', cid, filename })
+  }, [cid, filename])
+
   return (
     <Box>
       { isLoading && <Loader /> }

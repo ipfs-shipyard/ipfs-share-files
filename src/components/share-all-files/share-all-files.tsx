@@ -32,9 +32,6 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
    */
   const shouldGenerateLink = useMemo(() => Object.keys(files).length > 0, [files])
   const allFilesArePublished = useMemo(() => Object.values(files).every((file) => file.published), [files])
-  // const disabled = useMemo(() => {
-  //   return !shouldGenerateLink || !allFilesArePublished
-  // }, [shouldGenerateLink, allFilesArePublished])
 
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
@@ -54,7 +51,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
         const { cid } = await mfs.stat('/')
         setFolderCid(cid)
 
-        const link = getShareLink(cid, 'allfiles.share-ipfs-helia')
+        const link = getShareLink(cid)
         setShareAllLink(link)
       } catch (e: any) {
         console.error(e)

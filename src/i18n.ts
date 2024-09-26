@@ -43,8 +43,8 @@ await i18n
     debug: import.meta.env.DEBUG,
     // react i18next special options (optional)
     react: {
-      wait: true,
-      useSuspense: false,
+      // wait: true,
+      // useSuspense: false,
       bindI18n: 'languageChanged loaded',
       // bindStore: 'added removed',
       nsMode: 'default'

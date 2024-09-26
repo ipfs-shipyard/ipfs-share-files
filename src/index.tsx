@@ -7,6 +7,7 @@ import { App } from './App'
 import i18n from './i18n'
 import { FilesProvider } from './providers/FilesProvider'
 import { HeliaProvider } from './providers/HeliaProvider'
+import { DownloadProvider } from './providers/download-provider'
 import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
@@ -15,7 +16,9 @@ ReactDOM.render(
       <I18nextProvider i18n={i18n} >
         <HeliaProvider>
           <FilesProvider>
-            <App />
+            <DownloadProvider>
+              <App />
+            </DownloadProvider>
           </FilesProvider>
         </HeliaProvider>
       </I18nextProvider>
