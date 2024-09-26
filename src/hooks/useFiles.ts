@@ -1,14 +1,14 @@
-import { Dispatch, useContext } from "react"
+import blobToIt from 'blob-to-it'
+import { type Dispatch, useContext } from 'react'
 import shortid from 'shortid'
-import { AddFileState, FilesAction, FilesContext, FilesDispatchContext } from "../providers/FilesProvider"
-import blobToIt from "blob-to-it"
-import { HeliaContextType } from "../providers/HeliaProvider"
+import { type AddFileState, type FilesAction, FilesContext, FilesDispatchContext, type FilesState } from '../providers/FilesProvider'
+import { type HeliaContextType } from '../providers/HeliaProvider'
 
-export function useFiles () {
+export function useFiles (): FilesState {
   return useContext(FilesContext)
 }
 
-export function useFilesDispatch () {
+export function useFilesDispatch (): Dispatch<FilesAction> {
   return useContext(FilesDispatchContext)
 }
 
@@ -30,31 +30,31 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
         progress: 0,
         cid: null,
         pending: true,
-        published: false,
+        published: false
       }
 
       Promise.resolve().then(async () => {
-        dispatch({ type: 'add_start', ...file})
+        dispatch({ type: 'add_start', ...file })
         const content = blobToIt(_file)
         await mfs.writeByteStream(content, name)
         const { cid } = await mfs.stat(`/${name}`)
-        dispatch({ type: 'add_success', id: id, cid })
+        dispatch({ type: 'add_success', id, cid })
         return cid
       }).catch((err: Error) => {
         console.error(err)
-        dispatch({ type: 'add_fail', id: id, error: err })
+        dispatch({ type: 'add_fail', id, error: err })
         throw err
       }).then(async (cid) => {
-        dispatch({ type: 'publish_start', id: id })
+        dispatch({ type: 'publish_start', id })
         await helia.routing.provide(cid, {
           onProgress: (evt) => {
             console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
           }
         })
-        dispatch({ type: 'publish_success', id: id, cid })
+        dispatch({ type: 'publish_success', id, cid })
       }).catch((err: Error) => {
         console.error(err)
-        dispatch({ type: 'publish_fail', id: id, error: err })
+        dispatch({ type: 'publish_fail', id, error: err })
       })
     }
   }

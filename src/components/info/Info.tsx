@@ -1,9 +1,8 @@
+import React, { useCallback, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-
 import Modal from '../modal/Modal'
-import { useCallback, useState } from 'react'
 
-export const Info = ({isDownload}: {isDownload?: boolean}) => {
+export const Info = ({ isDownload }: { isDownload?: boolean }) => {
   const { t } = useTranslation()
   // Modals created by links
   const [showModalReprovide, setShowModalReprovide] = useState(false)
@@ -27,7 +26,7 @@ export const Info = ({isDownload}: {isDownload?: boolean}) => {
     setShowModalCid(false)
   }, [])
 
-  const handleCloseModalReprovide = useCallback(() =>{
+  const handleCloseModalReprovide = useCallback(() => {
     setShowModalReprovide(false)
   }, [])
 
@@ -59,7 +58,7 @@ export const Info = ({isDownload}: {isDownload?: boolean}) => {
   const isUsingDaemon = false
 
   // Info for the Download page
-  if (isDownload) {
+  if (isDownload === true) {
     return (
       <div>
         <div className='pr5-l w-100 w-two-thirds-l mw7-l'>

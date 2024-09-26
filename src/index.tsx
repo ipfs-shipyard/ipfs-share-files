@@ -1,14 +1,16 @@
-import ReactDOM from 'react-dom'
-import { App } from './App'
-import registerServiceWorker from './registerServiceWorker'
-import { I18nextProvider } from 'react-i18next'
-import i18n from './i18n'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React from 'react'
 import { DndProvider } from 'react-dnd'
-import { HeliaProvider } from './providers/HeliaProvider'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import ReactDOM from 'react-dom'
+import { I18nextProvider } from 'react-i18next'
+import { App } from './App'
+import i18n from './i18n'
 import { FilesProvider } from './providers/FilesProvider'
+import { HeliaProvider } from './providers/HeliaProvider'
+import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
+  // @ts-expect-error - DndProvider DOES accept children...
     <DndProvider backend={HTML5Backend}>
       <I18nextProvider i18n={i18n} >
         <HeliaProvider>

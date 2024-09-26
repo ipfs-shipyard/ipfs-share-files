@@ -1,20 +1,18 @@
-import { Trans, useTranslation } from 'react-i18next'
+import classNames from 'classnames'
+import React, { forwardRef } from 'react'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import classNames from 'classnames'
-
-// Components
-import Loader from '../loader/Loader'
+import { Trans, useTranslation } from 'react-i18next'
+import { useAddFiles, useFilesDispatch } from '../../hooks/useFiles'
+import { useHelia } from '../../hooks/useHelia'
+import { type FileState, type ShareLinkState } from '../../providers/FilesProvider'
 import { AddFiles } from '../add-files/AddFiles'
-import { FileTree } from '../file-tree/FileTree'
 import { CopyLink } from '../copy-link/CopyLink'
 import { DownloadFiles } from '../download-files/DownloadFiles'
-import { FileState, ShareLinkState } from '../../providers/FilesProvider'
-import { useAddFiles, useFilesDispatch } from '../../hooks/useFiles'
-import { forwardRef } from 'react'
-import { useHelia } from '../../hooks/useHelia'
+import { FileTree } from '../file-tree/FileTree'
+import Loader from '../loader/Loader'
 
-export const Box = forwardRef<HTMLDivElement, {children: any, className?: string}>((props, ref) => {
+export const Box = forwardRef<HTMLDivElement, { children: any, className?: string }>((props, ref) => {
   const { children, className } = props
   return (
     <div ref={ref} className={classNames('center ml0-l mb4 mt2-l mb0-l pa4 w-100 w-third-l mw6 order-2-l br3 shadow-4 bg-white', className)}>
@@ -22,8 +20,10 @@ export const Box = forwardRef<HTMLDivElement, {children: any, className?: string
     </div>
   )
 })
+// Component definition is missing display [nameeslintreact/display-name](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md)
+Box.displayName = 'Box'
 
-export const BoxDownload = ({ files, isLoading }: {files: Record<string, FileState>, isLoading: boolean}) => (
+export const BoxDownload = ({ files, isLoading }: { files: Record<string, FileState>, isLoading: boolean }) => (
   <Box>
     { isLoading && <Loader /> }
     <FileTree files={files} isDownload />
@@ -35,12 +35,13 @@ export const BoxAdd = ({ files, isLoading, shareLink }: { files: Record<string, 
   const dispatch = useFilesDispatch()
   const heliaState = useHelia()
   const doAddFiles = useAddFiles(dispatch, heliaState)
-  const [{ isOver }, drop] = useDrop<{files: File[], type: string}, Promise<void>, {isOver: boolean}>({
+  const [{ isOver }, drop] = useDrop<{ files: File[], type: string }, Promise<void>, { isOver: boolean }>({
     accept: [NativeTypes.FILE],
     collect: (monitor) => ({
       isOver: monitor.isOver()
     }),
     drop: async ({ files }) => {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!files) return
       // still can't tell a dir from a file on the web web in 2021 XD  https://stackoverflow.com/a/25095250/11518426
       files = files.filter(f => !(!f.type && f.size % 4096 === 0))
@@ -50,17 +51,19 @@ export const BoxAdd = ({ files, isLoading, shareLink }: { files: Record<string, 
     }
   })
 
+  // console.log('shareLink', shareLink)
+
   return <Box ref={drop} className={isOver ? '' : 'bg-gray-muted'} >
     <AddFiles doAddFiles={doAddFiles} />
     { isLoading && <Loader /> }
     <FileTree files={files} />
-    { shareLink.link && <CopyLink shareLink={shareLink.link ?? ''} /> }
+    <CopyLink shareLink={shareLink.link} />
   </Box>
 }
 
 // TODO this text is all outdated
-export const BoxNotAvailable = () => {
-  const { t } = useTranslation('myNamespace');
+export const BoxNotAvailable = (): React.JSX.Element => {
+  const { t } = useTranslation('myNamespace')
   return (
     <Box>
       <p className='mv0 orange f5 lh-title'>{t('box.missingDaemon')}</p>

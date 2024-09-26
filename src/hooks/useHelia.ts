@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { HeliaContext } from '../providers/HeliaProvider'
+import { HeliaContext, type HeliaContextType } from '../providers/HeliaProvider'
 
-export const useHelia = () => {
+export const useHelia = (): HeliaContextType => {
   return useContext(HeliaContext)
 }

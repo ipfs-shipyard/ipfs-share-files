@@ -6,12 +6,49 @@
   "private": true,
   "type": "module",
   "main": "src/index.tsx",
+  "eslintConfig": {
+    "settings": {
+      "react": {
+        "version": "16.3"
+      }
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "ipfs"
+    ],
+    "plugins": [
+      "react"
+    ],
+    "parserOptions": {
+      "project": true,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "react/prop-types": "off",
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "error",
+            "info",
+            "time",
+            "timeEnd",
+            "warn"
+          ]
+        }
+      ]
+    }
+  },
   "scripts": {
     "start": "vite",
     "prebuild": "lol public/locales > src/lib/languages.json",
     "build": "vite build",
     "build:icons": "svgr -d src/icons node_modules/ipfs-css/icons && eslint --fix src/icons/*",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "aegir lint",
     "test": "echo 'not yet' || react-scripts test",
     "test:coverage": "echo 'not yet' || react-scripts test --coverage",
     "test:serve": "ecstatic build --cache=0 --port=3001",
@@ -48,7 +85,7 @@
     "multiaddr-to-uri": "^6.0.0",
     "prop-types": "^15.7.2",
     "pull-file-reader": "^1.0.2",
-    "qrcode.react": "^1.0.1",
+    "qrcode.react": "^4.0.1",
     "react": "^17.0.1",
     "react-circular-progressbar": "^2.0.4",
     "react-copy-to-clipboard": "^5.0.3",
@@ -80,21 +117,12 @@
     "@storybook/react": "^6.1.20",
     "@vitejs/plugin-react": "^4.3.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
-    "babel-runtime": "^6.26.0",
+    "aegir": "^44.1.1",
     "big.js": "^6.0.3",
     "bundlesize": "^0.18.1",
     "ecstatic": "^4.1.4",
-    "eslint": "^7.20.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "ipfsd-ctl": "^7.2.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.36.1",
     "npm-run-all": "^4.1.5",
     "source-map-explorer": "^2.5.2",
     "typescript": "^5.6.2",

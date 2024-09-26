@@ -1,16 +1,16 @@
-import { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import classnames from 'classnames'
+import React, { useCallback, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
+import { useTranslation } from 'react-i18next'
+import { type FileState } from '../../providers/FilesProvider'
 import downloadArchive from '../file/utils/archive'
-import { FileState } from '../../providers/FilesProvider'
 // import downloadFile from '../file/utils/download'
 
 // Styles
 import 'react-circular-progressbar/dist/styles.css'
 import './DownloadFiles.css'
 
-export const DownloadFiles = ({files, isLoading}: {files: Record<string, FileState>, isLoading: boolean}) => {
+export const DownloadFiles = ({ files, isLoading }: { files: Record<string, FileState>, isLoading: boolean }) => {
   const [progress, setProgress] = useState(100)
 
   const handleOnClick = useCallback(async () => {
@@ -21,14 +21,14 @@ export const DownloadFiles = ({files, isLoading}: {files: Record<string, FileSta
       // just create a file object from Helia unixfs
       // const { url, filename } = await doGetFileURL()
       // downloadFile(url, filename)
+      // eslint-disable-next-line no-alert
       alert('FIX_ME')
     } else {
-      console.log({files})
+      // console.log({ files })
       // create a directory
-      // TODO
-      // @ts-expect-error
+      // @ts-expect-error - TODO: fix this
       const { url, filename } = await doGetArchiveURL()
-      const updater = (progress) => setProgress(progress)
+      const updater = (progress): void => { setProgress(progress) }
       downloadArchive(url, filename, updater)
     }
   }, [files])
@@ -43,6 +43,7 @@ export const DownloadFiles = ({files, isLoading}: {files: Record<string, FileSta
 
   return (
     <div className='w5 center'>
+      { /* eslint-disable-next-line @typescript-eslint/no-misused-promises */ }
       <button className={btnClass} onClick={handleOnClick}>
         { progress === 100
           ? <span className='truncate'>{ Object.keys(files).length > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>

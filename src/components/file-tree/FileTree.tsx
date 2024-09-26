@@ -1,8 +1,8 @@
+import React from 'react'
 import { useTranslation, Trans } from 'react-i18next'
-
 // Components
+import { type FileState } from '../../providers/FilesProvider'
 import { File } from '../file/File'
-import { FileState } from '../../providers/FilesProvider'
 
 export const FileTree = ({ files, isDownload }: { files: Record<string, FileState>, isDownload?: boolean }) => {
   const filesMap = Object.entries(files)
@@ -10,7 +10,7 @@ export const FileTree = ({ files, isDownload }: { files: Record<string, FileStat
 
   return (
   <div className='mt4'>
-     {!isDownload && filesMap.length > 1 && (
+     {isDownload === false && filesMap.length > 1 && (
      <div className='f5 montserrat fw4 charcoal mb2'>
       <Trans t={t} i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
     </div>)}

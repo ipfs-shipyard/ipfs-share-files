@@ -1,8 +1,12 @@
-const archive = (url: string, filename: string, progressCallback: (n: number | null) => void) => {
+export interface AbortFn {
+  (): void
+}
+
+const archive = (url: string, filename: string, progressCallback: (n: number | null) => void): { abort: AbortFn } => {
   const xhr = new window.XMLHttpRequest()
   let total = 0
 
-  const abort = () => {
+  const abort: AbortFn = () => {
     xhr.abort()
     progressCallback(null)
   }
@@ -29,6 +33,7 @@ const archive = (url: string, filename: string, progressCallback: (n: number | n
   }
 
   xhr.onprogress = (e) => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/prefer-nullish-coalescing
     total = e.lengthComputable ? e.total : (total || Number(xhr.getResponseHeader('X-Content-Length') || xhr.getResponseHeader('Content-Length') || 0))
     progressCallback((e.loaded / total) * 100)
   }

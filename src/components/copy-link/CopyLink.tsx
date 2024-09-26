@@ -1,20 +1,24 @@
-import { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import classnames from 'classnames'
+import { QRCodeSVG } from 'qrcode.react'
+import React, { useCallback, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import QRCode from 'qrcode.react'
+import { useTranslation } from 'react-i18next'
 
-export const CopyLink = ({shareLink, withLabel}: {shareLink: string, withLabel?: boolean}) => {
+export const CopyLink = ({ shareLink, withLabel }: { shareLink: string | null, withLabel?: boolean }) => {
   const [copied, setCopied] = useState(false)
   const { t } = useTranslation()
   const handleOnCopyClick = useCallback(() => {
     setCopied(true)
-    setTimeout(() => setCopied(false), 2500)
+    setTimeout(() => { setCopied(false) }, 2500)
   }, [])
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
+
+  if (shareLink == null) {
+    return null
+  }
 
   return (
     <div>
@@ -35,16 +39,16 @@ export const CopyLink = ({shareLink, withLabel}: {shareLink: string, withLabel?:
       <div className="overflow-hidden">
         <div className="flex flex-column items-center mb3 appear-from-below">
           <span className="f7 charcoal-muted lh-copy pb2">{t('copyLink.qrLabel')}</span>
-          <QRCode
+          <QRCodeSVG
             value={shareLink}
             bgColor={'#ffffff'}
             fgColor={'#022E44'}
             level={'M'}
-            renderAs={'svg'}
+            // renderAs={'svg'}
             imageSettings={{
               src: 'favicon-32x32.png',
-              x: null,
-              y: null,
+              x: 0,
+              y: 0,
               height: 32,
               width: 32,
               excavate: true
@@ -55,4 +59,3 @@ export const CopyLink = ({shareLink, withLabel}: {shareLink: string, withLabel?:
     </div>
   )
 }
-

@@ -1,15 +1,16 @@
+import React, { type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IGNORED_FILES } from '../../constants/files'
-import { ChangeEvent } from 'react'
 
 const parseFiles = (ev: ChangeEvent<HTMLInputElement>) => {
   ev.preventDefault()
   ev.stopPropagation()
 
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/prefer-nullish-coalescing
   return Object.values(ev?.target?.files || {})
 }
 
-export const AddFiles = ({ doAddFiles }: { doAddFiles: (files: File[]) => void }) => {
+export const AddFiles = ({ doAddFiles }: { doAddFiles(files: File[]): void }): React.JSX.Element => {
   const { t } = useTranslation()
   const onAddFiles = (ev) => {
     const filesList = parseFiles(ev)
@@ -51,6 +52,7 @@ export const AddFiles = ({ doAddFiles }: { doAddFiles: (files: File[]) => void }
             type="file"
             multiple
             // @ts-expect-error react types don't know about these attributes
+            // eslint-disable-next-line react/no-unknown-property
             directory="true" webkitdirectory="true" mozdirectory="true"
           />
         </label>

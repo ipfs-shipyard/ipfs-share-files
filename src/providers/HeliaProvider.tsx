@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 
-import { unixfs as _unixfs, UnixFS } from '@helia/unixfs'
-import { mfs as _mfs, MFS } from '@helia/mfs'
-import { createHelia, HeliaLibp2p } from 'helia'
+import { mfs as _mfs, type MFS } from '@helia/mfs'
+import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
+import { devToolsMetrics } from '@libp2p/devtools-metrics'
+import { createHelia, type HeliaLibp2p } from 'helia'
 import PropTypes from 'prop-types'
-import {
+import React, {
   useEffect,
   useState,
   useCallback,
   createContext
 } from 'react'
-import { devToolsMetrics } from '@libp2p/devtools-metrics'
 
 export type HeliaContextType = {
   helia: null
@@ -62,16 +62,17 @@ export const HeliaProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    startHelia()
+    void startHelia()
   }, [])
 
-  const value = {
+  // @ts-expect-error - TODO: helia might still be null?
+  const value: HeliaContextType = {
     helia,
     unixfs,
     mfs,
     error,
     starting
-  } as HeliaContextType
+  }
 
   return (
     <HeliaContext.Provider value={value}>

@@ -1,7 +1,6 @@
-import { useTranslation } from 'react-i18next'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-
-
+import { useTranslation } from 'react-i18next'
 // Components
 import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/Box'
 import Headline from '../components/headline/Headline'
@@ -10,13 +9,14 @@ import { useCurrentPage } from '../hooks/useCurrentPage'
 import { useFiles } from '../hooks/useFiles'
 import { useHelia } from '../hooks/useHelia'
 
-export const Page = () => {
+export const Page = (): React.JSX.Element => {
   const [t] = useTranslation()
   const currentPage = useCurrentPage()
   const heliaState = useHelia()
   const { shareLink, files, fetch } = useFiles()
   const isDownload = currentPage === 'download'
   let content
+  // debugger
   if (heliaState.error) {
     content = <BoxNotAvailable />
   } else if (isDownload) {
@@ -25,12 +25,11 @@ export const Page = () => {
     content = <BoxAdd files={files} shareLink={shareLink} isLoading={fetch.loading} />
   }
   const headline = <Headline isDownload={isDownload} />
-  const info = <Info isDownload={isDownload} /> 
-
+  const info = <Info isDownload={isDownload} />
 
   // TODO: reimplement this:
   // if the hash has changed, reset the files
-  //  and if the hash is a cid, fetch the new file tree 
+  //  and if the hash is a cid, fetch the new file tree
   //
   // handleRouting (prevProps) {
   //   const { doUpdateHash, doFetchFileTree, doResetFiles } = this.props

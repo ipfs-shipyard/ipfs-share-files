@@ -1,8 +1,10 @@
-import { withTranslation } from 'react-i18next'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-const Headline = ({ t, imgHeight = 70, isDownload }) => {
+const Headline = ({ imgHeight = 70, isDownload }): React.JSX.Element => {
+  const { t } = useTranslation('translation')
   // Download page
-  if (isDownload) {
+  if (isDownload === true) {
     return (
       <div className='pv4'>
         <div className='mb3 f2 white montserrat'>{t('info.download.title')}</div>
@@ -20,4 +22,4 @@ const Headline = ({ t, imgHeight = 70, isDownload }) => {
   )
 }
 
-export default withTranslation('translation')(Headline)
+export default Headline

@@ -1,4 +1,4 @@
-const download = (url: string, fileName: string) => {
+const download = (url: string, fileName: string): void => {
   const link = document.createElement('a')
 
   link.setAttribute('href', url)
