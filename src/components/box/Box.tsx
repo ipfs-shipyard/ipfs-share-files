@@ -6,10 +6,10 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useAddFiles, useFilesDispatch } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
 import { AddFiles } from '../add-files/AddFiles'
-import { CopyLink } from '../copy-link/CopyLink'
 import { DownloadFiles } from '../download-files/DownloadFiles'
 import { FileTree } from '../file-tree/FileTree'
 import Loader from '../loader/Loader'
+import { ShareAllFiles } from '../share-all-files/share-all-files'
 
 export const Box = forwardRef<HTMLDivElement, { children: any, className?: string }>((props, ref) => {
   const { children, className } = props
@@ -58,7 +58,7 @@ export const BoxAdd = ({ isLoading }: { isLoading: boolean }): React.JSX.Element
     <AddFiles doAddFiles={doAddFiles} />
     { isLoading && <Loader /> }
     <FileTree />
-    <CopyLink />
+    <ShareAllFiles />
   </Box>
 }
 

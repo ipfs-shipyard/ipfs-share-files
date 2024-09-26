@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
@@ -43,7 +43,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
 
   const handleOnCopyClick = useCallback(() => {
     setCopied(true)
-    setTimeout(() => { setCopied(false) }, 2500)
+    setTimeout(() => { setCopied(false) }, 1500)
   }, [copied])
 
   const renderWarningSign = useCallback(() => {
@@ -96,7 +96,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
       )
     }
   }, [file, progress, isDownload])
-
+  const disabled = useMemo(() => !file.published, [file.published])
   const renderCopyButton = useCallback(({ url, t }) => {
     if (isDownload === true) {
       return null
@@ -104,7 +104,8 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
 
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': copied,
-      'o-80 glow pointer': !copied
+      'o-80 glow pointer': !copied,
+      'o-50 no-pointer-events thing': disabled
     }, ['pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5'])
 
     return (
@@ -114,7 +115,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
         </div>
       </CopyToClipboard>
     )
-  }, [isDownload, copied])
+  }, [isDownload, copied, disabled])
 
   const { t } = useTranslation()
   // console.log('cid', cid)

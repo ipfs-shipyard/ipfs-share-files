@@ -12,5 +12,10 @@ export default defineConfig({
     'process.env': process.env,
     global: 'window'
   },
-  plugins: [react()]
+  plugins: [react()],
+  esbuild: {
+    supported: {
+      'top-level-await': true
+    }
+  }
 })
