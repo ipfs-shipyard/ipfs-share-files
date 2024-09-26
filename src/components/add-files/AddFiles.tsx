@@ -2,7 +2,7 @@ import React, { type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IGNORED_FILES } from '../../constants/files'
 
-const parseFiles = (ev: ChangeEvent<HTMLInputElement>) => {
+const parseFiles = (ev: ChangeEvent<HTMLInputElement>): File[] => {
   ev.preventDefault()
   ev.stopPropagation()
 
@@ -12,12 +12,12 @@ const parseFiles = (ev: ChangeEvent<HTMLInputElement>) => {
 
 export const AddFiles = ({ doAddFiles }: { doAddFiles(files: File[]): void }): React.JSX.Element => {
   const { t } = useTranslation()
-  const onAddFiles = (ev) => {
+  const onAddFiles = (ev): void => {
     const filesList = parseFiles(ev)
     doAddFiles(filesList)
   }
 
-  const onAddFolder = (ev) => {
+  const onAddFolder = (ev): void => {
     const filesList = parseFiles(ev).filter(({ name }) => !IGNORED_FILES.includes(name))
     doAddFiles(filesList)
   }

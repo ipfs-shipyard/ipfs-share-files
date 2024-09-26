@@ -1,5 +1,6 @@
 import { type CID } from 'multiformats/cid'
 import React, { createContext, useEffect, useReducer } from 'react'
+import { getShareLink } from '../components/file/utils/get-share-link'
 
 export interface AddFileState {
   id: string
@@ -81,6 +82,11 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
             cid: action.cid,
             published: action.published
           }
+        },
+        shareLink: {
+          outdated: true,
+          link: null,
+          cid: null
         }
       }
 
@@ -227,8 +233,9 @@ export const FilesProvider = ({ children }): React.JSX.Element => {
     if (publishedFiles.length !== 0) {
       const cid = publishedFiles[0].cid
       if (cid != null) {
-        // TODO: use link to current host/URL with proper download link
-        const link = `/ipfs/${cid.toString()}`
+        const link = getShareLink(cid)
+        // eslint-disable-next-line no-console
+        console.log('share link', link)
         dispatch({ type: 'share_link', link, cid })
       }
     }

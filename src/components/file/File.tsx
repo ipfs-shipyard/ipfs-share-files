@@ -13,6 +13,7 @@ import { type FileState } from '../../providers/FilesProvider'
 import { doGetFile, doGetFileURL } from '../../util'
 import FileIcon from './file-icon/FileIcon'
 import downloadFile from './utils/download'
+import { getShareLink } from './utils/get-share-link'
 import viewFile from './utils/view'
 import './File.css'
 import 'react-circular-progressbar/dist/styles.css'
@@ -121,7 +122,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   const fileNameClass = classnames({ charcoal: error == null, gray: error }, ['FileLinkName ph2 f6 b truncate'])
   const fileSizeClass = classnames({ 'charcoal-muted': error == null, gray: error }, ['f6'])
 
-  const url = cid != null ? new URL(`/#${cid}?filename=${encodeURI(name)}`, window.location.href).toString() : undefined
+  const url = cid != null ? getShareLink(cid, name) : undefined
 
   return (
     <div className='mv2 flex items-center justify-between'>

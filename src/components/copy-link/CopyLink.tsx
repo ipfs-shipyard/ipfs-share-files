@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useFiles } from '../../hooks/useFiles'
 
 export const CopyLink = ({ withLabel }: { withLabel?: boolean }): React.ReactNode => {
-  const { shareLink } = useFiles()
+  const { shareLink, files } = useFiles()
   const [copied, setCopied] = useState(false)
   const { t } = useTranslation()
   const handleOnCopyClick = useCallback(() => {
@@ -20,9 +20,12 @@ export const CopyLink = ({ withLabel }: { withLabel?: boolean }): React.ReactNod
 
   const { link } = shareLink
   if (link == null) {
+    if (Object.keys(files).length > 0) {
     // we need to render a UI to explain what processing is happening
-    return 'Preparing link...'
+      return 'Preparing link...'
     // return null
+    }
+    return null
   }
 
   return (
@@ -35,7 +38,7 @@ export const CopyLink = ({ withLabel }: { withLabel?: boolean }): React.ReactNod
         <div className='ph2 w-80 f7 navy truncate'>
           { link }
         </div>
-        <CopyToClipboard text={shareLink} onCopy={handleOnCopyClick}>
+        <CopyToClipboard text={link} onCopy={handleOnCopyClick}>
           <div className={copyBtnClass}>
             { copied ? t('copyLink.copied') : t('copyLink.copy') }
           </div>
