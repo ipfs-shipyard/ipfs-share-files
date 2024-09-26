@@ -135,7 +135,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
         rel='noopener noreferrer'>
         <div>
           {/* TODO figure out how type was passed thru */}
-          <FileIcon className="flex-shrink-0" name={name} type={''} error={error} />
+          <FileIcon className="flex-shrink-0" name={name} error={error} />
         </div>
         <span className={fileNameClass}>{name}</span>
         <span className={fileSizeClass}>{size != null ? `(~${size})` : ''}</span>

@@ -5,7 +5,6 @@ import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
 import i18n from '../../i18n-decorator'
 import { BoxAdd, BoxDownload, BoxNotAvailable } from './Box'
-import fixtures from './fixtures/root.json'
 
 const wrapperClass = 'flex flex-auto pa3 bg-navy sans-serif'
 

@@ -1,26 +1,28 @@
-import React from 'react'
-import fileExtension from 'file-extension'
 import classNames from 'classnames'
-
-// Utils
-import extToType from '../utils/extToType'
-
-// Static
-import Folder from '../../../media/icons/GlyphFolder'
+import fileExtension from 'file-extension'
+import React, { type HTMLProps } from 'react'
+import DocCalc from '../../../media/icons/GlyphDocCalc'
 import Doc from '../../../media/icons/GlyphDocGeneric'
 import DocMovie from '../../../media/icons/GlyphDocMovie'
-import DocCalc from '../../../media/icons/GlyphDocCalc'
 import DocMusic from '../../../media/icons/GlyphDocMusic'
 import DocPicture from '../../../media/icons/GlyphDocPicture'
 import DocText from '../../../media/icons/GlyphDocText'
+import Folder from '../../../media/icons/GlyphFolder'
+import extToType from '../utils/extToType'
 
-const typeFromExt = (filename) => {
+const typeFromExt = (filename: string): string => {
   const ext = fileExtension(filename)
-  return extToType[ext] || ext
+  return extToType[ext] ?? ext
 }
 
-const FileIcon = ({ className = '', name, type, error }) => {
-  const iconColor = classNames(className, error ? 'fill-gray' : 'fill-aqua')
+export interface FileIconProps extends HTMLProps<HTMLElement> {
+  name: string
+  type?: 'dir' | 'file'
+  error?: Error
+}
+
+const FileIcon: React.FC<FileIconProps> = ({ className = '', name, type, error }) => {
+  const iconColor = classNames(className, error != null ? 'fill-gray' : 'fill-aqua')
   const iconHeight = 40
 
   if (type === 'dir') {

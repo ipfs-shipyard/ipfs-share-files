@@ -8,7 +8,7 @@ export interface DropdownProps extends Omit<React.HTMLProps<HTMLDivElement>, 'on
   options: Array<{ name: string, value: string }>
   Icon(props: any): React.JSX.Element
   onChange?(value: string): void
-  selectedOption: string
+  selectedOption?: string
 }
 
 const Dropdown = ({ className, options, Icon, onChange, selectedOption }: DropdownProps): React.JSX.Element => {

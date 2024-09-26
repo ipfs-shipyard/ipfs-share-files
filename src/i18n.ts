@@ -11,7 +11,7 @@ export const localesList = Object.values(locales).map(locale => ({
   name: locale.nativeName
 }))
 
-i18n
+await i18n
   .use(ICU)
   .use(Backend)
   .use(LanguageDetector)
@@ -24,7 +24,7 @@ i18n
       backendOptions: [
         { // LocalStorageBackend
           defaultVersion: 'v1',
-          expirationTime: (!import.meta.env.NODE_ENV || import.meta.env.NODE_ENV === 'development') ? 1 : 7 * 24 * 60 * 60 * 1000
+          expirationTime: (import.meta.env.NODE_ENV == null || import.meta.env.NODE_ENV === 'development') ? 1 : 7 * 24 * 60 * 60 * 1000
         },
         { // HttpBackend
           // ensure a relative path is used to look up the locales, so it works when loaded from /ipfs/<cid>
@@ -50,6 +50,7 @@ i18n
       nsMode: 'default'
     }
   }, (err, t) => {
-    if (err) console.error('i18n init error:', err)
+    if (err != null) console.error('i18n init error:', err)
   })
+
 export default i18n
