@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import { type CID } from 'multiformats/cid'
 import { QRCodeSVG } from 'qrcode.react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
@@ -7,11 +8,19 @@ import { useFiles } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
 import { getShareLink } from '../file/utils/get-share-link'
 
+/**
+ * This component renders a QR code and a share link that reprents either:
+ *
+ * 1. The single file that is listed
+ * 2. A root folder of an MFS representation of all files listed
+ */
 export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.ReactNode => {
   const { files } = useFiles()
-  const { mfs } = useHelia()
+  const { mfs, helia } = useHelia()
   const [shareAllLink, setShareAllLink] = useState<string | null>()
   const [copied, setCopied] = useState(false)
+  const [isShareDisabled, setShareDisabled] = useState(true)
+  const [folderCid, setFolderCid] = useState<CID | null>(null)
   const { t } = useTranslation()
   const handleOnCopyClick = useCallback(() => {
     setCopied(true)
@@ -23,23 +32,28 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
    */
   const shouldGenerateLink = useMemo(() => Object.keys(files).length > 0, [files])
   const allFilesArePublished = useMemo(() => Object.values(files).every((file) => file.published), [files])
-  const disabled = useMemo(() => !shouldGenerateLink || !allFilesArePublished, [shouldGenerateLink, allFilesArePublished])
+  // const disabled = useMemo(() => {
+  //   return !shouldGenerateLink || !allFilesArePublished
+  // }, [shouldGenerateLink, allFilesArePublished])
 
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied,
-    'o-50 no-pointer-events thing': disabled
+    'o-50 no-pointer-events thing': isShareDisabled
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
   useEffect(() => {
-    if (mfs == null) {
+    if (mfs == null || helia == null) {
       return
     }
     const fetchShareLink = async (): Promise<void> => {
       try {
         // TODO: Share all link should be for a single file if there is only one file
         setShareAllLink(null)
+        setFolderCid(null)
         const { cid } = await mfs.stat('/')
+        setFolderCid(cid)
+
         const link = getShareLink(cid, 'allfiles.share-ipfs-helia')
         setShareAllLink(link)
       } catch (e: any) {
@@ -53,10 +67,34 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
     } else {
       setShareAllLink(null)
     }
+    return () => {
+      // empty out share link if we're unmounting
+      setShareDisabled(true)
+      setShareAllLink(null)
+    }
   }, [mfs, shouldGenerateLink])
 
-  if (mfs == null) {
-    // we can't create a share-all-files link without mfs(helia)
+  useEffect(() => {
+    if (helia == null || folderCid == null) {
+      return
+    }
+    // publish the folder CID
+    void helia.routing.provide(folderCid, {
+      onProgress: (evt) => {
+        console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
+      }
+    }).catch((err: Error) => {
+      console.error('Could not provide the folder CID: ', err)
+      // throw err
+    }).then(() => {
+      // share button can be enabled now
+      console.info('Folder CID published')
+      setShareDisabled(false)
+    })
+  }, [helia, folderCid])
+
+  if (mfs == null || helia == null) {
+    // we can't create a share-all-files link without helia, and mfs
     return null
   }
 
