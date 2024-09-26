@@ -5,13 +5,50 @@
   "leadMaintainer": "Diogo Silva <fsdiogo@gmail.com>",
   "private": true,
   "type": "module",
-  "main": "src/index.jsx",
+  "main": "src/index.tsx",
+  "eslintConfig": {
+    "settings": {
+      "react": {
+        "version": "16.3"
+      }
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "ipfs"
+    ],
+    "plugins": [
+      "react"
+    ],
+    "parserOptions": {
+      "project": true,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "react/prop-types": "off",
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "error",
+            "info",
+            "time",
+            "timeEnd",
+            "warn"
+          ]
+        }
+      ]
+    }
+  },
   "scripts": {
     "start": "vite",
     "prebuild": "lol public/locales > src/lib/languages.json",
     "build": "vite build",
     "build:icons": "svgr -d src/icons node_modules/ipfs-css/icons && eslint --fix src/icons/*",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "aegir lint",
     "test": "echo 'not yet' || react-scripts test",
     "test:coverage": "echo 'not yet' || react-scripts test --coverage",
     "test:serve": "ecstatic build --cache=0 --port=3001",
@@ -48,16 +85,16 @@
     "multiaddr-to-uri": "^6.0.0",
     "prop-types": "^15.7.2",
     "pull-file-reader": "^1.0.2",
-    "qrcode.react": "^1.0.1",
+    "qrcode.react": "^4.0.1",
     "react": "^17.0.1",
-    "react-circular-progressbar": "^2.0.3",
+    "react-circular-progressbar": "^2.0.4",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dnd": "^13.1.1",
     "react-dnd-html5-backend": "^12.1.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.8.8",
-    "react-intl": "^5.13.1",
+    "react-intl": "^6.6.8",
     "react-loader-spinner": "^4.0.0",
     "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
@@ -67,7 +104,8 @@
     "shortid": "^2.2.16",
     "tachyons": "^4.12.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "video-extensions": "^1.1.0"
+    "video-extensions": "^1.1.0",
+    "wouter": "^3.3.5"
   },
   "devDependencies": {
     "@olizilla/lol": "2.0.0",
@@ -79,24 +117,15 @@
     "@storybook/react": "^6.1.20",
     "@vitejs/plugin-react": "^4.3.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
-    "babel-runtime": "^6.26.0",
+    "aegir": "^44.1.1",
     "big.js": "^6.0.3",
     "bundlesize": "^0.18.1",
     "ecstatic": "^4.1.4",
-    "eslint": "^7.20.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "ipfsd-ctl": "^7.2.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.36.1",
     "npm-run-all": "^4.1.5",
     "source-map-explorer": "^2.5.2",
-    "typescript": "^4.9.5",
+    "typescript": "^5.6.2",
     "vite": "^5.4.6"
   },
   "homepage": "./",

@@ -1,8 +1,8 @@
-import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
+import { storiesOf } from '@storybook/react'
+import React from 'react'
 import i18n from '../../i18n-decorator'
-import { TranslatedInfo as Info } from './Info'
+import { Info } from './Info'
 
 storiesOf('Info', module)
   .addDecorator(checkA11y)

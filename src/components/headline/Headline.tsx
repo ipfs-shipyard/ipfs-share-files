@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'redux-bundler-react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
-const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
+const Headline = ({ imgHeight = 70, isDownload }): React.JSX.Element => {
+  const { t } = useTranslation('translation')
   // Download page
-  if (isDownload) {
+  if (isDownload === true) {
     return (
       <div className='pv4'>
         <div className='mb3 f2 white montserrat'>{t('info.download.title')}</div>
@@ -22,9 +22,4 @@ const Headline = ({ t, imgHeight = 70, isDownload, ipfsProvider }) => {
   )
 }
 
-export const TranslatedHeadline = withTranslation('translation')(Headline)
-
-export default connect(
-  'selectIpfsProvider',
-  TranslatedHeadline
-)
+export default Headline

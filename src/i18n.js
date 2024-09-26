@@ -1,11 +1,10 @@
 import i18n from 'i18next'
-import ICU from 'i18next-icu'
-import Backend from 'i18next-chained-backend'
-import LocalStorageBackend from 'i18next-localstorage-backend'
-import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-
-import locales from './lib/languages.json'
+import Backend from 'i18next-chained-backend'
+import HttpBackend from 'i18next-http-backend'
+import ICU from 'i18next-icu'
+import LocalStorageBackend from 'i18next-localstorage-backend'
+import locales from './lib/languages'
 
 export const localesList = Object.values(locales).map(locale => ({
   value: locale.locale,
@@ -47,8 +46,10 @@ i18n
       wait: true,
       useSuspense: false,
       bindI18n: 'languageChanged loaded',
-      bindStore: 'added removed',
+      // bindStore: 'added removed',
       nsMode: 'default'
     }
+  }, (err, t) => {
+    if (err) console.error('i18n init error:', err)
   })
 export default i18n

@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
   // },
   define: {
     'process.env': process.env,
-    'global': 'window',
+    global: 'window'
   },
-  plugins: [react()],
+  plugins: [react()]
 })
