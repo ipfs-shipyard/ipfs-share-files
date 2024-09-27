@@ -1,6 +1,7 @@
 import blobToIt from 'blob-to-it'
 import { CID } from 'multiformats/cid'
 import React, { createContext, useEffect, useReducer } from 'react'
+import { asyncItToFile } from '../components/file/utils/async-it-to-file'
 import { getShareLink } from '../components/file/utils/get-share-link'
 import { useHelia } from '../hooks/useHelia'
 
@@ -272,8 +273,6 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const heliaState = useHelia()
   const { helia, mfs, unixfs } = heliaState
 
-  // const doAddFiles = useAddFiles(dispatch, heliaState)
-
   console.log('filesProvider state.fetch:', state.fetch)
   useEffect(() => {
     if (helia == null || mfs == null || unixfs == null) return
@@ -281,20 +280,18 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       console.log('fetching files...')
       // is the CID representing a single file or a directory?
       const unixfsStats = await unixfs.stat(cid)
-      const bytes = await helia.blockstore.get(cid)
 
       const files: Array<{ cid: CID, file: File }> = []
       if (unixfsStats.type === 'file') {
         console.log('its a file')
-        const file = new File([bytes], filename ?? cid.toString())
+        const file = await asyncItToFile(unixfs.cat(cid), filename ?? cid.toString())
         files.push({ cid, file })
       } else {
-        // it's a directory
+        console.log('it\'s a directory')
         for await (const entry of unixfs.ls(cid)) {
           if (entry.type === 'file') {
-            const bytes = await helia.blockstore.get(entry.cid)
-            const realFile = new File([bytes], entry.name)
-            files.push({ file: realFile, cid: entry.cid })
+            const file = await asyncItToFile(unixfs.cat(entry.cid), entry.name ?? filename ?? cid.toString())
+            files.push({ file, cid: entry.cid })
 
             console.log('created file...')
           }

@@ -1,6 +1,3 @@
-// import { readFile } from 'node:fs/promises'
-// import { join } from 'node:path'
-// import { cwd } from 'node:process'
 import { unixfs, type UnixFS } from '@helia/unixfs'
 import { stop } from '@libp2p/interface'
 import { expect } from 'aegir/chai'

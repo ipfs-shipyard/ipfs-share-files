@@ -10,9 +10,9 @@ import { useHelia } from '../../hooks/useHelia'
 import IconDownload from '../../media/icons/download.svg'
 import IconView from '../../media/icons/view.svg'
 import { type FileState } from '../../providers/FilesProvider'
-import { doGetFile, doGetFileURL } from '../../util'
+import { doGetFileURL } from '../../util'
 import FileIcon from './file-icon/FileIcon'
-import downloadFile from './utils/download'
+import { downloadCidAsFile } from './utils/download'
 import { getShareLink } from './utils/get-share-link'
 import viewFile from './utils/view'
 import './File.css'
@@ -35,11 +35,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   const handleDownloadClick = useCallback(async () => {
     if (unixfs == null || cid == null) return
 
-    const file = await doGetFile(unixfs, cid, name)
-    const url = URL.createObjectURL(file)
-    downloadFile(url, name)
-    // eslint-disable-next-line no-alert
-    alert('FIX_ME')
+    await downloadCidAsFile({ unixfs, cid, filename: name })
   }, [file, unixfs, cid])
 
   const handleOnCopyClick = useCallback(() => {
@@ -70,6 +66,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
           width={glyphWidth + 5}
           fill={fillColor}
           style={{ marginRight: '-3px' }}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={handleViewClick}
           alt='View' />
         <IconDownload
@@ -77,6 +74,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
           width={glyphWidth + 5}
           fill={fillColor}
           style={{ marginRight: '-3px' }}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={handleDownloadClick}
           alt='Download' />
       </div>
