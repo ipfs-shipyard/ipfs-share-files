@@ -103,7 +103,7 @@ export type FilesAction =
   | { type: 'fetch_fail', error: Error }
 
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
-  // console.log('filesReducer', action)
+  console.log('filesReducer action:', action)
   switch (action.type) {
     case 'add_start':
       return {
@@ -267,7 +267,7 @@ const initialState: FilesState = {
 export const FilesContext = createContext<FilesState>(initialState)
 export const FilesDispatchContext = createContext<React.Dispatch<FilesAction>>(null as any)
 
-export const FilesProvider = ({ children }): React.JSX.Element => {
+export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(filesReducer, initialState)
   const heliaState = useHelia()
   const { helia, mfs, unixfs } = heliaState
@@ -288,17 +288,6 @@ export const FilesProvider = ({ children }): React.JSX.Element => {
         console.log('its a file')
         const file = new File([bytes], filename ?? cid.toString())
         files.push({ cid, file })
-        // return {
-        //   [cid.toString()]: {
-        //     id: cid.toString(),
-        //     name: filename ?? cid.toString(),
-        //     size: file.size,
-        //     progress: 0,
-        //     pending: true,
-        //     cid,
-        //     published: false
-        //   }
-        // }
       } else {
         // it's a directory
         for await (const entry of unixfs.ls(cid)) {
@@ -306,6 +295,7 @@ export const FilesProvider = ({ children }): React.JSX.Element => {
             const bytes = await helia.blockstore.get(entry.cid)
             const realFile = new File([bytes], entry.name)
             files.push({ file: realFile, cid: entry.cid })
+
             console.log('created file...')
           }
         }
@@ -323,6 +313,8 @@ export const FilesProvider = ({ children }): React.JSX.Element => {
           pending: true,
           published: false
         }
+
+        dispatch({ type: 'fetch_success', files: { [id]: file } })
 
         Promise.resolve().then(async () => {
           dispatch({ type: 'add_start', ...file })
@@ -347,6 +339,7 @@ export const FilesProvider = ({ children }): React.JSX.Element => {
           console.error(err)
           dispatch({ type: 'publish_fail', id, error: err })
         })
+        // mark fetch as false
       }
       // return files
 

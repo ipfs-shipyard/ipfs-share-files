@@ -6,7 +6,7 @@ import './Dropdown.css'
 
 export interface DropdownProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
   options: Array<{ name: string, value: string }>
-  Icon(props: any): React.JSX.Element
+  Icon: React.FC<React.HTMLProps<SVGSVGElement>>
   onChange?(value: string): void
   selectedOption?: string
 }

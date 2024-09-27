@@ -12,12 +12,12 @@ const parseFiles = (ev: ChangeEvent<HTMLInputElement>): File[] => {
 
 export const AddFiles = ({ doAddFiles }: { doAddFiles(files: File[]): void }): React.JSX.Element => {
   const { t } = useTranslation()
-  const onAddFiles = (ev): void => {
+  const onAddFiles: React.ChangeEventHandler<HTMLInputElement> = (ev): void => {
     const filesList = parseFiles(ev)
     doAddFiles(filesList)
   }
 
-  const onAddFolder = (ev): void => {
+  const onAddFolder: React.ChangeEventHandler<HTMLInputElement> = (ev): void => {
     const filesList = parseFiles(ev).filter(({ name }) => !IGNORED_FILES.includes(name))
     doAddFiles(filesList)
   }

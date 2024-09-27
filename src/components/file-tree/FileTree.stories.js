@@ -5,7 +5,7 @@ import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
 import i18n from '../../i18n-decorator'
 import FileTree from './FileTree'
-import files from './fixtures/root.json'
+import files from './fixtures/root'
 
 storiesOf('FileTree', module)
   .addDecorator(checkA11y)

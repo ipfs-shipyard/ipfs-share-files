@@ -7,32 +7,34 @@ import downloadArchive from '../file/utils/archive'
 // import downloadFile from '../file/utils/download'
 import 'react-circular-progressbar/dist/styles.css'
 import './DownloadFiles.css'
+// import { doGetFileURL } from '../../util'
 
 export const DownloadFiles = ({ isLoading }: { isLoading: boolean }) => {
-  const [progress, setProgress] = useState(100)
+  const { t } = useTranslation()
+  const [progress, setProgress] = useState<number | null>(100)
   const { files } = useFiles()
 
-  const handleOnClick = useCallback(async () => {
+  const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = useCallback((ev) => {
     // const fs = selectUnixFs()
     // console.log('download click fs', fs)
-
-    if (Object.keys(files).length === 1) {
+    void (async () => {
+      if (Object.keys(files).length === 1) {
       // just create a file object from Helia unixfs
       // const { url, filename } = await doGetFileURL()
       // downloadFile(url, filename)
       // eslint-disable-next-line no-alert
-      alert('FIX_ME')
-    } else {
+        alert('FIX_ME')
+      } else {
       // console.log({ files })
       // create a directory
       // @ts-expect-error - TODO: fix this
-      const { url, filename } = await doGetArchiveURL()
-      const updater = (progress): void => { setProgress(progress) }
-      downloadArchive(url, filename, updater)
-    }
+        const { url, filename } = await doGetArchiveURL()
+        const updater: (n: number | null) => void = (progress): void => { setProgress(progress) }
+        downloadArchive(url, filename, updater)
+      }
+    })()
   }, [files])
 
-  const { t } = useTranslation()
   const btnClass = classnames({
     'ba b--navy bg-white navy no-pointer-events': progress !== 100,
     'bg-navy white glow pointer': progress === 100,
@@ -49,7 +51,7 @@ export const DownloadFiles = ({ isLoading }: { isLoading: boolean }) => {
           : <div className='flex items-center'>
             {t('downloadFiles.downloading')}
             <CircularProgressbar
-              value={progress}
+              value={progress ?? 0}
               strokeWidth={50}
               styles={{
                 root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },

@@ -1,14 +1,14 @@
 import classnames from 'classnames'
+import GlyphAttention from 'ipfs-css/icons/glyph_attention.svg'
+import GlyphCancel from 'ipfs-css/icons/glyph_cancel.svg'
+import GlyphTick from 'ipfs-css/icons/glyph_tick.svg'
 import React, { useCallback, useMemo, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useHelia } from '../../hooks/useHelia'
-import IconDownload from '../../media/icons/Download'
-import GlyphAttention from '../../media/icons/GlyphAttention'
-import GlyphCancel from '../../media/icons/GlyphCancel'
-import GlyphTick from '../../media/icons/GlyphTick'
-import IconView from '../../media/icons/View'
+import IconDownload from '../../media/icons/download.svg'
+import IconView from '../../media/icons/view.svg'
 import { type FileState } from '../../providers/FilesProvider'
 import { doGetFile, doGetFileURL } from '../../util'
 import FileIcon from './file-icon/FileIcon'
@@ -19,6 +19,7 @@ import './File.css'
 import 'react-circular-progressbar/dist/styles.css'
 
 export const File = ({ file, isDownload }: { file: FileState, isDownload?: boolean }): React.JSX.Element => {
+  const { t } = useTranslation()
   // TODO: implement progress
   const [progress] = useState(100)
   const [copied, setCopied] = useState(false)
@@ -39,7 +40,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     downloadFile(url, name)
     // eslint-disable-next-line no-alert
     alert('FIX_ME')
-  }, [file])
+  }, [file, unixfs, cid])
 
   const handleOnCopyClick = useCallback(() => {
     setCopied(true)
@@ -62,6 +63,8 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     if (isDownload === true && _progress === 100) {
       return <div className='flex items-center'>
         { renderWarningSign() }
+        {/* TODO: make preview pop up in modal */}
+        {/* TODO: disable preview link for un-previewable files */}
         <IconView
           className='pointer o-80 glow'
           width={glyphWidth + 5}
@@ -97,9 +100,13 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     }
   }, [file, progress, isDownload])
   const disabled = useMemo(() => !file.published, [file.published])
-  const renderCopyButton = useCallback(({ url, t }) => {
+  const renderCopyButton = useCallback((url?: string) => {
     if (isDownload === true) {
       return null
+    }
+    if (url == null) {
+      // TODO: Fix this.. this shouldn't be needed.
+      return <div className='pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5 o-50 no-pointer-events'>{t('copyLink.copy')}</div>
     }
 
     const copyBtnClass = classnames({
@@ -115,9 +122,8 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
         </div>
       </CopyToClipboard>
     )
-  }, [isDownload, copied, disabled])
+  }, [isDownload, copied, disabled, t])
 
-  const { t } = useTranslation()
   // console.log('cid', cid)
 
   const fileNameClass = classnames({ charcoal: error == null, gray: error }, ['FileLinkName ph2 f6 b truncate'])
@@ -143,7 +149,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
       </a>
       <div className='flex items-center'>
         <span className='ml-auto'>{ renderFileStatus() }</span>
-        { renderCopyButton({ url, t }) }
+        { renderCopyButton(url) }
       </div>
     </div>
   )

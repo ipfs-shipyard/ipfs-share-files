@@ -1,10 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-const Headline = ({ imgHeight = 70, isDownload }): React.JSX.Element => {
+export interface HeadlineProps {
+  imgHeight?: number
+  isDownload: boolean
+}
+
+const Headline: React.FC<HeadlineProps> = ({ imgHeight = 70, isDownload }) => {
   const { t } = useTranslation('translation')
   // Download page
-  if (isDownload === true) {
+  if (isDownload) {
     return (
       <div className='pv4'>
         <div className='mb3 f2 white montserrat'>{t('info.download.title')}</div>

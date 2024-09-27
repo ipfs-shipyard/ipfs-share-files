@@ -5,15 +5,15 @@ import { localesList } from '../../i18n'
 import LanguagePicker from '../../media/images/Language'
 import Dropdown from '../dropdown/Dropdown'
 
-const Footer = () => {
+const Footer = (): React.JSX.Element => {
   const anchorClass = 'no-underline underline-hover aqua'
   const defaultLanguage = window.localStorage.getItem('i18nextLng')?.split('-')[0]
   const [selectedLanguage, setLanguage] = useState(defaultLanguage)
 
-  const onLocaleChange = (locale) => {
+  const onLocaleChange = (locale: string): void => {
     window.localStorage.setItem('i18nextLng', locale)
     setLanguage(locale)
-    i18n.changeLanguage(locale)
+    void i18n.changeLanguage(locale)
   }
 
   return (

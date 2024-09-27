@@ -33,7 +33,7 @@ export const HeliaContext = createContext<HeliaContextType>({
   starting: true
 })
 
-export const HeliaProvider = ({ children }): React.JSX.Element => {
+export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [helia, setHelia] = useState<HeliaLibp2p | null>(null)
   const [unixfs, setUnixfs] = useState<UnixFS | null>(null)
   const [mfs, setMfs] = useState<MFS | null>(null)

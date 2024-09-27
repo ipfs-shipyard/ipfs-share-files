@@ -1,4 +1,4 @@
-const extensionsToType = {
+const extensionsToType: Record<string, string> = {
   wav: 'audio',
   bwf: 'audio',
   aiff: 'audio',

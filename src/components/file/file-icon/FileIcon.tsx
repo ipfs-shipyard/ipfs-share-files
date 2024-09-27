@@ -1,17 +1,16 @@
 import classNames from 'classnames'
-import fileExtension from 'file-extension'
+import DocCalc from 'ipfs-css/icons/glyph_doc_calc.svg'
+import Doc from 'ipfs-css/icons/glyph_doc_generic.svg'
+import DocMovie from 'ipfs-css/icons/glyph_doc_movie.svg'
+import DocMusic from 'ipfs-css/icons/glyph_doc_music.svg'
+import DocPicture from 'ipfs-css/icons/glyph_doc_picture.svg'
+import DocText from 'ipfs-css/icons/glyph_doc_text.svg'
+import Folder from 'ipfs-css/icons/glyph_folder.svg'
 import React, { type HTMLProps } from 'react'
-import DocCalc from '../../../media/icons/GlyphDocCalc'
-import Doc from '../../../media/icons/GlyphDocGeneric'
-import DocMovie from '../../../media/icons/GlyphDocMovie'
-import DocMusic from '../../../media/icons/GlyphDocMusic'
-import DocPicture from '../../../media/icons/GlyphDocPicture'
-import DocText from '../../../media/icons/GlyphDocText'
-import Folder from '../../../media/icons/GlyphFolder'
 import extToType from '../utils/extToType'
 
-const typeFromExt = (filename: string): string => {
-  const ext = fileExtension(filename)
+const typeFromExt = (filename: string): string | undefined => {
+  const ext = filename.split('.').pop() ?? ''
   return extToType[ext] ?? ext
 }
 
