@@ -46,6 +46,7 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         console.info('Starting Helia')
         const helia = await createHelia({
           libp2p: {
+            // @ts-expect-error - problem with helia/devToolsMetrics types.
             metrics: devToolsMetrics()
           }
         }) as HeliaLibp2p
