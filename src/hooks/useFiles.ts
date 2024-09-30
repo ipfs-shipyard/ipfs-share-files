@@ -48,7 +48,7 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
         dispatch({ type: 'publish_start', id })
         await helia.routing.provide(cid, {
           onProgress: (evt) => {
-            console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
+            console.info(`upload file Publish progress "${evt.type}" detail:`, evt.detail)
           }
         })
         dispatch({ type: 'publish_success', id, cid })

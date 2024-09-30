@@ -33,6 +33,24 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   const shouldGenerateLink = useMemo(() => Object.keys(files).length > 0, [files])
   const allFilesArePublished = useMemo(() => Object.values(files).every((file) => file.published), [files])
 
+  useEffect(() => {
+    if (mfs == null || !shouldGenerateLink || !allFilesArePublished) {
+      return
+    }
+    void (async () => {
+      try {
+        const rootStats = await mfs.stat('/')
+        setFolderCid(rootStats.cid)
+        const link = getShareLink(rootStats.cid)
+        setShareAllLink(link)
+      } catch (e) {
+        // sometimes files will exist in MFS but this fires before mfs.stat is ready
+        console.error('could not get folder CID', e)
+        setShareAllLink(null)
+      }
+    })()
+  }, [files, mfs, shouldGenerateLink, allFilesArePublished])
+
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied,
@@ -40,50 +58,22 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
   useEffect(() => {
-    if (mfs == null || helia == null) {
-      return
-    }
-    const fetchShareLink = async (): Promise<void> => {
-      try {
-        // TODO: Share all link should be for a single file if there is only one file
-        setShareAllLink(null)
-        setFolderCid(null)
-        const { cid } = await mfs.stat('/')
-        setFolderCid(cid)
-
-        const link = getShareLink(cid)
-        setShareAllLink(link)
-      } catch (e: any) {
-        console.error(e)
-        setShareAllLink(null)
-      }
-    }
-    // if no files, or not all files are published, we can't create a share-all-files link
-    if (shouldGenerateLink) {
-      void fetchShareLink()
-    } else {
-      setShareAllLink(null)
-    }
-    return () => {
-      // empty out share link if we're unmounting
-      setShareDisabled(true)
-      setShareAllLink(null)
-    }
-  }, [helia, mfs, shouldGenerateLink])
-
-  useEffect(() => {
     if (helia == null || folderCid == null) {
       return
     }
+
+    console.log('publishing folderCID', folderCid)
     // publish the folder CID
     void helia.routing.provide(folderCid, {
       onProgress: (evt) => {
-        console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
+        console.info(`Folder Publish progress "${evt.type}" detail:`, evt.detail)
       }
     }).catch((err: Error) => {
       console.error('Could not provide the folder CID: ', err)
       // throw err
     }).then(() => {
+      const link = getShareLink(folderCid)
+      setShareAllLink(link)
       // share button can be enabled now
       console.info('Folder CID published')
       setShareDisabled(false)
@@ -98,7 +88,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   if (!shouldGenerateLink) {
     return null
   }
-  if (shareAllLink == null || !allFilesArePublished) {
+  if (shareAllLink == null || !allFilesArePublished || isShareDisabled) {
     return 'Preparing link...'
   }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import NodeInfo from '../node-info/node-info'
 
 export interface HeadlineProps {
   imgHeight?: number
@@ -20,9 +21,14 @@ const Headline: React.FC<HeadlineProps> = ({ imgHeight = 70, isDownload }) => {
 
   // Add page
   return (
-    <div className='pv4'>
-      <div className='mb3 f2 white montserrat'>{t('info.add.title')}</div>
-      <div className='mb4 f4 fw1 white montserrat'>{t('info.add.subtitle')}</div>
+    <div className='flex flex-column flex-row-l items-start justify-between'>
+      <div className='pv4'>
+        <div className='mb3 f2 white montserrat'>{t('info.add.title')}</div>
+        <div className='mb4 f4 fw1 white montserrat'>{t('info.add.subtitle')}</div>
+      </div>
+      <div className='pv4'>
+        <NodeInfo />
+      </div>
     </div>
   )
 }

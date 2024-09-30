@@ -283,7 +283,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       console.log('unixfsStats:', unixfsStats)
 
       const files: Array<{ cid: CID, file: File }> = []
-      if (unixfsStats.type === 'file') {
+      if (unixfsStats.type === 'file' || unixfsStats.type === 'raw') {
         console.log('its a file')
         const file = await asyncItToFile(unixfs.cat(cid), filename ?? cid.toString())
         files.push({ cid, file })
@@ -333,7 +333,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           dispatch({ type: 'publish_start', id })
           await helia.routing.provide(cid, {
             onProgress: (evt) => {
-              console.info(`Publish progress "${evt.type}" detail:`, evt.detail)
+              console.info(`download file Publish progress "${evt.type}" detail:`, evt.detail)
             }
           })
           dispatch({ type: 'publish_success', id, cid })

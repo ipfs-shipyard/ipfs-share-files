@@ -24,8 +24,6 @@ export const Page = (): React.JSX.Element => {
   } else {
     content = <BoxAdd isLoading={fetch.loading} />
   }
-  const headline = <Headline isDownload={isDownload} />
-  const info = <Info isDownload={isDownload} />
 
   // TODO: reimplement this:
   // if the hash has changed, reset the files
@@ -47,11 +45,11 @@ export const Page = (): React.JSX.Element => {
       <Helmet>
         <title>{t('pageTitle.ipfs')} | { isDownload ? t('pageTitle.download') : t('pageTitle.add') }</title>
       </Helmet>
-      { headline }
+      <Headline isDownload={isDownload} />
 
       <div className='flex flex-column flex-row-l items-start'>
         { content }
-        { info }
+        <Info isDownload={isDownload} />
       </div>
     </div>
   )

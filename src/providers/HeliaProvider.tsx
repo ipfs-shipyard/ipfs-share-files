@@ -4,12 +4,19 @@ import { mfs as _mfs, type MFS } from '@helia/mfs'
 import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
 import { devToolsMetrics } from '@libp2p/devtools-metrics'
 import { createHelia, type HeliaLibp2p } from 'helia'
+import { type Multiaddr } from 'multiaddr'
 import React, {
   useEffect,
   useState,
   useCallback,
   createContext
 } from 'react'
+import { useInterval } from '../hooks/useInterval'
+
+export interface HeliaNodeInfo {
+  peerId: string
+  multiaddrs: Multiaddr[]
+}
 
 export type HeliaContextType = {
   helia: null
@@ -17,12 +24,14 @@ export type HeliaContextType = {
   mfs: null
   error: boolean
   starting: true
+  nodeInfo?: HeliaNodeInfo
 } | {
   helia: HeliaLibp2p
   unixfs: UnixFS
   mfs: MFS
   error: boolean
   starting: false
+  nodeInfo: HeliaNodeInfo
 }
 
 export const HeliaContext = createContext<HeliaContextType>({
@@ -39,12 +48,15 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [mfs, setMfs] = useState<MFS | null>(null)
   const [starting, setStarting] = useState(true)
   const [error, setError] = useState(false)
+  // const [listeningAddrs, setListeningAddrs] = useState<string[]>([])
+  const [nodeInfo, setNodeInfo] = useState<HeliaNodeInfo>()
 
   const startHelia = useCallback(async () => {
     if (helia == null) {
       try {
         console.info('Starting Helia')
         const helia = await createHelia({
+          // datastore: new LevelDatastore('helia'),
           libp2p: {
             // @ts-expect-error - problem with helia/devToolsMetrics types.
             metrics: devToolsMetrics()
@@ -54,6 +66,10 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setUnixfs(_unixfs(helia))
         setMfs(_mfs(helia))
         setStarting(false)
+        // setNodeInfo({
+        //   peerId: helia.libp2p.peerId.toString(),
+        //   multiaddrs: helia.libp2p.getMultiaddrs()
+        // })
       } catch (e) {
         console.error(e)
         setError(true)
@@ -65,19 +81,32 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     void startHelia()
   }, [])
 
+  const updateNodeInfo = useCallback(() => {
+    if (helia == null) return
+    setNodeInfo({
+      ...nodeInfo,
+      // @ts-expect-error - multiaddr mismatch between helia and libp2p?
+      multiaddrs: helia.libp2p.getMultiaddrs()
+    })
+  }, [helia, nodeInfo])
+
+  useInterval(updateNodeInfo, 5000)
+
   // output multiaddrs
   useEffect(() => {
     if (helia == null) return
-    const listener = (): void => {
-      const addrs = helia.libp2p.getMultiaddrs()
-      console.info('libp2p multiaddrs:', addrs.map((addr) => addr.toString()))
-    }
 
-    helia.libp2p.addEventListener('self:peer:update', listener)
+    (globalThis as any).helia = helia
+
+    helia.libp2p.addEventListener('self:peer:update', updateNodeInfo)
     return () => {
-      helia.libp2p.removeEventListener('self:peer:update', listener)
+      helia.libp2p.removeEventListener('self:peer:update', updateNodeInfo)
     }
-  }, [helia])
+  }, [helia, updateNodeInfo])
+
+  useEffect(() => {
+    console.log('helia node info: ', nodeInfo)
+  }, [nodeInfo, updateNodeInfo])
 
   // @ts-expect-error - TODO: helia might still be null?
   const value: HeliaContextType = {
@@ -85,7 +114,8 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     unixfs,
     mfs,
     error,
-    starting
+    starting,
+    nodeInfo
   }
 
   return (

@@ -52,6 +52,7 @@ const options = {
       'react-i18next',
       'react-loader-spinner',
       'react-modal',
+      '@multiformats/multiaddr-matcher',
 
       // error when testing without this dep
       'node-datachannel'
