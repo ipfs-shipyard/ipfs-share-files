@@ -138,20 +138,21 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
 
   return (
     <div className='mv2 flex items-center justify-between'>
-      <a
+      <div
         title={t('box.viewOnGateway')}
-        className='flex items-center link truncate FileLink'
+        className='flex items-center truncate'
         style={{ outline: 'none' }}
-        href={url}
-        target='_blank'
-        rel='noopener noreferrer'>
+        // href={url}
+        // target='_blank'
+        rel='noopener noreferrer'
+        >
         <div>
           {/* TODO figure out how type was passed thru */}
           <FileIcon className="flex-shrink-0" name={name} error={error} />
         </div>
         <span className={fileNameClass}>{name}</span>
         <span className={fileSizeClass}>{size != null ? `(~${size})` : ''}</span>
-      </a>
+      </div>
       <div className='flex items-center'>
         <span className='ml-auto'>{ renderFileStatus() }</span>
         { renderCopyButton(url) }
