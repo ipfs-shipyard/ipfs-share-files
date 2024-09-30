@@ -41,7 +41,6 @@ const options = {
       'classnames',
       'helia',
       'ipfs-css',
-      'multiaddr',
       'qrcode.react',
       'react-circular-progressbar',
       'react-copy-to-clipboard',

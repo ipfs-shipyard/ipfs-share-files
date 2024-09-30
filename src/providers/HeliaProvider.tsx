@@ -4,7 +4,6 @@ import { mfs as _mfs, type MFS } from '@helia/mfs'
 import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
 import { devToolsMetrics } from '@libp2p/devtools-metrics'
 import { createHelia, type HeliaLibp2p } from 'helia'
-import { type Multiaddr } from 'multiaddr'
 import React, {
   useEffect,
   useState,
@@ -12,9 +11,10 @@ import React, {
   createContext
 } from 'react'
 import { useInterval } from '../hooks/useInterval'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 export interface HeliaNodeInfo {
-  peerId: string
+  peerId?: string
   multiaddrs: Multiaddr[]
 }
 
@@ -66,10 +66,10 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setUnixfs(_unixfs(helia))
         setMfs(_mfs(helia))
         setStarting(false)
-        // setNodeInfo({
-        //   peerId: helia.libp2p.peerId.toString(),
-        //   multiaddrs: helia.libp2p.getMultiaddrs()
-        // })
+        setNodeInfo({
+          peerId: helia.libp2p.peerId.toString(),
+          multiaddrs: helia.libp2p.getMultiaddrs()
+        })
       } catch (e) {
         console.error(e)
         setError(true)
@@ -85,7 +85,6 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (helia == null) return
     setNodeInfo({
       ...nodeInfo,
-      // @ts-expect-error - multiaddr mismatch between helia and libp2p?
       multiaddrs: helia.libp2p.getMultiaddrs()
     })
   }, [helia, nodeInfo])
