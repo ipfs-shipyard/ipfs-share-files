@@ -10,11 +10,11 @@ import { useHelia } from '../../hooks/useHelia'
 import IconDownload from '../../media/icons/download.svg'
 import IconView from '../../media/icons/view.svg'
 import { type FileState } from '../../providers/FilesProvider'
-import { doGetFileURL } from '../../util'
+import CidRenderer from '../cid-renderer/cid-renderer'
+import Modal from '../modal/Modal'
 import FileIcon from './file-icon/FileIcon'
 import { downloadCidAsFile } from './utils/download'
 import { getShareLink } from './utils/get-share-link'
-import viewFile from './utils/view'
 import './File.css'
 import 'react-circular-progressbar/dist/styles.css'
 
@@ -24,12 +24,21 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   const [progress] = useState(100)
   const [copied, setCopied] = useState(false)
   const { unixfs } = useHelia()
+
+  const [showModalView, setShowModalView] = useState(false)
+
+  const handleOpenModalView = useCallback(() => {
+    setShowModalView(true)
+  }, [])
+
+  const handleCloseModalView = useCallback(() => {
+    setShowModalView(false)
+  }, [])
   const { cid, name, size, error } = file
 
   const handleViewClick = useCallback(async () => {
-    if (cid == null) return
-    const { url } = doGetFileURL(name, cid, { download: false })
-    viewFile(url)
+    if (file == null) return
+    handleOpenModalView()
   }, [file])
 
   const handleDownloadClick = useCallback(async () => {
@@ -122,8 +131,6 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     )
   }, [isDownload, copied, disabled, t])
 
-  // console.log('cid', cid)
-
   const fileNameClass = classnames({ charcoal: error == null, gray: error }, ['FileLinkName ph2 f6 b truncate'])
   const fileSizeClass = classnames({ 'charcoal-muted': error == null, gray: error }, ['f6'])
 
@@ -149,6 +156,16 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
         <span className='ml-auto'>{ renderFileStatus() }</span>
         { renderCopyButton(url) }
       </div>
+      <Modal
+        isOpen={showModalView}
+        onClose={handleCloseModalView}
+        onRequestClose={handleCloseModalView}
+        title={file.name}
+        contentLabel={cid?.toString()}
+      >
+        <CidRenderer file={file} unixfs={unixfs}/>
+      </Modal>
     </div>
+
   )
 }

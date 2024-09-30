@@ -280,6 +280,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       console.log('fetching files...')
       // is the CID representing a single file or a directory?
       const unixfsStats = await unixfs.stat(cid)
+      console.log('unixfsStats:', unixfsStats)
 
       const files: Array<{ cid: CID, file: File }> = []
       if (unixfsStats.type === 'file') {
@@ -290,7 +291,11 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         console.log('it\'s a directory')
         for await (const entry of unixfs.ls(cid)) {
           if (entry.type === 'file') {
-            const file = await asyncItToFile(unixfs.cat(entry.cid), entry.name ?? filename ?? cid.toString())
+            const file = await asyncItToFile(unixfs.cat(entry.cid, {
+              onProgress: (evt) => {
+                console.info(`download progress "${evt.type}" detail:`, evt.detail)
+              }
+            }), entry.name ?? filename ?? cid.toString())
             files.push({ file, cid: entry.cid })
 
             console.log('created file...')

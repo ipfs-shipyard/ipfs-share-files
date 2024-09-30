@@ -24,10 +24,6 @@ export interface ModalProps extends ReactModal.Props {
   title?: string
   onClose(): void
   children: React.ReactNode
-
-  // ReactModel props:
-  // onRequestClose(): void
-  // contentLabel?: string
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children, ...props }) => {

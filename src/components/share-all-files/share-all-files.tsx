@@ -69,7 +69,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
       setShareDisabled(true)
       setShareAllLink(null)
     }
-  }, [mfs, shouldGenerateLink])
+  }, [helia, mfs, shouldGenerateLink])
 
   useEffect(() => {
     if (helia == null || folderCid == null) {

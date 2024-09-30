@@ -19,5 +19,10 @@ export async function asyncItToFile (asyncIt: AsyncIterable<Uint8Array>, filenam
     filename = `${filename}.${type.ext}`
   }
 
-  return new File([blob], filename, { type })
+  let blobType = type?.mime
+  if (type?.ext === 'txt' || filename.endsWith('.txt')) {
+    blobType = 'text/plain'
+  }
+
+  return new File([blob], filename, { type: blobType })
 }

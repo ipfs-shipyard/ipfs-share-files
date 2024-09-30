@@ -65,6 +65,20 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     void startHelia()
   }, [])
 
+  // output multiaddrs
+  useEffect(() => {
+    if (helia == null) return
+    const listener = (): void => {
+      const addrs = helia.libp2p.getMultiaddrs()
+      console.info('libp2p multiaddrs:', addrs.map((addr) => addr.toString()))
+    }
+
+    helia.libp2p.addEventListener('self:peer:update', listener)
+    return () => {
+      helia.libp2p.removeEventListener('self:peer:update', listener)
+    }
+  }, [helia])
+
   // @ts-expect-error - TODO: helia might still be null?
   const value: HeliaContextType = {
     helia,
