@@ -16,7 +16,7 @@ export const Page = (): React.JSX.Element => {
   const { fetch } = useFiles()
   const isDownload = currentPage === 'download'
   let content
-  // debugger
+
   if (heliaState.error) {
     content = <BoxNotAvailable />
   } else if (isDownload) {
@@ -24,21 +24,6 @@ export const Page = (): React.JSX.Element => {
   } else {
     content = <BoxAdd isLoading={fetch.loading} />
   }
-
-  // TODO: reimplement this:
-  // if the hash has changed, reset the files
-  //  and if the hash is a cid, fetch the new file tree
-  //
-  // handleRouting (prevProps) {
-  //   const { doUpdateHash, doFetchFileTree, doResetFiles } = this.props
-  //   const prevHash = prevProps && prevProps.routeInfo.params.hash
-  //   const currentHash = this.props.routeInfo.params.hash
-
-  //   if (prevHash !== currentHash) {
-  //     doResetFiles()
-  //     cid(currentHash) ? doFetchFileTree(currentHash) : doUpdateHash('#/')
-  //   }
-  // }
 
   return (
     <div data-id='Page'>

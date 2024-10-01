@@ -9,13 +9,13 @@ import Folder from 'ipfs-css/icons/glyph_folder.svg'
 import React, { type HTMLProps } from 'react'
 import extToType from '../utils/extToType'
 
-const typeFromExt = (filename: string): string | undefined => {
-  const ext = filename.split('.').pop() ?? ''
+const typeFromExt = (filename?: string): string | undefined => {
+  const ext = filename?.split('.').pop() ?? ''
   return extToType[ext] ?? ext
 }
 
 export interface FileIconProps extends HTMLProps<HTMLElement> {
-  name: string
+  name?: string
   type?: 'dir' | 'file'
   error?: Error
 }

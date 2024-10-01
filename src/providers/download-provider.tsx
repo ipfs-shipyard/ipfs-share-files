@@ -2,6 +2,7 @@
  * A download provider that stores the cid and filename from the URL for distributing to other components
  */
 import React, { createContext, useContext, useState, type ReactNode } from 'react'
+import { useFilesDispatch } from '../hooks/useFiles'
 
 // Define the shape of the context state
 interface DownloadContextState {
@@ -22,8 +23,10 @@ export const DownloadContext = createContext<DownloadContextState>({
 export const DownloadProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cid, setCid] = useState<string | null>(null)
   const [filename, setFilename] = useState<string | null>(null)
+  const dispatch = useFilesDispatch()
 
   const setDownloadInfo = (newCid: string, newFilename: string | null): void => {
+    dispatch({ type: 'reset_files' })
     setCid(newCid)
     setFilename(newFilename)
   }

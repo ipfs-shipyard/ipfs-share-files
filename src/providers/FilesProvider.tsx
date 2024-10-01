@@ -102,6 +102,7 @@ export type FilesAction =
   | { type: 'fetch_start', cid: string, filename: string | null }
   | { type: 'fetch_success', files: Record<string, FileState> }
   | { type: 'fetch_fail', error: Error }
+  | { type: 'reset_files' }
 
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
   console.log('filesReducer action:', action)
@@ -248,6 +249,17 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           error: action.error
         }
       }
+
+    case 'reset_files':
+      /**
+       * on hash-change, we should empty out all files. This is handled by `useCurrentPage`, which calls
+       * `setDownloadInfo` from download-provider.tsx
+       *
+       * Might be a race condition here depending on how quickly this action is dispatched vs setCid and setFilename
+       * in download-provider.tsx
+       */
+
+      return initialState
 
     default:
       return state
