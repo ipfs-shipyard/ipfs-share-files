@@ -282,12 +282,11 @@ export const FilesDispatchContext = createContext<React.Dispatch<FilesAction>>(n
 
 export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(filesReducer, initialState)
-  const heliaState = useHelia()
-  const { helia, mfs, unixfs } = heliaState
+  const { helia, mfs, unixfs, nodeInfo } = useHelia()
+  const { multiaddrs } = nodeInfo ?? { multiaddrs: [] }
 
-  console.log('filesProvider state.fetch:', state.fetch)
   useEffect(() => {
-    if (helia == null || mfs == null || unixfs == null) return
+    if (helia == null || mfs == null || unixfs == null || multiaddrs?.length === 0) return
     const fetchFiles = async (cid: CID, filename: string | null): Promise<void> => {
       console.log('fetching files...')
       // is the CID representing a single file or a directory?
@@ -366,7 +365,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         dispatch({ type: 'fetch_fail', error: err })
       })
     }
-  }, [state.fetch, helia, mfs, unixfs])
+  }, [state.fetch, helia, mfs, unixfs, multiaddrs])
 
   // we need to update the share link whenever the files change
   useEffect(() => {

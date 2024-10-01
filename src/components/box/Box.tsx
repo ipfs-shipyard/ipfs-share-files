@@ -28,17 +28,11 @@ export const BoxDownload = (): React.JSX.Element => {
 
   const dispatch = useFilesDispatch()
   const { fetch, files } = useFiles()
-  // const heliaState = useHelia()
-  // const doAddFiles = useAddFiles(dispatch, heliaState)
   const { cid, filename } = useDownloadInfo()
   const isLoading = fetch.loading || Object.keys(files).length === 0
 
   useEffect(() => {
     if (cid == null) return
-    //   if (heliaState.helia == null) {
-    //     return
-    //   }
-    //   // fetch the file tree
     dispatch({ type: 'fetch_start', cid, filename })
   }, [cid, filename])
 
@@ -70,8 +64,6 @@ export const BoxAdd = ({ isLoading }: { isLoading: boolean }): React.JSX.Element
       doAddFiles(files)
     }
   })
-
-  // console.log('shareLink', shareLink)
 
   return <Box ref={drop} className={isOver ? '' : 'bg-gray-muted'} >
     <AddFiles doAddFiles={doAddFiles} />
