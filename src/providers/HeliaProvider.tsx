@@ -50,7 +50,6 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [mfs, setMfs] = useState<MFS | null>(null)
   const [starting, setStarting] = useState(true)
   const [error, setError] = useState(false)
-  // const [listeningAddrs, setListeningAddrs] = useState<string[]>([])
   const [nodeInfo, setNodeInfo] = useState<HeliaNodeInfo>()
 
   const startHelia = useCallback(async () => {

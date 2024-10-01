@@ -13,7 +13,6 @@ export const Page = (): React.JSX.Element => {
   const [t] = useTranslation()
   const currentPage = useCurrentPage()
   const heliaState = useHelia()
-  const { fetch } = useFiles()
   const isDownload = currentPage === 'download'
   let content
 
@@ -22,7 +21,7 @@ export const Page = (): React.JSX.Element => {
   } else if (isDownload) {
     content = <BoxDownload />
   } else {
-    content = <BoxAdd isLoading={fetch.loading} />
+    content = <BoxAdd />
   }
 
   return (

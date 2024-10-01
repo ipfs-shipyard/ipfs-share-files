@@ -1,12 +1,10 @@
 import classnames from 'classnames'
-import { type CID } from 'multiformats/cid'
 import { QRCodeSVG } from 'qrcode.react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useFiles } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
-import { getShareLink } from '../file/utils/get-share-link'
 
 /**
  * This component renders a QR code and a share link that reprents either:
@@ -15,12 +13,10 @@ import { getShareLink } from '../file/utils/get-share-link'
  * 2. A root folder of an MFS representation of all files listed
  */
 export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.ReactNode => {
-  const { files } = useFiles()
+  const { files, shareLink, rootPublished } = useFiles()
+  const { link: shareAllLink } = shareLink
   const { mfs, helia } = useHelia()
-  const [shareAllLink, setShareAllLink] = useState<string | null>()
   const [copied, setCopied] = useState(false)
-  const [isShareDisabled, setShareDisabled] = useState(true)
-  const [folderCid, setFolderCid] = useState<CID | null>(null)
   const { t } = useTranslation()
   const handleOnCopyClick = useCallback(() => {
     setCopied(true)
@@ -33,52 +29,13 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   const shouldGenerateLink = useMemo(() => Object.keys(files).length > 0, [files])
   const allFilesArePublished = useMemo(() => Object.values(files).every((file) => file.published), [files])
 
-  useEffect(() => {
-    if (mfs == null || !shouldGenerateLink || !allFilesArePublished) {
-      return
-    }
-    void (async () => {
-      try {
-        const rootStats = await mfs.stat('/')
-        setFolderCid(rootStats.cid)
-        const link = getShareLink(rootStats.cid)
-        setShareAllLink(link)
-      } catch (e) {
-        // sometimes files will exist in MFS but this fires before mfs.stat is ready
-        console.error('could not get folder CID', e)
-        setShareAllLink(null)
-      }
-    })()
-  }, [files, mfs, shouldGenerateLink, allFilesArePublished])
+  useEffect(() => {})
 
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied,
-    'o-50 no-pointer-events thing': isShareDisabled
+    'o-50 no-pointer-events thing': !allFilesArePublished || !rootPublished
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
-
-  useEffect(() => {
-    if (helia == null || folderCid == null) {
-      return
-    }
-
-    console.log('publishing folderCID', folderCid)
-    // publish the folder CID
-    void helia.routing.provide(folderCid, {
-      onProgress: (evt) => {
-        console.info(`Folder Publish progress "${evt.type}" detail:`, evt.detail)
-      }
-    }).catch((err: Error) => {
-      console.error('Could not provide the folder CID: ', err)
-      // throw err
-    }).then(() => {
-      const link = getShareLink(folderCid)
-      setShareAllLink(link)
-      // share button can be enabled now
-      console.info('Folder CID published')
-      setShareDisabled(false)
-    })
-  }, [helia, folderCid])
 
   if (mfs == null || helia == null) {
     // we can't create a share-all-files link without helia, and mfs
@@ -88,7 +45,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   if (!shouldGenerateLink) {
     return null
   }
-  if (shareAllLink == null || !allFilesArePublished || isShareDisabled) {
+  if (shareAllLink == null) {
     return 'Preparing link...'
   }
 

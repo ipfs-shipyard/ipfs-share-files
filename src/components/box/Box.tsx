@@ -3,7 +3,7 @@ import React, { forwardRef, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { Trans, useTranslation } from 'react-i18next'
-import { useAddFiles, useFiles, useFilesDispatch } from '../../hooks/useFiles'
+import { useFiles, useFilesDispatch, useAddFiles } from '../../hooks/useFiles'
 import { useHelia } from '../../hooks/useHelia'
 import { useDownloadInfo } from '../../providers/download-provider'
 import { AddFiles } from '../add-files/AddFiles'
@@ -27,14 +27,18 @@ export const BoxDownload = (): React.JSX.Element => {
   // TODO: we have a CID in the URL, so we're in download mode. Trigger helia to fetch the file tree
 
   const dispatch = useFilesDispatch()
-  const { fetch, files } = useFiles()
+  const { files, filesToFetch } = useFiles()
   const { cid, filename } = useDownloadInfo()
-  const isLoading = fetch.loading || Object.keys(files).length === 0
+  const { helia, nodeInfo } = useHelia()
+  const { multiaddrs } = nodeInfo ?? { multiaddrs: [] }
+  const isLoading = filesToFetch.length !== 0 || Object.keys(files).length === 0
 
   useEffect(() => {
+    if (helia == null) return
+    // if (multiaddrs.length === 0) return
     if (cid == null) return
     dispatch({ type: 'fetch_start', cid, filename })
-  }, [cid, filename])
+  }, [cid, filename, helia, multiaddrs.length])
 
   return (
     <Box>
@@ -45,7 +49,7 @@ export const BoxDownload = (): React.JSX.Element => {
   )
 }
 
-export const BoxAdd = ({ isLoading }: { isLoading: boolean }): React.JSX.Element => {
+export const BoxAdd = (): React.JSX.Element => {
   const dispatch = useFilesDispatch()
   const heliaState = useHelia()
   const doAddFiles = useAddFiles(dispatch, heliaState)
@@ -67,7 +71,7 @@ export const BoxAdd = ({ isLoading }: { isLoading: boolean }): React.JSX.Element
 
   return <Box ref={drop} className={isOver ? '' : 'bg-gray-muted'} >
     <AddFiles doAddFiles={doAddFiles} />
-    { isLoading && <Loader /> }
+    {/* { isLoading && <Loader /> } */}
     <FileTree />
     <ShareAllFiles />
   </Box>

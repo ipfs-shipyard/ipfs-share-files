@@ -31,8 +31,6 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
       (acc: typeof base, addr: Multiaddr) => {
         if (Circuit.matches(addr)) {
           acc.circuitRelayAddrs++
-          // eslint-disable-next-line no-console
-          console.log('circuit relay addr', addr.toString())
         } else if (WebRTC.matches(addr)) {
           acc.webRtc++
         } else if (WebRTCDirect.matches(addr)) {
@@ -69,7 +67,7 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
         }
         if (conn.limits == null) {
           // eslint-disable-next-line no-console
-          console.log('unlimited connection', conn)
+          // console.log('unlimited connection', conn)
           acc.unlimitedConns++
         }
         return acc
