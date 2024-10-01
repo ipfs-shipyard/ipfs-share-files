@@ -116,7 +116,6 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
             bgColor={'#ffffff'}
             fgColor={'#022E44'}
             level={'M'}
-            renderAs={'svg'}
             imageSettings={{
               src: 'favicon-32x32.png',
               x: 50,
