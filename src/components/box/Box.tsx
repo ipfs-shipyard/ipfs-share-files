@@ -24,8 +24,6 @@ export const Box = forwardRef<HTMLDivElement, { children: any, className?: strin
 Box.displayName = 'Box'
 
 export const BoxDownload = (): React.JSX.Element => {
-  // TODO: we have a CID in the URL, so we're in download mode. Trigger helia to fetch the file tree
-
   const dispatch = useFilesDispatch()
   const { files, filesToFetch } = useFiles()
   const { cid, filename } = useDownloadInfo()
