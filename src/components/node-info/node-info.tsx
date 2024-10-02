@@ -3,6 +3,7 @@ import { type Multiaddr } from '@multiformats/multiaddr'
 import { Circuit, WebRTC, WebRTCDirect, WebSockets, WebSocketsSecure, WebTransport } from '@multiformats/multiaddr-matcher'
 import React, { useMemo } from 'react'
 import { useHelia } from '../../hooks/useHelia'
+import { NodeInfoDetail } from './node-info-detail'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NodeInfoProps {
@@ -29,17 +30,17 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
     }
     return multiaddrs.reduce(
       (acc: typeof base, addr: Multiaddr) => {
-        if (Circuit.matches(addr)) {
+        if (Circuit.exactMatch(addr)) {
           acc.circuitRelayAddrs++
-        } else if (WebRTC.matches(addr)) {
+        } else if (WebRTC.exactMatch(addr)) {
           acc.webRtc++
-        } else if (WebRTCDirect.matches(addr)) {
+        } else if (WebRTCDirect.exactMatch(addr)) {
           acc.webRtcDirect++
-        } else if (WebTransport.matches(addr)) {
+        } else if (WebTransport.exactMatch(addr)) {
           acc.webTransport++
-        } else if (WebSockets.matches(addr)) {
+        } else if (WebSockets.exactMatch(addr)) {
           acc.webSockets++
-        } else if (WebSocketsSecure.matches(addr)) {
+        } else if (WebSocketsSecure.exactMatch(addr)) {
           acc.webSocketsSecure++
         } else {
           // eslint-disable-next-line no-console
@@ -52,8 +53,8 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
     )
   }, [multiaddrs])
 
-  const { inboundConns, outboundConns, unlimitedConns } = useMemo(() => {
-    const base = { inboundConns: 0, outboundConns: 0, unlimitedConns: 0 }
+  const { totalConns, inboundConns, outboundConns, unlimitedConns } = useMemo(() => {
+    const base = { totalConns: 0, inboundConns: 0, outboundConns: 0, unlimitedConns: 0 }
     if (connections == null) {
       return base
     }
@@ -66,10 +67,9 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
           acc.outboundConns++
         }
         if (conn.limits == null) {
-          // eslint-disable-next-line no-console
-          // console.log('unlimited connection', conn)
           acc.unlimitedConns++
         }
+        acc.totalConns++
         return acc
       },
       base
@@ -81,15 +81,10 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
   }
 
   return (
-    <div className='NodeInfo gray-muted'>
-      <div className='NodeInfo-peerId'>
-        <span>Peer ID:</span>
-        <span>{peerId}</span>
-      </div>
-      <div className='NodeInfo-multiaddrs'>
-        <p>ListeningAddrs: {listeningAddrs} (relayed: {circuitRelayAddrs}, webRtc: {webRtc}, webRtcDirect: {webRtcDirect}, webTransport: {webTransport}, ws: {webSockets}, wss: {webSocketsSecure})</p>
-        <p>Connections: {connections?.length} ({inboundConns} in, {outboundConns} out, {unlimitedConns} unlimited)</p>
-      </div>
+    <div className='ml2 pb2 f5 gray-muted montserrat mw7'>
+      <NodeInfoDetail label='Peer ID' value={peerId} />
+      <NodeInfoDetail label='ListeningAddrs' value={`${listeningAddrs} (relayed: ${circuitRelayAddrs}, webRtc: ${webRtc}, webRtcDirect: ${webRtcDirect}, webTransport: ${webTransport}, ws: ${webSockets}, wss: ${webSocketsSecure})`} />
+      <NodeInfoDetail label='Connections' value={`${totalConns} (${inboundConns} in, ${outboundConns} out, ${unlimitedConns} unlimited)`} />
     </div>
   )
 }

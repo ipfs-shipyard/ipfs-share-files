@@ -9,7 +9,7 @@ export const FileTree = ({ isDownload }: { isDownload?: boolean }): React.ReactN
   const filesMap = Object.entries(files)
 
   return (
-  <div className='mt4'>
+  <div className=''>
      {isDownload === false && filesMap.length > 1 && (
      <div className='f5 montserrat fw4 charcoal mb2'>
       <Trans t={t} i18nKey='copyLink.labelIndividual'>Share individual files:</Trans>
