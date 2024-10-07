@@ -1,12 +1,10 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-// Components
 import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/Box'
 import Headline from '../components/headline/Headline'
 import { Info } from '../components/info/Info'
 import { useCurrentPage } from '../hooks/useCurrentPage'
-import { useFiles } from '../hooks/useFiles'
 import { useHelia } from '../hooks/useHelia'
 
 export const Page = (): React.JSX.Element => {
@@ -16,8 +14,8 @@ export const Page = (): React.JSX.Element => {
   const isDownload = currentPage === 'download'
   let content
 
-  if (heliaState.error) {
-    content = <BoxNotAvailable />
+  if (heliaState.error != null) {
+    content = <BoxNotAvailable error={heliaState.error} />
   } else if (isDownload) {
     content = <BoxDownload />
   } else {

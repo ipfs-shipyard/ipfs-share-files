@@ -19,7 +19,6 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
 
   return (files: File[]) => {
     for (const _file of files) {
-      // const id: string = shortid.generate()
       const name = _file.name
 
       Promise.resolve().then(async () => {

@@ -30,13 +30,12 @@
       "copyKeepDaemon": "You can share these files directly from your device simply by keeping your IPFS node running. Just share the link you received, and be sure to keep your node running until the recipient downloads the files."    },
     "learnMore": "Learn more."
   },
-  "box": {
-    "missingDaemon": "Is your IPFS node running?",
-    "runningDaemon": "You need a <1>running node</1> to add files to IPFS.",
-    "configureDaemon": "Make sure you <1>configure your IPFS API</1> to allow cross-origin (CORS) requests:",
-    "runDaemon": "Then, start an IPFS daemon in your terminal:",
-    "largeFilesWarning": "If you have issues downloading files larger than 1GB, installing <1>IPFS Desktop</1> or <3>IPFS Companion</3> can improve performance.",
-    "viewOnGateway": "View on IPFS"
+  "helia-error": {
+    "title": "An error occurred while trying to initialize a Helia node.",
+    "message": "Error: {message}",
+    "more-details": "The error stack trace is available in the browser console.",
+    "refresh-page": "You may need to <1>refresh the page</1> to try re-instantiating your Helia node.",
+    "open-issue": "If the problem persists, please <1>open an issue</1>."
   },
   "modal": {
     "how": {

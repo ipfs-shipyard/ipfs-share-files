@@ -24,14 +24,14 @@ export type HeliaContextType = {
   helia: null
   unixfs: null
   mfs: null
-  error: boolean
+  error: null
   starting: true
   nodeInfo?: HeliaNodeInfo
 } | {
   helia: HeliaLibp2p
   unixfs: UnixFS
   mfs: MFS
-  error: boolean
+  error: null | Error
   starting: false
   nodeInfo: HeliaNodeInfo
 }
@@ -40,7 +40,7 @@ export const HeliaContext = createContext<HeliaContextType>({
   helia: null,
   unixfs: null,
   mfs: null,
-  error: false,
+  error: null,
   starting: true
 })
 
@@ -49,7 +49,7 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [unixfs, setUnixfs] = useState<UnixFS | null>(null)
   const [mfs, setMfs] = useState<MFS | null>(null)
   const [starting, setStarting] = useState(true)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
   const [nodeInfo, setNodeInfo] = useState<HeliaNodeInfo>()
 
   const startHelia = useCallback(async () => {
@@ -71,9 +71,9 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           multiaddrs: helia.libp2p.getMultiaddrs(),
           connections: helia.libp2p.getConnections()
         })
-      } catch (e) {
+      } catch (e: any) {
         console.error(e)
-        setError(true)
+        setError(e)
       }
     }
   }, [])

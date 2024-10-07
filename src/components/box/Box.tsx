@@ -76,31 +76,27 @@ export const BoxAdd = (): React.JSX.Element => {
 }
 
 // TODO this text is all outdated
-export const BoxNotAvailable = (): React.JSX.Element => {
-  const { t } = useTranslation('myNamespace')
+export const BoxNotAvailable: React.FC<{ error: Error }> = ({ error }) => {
+  const { t } = useTranslation('translation')
   return (
     <Box>
-      <p className='mv0 orange f5 lh-title'>{t('box.missingDaemon')}</p>
+      <p className='mv0 red f5 lh-title'>{t('helia-error.title')}</p>
       <p className='mv3 navy f6 lh-copy'>
-        <Trans i18nKey='box.runningDaemon'>
-          You need a <a className='link aqua underline-hover' href='https://docs.ipfs.io/introduction/usage/' target='_blank' rel='noopener noreferrer'>running daemon</a> to add files to IPFS.
+        {t('helia-error.message', { message: error.message })}
+      </p>
+      <p className='mv3 navy f6 lh-copy'>
+        {t('helia-error.more-details')}
+      </p>
+      <p className='mv3 navy f6 lh-copy'>
+        <Trans i18nKey="helia-error.refresh-page">
+          You may need to <a className="link aqua underline-hover" href={window.location.href}>refresh the page</a> to try re-instantiating your Helia node.
         </Trans>
       </p>
       <p className='mv3 navy f6 lh-copy'>
-        <Trans i18nKey='box.configureDaemon'>
-          Make sure you <a className='link aqua underline-hover' href='https://github.com/ipfs-shipyard/ipfs-share-files#ipfs-daemon' target='_blank' rel='noopener noreferrer'>configure your IPFS API</a> to allow cross-origin (CORS) requests:
+        <Trans i18nKey='helia-error.open-issue'>
+          If the problem persists, please <a className='link aqua underline-hover' href='https://github.com/ipfs-shipyard/ipfs-share-files' target='_blank' rel='noopener noreferrer'>open an issue</a>.
         </Trans>
       </p>
-      <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
-        <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["{ window.location.origin }", "https://share.ipfs.io"]'</code>
-        <code className='db'>$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'</code>
-      </div>
-      <p className='mv3 navy f6 lh-copy'>{t('box.runDaemon')}</p>
-      <div className='pa3 bg-black-80 bt bw4 br2 gray-muted f7 nowrap overflow-x-scroll'>
-        <code className='db'>$ ipfs daemon</code>
-        <code className='db'>Initializing daemon...</code>
-        <code className='db'>API server listening on /ip4/127.0.0.1/tcp/5001</code>
-      </div>
     </Box>
   )
 }
