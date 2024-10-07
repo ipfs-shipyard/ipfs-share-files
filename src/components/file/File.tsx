@@ -68,7 +68,6 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     if (isDownload === true && _progress === 100) {
       return <div className='flex items-center'>
         { renderWarningSign() }
-        {/* TODO: make preview pop up in modal */}
         {/* TODO: disable preview link for un-previewable files */}
         <IconView
           className='pointer o-80 glow'
@@ -142,8 +141,6 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
         title={t('box.viewOnGateway')}
         className='flex items-center truncate'
         style={{ outline: 'none' }}
-        // href={url}
-        // target='_blank'
         rel='noopener noreferrer'
         >
         <div>
