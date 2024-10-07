@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { useTranslation } from 'react-i18next'
 import { useFiles } from '../../hooks/useFiles'
@@ -14,10 +14,21 @@ export interface DownloadFilesProps {
 
 export const DownloadFiles: React.FC<DownloadFilesProps> = ({ isLoading }: { isLoading: boolean }) => {
   const { t } = useTranslation()
-  const [progress, setProgress] = useState<number | null>(100)
+  const [progress, setProgress] = useState<number>(0)
   const { files, shareLink } = useFiles()
   const { cid: folderCid } = shareLink
   const { helia, unixfs } = useHelia()
+
+  // simulate progress for now
+  // TODO: useFiles should give us a way to determine if all of the files are downloaded
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setProgress((progress) => Math.max(0, Math.min(100, progress + 10)))
+    }, 150)
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [progress])
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = useCallback((ev) => {
     if (isLoading || helia == null || unixfs == null || folderCid == null) {

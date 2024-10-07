@@ -32,8 +32,6 @@ export const DownloadProvider: React.FC<{ children: ReactNode }> = ({ children }
     setFilename(filename)
   }
 
-  console.log('DownloadProvider state:', { cid, filename })
-
   return (
     <DownloadContext.Provider value={{ cid, filename, setDownloadInfo }}>
       {children}
