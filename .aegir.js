@@ -1,9 +1,11 @@
 /** @type {import('aegir').PartialOptions} */
 const options = {
   lint: {
-    paths: [
-      'src',
-      'test'
+    files: [
+      'src/**/*.ts',
+      'src/**/*.tsx',
+      'test/**/*.ts',
+      'test/**/*.tsx',
     ]
   },
   build: {

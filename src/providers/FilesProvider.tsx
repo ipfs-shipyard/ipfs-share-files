@@ -1,4 +1,3 @@
-import blobToIt from 'blob-to-it'
 import { CID } from 'multiformats/cid'
 import React, { createContext, useEffect, useReducer } from 'react'
 import { asyncItToFile } from '../components/file/utils/async-it-to-file'
@@ -139,7 +138,6 @@ export type FilesAction =
   | { type: 'reset_files' }
 
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
-  console.log('filesReducer action:', action)
   switch (action.type) {
     case 'add_start':
       return {
@@ -170,7 +168,7 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           ...state.files,
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           [action.id]: {
-            ...state.files[action.id],
+            ...state.files[action.id] satisfies FileState,
             pending: false,
             cid: action.cid
           } as FileState
