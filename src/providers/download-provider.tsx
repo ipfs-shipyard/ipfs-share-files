@@ -28,7 +28,8 @@ export const DownloadProvider: React.FC<{ children: ReactNode }> = ({ children }
   const setDownloadInfo = (newCid: string, newFilename: string | null): void => {
     dispatch({ type: 'reset_files' })
     setCid(newCid)
-    setFilename(newFilename)
+    const filename = decodeURIComponent(newFilename ?? '')
+    setFilename(filename)
   }
 
   console.log('DownloadProvider state:', { cid, filename })
