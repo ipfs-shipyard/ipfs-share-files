@@ -4,6 +4,8 @@ import { mfs as _mfs, type MFS } from '@helia/mfs'
 import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
 import { devToolsMetrics } from '@libp2p/devtools-metrics'
 import { type Connection } from '@libp2p/interface'
+import { IDBBlockstore } from 'blockstore-idb'
+import { IDBDatastore } from 'datastore-idb'
 import { createHelia, type HeliaLibp2p } from 'helia'
 import React, {
   useEffect,
@@ -13,6 +15,8 @@ import React, {
 } from 'react'
 import { useInterval } from '../hooks/useInterval'
 import type { Multiaddr } from '@multiformats/multiaddr'
+import type { Blockstore } from 'interface-blockstore'
+import type { Datastore } from 'interface-datastore'
 
 export interface HeliaNodeInfo {
   peerId?: string
@@ -51,36 +55,58 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [starting, setStarting] = useState(true)
   const [error, setError] = useState<Error | null>(null)
   const [nodeInfo, setNodeInfo] = useState<HeliaNodeInfo>()
-
-  const startHelia = useCallback(async () => {
-    if (helia == null) {
-      try {
-        console.info('Starting Helia')
-        const helia = await createHelia({
-          // datastore: new LevelDatastore('helia'),
-          libp2p: {
-            metrics: devToolsMetrics()
-          }
-        }) as HeliaLibp2p
-        setHelia(helia)
-        setUnixfs(_unixfs(helia))
-        setMfs(_mfs(helia))
-        setStarting(false)
-        setNodeInfo({
-          peerId: helia.libp2p.peerId.toString(),
-          multiaddrs: helia.libp2p.getMultiaddrs(),
-          connections: helia.libp2p.getConnections()
-        })
-      } catch (e: any) {
-        console.error(e)
-        setError(e)
-      }
-    }
-  }, [])
+  const [datastore, setDatastore] = useState<null | Datastore>(null)
+  const [blockstore, setBlockstore] = useState<null | Blockstore>(null)
 
   useEffect(() => {
-    void startHelia()
-  }, [])
+    if (datastore == null) {
+      void (async () => {
+        const db = new IDBDatastore('helia-datastore')
+        await db.open()
+        setDatastore(db)
+      })()
+    }
+  }, [datastore])
+
+  useEffect(() => {
+    if (blockstore == null) {
+      void (async () => {
+        const db = new IDBBlockstore('helia-blockstore')
+        await db.open()
+        setBlockstore(db)
+      })()
+    }
+  }, [blockstore])
+
+  useEffect(() => {
+    if (datastore == null || blockstore == null) return
+    if (helia == null) {
+      void (async () => {
+        try {
+          console.info('Starting Helia')
+          const helia = await createHelia({
+            datastore,
+            blockstore,
+            libp2p: {
+              metrics: devToolsMetrics()
+            }
+          }) as HeliaLibp2p
+          setHelia(helia)
+          setUnixfs(_unixfs(helia))
+          setMfs(_mfs(helia))
+          setStarting(false)
+          setNodeInfo({
+            peerId: helia.libp2p.peerId.toString(),
+            multiaddrs: helia.libp2p.getMultiaddrs(),
+            connections: helia.libp2p.getConnections()
+          })
+        } catch (e: any) {
+          console.error(e)
+          setError(e)
+        }
+      })()
+    }
+  }, [datastore, blockstore, helia])
 
   const updateNodeInfo = useCallback(() => {
     if (helia == null) return
