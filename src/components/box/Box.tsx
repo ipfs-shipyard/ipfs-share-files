@@ -56,11 +56,14 @@ export const BoxAdd = (): React.JSX.Element => {
     collect: (monitor) => ({
       isOver: monitor.isOver()
     }),
-    drop: async ({ files }) => {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (!files) return
+    drop: async ({ files, ...rest }, monitor) => {
+      // FIXME: fix folder drag n drop: it fails and we should display a message to the user that folder drop currently doesn't work
+      if (files == null) return
       // still can't tell a dir from a file on the web web in 2021 XD  https://stackoverflow.com/a/25095250/11518426
-      files = files.filter(f => !(!f.type && f.size % 4096 === 0))
+      files = files.filter(f => {
+        if (f.type == null) return false
+        return !(f.size % 4096 === 0)
+      })
       // check: https://react-dnd.github.io/react-dnd/docs/api/use-drop
       // this is the handler that lets you call the function `doAddFiles`
       doAddFiles(files)
