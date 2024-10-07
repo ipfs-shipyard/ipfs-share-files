@@ -54,6 +54,10 @@ const options = {
       'react-loader-spinner',
       'react-modal',
       '@multiformats/multiaddr-matcher',
+      'blockstore-idb',
+      'datastore-idb',
+      'interface-blockstore',
+      'interface-datastore',
 
       // error when testing without this dep
       'node-datachannel'
