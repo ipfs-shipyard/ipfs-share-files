@@ -118,13 +118,20 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': copied,
       'o-80 glow pointer': !copied,
-      'o-50 no-pointer-events bg-gray': disabled
+      'o-50 no-pointer-events bg-gray w4': disabled
     }, ['pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5'])
+
+    let copyBtnTxt = t('copyLink.copy')
+    if (disabled) {
+      copyBtnTxt = t('copyLink.publishing')
+    } else if (copied) {
+      copyBtnTxt = t('copyLink.copied')
+    }
 
     return (
       <CopyToClipboard text={url} onCopy={handleOnCopyClick}>
         <div className={copyBtnClass}>
-          {copied ? t('copyLink.copied') : t('copyLink.copy')}
+          {copyBtnTxt}
         </div>
       </CopyToClipboard>
     )

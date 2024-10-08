@@ -34,7 +34,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied,
-    'o-50 no-pointer-events bg-gray': disabled
+    'o-50 no-pointer-events bg-gray navy w4': disabled
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
   if (mfs == null || helia == null) {
@@ -49,6 +49,13 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
     return 'Preparing link...'
   }
 
+  let copyBtnTxt = t('copyLink.copy')
+  if (disabled) {
+    copyBtnTxt = t('copyLink.publishing')
+  } else if (copied) {
+    copyBtnTxt = t('copyLink.copied')
+  }
+
   return (
     <div>
       { withLabel === true ? <div className='f5 montserrat fw4 charcoal mt4 mb1'>{t('copyLink.labelAll')}</div> : null }
@@ -61,7 +68,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
         </div>
         <CopyToClipboard text={shareAllLink} onCopy={handleOnCopyClick}>
           <div className={copyBtnClass}>
-            { copied ? t('copyLink.copied') : t('copyLink.copy') }
+            { copyBtnTxt }
           </div>
         </CopyToClipboard>
       </div>
