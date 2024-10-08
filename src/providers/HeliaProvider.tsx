@@ -131,10 +131,6 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [helia, updateNodeInfo])
 
-  useEffect(() => {
-    console.log('helia node info: ', nodeInfo)
-  }, [nodeInfo, updateNodeInfo])
-
   // @ts-expect-error - TODO: helia might still be null?
   const value: HeliaContextType = {
     helia,

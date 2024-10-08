@@ -215,7 +215,6 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
       return {
         ...state,
         filesToPublish: state.filesToPublish.map(f => ({ ...f, publishing: true } satisfies FilesToPublish))
-
       }
 
     case 'publish_success':
@@ -367,7 +366,11 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (unixfsStats.type !== 'directory') {
         // eslint-disable-next-line no-console
         console.log('its a file')
-        const file = await asyncItToFile(unixfs.cat(cidInstance), filename ?? cid.toString())
+        const file = await asyncItToFile(unixfs.cat(cidInstance, {
+          onProgress: (evt) => {
+            console.info(`download progress "${evt.type}" detail:`, evt.detail)
+          }
+        }), filename ?? cid.toString())
         dispatch({ type: 'fetch_success', files: { [cid]: { id: cid, name: file.name, size: file.size, progress: 0, pending: true, cid: cidInstance, published: false } } })
       } else {
         // eslint-disable-next-line no-console
