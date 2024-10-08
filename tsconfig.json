@@ -4,7 +4,8 @@
     "outDir": "aegir-build",
     "types": ["vite/client", "mocha"],
     "jsx": "react",
-    "checkJs": false
+    "checkJs": false,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src", "test", "vite.config.ts"]
 }
