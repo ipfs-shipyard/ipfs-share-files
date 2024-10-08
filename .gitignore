@@ -69,3 +69,8 @@ build/
 
 # Misc
 .DS_Store
+dist
+.vscode
+src/icons
+aegir-build
+.coverage
