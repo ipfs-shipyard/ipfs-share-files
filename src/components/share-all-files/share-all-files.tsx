@@ -3,8 +3,8 @@ import { QRCodeSVG } from 'qrcode.react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
-import { useFiles } from '../../hooks/useFiles'
-import { useHelia } from '../../hooks/useHelia'
+import { useFiles } from '../../hooks/use-files.js'
+import { useHelia } from '../../hooks/use-helia.js'
 
 /**
  * This component renders a QR code and a share link that reprents either:

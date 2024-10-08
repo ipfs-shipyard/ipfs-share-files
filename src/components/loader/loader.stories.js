@@ -1,14 +1,14 @@
 import { checkA11y } from '@storybook/addon-a11y'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import i18n from '../../i18n-decorator'
-import Header from './Header'
+import i18n from '../../i18n-decorator.js'
+import Loader from './loader.js'
 
-storiesOf('Header', module)
+storiesOf('Loader', module)
   .addDecorator(checkA11y)
   .addDecorator(i18n)
   .add('Default', () => (
-    <div className='bg-navy sans-serif'>
-      <Header />
+    <div className='ml4 sans-serif'>
+      <Loader />
     </div>
   ))

@@ -2,11 +2,11 @@ import classnames from 'classnames'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { useTranslation } from 'react-i18next'
-import { useFiles } from '../../hooks/useFiles'
-import { useHelia } from '../../hooks/useHelia'
+import { useFiles } from '../../hooks/use-files.js'
+import { useHelia } from '../../hooks/use-helia.js'
 import 'react-circular-progressbar/dist/styles.css'
-import './DownloadFiles.css'
-import { downloadAllFiles, downloadCidAsFile } from '../file/utils/download'
+import './download-files.css'
+import { downloadAllFiles, downloadCidAsFile } from '../file/utils/download.js'
 
 export interface DownloadFilesProps {
   isLoading: boolean

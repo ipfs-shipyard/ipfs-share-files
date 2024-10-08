@@ -2,13 +2,18 @@ import { checkA11y } from '@storybook/addon-a11y'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
 import i18n from '../../i18n-decorator'
-import Footer from './Footer'
+import { Info } from './info'
 
-storiesOf('Footer', module)
+storiesOf('Info', module)
   .addDecorator(checkA11y)
   .addDecorator(i18n)
-  .add('Default', () => (
+  .add('Add', () => (
     <div className='bg-navy sans-serif'>
-      <Footer />
+      <Info />
+    </div>
+  ))
+  .add('Download', () => (
+    <div className='bg-navy sans-serif'>
+      <Info isDownload />
     </div>
   ))

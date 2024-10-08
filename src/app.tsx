@@ -1,11 +1,9 @@
-// Components
 import React from 'react'
-import Footer from './components/footer/Footer'
-import Header from './components/header/Header'
-// Styles
-import './App.css'
-import { useHelia } from './hooks/useHelia'
-import { Page } from './page/Page'
+import Footer from './components/footer/footer.jsx'
+import Header from './components/header/header.jsx'
+import './app.css'
+import { useHelia } from './hooks/use-helia.js'
+import { Page } from './page/page.jsx'
 
 export const App = (): React.JSX.Element => {
   const { starting, error } = useHelia()

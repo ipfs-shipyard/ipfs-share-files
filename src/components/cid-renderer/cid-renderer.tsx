@@ -1,6 +1,6 @@
 import { type UnixFS } from '@helia/unixfs'
 import React, { useEffect } from 'react'
-import { type FileState } from '../../providers/FilesProvider'
+import { type FileState } from '../../providers/files-provider'
 import { asyncItToFile } from '../file/utils/async-it-to-file'
 
 export interface CidRendererProps {

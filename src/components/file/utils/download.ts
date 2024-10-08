@@ -1,6 +1,6 @@
 import JsZip from 'jszip'
 import { asyncItToFile } from './async-it-to-file'
-import type { FileState } from '../../../providers/FilesProvider'
+import type { FileState } from '../../../providers/files-provider'
 import type { UnixFS } from '@helia/unixfs'
 import type { CID } from 'multiformats/cid'
 export const download = (url: string, fileName: string): void => {

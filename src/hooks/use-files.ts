@@ -1,7 +1,7 @@
 import blobToIt from 'blob-to-it'
 import { type Dispatch, useContext } from 'react'
-import { type AddFileState, type FilesAction, FilesContext, FilesDispatchContext, type FilesState } from '../providers/FilesProvider'
-import { type HeliaContextType } from '../providers/HeliaProvider'
+import { type AddFileState, type FilesAction, FilesContext, FilesDispatchContext, type FilesState } from '../providers/files-provider'
+import { type HeliaContextType } from '../providers/helia-provider'
 
 export function useFiles (): FilesState {
   return useContext(FilesContext)

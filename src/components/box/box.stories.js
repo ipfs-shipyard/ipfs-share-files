@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react'
 import React from 'react'
 import { Provider } from 'redux-bundler-react'
 import getStore from '../../bundles'
-import i18n from '../../i18n-decorator'
-import { BoxAdd, BoxDownload, BoxNotAvailable } from './Box'
+import i18n from '../../i18n-decorator.js'
+import { BoxAdd, BoxDownload, BoxNotAvailable } from './box.js'
 
 const wrapperClass = 'flex flex-auto pa3 bg-navy sans-serif'
 
