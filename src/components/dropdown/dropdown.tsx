@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { useCallback, useEffect, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import './Dropdown.css'
+import './dropdown.css'
 
 export interface DropdownProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
   options: Array<{ name: string, value: string }>

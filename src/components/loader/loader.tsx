@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Puff } from 'react-loader-spinner'
-import './Loader.css'
+import './loader.css'
 
 export interface LoaderProps {
   // TODO: support different loader types
