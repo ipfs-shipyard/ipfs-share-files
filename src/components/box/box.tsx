@@ -9,7 +9,6 @@ import { useDownloadInfo } from '../../providers/download-provider.jsx'
 import { AddFiles } from '../add-files/add-files.jsx'
 import { DownloadFiles } from '../download-files/download-files.jsx'
 import { FileTree } from '../file-tree/file-tree.jsx'
-import Loader from '../loader/loader.jsx'
 import { ShareAllFiles } from '../share-all-files/share-all-files.jsx'
 
 export const Box = forwardRef<HTMLDivElement, { children: any, className?: string }>((props, ref) => {
@@ -40,7 +39,6 @@ export const BoxDownload = (): React.JSX.Element => {
 
   return (
     <Box>
-      { isLoading && <Loader /> }
       <FileTree isDownload />
       <DownloadFiles isLoading={isLoading} />
     </Box>
@@ -72,13 +70,11 @@ export const BoxAdd = (): React.JSX.Element => {
 
   return <Box ref={drop} className={isOver ? '' : 'bg-gray-muted'} >
     <AddFiles doAddFiles={doAddFiles} />
-    {/* { isLoading && <Loader /> } */}
     <FileTree />
     <ShareAllFiles />
   </Box>
 }
 
-// TODO this text is all outdated
 export const BoxNotAvailable: React.FC<{ error: Error }> = ({ error }) => {
   const { t } = useTranslation('translation')
   return (

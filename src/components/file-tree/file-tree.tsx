@@ -2,11 +2,16 @@ import React from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { useFiles } from '../../hooks/use-files.js'
 import { File } from '../file/file.jsx'
+import Loader from '../loader/loader.jsx'
 
 export const FileTree = ({ isDownload }: { isDownload?: boolean }): React.ReactNode => {
   const { t } = useTranslation()
   const { files } = useFiles()
   const filesMap = Object.entries(files)
+
+  if (isDownload === true && filesMap.length === 0) {
+    return <Loader text={t('loader.fileList')} />
+  }
 
   return (
   <div className=''>

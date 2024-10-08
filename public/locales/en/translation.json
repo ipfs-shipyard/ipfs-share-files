@@ -73,7 +73,9 @@
     "copied": "Copied!",
     "qrLabel": "Or scan to share all files"
   },
-  "loader": "Loading file list…",
+  "loader": {
+    "fileList": "Loading file list…"
+  },
   "downloadFiles": {
     "download": "Download",
     "downloadAll": "Download all",

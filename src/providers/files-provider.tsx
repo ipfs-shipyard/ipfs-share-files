@@ -123,20 +123,24 @@ export type FilesAction =
 
   | { type: 'publish_start', cid: CID }
   | { type: 'publish_in-progress', cid: CID }
+  | { type: 'publish_cancelled', cid: CID }
   | { type: 'publish_success', cid: CID }
-  | { type: 'publish_success_dir', cid: CID }
+  | { type: 'publish_success_dir' }
+  | { type: 'publish_reset_dir' }
   | { type: 'publish_fail', cid: CID, error: Error }
 
   | { type: 'share_link', link: string, cid: CID }
 
   | { type: 'fetch_start', cid: string, filename: string | null }
   | { type: 'fetch_in-progress', cid: string }
+  | { type: 'fetch_cancelled', cid: string }
   | { type: 'fetch_success', files: Record<string, DownloadFileState> }
   | { type: 'fetch_success_dir', cid: string }
   | { type: 'fetch_fail', error: Error }
 
   | { type: 'reset_files' }
 
+// eslint-disable-next-line complexity
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
   switch (action.type) {
     case 'add_start':
@@ -173,6 +177,10 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
             cid: action.cid
           } as FileState
         },
+        filesToPublish: [
+          ...state.filesToPublish,
+          { cid: action.cid, publishing: false } satisfies FilesToPublish
+        ],
         shareLink: {
           outdated: true,
           link: null,
@@ -214,7 +222,23 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
     case 'publish_in-progress':
       return {
         ...state,
-        filesToPublish: state.filesToPublish.map(f => ({ ...f, publishing: true } satisfies FilesToPublish))
+        filesToPublish: state.filesToPublish.map(f => {
+          if (f.cid.equals(action.cid)) {
+            return { ...f, publishing: true } satisfies FilesToPublish
+          }
+          return f
+        })
+      }
+
+    case 'publish_cancelled':
+      return {
+        ...state,
+        filesToPublish: state.filesToPublish.map(f => {
+          if (f.cid.equals(action.cid)) {
+            return { ...f, publishing: false } satisfies FilesToPublish
+          }
+          return f
+        })
       }
 
     case 'publish_success':
@@ -231,6 +255,17 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
         },
         // remove the file from filesToPublish
         filesToPublish: state.filesToPublish.filter(f => !f.cid.equals(action.cid))
+      }
+
+    case 'publish_reset_dir':
+      return {
+        ...state,
+        rootPublished: false,
+        shareLink: {
+          outdated: true,
+          link: null,
+          cid: null
+        }
       }
 
     case 'publish_success_dir':
@@ -292,6 +327,17 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
         })
       }
 
+    case 'fetch_cancelled':
+      return {
+        ...state,
+        filesToFetch: state.filesToFetch.map(f => {
+          if (f.cid === action.cid) {
+            return { ...f, fetching: false }
+          }
+          return f
+        })
+      }
+
     case 'fetch_success':
       // add the fetched file to files and filesToPublish
       return {
@@ -346,93 +392,97 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [state, dispatch] = useReducer(filesReducer, initialState)
   // const [fetching, setFetching] = React.useState(false)
   const { helia, mfs, unixfs } = useHelia()
-  const { filesToFetch, filesToPublish } = state
+  const { filesToFetch, filesToPublish, files } = state
 
   useEffect(() => {
     if (filesToFetch.length === 0) return
     if (unixfs == null) return
+    const controller = new AbortController()
     const fetchFile = async ({ cid, filename, fetching }: FileToFetch): Promise<void> => {
       if (fetching) return
       dispatch({ type: 'fetch_in-progress', cid })
 
-      // eslint-disable-next-line no-console
-      console.log(`fetching ${cid}...`)
-      // is the CID representing a single file or a directory?
       const cidInstance = CID.parse(cid)
-      const unixfsStats = await unixfs.stat(cidInstance)
-      // eslint-disable-next-line no-console
-      console.log('unixfsStats:', unixfsStats)
+      const unixfsStats = await unixfs.stat(cidInstance, {
+        signal: controller.signal,
+        onProgress: (evt) => {
+          console.info(`unixfsStats progress "${evt.type}" detail:`, evt.detail)
+        }
+      })
+      if (unixfsStats == null) {
+        console.error('could not get unixfs stats for cid:', cid)
+        return
+      }
 
       if (unixfsStats.type !== 'directory') {
         // eslint-disable-next-line no-console
         console.log('its a file')
         const file = await asyncItToFile(unixfs.cat(cidInstance, {
+          signal: controller.signal,
           onProgress: (evt) => {
             console.info(`download progress "${evt.type}" detail:`, evt.detail)
           }
         }), filename ?? cid.toString())
         dispatch({ type: 'fetch_success', files: { [cid]: { id: cid, name: file.name, size: file.size, progress: 0, pending: true, cid: cidInstance, published: false } } })
       } else {
-        // eslint-disable-next-line no-console
-        console.log('it\'s a directory')
         for await (const entry of unixfs.ls(cidInstance)) {
           if (entry.type !== 'directory') {
             // eslint-disable-next-line no-console
-            console.log(`fetching ${entry.cid}...`)
+            console.log(`fetching directory entry ${entry.cid}...`)
             const file = await asyncItToFile(unixfs.cat(entry.cid, {
+              signal: controller.signal,
               onProgress: (evt) => {
                 console.info(`download progress "${evt.type}" detail:`, evt.detail)
               }
             }), entry.name ?? filename ?? cid.toString())
             dispatch({ type: 'fetch_success', files: { [entry.cid.toString()]: { id: entry.cid.toString(), name: file.name, size: file.size, progress: 0, pending: true, cid: entry.cid, published: false } } })
-
-            // eslint-disable-next-line no-console
-            console.log('created file...')
+          } else {
+            console.warn('directory entry found in directory, skipping...')
           }
         }
         dispatch({ type: 'fetch_success_dir', cid })
       }
     }
-    void Promise.all(filesToFetch.map(async (fileToFetch) => {
-      return fetchFile(fileToFetch)
-    })).catch((err) => {
-      console.error('error fetching files:', err)
-    }).then(async () => {
-      console.info('done fetching files')
-    })
-  }, [unixfs, filesToFetch])
 
-  /**
-   * Any files that have published=false should be added to filesToPublish
-   * if they are not already in filesToPublish
-   */
-  useEffect(() => {
-    const files = Object.values(state.files)
-    const filesToPublishToAdd = files.filter(f => !f.published)
-    if (filesToPublishToAdd.length === 0) return
-
-    for (const { cid } of filesToPublishToAdd) {
-      if (filesToPublish.some(f => f.cid.equals(cid))) {
-        // file is already in filesToPublish
-        continue
+    const fetchAllFiles = async (): Promise<void> => {
+      for (const fileToFetch of filesToFetch) {
+        try {
+          await fetchFile(fileToFetch)
+          dispatch({ type: 'publish_start', cid: CID.parse(fileToFetch.cid) })
+        } catch (e: any) {
+          if (e.name === 'AbortError') {
+            dispatch({ type: 'fetch_cancelled', cid: fileToFetch.cid.toString() })
+            return
+          }
+          console.error('error fetching file:', e)
+        }
       }
-      dispatch({ type: 'publish_start', cid })
     }
-  }, [filesToPublish, state.files])
+
+    fetchAllFiles()
+      .catch((err) => {
+        console.error('error fetching files:', err)
+      })
+    // react mounts, unmounts, then re-mounts all components in dev mode on initial mount.
+    // aborting the request here causes the fetch to be cancelled on re-mount
+    return () => {
+      controller.abort()
+    }
+  }, [unixfs, filesToFetch.map(f => f.cid.toString()).sort().join(',')])
 
   useEffect(() => {
     if (filesToPublish.length === 0) return
     if (mfs == null) return
     if (filesToPublish.every(f => f.publishing)) return
+    const controller = new AbortController()
 
     const publishFile = async ({ cid, publishing }: FilesToPublish): Promise<void> => {
       if (publishing) return
       dispatch({ type: 'publish_in-progress', cid })
 
-      // eslint-disable-next-line no-console
-      console.log(`publishing ${cid}...`)
       try {
         await helia.routing.provide(cid, {
+          signal: controller.signal,
           onProgress: (evt) => {
             console.info(`file Publish progress "${evt.type}" detail:`, evt.detail)
           }
@@ -442,28 +492,66 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         dispatch({ type: 'publish_fail', cid, error })
       }
     }
-    void Promise.all(filesToPublish.map(async (fileToPublish) => {
-      if (fileToPublish.publishing) return
-      await publishFile(fileToPublish)
-    })).catch((err) => {
-      console.error('error publishing files:', err)
-    }).then(async () => {
-      // publish the folder root
-      try {
-        const rootStats = await mfs.stat('/')
-        const link = getShareLink(rootStats.cid)
-        dispatch({ type: 'share_link', link, cid: rootStats.cid })
-        await helia.routing.provide(rootStats.cid, {
-          onProgress: (evt) => {
-            console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
+
+    const publishAllFiles = async (): Promise<void> => {
+      for (const fileToPublish of filesToPublish) {
+        try {
+          await publishFile(fileToPublish)
+        } catch (e: any) {
+          if (e.name === 'AbortError') {
+            dispatch({ type: 'publish_cancelled', cid: fileToPublish.cid })
+            return
           }
-        })
-        dispatch({ type: 'publish_success_dir', cid: rootStats.cid })
-      } catch (err: any) {
-        console.error('error publishing folder root:', err)
+          console.error('error publishing file:', e)
+        }
       }
+    }
+    publishAllFiles().catch((err) => {
+      console.error('error publishing files:', err)
     })
-  }, [filesToPublish, mfs])
+
+    return () => {
+      controller.abort()
+    }
+  }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), mfs])
+
+  useEffect(() => {
+    if (mfs == null) return
+    if (filesToPublish.length !== 0) return
+    if (filesToFetch.length !== 0) return
+    if (Object.values(files).length === 0) return
+    const controller = new AbortController()
+
+    const publishRoot = async (): Promise<void> => {
+      // publish the folder root
+      const rootStats = await mfs.stat('/', {
+        signal: controller.signal,
+        onProgress: (evt) => {
+          console.info(`root folder stats progress "${evt.type}" detail:`, evt.detail)
+        }
+      })
+      const link = getShareLink(rootStats.cid)
+      dispatch({ type: 'share_link', link, cid: rootStats.cid })
+      await helia.routing.provide(rootStats.cid, {
+        signal: controller.signal,
+        onProgress: (evt) => {
+          console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
+        }
+      })
+      dispatch({ type: 'publish_success_dir' })
+    }
+    publishRoot().catch((err: any) => {
+      if (err.name === 'AbortError') {
+        dispatch({ type: 'publish_reset_dir' })
+        return
+      }
+      console.error('error publishing folder root:', err)
+    })
+
+    return () => {
+      controller.abort()
+    }
+  }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), filesToFetch.map(f => f.cid.toString()).sort().join(','), mfs])
 
   return (
     <FilesContext.Provider value={state}>
