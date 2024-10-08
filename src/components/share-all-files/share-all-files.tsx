@@ -34,7 +34,7 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
   const copyBtnClass = classnames({
     'o-50 no-pointer-events': copied,
     'o-80 glow pointer': !copied,
-    'o-50 no-pointer-events thing': !allFilesArePublished || !rootPublished
+    'o-50 no-pointer-events bg-gray': !allFilesArePublished || !rootPublished
   }, ['pa2 w3 flex items-center justify-center br-pill bg-navy f7 white'])
 
   if (mfs == null || helia == null) {

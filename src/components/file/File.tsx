@@ -118,7 +118,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     const copyBtnClass = classnames({
       'o-50 no-pointer-events': copied,
       'o-80 glow pointer': !copied,
-      'o-50 no-pointer-events thing': disabled
+      'o-50 no-pointer-events bg-gray': disabled
     }, ['pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5'])
 
     return (
