@@ -1,8 +1,8 @@
 import { checkA11y } from '@storybook/addon-a11y'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import i18n from '../../i18n-decorator'
-import { TranslatedFile as File } from './file'
+import i18n from '../../i18n-decorator.js'
+import { TranslatedFile as File } from './file.js'
 
 const wrapperClass = 'ma3 sans-serif'
 

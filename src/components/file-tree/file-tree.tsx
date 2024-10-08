@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation, Trans } from 'react-i18next'
-import { useFiles } from '../../hooks/use-files'
-import { File } from '../file/file'
+import { useFiles } from '../../hooks/use-files.js'
+import { File } from '../file/file.jsx'
 
 export const FileTree = ({ isDownload }: { isDownload?: boolean }): React.ReactNode => {
   const { t } = useTranslation()

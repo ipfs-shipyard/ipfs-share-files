@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import Modal from '../modal/modal'
+import Modal from '../modal/modal.jsx'
 
 export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Element => {
   const { t } = useTranslation()

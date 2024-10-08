@@ -13,7 +13,7 @@ import React, {
   useCallback,
   createContext
 } from 'react'
-import { useInterval } from '../hooks/use-interval'
+import { useInterval } from '../hooks/use-interval.js'
 import type { Multiaddr } from '@multiformats/multiaddr'
 import type { Blockstore } from 'interface-blockstore'
 import type { Datastore } from 'interface-datastore'
