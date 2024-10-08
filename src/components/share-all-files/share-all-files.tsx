@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { QRCodeSVG } from 'qrcode.react'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useFiles } from '../../hooks/use-files.js'
