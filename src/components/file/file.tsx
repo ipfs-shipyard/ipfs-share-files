@@ -138,7 +138,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   return (
     <div className='mv2 flex items-center justify-between'>
       <div
-        title={t('box.viewOnGateway')}
+        title={file.name}
         className='flex items-center truncate'
         style={{ outline: 'none' }}
         rel='noopener noreferrer'
