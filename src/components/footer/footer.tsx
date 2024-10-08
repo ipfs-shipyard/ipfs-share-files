@@ -1,9 +1,9 @@
 import i18n from 'i18next'
 import React, { useState } from 'react'
 import { Trans } from 'react-i18next'
-import { localesList } from '../../i18n.js'
-import LanguagePicker from '../../media/images/language.jsx'
-import Dropdown from '../dropdown/dropdown.jsx'
+import { localesList } from '../../i18n'
+import LanguagePicker from '../../media/images/language'
+import Dropdown from '../dropdown/dropdown'
 
 const Footer = (): React.JSX.Element => {
   const anchorClass = 'no-underline underline-hover aqua'

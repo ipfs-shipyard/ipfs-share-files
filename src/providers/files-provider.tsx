@@ -1,8 +1,8 @@
 import { CID } from 'multiformats/cid'
 import React, { createContext, useEffect, useReducer } from 'react'
-import { asyncItToFile } from '../components/file/utils/async-it-to-file.js'
-import { getShareLink } from '../components/file/utils/get-share-link.js'
-import { useHelia } from '../hooks/use-helia.js'
+import { asyncItToFile } from '../components/file/utils/async-it-to-file'
+import { getShareLink } from '../components/file/utils/get-share-link'
+import { useHelia } from '../hooks/use-helia'
 
 export interface AddFileState {
   id: string

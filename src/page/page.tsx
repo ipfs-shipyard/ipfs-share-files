@@ -1,11 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/box.jsx'
-import Headline from '../components/headline/headline.jsx'
-import { Info } from '../components/info/info.jsx'
-import { useCurrentPage } from '../hooks/use-current-page.js'
-import { useHelia } from '../hooks/use-helia.js'
+import { BoxAdd, BoxDownload, BoxNotAvailable } from '../components/box/box'
+import Headline from '../components/headline/headline'
+import { Info } from '../components/info/info'
+import { useCurrentPage } from '../hooks/use-current-page'
+import { useHelia } from '../hooks/use-helia'
 
 export const Page = (): React.JSX.Element => {
   const [t] = useTranslation()

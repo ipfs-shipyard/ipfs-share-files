@@ -7,7 +7,7 @@ import DocPicture from 'ipfs-css/icons/glyph_doc_picture.svg'
 import DocText from 'ipfs-css/icons/glyph_doc_text.svg'
 import Folder from 'ipfs-css/icons/glyph_folder.svg'
 import React, { type HTMLProps } from 'react'
-import extToType from '../utils/ext-to-type.js'
+import extToType from '../utils/ext-to-type'
 
 const typeFromExt = (filename?: string): string | undefined => {
   const ext = filename?.split('.').pop() ?? ''

@@ -2,8 +2,8 @@ import { type Connection } from '@libp2p/interface'
 import { type Multiaddr } from '@multiformats/multiaddr'
 import { Circuit, WebRTC, WebRTCDirect, WebSockets, WebSocketsSecure, WebTransport } from '@multiformats/multiaddr-matcher'
 import React, { useMemo } from 'react'
-import { useHelia } from '../../hooks/use-helia.js'
-import { NodeInfoDetail } from './node-info-detail.jsx'
+import { useHelia } from '../../hooks/use-helia'
+import { NodeInfoDetail } from './node-info-detail'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NodeInfoProps {
