@@ -14,10 +14,15 @@ export interface LoaderProps {
 const Loader = ({
   // loader = 'Puff',
   color = '#022e44',
-  size = 25
+  size = 25,
+  text = ''
 }: LoaderProps): React.JSX.Element => {
   const { t } = useTranslation('translation')
-  const text = t('loader')
+
+  if (text === '') {
+    text = t('loader.fileList')
+  }
+
   return (
     <div className='Loader mv2 flex items-center'>
       <Puff color={color} height={size} width={size} />

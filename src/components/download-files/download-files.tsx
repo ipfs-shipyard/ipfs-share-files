@@ -12,8 +12,36 @@ export interface DownloadFilesProps {
   isLoading: boolean
 }
 
-export const DownloadFiles: React.FC<DownloadFilesProps> = ({ isLoading }: { isLoading: boolean }) => {
+const DownloadAllBtnContent: React.FC<{ progress: number }> = ({ progress }) => {
   const { t } = useTranslation()
+  const { files } = useFiles()
+
+  if (progress === 0) {
+    return (
+      <div className='flex items-center'>{t('downloadFiles.downloading')}</div>
+    )
+  }
+
+  if (progress === 100) {
+    return <span className='truncate'>{ Object.keys(files).length > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
+  }
+
+  return (
+    <div className='flex items-center'>
+      {t('downloadFiles.downloading')}
+      <CircularProgressbar
+        value={progress}
+        strokeWidth={50}
+        styles={{
+          root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
+          path: { stroke: '#3e6175', strokeLinecap: 'butt' }
+        }}
+      />
+    </div>
+  )
+}
+
+export const DownloadFiles: React.FC<DownloadFilesProps> = ({ isLoading }: { isLoading: boolean }) => {
   const [progress, setProgress] = useState<number>(0)
   const { files, shareLink } = useFiles()
   const { cid: folderCid } = shareLink
@@ -22,13 +50,14 @@ export const DownloadFiles: React.FC<DownloadFilesProps> = ({ isLoading }: { isL
   // simulate progress for now
   // TODO: useFiles should give us a way to determine if all of the files are downloaded
   useEffect(() => {
+    if (Object.values(files).length === 0) return
     const timeoutId = setTimeout(() => {
       setProgress((progress) => Math.max(0, Math.min(100, progress + 10)))
     }, 150)
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [progress])
+  }, [progress, files])
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = useCallback((ev) => {
     if (isLoading || helia == null || unixfs == null || folderCid == null) {
@@ -59,18 +88,7 @@ export const DownloadFiles: React.FC<DownloadFilesProps> = ({ isLoading }: { isL
   return (
     <div className='w5 center'>
       <button className={btnClass} onClick={handleOnClick}>
-        { progress === 100
-          ? <span className='truncate'>{ Object.keys(files).length > 1 ? t('downloadFiles.downloadAll') : t('downloadFiles.download') }</span>
-          : <div className='flex items-center'>
-            {t('downloadFiles.downloading')}
-            <CircularProgressbar
-              value={progress ?? 0}
-              strokeWidth={50}
-              styles={{
-                root: { width: 15, height: 15, marginLeft: 7, marginRight: 5 },
-                path: { stroke: '#3e6175', strokeLinecap: 'butt' }
-              }} />
-          </div> }
+        <DownloadAllBtnContent progress={progress} />
       </button>
     </div>
   )
