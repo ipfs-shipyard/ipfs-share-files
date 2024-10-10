@@ -17,6 +17,7 @@ import { downloadCidAsFile } from './utils/download.js'
 import { getShareLink } from './utils/get-share-link.js'
 import './file.css'
 import 'react-circular-progressbar/dist/styles.css'
+import { formatBytes } from '../../lib/size.js'
 
 export const File = ({ file, isDownload }: { file: FileState, isDownload?: boolean }): React.JSX.Element => {
   const { t } = useTranslation()
@@ -144,7 +145,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
           <FileIcon className="flex-shrink-0" name={name} error={error} />
         </div>
         <span className={fileNameClass}>{name}</span>
-        <span className={fileSizeClass}>{size != null ? `(~${size})` : ''}</span>
+        <span className={fileSizeClass}>{size != null ? `(~${formatBytes(size)})` : ''}</span>
       </div>
       <div className='flex items-center'>
         <span className='ml-auto'>{ renderFileStatus() }</span>
