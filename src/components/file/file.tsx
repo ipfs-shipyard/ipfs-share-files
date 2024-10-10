@@ -106,13 +106,9 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
     }
   }, [file, progress, isDownload])
   const disabled = useMemo(() => !file.published, [file.published])
-  const renderCopyButton = useCallback((url?: string) => {
+  const renderCopyButton = useCallback((url: string) => {
     if (isDownload === true) {
       return null
-    }
-    if (url == null) {
-      // TODO: Fix this.. this shouldn't be needed.
-      return <div className='pa2 w3 flex items-center justify-center br-pill bg-aqua f7 fw5 o-50 no-pointer-events'>{t('copyLink.copy')}</div>
     }
 
     const copyBtnClass = classnames({
@@ -133,12 +129,12 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   const fileNameClass = classnames({ charcoal: error == null, gray: error }, ['FileLinkName ph2 f6 b truncate'])
   const fileSizeClass = classnames({ 'charcoal-muted': error == null, gray: error }, ['f6'])
 
-  const url = cid != null ? getShareLink(cid, name) : undefined
+  const url = getShareLink(cid, name)
 
   return (
     <div className='mv2 flex items-center justify-between'>
       <div
-        title={t('box.viewOnGateway')}
+        title={file.name}
         className='flex items-center truncate'
         style={{ outline: 'none' }}
         rel='noopener noreferrer'
