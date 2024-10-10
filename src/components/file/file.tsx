@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useHelia } from '../../hooks/use-helia.js'
+import { formatBytes } from '../../lib/size.js'
 import IconDownload from '../../media/icons/download.svg'
 import IconView from '../../media/icons/view.svg'
 import { type FileState } from '../../providers/files-provider.jsx'
@@ -17,7 +18,6 @@ import { downloadCidAsFile } from './utils/download.js'
 import { getShareLink } from './utils/get-share-link.js'
 import './file.css'
 import 'react-circular-progressbar/dist/styles.css'
-import { formatBytes } from '../../lib/size.js'
 
 export const File = ({ file, isDownload }: { file: FileState, isDownload?: boolean }): React.JSX.Element => {
   const { t } = useTranslation()

@@ -1,5 +1,7 @@
-export function formatBytes(bytes: number, decimals = 0): string {
-  if (!+bytes) return '0 Bytes' // checks if bytes is zero, NaN, or any falsy value
+export function formatBytes (bytes: number, decimals = 0): string {
+  if (bytes === 0 || isNaN(bytes)) {
+    return '0 Bytes'
+  }
 
   const k = 1024 // constant for the base of the exponentiation
   const dm = decimals < 0 ? 0 : decimals // determines the number of decimal places to display
