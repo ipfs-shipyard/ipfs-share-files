@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useHelia } from '../../hooks/use-helia.js'
+import { formatBytes } from '../../lib/size.js'
 import IconDownload from '../../media/icons/download.svg'
 import IconView from '../../media/icons/view.svg'
 import { type FileState } from '../../providers/files-provider.jsx'
@@ -144,7 +145,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
           <FileIcon className="flex-shrink-0" name={name} error={error} />
         </div>
         <span className={fileNameClass}>{name}</span>
-        <span className={fileSizeClass}>{size != null ? `(~${size})` : ''}</span>
+        <span className={fileSizeClass}>{size != null ? `(~${formatBytes(size)})` : ''}</span>
       </div>
       <div className='flex items-center'>
         <span className='ml-auto'>{ renderFileStatus() }</span>
