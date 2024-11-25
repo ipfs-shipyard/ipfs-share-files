@@ -115,7 +115,7 @@
     "@types/react-modal": "^3.16.3",
     "@types/shortid": "^0.0.32",
     "@vitejs/plugin-react": "^4.3.2",
-    "aegir": "^44.1.2",
+    "aegir": "^45.0.2",
     "ecstatic": "^4.1.4",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-react": "^7.37.1",
