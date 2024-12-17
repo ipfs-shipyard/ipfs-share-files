@@ -78,7 +78,7 @@
     "classnames": "^2.5.1",
     "datastore-idb": "^3.0.1",
     "helia": "^5.0.0",
-    "i18next": "^23.15.2",
+    "i18next": "^24.1.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-chained-backend": "^4.6.2",
     "i18next-http-backend": "^2.6.2",
