@@ -9,7 +9,6 @@ export interface AddFileState {
   name: string
   size: number
   progress: number
-  pending: true
   cid: CID
   published: false
   error?: undefined
@@ -20,7 +19,6 @@ export interface DownloadFileState {
   name: string
   size: number
   progress: number
-  pending: true
   cid: CID
   published: false
   error?: undefined
@@ -31,7 +29,6 @@ export interface FailedPublishFileState {
   name: string
   size: number
   progress: number
-  pending: false
   cid: CID
   published: false
   error: Error
@@ -41,7 +38,6 @@ export type FileState = AddFileState | DownloadFileState | FailedPublishFileStat
   name: string
   size: number
   progress: number
-  pending: false
   cid: CID
   published: true
   error: Error | undefined
@@ -153,7 +149,6 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
             name: action.name,
             size: action.size,
             progress: action.progress,
-            pending: action.pending,
             cid: action.cid,
             published: action.published
           }
@@ -173,7 +168,6 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           [action.id]: {
             ...state.files[action.id] satisfies FileState,
-            pending: false,
             cid: action.cid
           } as FileState
         },
@@ -196,7 +190,6 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           [action.id]: {
             ...state.files[action.id],
-            pending: false,
             error: action.error
           } as FileState
         },
@@ -249,8 +242,7 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           [action.cid.toString()]: {
             ...state.files[action.cid.toString()],
             cid: action.cid,
-            published: true,
-            pending: false
+            published: true
           }
         },
         // remove the file from filesToPublish
@@ -284,7 +276,6 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
           [action.cid.toString()]: {
             ...state.files[action.cid.toString()],
             error: action.error,
-            pending: false,
             published: false
           } satisfies FileState
         },
@@ -423,7 +414,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             console.info(`download progress "${evt.type}" detail:`, evt.detail)
           }
         }), filename ?? cid.toString())
-        dispatch({ type: 'fetch_success', files: { [cid]: { id: cid, name: file.name, size: file.size, progress: 0, pending: true, cid: cidInstance, published: false } } })
+        dispatch({ type: 'fetch_success', files: { [cid]: { id: cid, name: file.name, size: file.size, progress: 0, cid: cidInstance, published: false } } })
       } else {
         for await (const entry of unixfs.ls(cidInstance)) {
           if (entry.type !== 'directory') {
@@ -435,7 +426,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 console.info(`download progress "${evt.type}" detail:`, evt.detail)
               }
             }), entry.name ?? filename ?? cid.toString())
-            dispatch({ type: 'fetch_success', files: { [entry.cid.toString()]: { id: entry.cid.toString(), name: file.name, size: file.size, progress: 0, pending: true, cid: entry.cid, published: false } } })
+            dispatch({ type: 'fetch_success', files: { [entry.cid.toString()]: { id: entry.cid.toString(), name: file.name, size: file.size, progress: 0, cid: entry.cid, published: false } } })
           } else {
             console.warn('directory entry found in directory, skipping...')
           }

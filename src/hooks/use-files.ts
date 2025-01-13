@@ -32,7 +32,6 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
           size: _file.size,
           progress: 0,
           cid,
-          pending: true,
           published: false
         }
         dispatch({ type: 'add_start', ...file })
