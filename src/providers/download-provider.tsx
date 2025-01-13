@@ -3,17 +3,21 @@
  */
 import React, { createContext, useContext, useState, type ReactNode } from 'react'
 import { useFilesDispatch } from '../hooks/use-files.js'
+import { useHelia } from '../hooks/use-helia.js'
+import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
 
 // Define the shape of the context state
 interface DownloadContextState {
   cid: string | null
   filename: string | null
-  setDownloadInfo(cid: string, filename: string | null): void
+  maddrs: Multiaddr[] | null
+  setDownloadInfo(cid: string, filename: string | null, maddr: string | null): void
 }
 
 export const DownloadContext = createContext<DownloadContextState>({
   cid: null,
   filename: null,
+  maddrs: null,
   setDownloadInfo: () => {}
 })
 
@@ -23,17 +27,23 @@ export const DownloadContext = createContext<DownloadContextState>({
 export const DownloadProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cid, setCid] = useState<string | null>(null)
   const [filename, setFilename] = useState<string | null>(null)
+  const [maddrs, setMaddrs] = useState<Multiaddr[] | null>(null)
   const dispatch = useFilesDispatch()
 
-  const setDownloadInfo = (newCid: string, newFilename: string | null): void => {
+  const setDownloadInfo = (newCid: string, newFilename: string | null, newMaddrs: string | null): void => {
     dispatch({ type: 'reset_files' })
     setCid(newCid)
     const filename = decodeURIComponent(newFilename ?? '')
+    // Decode the provider's maddrs from the URL
+    const maddrs = newMaddrs != null ? decodeURIComponent(newMaddrs).split(',') : []
+    const multiaddrs = maddrs.map(maddr => multiaddr(maddr))
+
+    setMaddrs(multiaddrs)
     setFilename(filename)
   }
 
   return (
-    <DownloadContext.Provider value={{ cid, filename, setDownloadInfo }}>
+    <DownloadContext.Provider value={{ cid, filename, maddrs, setDownloadInfo }}>
       {children}
     </DownloadContext.Provider>
   )

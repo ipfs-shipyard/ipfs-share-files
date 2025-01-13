@@ -84,6 +84,7 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
     <div className='ml2 pb2 f5 gray-muted montserrat mw7'>
       <NodeInfoDetail label='Peer ID' value={peerId} />
       <NodeInfoDetail label='ListeningAddrs' value={`${listeningAddrs} (relayed: ${circuitRelayAddrs}, webRtc: ${webRtc}, webRtcDirect: ${webRtcDirect}, webTransport: ${webTransport}, ws: ${webSockets}, wss: ${webSocketsSecure})`} />
+      <NodeInfoDetail label='Dialable over WebRTC' value={` ${webRtc > 0 ? '✅' : '❌'}`} />
       <NodeInfoDetail label='Connections' value={`${totalConns} (${inboundConns} in, ${outboundConns} out, ${unlimitedConns} unlimited)`} />
     </div>
   )

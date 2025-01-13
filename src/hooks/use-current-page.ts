@@ -12,17 +12,20 @@ const cidRegex = /(?<=\/)[^/?]+(?=\?|$)/
 
 const filenameRegex = /(?<=filename=)[^&]+/
 
+const maddrsRegex = /(?<=maddrs=)[^&]+/
+
 export type CurrentPage = 'add' | 'download'
 export const useCurrentPage = (): CurrentPage => {
   const [location] = useHashLocation()
   const { setDownloadInfo } = useDownloadInfo()
   const maybeCid = location.match(cidRegex)?.[0] ?? null
   const filename = location.match(filenameRegex)?.[0] ?? null
+  const maddrs = location.match(maddrsRegex)?.[0] ?? null
 
   useEffect(() => {
     if (maybeCid == null) return
-    setDownloadInfo(maybeCid, filename)
-  }, [maybeCid, filename])
+    setDownloadInfo(maybeCid, filename, maddrs)
+  }, [maybeCid, filename, maddrs])
 
   if (location.startsWith('/add') || !cid(maybeCid ?? '')) {
     return 'add'

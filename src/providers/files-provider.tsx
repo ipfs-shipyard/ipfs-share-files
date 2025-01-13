@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import { asyncItToFile } from '../components/file/utils/async-it-to-file.js'
 import { getShareLink } from '../components/file/utils/get-share-link.js'
 import { useHelia } from '../hooks/use-helia.js'
+import { getWebRTCAddrs } from '../lib/share-addresses.js'
 
 export interface AddFileState {
   id: string
@@ -382,14 +383,26 @@ export const FilesDispatchContext = createContext<React.Dispatch<FilesAction>>(n
 export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(filesReducer, initialState)
   // const [fetching, setFetching] = React.useState(false)
-  const { helia, mfs, unixfs } = useHelia()
+  const { mfs, unixfs, nodeInfo } = useHelia()
   const { filesToFetch, filesToPublish, files } = state
 
+  /**
+   * File Fetching Effect
+   * Responsible for downloading files from IPFS when filesToFetch array changes.
+   * - Skips if filesToFetch is empty or unixfs is not available
+   * - For each file in filesToFetch:
+   *   - Gets stats to determine if it's a file or directory
+   *   - For files: downloads and dispatches fetch_success
+   *   - For directories: downloads each file in the directory
+   * - Adds downloaded files to publish queue
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (filesToFetch.length === 0) return
     if (unixfs == null) return
     const controller = new AbortController()
-    const fetchFile = async ({ cid, filename, fetching }: FileToFetch): Promise<void> => {
+
+    const fetchFile = async ({ cid, filename, maddrs, fetching }: FileToFetch): Promise<void> => {
       if (fetching) return
       dispatch({ type: 'fetch_in-progress', cid })
 
@@ -461,6 +474,15 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [unixfs, filesToFetch.map(f => f.cid.toString()).sort().join(',')])
 
+  /**
+   * File Publishing Effect
+   * Handles publishing files to IPFS network when filesToPublish array changes.
+   * - Skips if filesToPublish is empty, mfs unavailable, or all files already publishing
+   * - For each unpublished file:
+   *   - Provides the file to the IPFS network
+   *   - Updates state on success/failure
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (filesToPublish.length === 0) return
     if (mfs == null) return
@@ -506,6 +528,16 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), mfs])
 
+  /**
+   * Root Directory Publishing Effect
+   * Publishes the root directory after all individual files are processed.
+   * - Triggers when filesToPublish and filesToFetch are empty (all files processed)
+   * - Gets stats for root directory
+   * - Generates and dispatches share link
+   * - Publishes root directory to IPFS network
+   * - Updates state to indicate root directory is published
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (mfs == null) return
     if (filesToPublish.length !== 0) return
@@ -521,7 +553,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           console.info(`root folder stats progress "${evt.type}" detail:`, evt.detail)
         }
       })
-      const link = getShareLink(rootStats.cid)
+      const link = getShareLink({ cid: rootStats.cid, webrtcMaddrs: getWebRTCAddrs(nodeInfo?.multiaddrs) })
       dispatch({ type: 'share_link', link, cid: rootStats.cid })
       await helia.routing.provide(rootStats.cid, {
         signal: controller.signal,
