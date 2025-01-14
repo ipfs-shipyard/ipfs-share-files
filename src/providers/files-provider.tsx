@@ -391,9 +391,9 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
    * Responsible for downloading files from IPFS when filesToFetch array changes.
    * - Skips if filesToFetch is empty or unixfs is not available
    * - For each file in filesToFetch:
-   *   - Gets stats to determine if it's a file or directory
-   *   - For files: downloads and dispatches fetch_success
-   *   - For directories: downloads each file in the directory
+   * --- Gets stats to determine if it's a file or directory
+   * --- For files: downloads and dispatches fetch_success
+   * --- For directories: downloads each file in the directory
    * - Adds downloaded files to publish queue
    * - Handles cancellation via AbortController
    */
@@ -402,7 +402,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (unixfs == null) return
     const controller = new AbortController()
 
-    const fetchFile = async ({ cid, filename, maddrs, fetching }: FileToFetch): Promise<void> => {
+    const fetchFile = async ({ cid, filename, fetching }: FileToFetch): Promise<void> => {
       if (fetching) return
       dispatch({ type: 'fetch_in-progress', cid })
 
@@ -479,8 +479,8 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
    * Handles publishing files to IPFS network when filesToPublish array changes.
    * - Skips if filesToPublish is empty, mfs unavailable, or all files already publishing
    * - For each unpublished file:
-   *   - Provides the file to the IPFS network
-   *   - Updates state on success/failure
+   * --- Provides the file to the IPFS network
+   * --- Updates state on success/failure
    * - Handles cancellation via AbortController
    */
   useEffect(() => {
