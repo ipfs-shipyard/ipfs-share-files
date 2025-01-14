@@ -7,7 +7,8 @@ export interface NodeInfoDetailProps {
 export const NodeInfoDetail: React.FC<NodeInfoDetailProps> = ({ label, value }) => {
   return (
     <p>
-      <span className='aqua'>{label}: </span><span>{value}</span>
+      <span className='aqua'>{label}: </span>
+      <span style={{ overflowWrap: 'break-word' }}>{value}</span>
     </p>
   )
 }
