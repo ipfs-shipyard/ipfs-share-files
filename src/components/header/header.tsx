@@ -14,7 +14,7 @@ const Header = (): React.JSX.Element => {
         <div className='h3 ba mh2 aqua' />
         <div className='ml2 pb2 f2 fw1 aqua montserrat'>{t('header')}</div>
       </div>
-      <div className='ml-auto mt2-l mb0-l pa3 pb0 w-100 order-2-l pl3 pl4-ns mw7-l' style={{ marginLeft: 'auto' }}>
+      <div className='ml-auto mt2-l mb0-l pa3 pb0 w-100 order-2-l pl3 pl4-ns mw7-l'>
         <NodeInfo />
       </div>
     </div>
