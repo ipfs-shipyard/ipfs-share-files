@@ -1,10 +1,9 @@
 /**
  * A download provider that stores the cid and filename from the URL for distributing to other components
  */
+import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
 import React, { createContext, useContext, useState, type ReactNode } from 'react'
 import { useFilesDispatch } from '../hooks/use-files.js'
-import { useHelia } from '../hooks/use-helia.js'
-import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
 
 // Define the shape of the context state
 interface DownloadContextState {
