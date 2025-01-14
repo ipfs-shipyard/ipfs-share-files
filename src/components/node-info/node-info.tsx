@@ -89,9 +89,9 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
       {/*
         Dialable from other Browsers exclude:
         - WebTransport which is not included in the default Helia transports due to flaky browser support.
-        - Normal WebSockets which is blocked in secure contexts.
+        - WebSocket when in secure contexts
       */}
-      <NodeInfoDetail label='Dialable from other Browsers' value={` ${(webRtcDirect + webSocketsSecure) > 0 ? '✅' : '❌'}`} />
+      <NodeInfoDetail label='Dialable from other Browsers' value={` ${(webRtcDirect + webSocketsSecure + (window.isSecureContext ? webSockets : 0)) > 0 ? '✅' : '❌'}`} />
       <NodeInfoDetail label='Connections' value={`${totalConns} (${inboundConns} in, ${outboundConns} out, ${unlimitedConns} unlimited)`} />
     </div>
   )
