@@ -1,11 +1,10 @@
 import classNames from 'classnames'
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef } from 'react'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { Trans, useTranslation } from 'react-i18next'
 import { useFiles, useFilesDispatch, useAddFiles } from '../../hooks/use-files.js'
 import { useHelia } from '../../hooks/use-helia.js'
-import { useDownloadInfo } from '../../providers/download-provider.jsx'
 import { AddFiles } from '../add-files/add-files.jsx'
 import { DownloadFiles } from '../download-files/download-files.jsx'
 import { FileTree } from '../file-tree/file-tree.jsx'
@@ -23,30 +22,8 @@ export const Box = forwardRef<HTMLDivElement, { children: any, className?: strin
 Box.displayName = 'Box'
 
 export const BoxDownload = (): React.JSX.Element => {
-  const dispatch = useFilesDispatch()
   const { files, filesToFetch } = useFiles()
-  const { cid, filename, maddrs } = useDownloadInfo()
-  const { helia, nodeInfo } = useHelia()
-  const { multiaddrs } = nodeInfo ?? { multiaddrs: [] }
-  const isLoading = filesToFetch.length !== 0 || Object.keys(files).length === 0
-
-  useEffect(() => {
-    // Effect hook to optimistically dial the provider's maddrs
-    if (maddrs == null || helia == null) return
-    const dial = async (): Promise<void> => {
-      // eslint-disable-next-line no-console
-      console.log('Optimistically dialing provider maddrs', maddrs)
-      await helia?.libp2p.dial(maddrs)
-    }
-    void dial()
-  }, [maddrs, helia])
-
-  useEffect(() => {
-    if (helia == null) return
-    // if (multiaddrs.length === 0) return
-    if (cid == null) return
-    dispatch({ type: 'fetch_start', cid, filename })
-  }, [cid, filename, helia, multiaddrs.length]) // TODO: why is multiaddrs.length a dependency?
+  const isLoading = filesToFetch.length > 0 || Object.keys(files).length === 0
 
   return (
     <Box>

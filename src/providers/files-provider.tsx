@@ -4,6 +4,7 @@ import { asyncItToFile } from '../components/file/utils/async-it-to-file.js'
 import { getShareLink } from '../components/file/utils/get-share-link.js'
 import { useHelia } from '../hooks/use-helia.js'
 import { getWebRTCAddrs } from '../lib/share-addresses.js'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 export interface AddFileState {
   id: string
@@ -94,6 +95,7 @@ export interface FileToFetch {
   cid: string
   filename: string | null
   fetching: boolean
+  providerMaddrs: Multiaddr[] | null
 }
 
 export interface FilesToPublish {
@@ -128,7 +130,9 @@ export type FilesAction =
 
   | { type: 'share_link', link: string, cid: CID }
 
-  | { type: 'fetch_start', cid: string, filename: string | null }
+  | { type: 'fetch_start', cid: string, filename: string | null, providerMaddrs: Multiaddr[] | null }
+  | { type: 'provider_dial_success', maddrs: Multiaddr[] }
+  | { type: 'provider_dial_fail', maddrs: Multiaddr[] }
   | { type: 'fetch_in-progress', cid: string }
   | { type: 'fetch_cancelled', cid: string }
   | { type: 'fetch_success', files: Record<string, DownloadFileState> }
@@ -303,7 +307,7 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
         ...state,
         filesToFetch: [
           ...state.filesToFetch,
-          { cid: action.cid, filename: action.filename, fetching: false }
+          { cid: action.cid, filename: action.filename, fetching: false, providerMaddrs: action.providerMaddrs }
         ]
       }
 
@@ -450,6 +454,16 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const fetchAllFiles = async (): Promise<void> => {
       for (const fileToFetch of filesToFetch) {
+        if (fileToFetch.providerMaddrs != null) {
+          try {
+            // Optimistically dial the provider's maddrs
+            await helia?.libp2p.dial(fileToFetch.providerMaddrs)
+            dispatch({ type: 'provider_dial_success', maddrs: fileToFetch.providerMaddrs })
+          } catch (e: any) {
+            console.error('error dialing provider:', fileToFetch.providerMaddrs.map(m => m.toString()))
+            dispatch({ type: 'provider_dial_fail', maddrs: fileToFetch.providerMaddrs })
+          }
+        }
         try {
           await fetchFile(fileToFetch)
           dispatch({ type: 'publish_start', cid: CID.parse(fileToFetch.cid) })
