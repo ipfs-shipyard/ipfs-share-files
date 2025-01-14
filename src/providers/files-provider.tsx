@@ -383,7 +383,7 @@ export const FilesDispatchContext = createContext<React.Dispatch<FilesAction>>(n
 export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(filesReducer, initialState)
   // const [fetching, setFetching] = React.useState(false)
-  const { mfs, unixfs, nodeInfo } = useHelia()
+  const { helia, mfs, unixfs, nodeInfo } = useHelia()
   const { filesToFetch, filesToPublish, files } = state
 
   /**
