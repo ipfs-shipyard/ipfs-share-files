@@ -112,6 +112,9 @@ export interface FilesState {
 
   // whether or not the root CID (containing folder for all files) has been published
   rootPublished: boolean
+
+  // Whether or not to provide CIDs to the DHT
+  provideToDHT: boolean
 }
 
 export type FilesAction =
@@ -140,6 +143,8 @@ export type FilesAction =
   | { type: 'fetch_fail', error: Error }
 
   | { type: 'reset_files' }
+
+  | { type: 'set_provide_to_dht', provideToDHT: boolean }
 
 // eslint-disable-next-line complexity
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
@@ -368,6 +373,12 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
 
       return initialState
 
+    case 'set_provide_to_dht':
+      return {
+        ...state,
+        provideToDHT: action.provideToDHT
+      }
+
     default:
       return state
   }
@@ -378,7 +389,8 @@ const initialState: FilesState = {
   filesToPublish: [],
   files: {},
   rootPublished: false,
-  shareLink: { link: null, cid: null }
+  shareLink: { link: null, cid: null },
+  provideToDHT: false
 }
 
 export const FilesContext = createContext<FilesState>(initialState)
@@ -388,7 +400,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [state, dispatch] = useReducer(filesReducer, initialState)
   // const [fetching, setFetching] = React.useState(false)
   const { helia, mfs, unixfs, nodeInfo } = useHelia()
-  const { filesToFetch, filesToPublish, files } = state
+  const { filesToFetch, filesToPublish, files, provideToDHT } = state
 
   /**
    * File Fetching Effect
@@ -508,12 +520,15 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       dispatch({ type: 'publish_in-progress', cid })
 
       try {
-        await helia.routing.provide(cid, {
-          signal: controller.signal,
-          onProgress: (evt) => {
-            console.info(`file Publish progress "${evt.type}" detail:`, evt.detail)
-          }
-        })
+        if (provideToDHT) {
+          await helia.routing.provide(cid, {
+            signal: controller.signal,
+            onProgress: (evt) => {
+              console.info(`file Publish progress "${evt.type}" detail:`, evt.detail)
+            }
+          })
+        }
+        // TODO: dispatch a new action to update the state to indicate the file won't be provided to the DHT?
         dispatch({ type: 'publish_success', cid })
       } catch (error: any) {
         dispatch({ type: 'publish_fail', cid, error })
@@ -569,12 +584,16 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       })
       const link = getShareLink({ cid: rootStats.cid, webrtcMaddrs: getWebRTCAddrs(nodeInfo?.multiaddrs) })
       dispatch({ type: 'share_link', link, cid: rootStats.cid })
-      await helia.routing.provide(rootStats.cid, {
-        signal: controller.signal,
-        onProgress: (evt) => {
-          console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
-        }
-      })
+      if (provideToDHT) {
+        await helia.routing.provide(rootStats.cid, {
+          signal: controller.signal,
+          onProgress: (evt) => {
+            console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
+          }
+        })
+      }
+      // TODO: dispatch a new action to update the state to indicate if the file won't be provided to the DHT?
+
       dispatch({ type: 'publish_success_dir' })
     }
     publishRoot().catch((err: any) => {

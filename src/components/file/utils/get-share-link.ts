@@ -9,7 +9,8 @@ export function getShareLink ({ cid, name, webrtcMaddrs }: { cid: string | CID, 
   }
 
   if (webrtcMaddrs !== undefined) {
-    url.hash += `&maddrs=${encodeURIComponent(webrtcMaddrs.map(addr => (addr.toString())).join(','))}`
+    const encodedMaddrs = webrtcMaddrs.map(addr => addr.toString()).join(',')
+    url.hash += `&maddrs=${encodeURIComponent(encodedMaddrs)}`
   }
 
   return url.toString()

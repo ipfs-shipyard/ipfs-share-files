@@ -2,6 +2,7 @@ import { type Connection } from '@libp2p/interface'
 import { type Multiaddr } from '@multiformats/multiaddr'
 import { Circuit, WebRTC, WebRTCDirect, WebSockets, WebSocketsSecure, WebTransport } from '@multiformats/multiaddr-matcher'
 import React, { useMemo } from 'react'
+import { useFilesDispatch, useFiles } from '../../hooks/use-files.js'
 import { useHelia } from '../../hooks/use-helia.js'
 import { NodeInfoDetail } from './node-info-detail.jsx'
 
@@ -12,7 +13,9 @@ export interface NodeInfoProps {
 
 export const NodeInfo: React.FC<NodeInfoProps> = () => {
   const { nodeInfo } = useHelia()
+  const dispatch = useFilesDispatch()
   const { peerId, multiaddrs, connections } = nodeInfo ?? {}
+  const { provideToDHT } = useFiles()
 
   const { listeningAddrs, circuitRelayAddrs, webRtc, webRtcDirect, webTransport, webSockets, webSocketsSecure } = useMemo(() => {
     const base = {
@@ -93,6 +96,16 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
       */}
       <NodeInfoDetail label='Dialable from other Browsers' value={` ${(webRtcDirect + webSocketsSecure + (window.isSecureContext ? webSockets : 0)) > 0 ? '✅' : '❌'}`} />
       <NodeInfoDetail label='Connections' value={`${totalConns} (${inboundConns} in, ${outboundConns} out, ${unlimitedConns} unlimited)`} />
+      <div className='flex items-center mt2'>
+        <input
+          type="checkbox"
+          id="provideToDHT"
+          checked={provideToDHT}
+          onChange={(e) => { dispatch({ type: 'set_provide_to_dht', provideToDHT: e.target.checked }) }}
+          className="mr2"
+        />
+        <label htmlFor="provideToDHT" className="ma0">Provide CIDs to DHT</label>
+      </div>
     </div>
   )
 }
