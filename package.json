@@ -71,6 +71,7 @@
     "@helia/mfs": "^4.0.1",
     "@helia/unixfs": "^4.0.0",
     "@libp2p/devtools-metrics": "^1.2.0",
+    "@multiformats/multiaddr": "^12.3.4",
     "@multiformats/multiaddr-matcher": "^1.6.0",
     "@sgtpooki/file-type": "^1.0.1",
     "blob-to-it": "^2.0.7",

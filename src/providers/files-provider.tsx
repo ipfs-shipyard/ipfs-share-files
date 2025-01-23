@@ -3,6 +3,8 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import { asyncItToFile } from '../components/file/utils/async-it-to-file.js'
 import { getShareLink } from '../components/file/utils/get-share-link.js'
 import { useHelia } from '../hooks/use-helia.js'
+import { getWebRTCAddrs } from '../lib/share-addresses.js'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 export interface AddFileState {
   id: string
@@ -93,6 +95,7 @@ export interface FileToFetch {
   cid: string
   filename: string | null
   fetching: boolean
+  providerMaddrs: Multiaddr[] | null
 }
 
 export interface FilesToPublish {
@@ -109,6 +112,9 @@ export interface FilesState {
 
   // whether or not the root CID (containing folder for all files) has been published
   rootPublished: boolean
+
+  // Whether or not to provide CIDs to the DHT
+  provideToDHT: boolean
 }
 
 export type FilesAction =
@@ -127,7 +133,9 @@ export type FilesAction =
 
   | { type: 'share_link', link: string, cid: CID }
 
-  | { type: 'fetch_start', cid: string, filename: string | null }
+  | { type: 'fetch_start', cid: string, filename: string | null, providerMaddrs: Multiaddr[] | null }
+  | { type: 'provider_dial_success', maddrs: Multiaddr[] }
+  | { type: 'provider_dial_fail', maddrs: Multiaddr[] }
   | { type: 'fetch_in-progress', cid: string }
   | { type: 'fetch_cancelled', cid: string }
   | { type: 'fetch_success', files: Record<string, DownloadFileState> }
@@ -135,6 +143,8 @@ export type FilesAction =
   | { type: 'fetch_fail', error: Error }
 
   | { type: 'reset_files' }
+
+  | { type: 'set_provide_to_dht', provideToDHT: boolean }
 
 // eslint-disable-next-line complexity
 function filesReducer (state: FilesState, action: FilesAction): FilesState {
@@ -302,7 +312,7 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
         ...state,
         filesToFetch: [
           ...state.filesToFetch,
-          { cid: action.cid, filename: action.filename, fetching: false }
+          { cid: action.cid, filename: action.filename, fetching: false, providerMaddrs: action.providerMaddrs }
         ]
       }
 
@@ -363,6 +373,12 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
 
       return initialState
 
+    case 'set_provide_to_dht':
+      return {
+        ...state,
+        provideToDHT: action.provideToDHT
+      }
+
     default:
       return state
   }
@@ -373,7 +389,8 @@ const initialState: FilesState = {
   filesToPublish: [],
   files: {},
   rootPublished: false,
-  shareLink: { link: null, cid: null }
+  shareLink: { link: null, cid: null },
+  provideToDHT: false
 }
 
 export const FilesContext = createContext<FilesState>(initialState)
@@ -382,13 +399,25 @@ export const FilesDispatchContext = createContext<React.Dispatch<FilesAction>>(n
 export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(filesReducer, initialState)
   // const [fetching, setFetching] = React.useState(false)
-  const { helia, mfs, unixfs } = useHelia()
-  const { filesToFetch, filesToPublish, files } = state
+  const { helia, mfs, unixfs, nodeInfo } = useHelia()
+  const { filesToFetch, filesToPublish, files, provideToDHT } = state
 
+  /**
+   * File Fetching Effect
+   * Responsible for downloading files from IPFS when filesToFetch array changes.
+   * - Skips if filesToFetch is empty or unixfs is not available
+   * - For each file in filesToFetch:
+   * --- Gets stats to determine if it's a file or directory
+   * --- For files: downloads and dispatches fetch_success
+   * --- For directories: downloads each file in the directory
+   * - Adds downloaded files to publish queue
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (filesToFetch.length === 0) return
     if (unixfs == null) return
     const controller = new AbortController()
+
     const fetchFile = async ({ cid, filename, fetching }: FileToFetch): Promise<void> => {
       if (fetching) return
       dispatch({ type: 'fetch_in-progress', cid })
@@ -437,6 +466,16 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const fetchAllFiles = async (): Promise<void> => {
       for (const fileToFetch of filesToFetch) {
+        if (fileToFetch.providerMaddrs != null) {
+          try {
+            // Optimistically dial the provider's maddrs
+            await helia?.libp2p.dial(fileToFetch.providerMaddrs)
+            dispatch({ type: 'provider_dial_success', maddrs: fileToFetch.providerMaddrs })
+          } catch (e: any) {
+            console.error('error dialing provider:', fileToFetch.providerMaddrs.map(m => m.toString()))
+            dispatch({ type: 'provider_dial_fail', maddrs: fileToFetch.providerMaddrs })
+          }
+        }
         try {
           await fetchFile(fileToFetch)
           dispatch({ type: 'publish_start', cid: CID.parse(fileToFetch.cid) })
@@ -461,6 +500,15 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [unixfs, filesToFetch.map(f => f.cid.toString()).sort().join(',')])
 
+  /**
+   * File Publishing Effect
+   * Handles publishing files to IPFS network when filesToPublish array changes.
+   * - Skips if filesToPublish is empty, mfs unavailable, or all files already publishing
+   * - For each unpublished file:
+   * --- Provides the file to the IPFS network
+   * --- Updates state on success/failure
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (filesToPublish.length === 0) return
     if (mfs == null) return
@@ -472,12 +520,15 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       dispatch({ type: 'publish_in-progress', cid })
 
       try {
-        await helia.routing.provide(cid, {
-          signal: controller.signal,
-          onProgress: (evt) => {
-            console.info(`file Publish progress "${evt.type}" detail:`, evt.detail)
-          }
-        })
+        if (provideToDHT) {
+          await helia.routing.provide(cid, {
+            signal: controller.signal,
+            onProgress: (evt) => {
+              console.info(`file Publish progress "${evt.type}" detail:`, evt.detail)
+            }
+          })
+        }
+        // TODO: dispatch a new action to update the state to indicate the file won't be provided to the DHT?
         dispatch({ type: 'publish_success', cid })
       } catch (error: any) {
         dispatch({ type: 'publish_fail', cid, error })
@@ -506,6 +557,16 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), mfs])
 
+  /**
+   * Root Directory Publishing Effect
+   * Publishes the root directory after all individual files are processed.
+   * - Triggers when filesToPublish and filesToFetch are empty (all files processed)
+   * - Gets stats for root directory
+   * - Generates and dispatches share link
+   * - Publishes root directory to IPFS network
+   * - Updates state to indicate root directory is published
+   * - Handles cancellation via AbortController
+   */
   useEffect(() => {
     if (mfs == null) return
     if (filesToPublish.length !== 0) return
@@ -521,14 +582,18 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           console.info(`root folder stats progress "${evt.type}" detail:`, evt.detail)
         }
       })
-      const link = getShareLink(rootStats.cid)
+      const link = getShareLink({ cid: rootStats.cid, webrtcMaddrs: getWebRTCAddrs(nodeInfo?.multiaddrs) })
       dispatch({ type: 'share_link', link, cid: rootStats.cid })
-      await helia.routing.provide(rootStats.cid, {
-        signal: controller.signal,
-        onProgress: (evt) => {
-          console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
-        }
-      })
+      if (provideToDHT) {
+        await helia.routing.provide(rootStats.cid, {
+          signal: controller.signal,
+          onProgress: (evt) => {
+            console.info(`root folder Publish progress "${evt.type}" detail:`, evt.detail)
+          }
+        })
+      }
+      // TODO: dispatch a new action to update the state to indicate if the file won't be provided to the DHT?
+
       dispatch({ type: 'publish_success_dir' })
     }
     publishRoot().catch((err: any) => {
