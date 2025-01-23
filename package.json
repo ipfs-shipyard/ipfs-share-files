@@ -81,7 +81,7 @@
     "i18next": "^23.15.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-chained-backend": "^4.6.2",
-    "i18next-http-backend": "^2.6.2",
+    "i18next-http-backend": "^3.0.2",
     "i18next-icu": "^2.3.0",
     "i18next-localstorage-backend": "^4.2.0",
     "ipfs-css": "^1.4.0",
