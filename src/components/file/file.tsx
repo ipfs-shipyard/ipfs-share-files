@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useHelia } from '../../hooks/use-helia.js'
+import { getWebRTCAddrs } from '../../lib/share-addresses.js'
 import { formatBytes } from '../../lib/size.js'
 import IconDownload from '../../media/icons/download.svg'
 import IconView from '../../media/icons/view.svg'
@@ -24,7 +25,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   // TODO: implement progress
   const [progress] = useState(100)
   const [copied, setCopied] = useState(false)
-  const { unixfs } = useHelia()
+  const { unixfs, nodeInfo } = useHelia()
 
   const [showModalView, setShowModalView] = useState(false)
 
@@ -137,7 +138,7 @@ export const File = ({ file, isDownload }: { file: FileState, isDownload?: boole
   const fileNameClass = classnames({ charcoal: error == null, gray: error }, ['FileLinkName ph2 f6 b truncate'])
   const fileSizeClass = classnames({ 'charcoal-muted': error == null, gray: error }, ['f6'])
 
-  const url = getShareLink(cid, name)
+  const url = getShareLink({ cid, name, webrtcMaddrs: getWebRTCAddrs(nodeInfo?.multiaddrs) })
 
   return (
     <div className='mv2 flex items-center justify-between'>

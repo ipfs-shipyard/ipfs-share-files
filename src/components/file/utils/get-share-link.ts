@@ -1,8 +1,17 @@
 import { type CID } from 'multiformats/cid'
-export function getShareLink (cid: string | CID, name?: string): string {
-  if (name === undefined) {
-    return new URL(`/#/${cid}`, window.location.href).toString()
+import type { Multiaddr } from '@multiformats/multiaddr'
+
+export function getShareLink ({ cid, name, webrtcMaddrs }: { cid: string | CID, name?: string, webrtcMaddrs?: Multiaddr[] }): string {
+  const url = new URL(`/#/${cid}?`, window.location.href)
+
+  if (name !== undefined) {
+    url.hash += `filename=${encodeURIComponent(name)}`
   }
 
-  return new URL(`/#/${cid}?filename=${encodeURI(name)}`, window.location.href).toString()
+  if (webrtcMaddrs !== undefined) {
+    const encodedMaddrs = webrtcMaddrs.map(addr => addr.toString()).join(',')
+    url.hash += `&maddrs=${encodeURIComponent(encodedMaddrs)}`
+  }
+
+  return url.toString()
 }
