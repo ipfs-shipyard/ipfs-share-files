@@ -70,7 +70,7 @@
   "dependencies": {
     "@helia/mfs": "^4.0.3",
     "@helia/unixfs": "^4.0.3",
-    "@libp2p/devtools-metrics": "^1.2.11",
+    "@libp2p/devtools-metrics": "^1.2.12",
     "@multiformats/multiaddr": "^12.3.4",
     "@multiformats/multiaddr-matcher": "^1.6.0",
     "@sgtpooki/file-type": "^1.0.1",
