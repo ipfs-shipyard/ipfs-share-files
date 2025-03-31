@@ -68,11 +68,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@helia/mfs": "^4.0.3",
-    "@helia/unixfs": "^4.0.3",
-    "@libp2p/devtools-metrics": "^1.2.11",
+    "@helia/mfs": "^5.0.0",
+    "@helia/unixfs": "^5.0.0",
+    "@libp2p/devtools-metrics": "^1.2.12",
     "@multiformats/multiaddr": "^12.3.4",
-    "@multiformats/multiaddr-matcher": "^1.6.0",
+    "@multiformats/multiaddr-matcher": "^1.7.0",
     "@sgtpooki/file-type": "^1.0.1",
     "blob-to-it": "^2.0.8",
     "blockstore-idb": "^2.0.1",
