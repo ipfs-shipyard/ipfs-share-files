@@ -2,7 +2,7 @@
 
 import { mfs as _mfs, type MFS } from '@helia/mfs'
 import { unixfs as _unixfs, type UnixFS } from '@helia/unixfs'
-import { devToolsMetrics } from '@libp2p/devtools-metrics'
+import { inspectorMetrics } from '@ipshipyard/libp2p-inspector-metrics'
 import { type Connection } from '@libp2p/interface'
 import { IDBBlockstore } from 'blockstore-idb'
 import { IDBDatastore } from 'datastore-idb'
@@ -88,7 +88,7 @@ export const HeliaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             datastore,
             blockstore,
             libp2p: {
-              metrics: devToolsMetrics()
+              metrics: inspectorMetrics()
             }
           }) as HeliaLibp2p
           setHelia(helia)
