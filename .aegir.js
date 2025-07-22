@@ -39,7 +39,8 @@ const options = {
 
       // aegir dep-check doesn't check tsx files properly:
       '@helia/mfs',
-      '@libp2p/devtools-metrics',
+      '@libp2p/interface',
+      '@ipshipyard/libp2p-inspector-metrics',
       'classnames',
       'helia',
       'ipfs-css',
