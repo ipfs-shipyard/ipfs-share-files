@@ -607,7 +607,7 @@ export const FilesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return () => {
       controller.abort()
     }
-  }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), filesToFetch.map(f => f.cid.toString()).sort().join(','), mfs])
+  }, [filesToPublish.map(f => f.cid.toString()).sort().join(','), filesToFetch.map(f => f.cid.toString()).sort().join(','), mfs, getWebRTCAddrs(nodeInfo?.multiaddrs).map(a => a.toString()).join(',')])
 
   return (
     <FilesContext.Provider value={state}>

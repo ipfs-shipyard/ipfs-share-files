@@ -5,6 +5,8 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
 import { useFiles } from '../../hooks/use-files.js'
 import { useHelia } from '../../hooks/use-helia.js'
+import { getAddrsForQR } from '../../lib/share-addresses.js'
+import { getShareLink } from '../file/utils/get-share-link.js'
 
 /**
  * This component renders a QR code and a share link that reprents either:
@@ -14,8 +16,8 @@ import { useHelia } from '../../hooks/use-helia.js'
  */
 export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.ReactNode => {
   const { files, shareLink, rootPublished } = useFiles()
-  const { link: shareAllLink } = shareLink
-  const { mfs, helia } = useHelia()
+  const { link: shareAllLink, cid: shareCid } = shareLink
+  const { mfs, helia, nodeInfo } = useHelia()
   const [copied, setCopied] = useState(false)
   const { t } = useTranslation()
   const handleOnCopyClick = useCallback(() => {
@@ -28,6 +30,12 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
    */
   const shouldGenerateLink = useMemo(() => Object.keys(files).length > 0, [files])
   const allFilesArePublished = useMemo(() => Object.values(files).every((file) => file.published), [files])
+
+  // generate a shorter link for QR codes using optimized address selection
+  const qrLink = useMemo(() => {
+    if (shareCid == null) return null
+    return getShareLink({ cid: shareCid, webrtcMaddrs: getAddrsForQR(nodeInfo?.multiaddrs) })
+  }, [shareCid, nodeInfo?.multiaddrs])
 
   const disabled = !allFilesArePublished || !rootPublished
 
@@ -75,22 +83,24 @@ export const ShareAllFiles = ({ withLabel }: { withLabel?: boolean }): React.Rea
       <div className="overflow-hidden">
         <div className="flex flex-column items-center mb3 appear-from-below">
           <span className="f7 charcoal-muted lh-copy pb2">{t('copyLink.qrLabel')}</span>
-          <span style={ disabled ? { filter: 'blur(2px)' } : {} }>
-            <QRCodeSVG
-              value={shareAllLink}
-              bgColor={'#ffffff'}
-              fgColor={'#022E44'}
-              level={'M'}
-              imageSettings={{
-                src: 'favicon-32x32.png',
-                x: 50,
-                y: 50,
-                height: 32,
-                width: 32,
-                excavate: true
-              }}
-            />
-          </span>
+          {qrLink != null && (
+            <span style={disabled ? { filter: 'blur(2px)' } : {}}>
+              <QRCodeSVG
+                value={qrLink}
+                bgColor={'#ffffff'}
+                fgColor={'#022E44'}
+                level={'M'}
+                imageSettings={{
+                  src: 'favicon-32x32.png',
+                  x: 50,
+                  y: 50,
+                  height: 32,
+                  width: 32,
+                  excavate: true
+                }}
+              />
+            </span>
+          )}
         </div>
       </div>
     </div>
