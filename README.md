@@ -4,8 +4,10 @@
 | ------------- | ------------- |
 | ![Screenshot of IPFS Share sender view](https://gateway.ipfs.io/ipfs/QmPFxiRfnxucPbW9bXVKRPTn6ZvaDATjy4c3aPtmBHuGeJ)  | ![Screenshot of IPFS Share recipient view](https://gateway.ipfs.io/ipfs/QmYcitvEc1xsJDMQr7UpKfcYWddR6ocboBbVesp6Gp8cBo)  |
 
-[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg)](https://protocol.ai/) [![](https://img.shields.io/badge/project-IPFS-blue.svg)](http://ipfs.io/) [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg)](http://webchat.freenode.net/?channels=%23ipfs)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-blue.svg)](http://standardjs.com/)
+[![IPFS Project](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](https://ipfs.tech)
+[![Discourse Forum](https://img.shields.io/discourse/posts?server=https%3A%2F%2Fdiscuss.ipfs.tech&style=flat-square)](https://discuss.ipfs.tech)
+[![IPFS Community](https://img.shields.io/badge/community-join-blue.svg?style=flat-square)](https://docs.ipfs.tech/community/)
+[![Code Style](https://img.shields.io/badge/code%20style-standard-blue.svg?style=flat-square)](http://standardjs.com/)
 
 > Share files directly from your device's browser using IPFS — no cloud needed. Fast, free, easy file sharing for IPFS novices and veterans alike, available at https://share.ipfs.io.
 
@@ -38,9 +40,9 @@ Maintainers welcome! This repo is not currently under active development, but is
 - Includes brief explainers on how IPFS Share works, with links to more details for the curious
 
 ### How it works
-IPFS Share uses [ipfs-provider](https://github.com/ipfs-shipyard/ipfs-provider) to connect to IPFS via multiple providers. If local IPFS node is not available (for example, if you're using IPFS Share on your phone, or due to CORS), an instance of [`js-ipfs`](https://github.com/ipfs/js-ipfs/) is created.
+IPFS Share runs a [Helia](https://github.com/ipfs/helia) node directly in your browser. Files are shared peer-to-peer over WebRTC and WebTransport connections.
 
-The app itself is built using [`create-react-app`](https://github.com/facebook/create-react-app), so if you're comfortable building ordinary React web apps, you'll feel right at home in this codebase. Not familiar with React or `create-react-app`? There are extensive [docs](https://create-react-app.dev/docs/getting-started/) available. Visual styling is done using [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
+The app is built with React and [Vite](https://vite.dev/). Visual styling uses [Tachyons](http://tachyons.io/) with additional IPFS flavor via [`ipfs-css`](https://github.com/ipfs-shipyard/ipfs-css).
 
 ## For developers
 
@@ -48,7 +50,7 @@ It's easy to get a local copy of IPFS Share up and running, even if you don't ha
 
 ### Installation
 
-With `node@14` and `npm@6.4.1` or greater installed, run:
+With Node.js LTS installed, run:
 
 ```sh
 > npm ci
@@ -62,36 +64,6 @@ To run IPFS Share in development mode:
 > npm start
 # You can now view ipfs-share-files in the browser.
 # Local: http://localhost:3000
-```
-
-### Using with a local IPFS node
-
-If you have a local IPFS node, you may also want to run it simultaneously. Use [IPFS Desktop](https://github.com/ipfs-shipyard/ipfs-desktop) or start a daemon in the terminal:
-
-```sh
-> ipfs daemon
-# API server listening on /ip4/127.0.0.1/tcp/5001
-```
-
-If you are running a local node, you must configure your IPFS API to allow [cross-origin (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests from you development server and the [share.ipfs.io](https://share.ipfs.io) domain.
-
-You can either run the [cors-config.sh](./cors-config.sh) script:
-
-```sh
-> ./cors-config.sh
-```
-
-Or do it manually:
-
-```sh
-> ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3000", "https://share.ipfs.io"]'
-> ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
-```
-
-To reset the config to its default state, run:
-
-```sh
-> ipfs config --json API.HTTPHeaders {}
 ```
 
 ### Linting
@@ -129,32 +101,6 @@ Contributing translations in your language is particularly valuable! We use Tran
 1. Install the [Transifex CLI](https://github.com/transifex/cli)
 2. Download translations with `tx pull -a`
 3. Regenerate languages list: `npx -q @olizilla/lol@2 public/locales > src/lib/languages.json`
-
-## REFRESH - TODO
-
-### UI
-
-1. Update the "progress bar" circular progress bar to be a loading indicator for record publishing
-1. Disable share buttons when:
-    * no listening webrtc address
-    * CID is not published
-1. Remove protocol labs footer -> replace with "powered by Helia"
-1. Show the users what is actually happening in the background:
-    * Finding closest peers
-    * asking them to publish our provider record
-
-### Functionality
-
-1. publish directory CID
-1. Make sure that when share.ipfs.io link with CID deeplink is shared, that browser retrieval client can get the file.
-1. On self:update, we need to check if the listening webrtc address has changed, and republish all "files" and "directory" if so.
-1. Ability to remove individual files from share list
-1. Fix downloading the files filename
-
-### debugging
-
-1. Add libp2p-devtools
-
 
 ## Contribute
 
