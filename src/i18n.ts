@@ -4,12 +4,19 @@ import Backend from 'i18next-chained-backend'
 import HttpBackend from 'i18next-http-backend'
 import ICU from 'i18next-icu'
 import LocalStorageBackend from 'i18next-localstorage-backend'
-import locales from './lib/languages'
+import locales from './lib/languages.js'
 
-export const localesList = Object.values(locales).map(locale => ({
-  value: locale.locale,
-  name: locale.nativeName
-}))
+interface LocaleEntry {
+  locale: string
+  nativeName?: string
+  englishName?: string
+}
+
+export const localesList = Object.values(locales as Record<string, LocaleEntry>)
+  .map(locale => ({
+    value: locale.locale,
+    name: locale.nativeName ?? locale.englishName ?? locale.locale
+  }))
 
 await i18n
   .use(ICU)

@@ -46,7 +46,7 @@
   "scripts": {
     "clean": "aegir clean dist aegir-build",
     "start": "vite",
-    "prebuild": "lol public/locales > src/lib/languages.json",
+    "prebuild": "echo 'export default' > src/lib/languages.ts && lol public/locales >> src/lib/languages.ts",
     "build": "run-s dep-check lint build:aegir build:vite",
     "build:vite": "vite build",
     "build:aegir": "aegir build",
