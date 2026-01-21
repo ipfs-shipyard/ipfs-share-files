@@ -2,6 +2,7 @@ import { type Connection } from '@libp2p/interface'
 import { type Multiaddr } from '@multiformats/multiaddr'
 import { Circuit, WebRTC, WebRTCDirect, WebSockets, WebSocketsSecure, WebTransport } from '@multiformats/multiaddr-matcher'
 import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useFilesDispatch, useFiles } from '../../hooks/use-files.js'
 import { useHelia } from '../../hooks/use-helia.js'
 import { NodeInfoDetail } from './node-info-detail.jsx'
@@ -12,6 +13,7 @@ export interface NodeInfoProps {
 }
 
 export const NodeInfo: React.FC<NodeInfoProps> = () => {
+  const { t } = useTranslation()
   const { nodeInfo } = useHelia()
   const dispatch = useFilesDispatch()
   const { peerId, multiaddrs, connections } = nodeInfo ?? {}
@@ -87,15 +89,15 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
 
   return (
     <div className='ml2 pb2 f5 gray-muted montserrat mw7'>
-      <NodeInfoDetail label='Peer ID' value={peerId} />
-      <NodeInfoDetail label='ListeningAddrs' value={`${listeningAddrs} (relayed: ${circuitRelayAddrs}, WebRTC: ${webRtc}, Secure WebSockets: ${webSocketsSecure}, WebRTC Direct: ${webRtcDirect}, WebTransport: ${webTransport}, WebSockets: ${webSockets})`} />
+      <NodeInfoDetail label={t('nodeInfo.peerId')} value={peerId} />
+      <NodeInfoDetail label={t('nodeInfo.listeningAddrs')} value={t('nodeInfo.listeningAddrsValue', { total: listeningAddrs, relayed: circuitRelayAddrs, webRtc, secureWs: webSocketsSecure, webRtcDirect, webTransport, ws: webSockets })} />
       {/*
         Dialable from other Browsers exclude:
         - WebTransport which is not included in the default Helia transports due to flaky browser support.
         - WebSocket when in secure contexts
       */}
-      <NodeInfoDetail label='Dialable from other Browsers' value={` ${(webRtcDirect + webSocketsSecure + (window.isSecureContext ? webSockets : 0)) > 0 ? '✅' : '❌'}`} />
-      <NodeInfoDetail label='Connections' value={`${totalConns} (${inboundConns} in, ${outboundConns} out, ${unlimitedConns} unlimited)`} />
+      <NodeInfoDetail label={t('nodeInfo.dialable')} value={` ${(webRtcDirect + webSocketsSecure + (window.isSecureContext ? webSockets : 0)) > 0 ? '✅' : '❌'}`} />
+      <NodeInfoDetail label={t('nodeInfo.connections')} value={t('nodeInfo.connectionsValue', { total: totalConns, inbound: inboundConns, outbound: outboundConns, unlimited: unlimitedConns })} />
       <div className='flex items-center mt2'>
         <input
           type="checkbox"
@@ -104,7 +106,7 @@ export const NodeInfo: React.FC<NodeInfoProps> = () => {
           onChange={(e) => { dispatch({ type: 'set_provide_to_dht', provideToDHT: e.target.checked }) }}
           className="mr2"
         />
-        <label htmlFor="provideToDHT" className="ma0">Provide CIDs to DHT</label>
+        <label htmlFor="provideToDHT" className="ma0 pointer">{t('nodeInfo.provideToDHT')}</label>
       </div>
     </div>
   )

@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Click here to open the dropdown"
+  },
+  "nodeInfo": {
+    "peerId": "Peer ID",
+    "listeningAddrs": "Listening Addrs",
+    "listeningAddrsValue": "{total} (relayed: {relayed}, WebRTC: {webRtc}, Secure WebSockets: {secureWs}, WebRTC Direct: {webRtcDirect}, WebTransport: {webTransport}, WebSockets: {ws})",
+    "dialable": "Dialable from other Browsers",
+    "connections": "Connections",
+    "connectionsValue": "{total} ({inbound} in, {outbound} out, {unlimited} unlimited/direct)",
+    "provideToDHT": "Announce CIDs on Amino DHT"
   }
 }
