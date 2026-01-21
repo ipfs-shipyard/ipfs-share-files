@@ -6,6 +6,7 @@
   },
   "header": "Compartilhar",
   "footer": "Licenciado <1> CC-BY 3.0 </1> exceto <3>onde indicado</3>",
+  "powered-by-helia": "",
   "info": {
     "add": {
       "title": "Compartilhar arquivos usando o IPFS",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "Você pode compartilhar estes arquivos direto do seu dispositivo simplesmente mantendo seu nó IPFS aberto. Apenas compartilhe o link que você recebeu e mantenha o seu nó em execução até o destinatário baixar os arquivos."    },
     "learnMore": "Saiba mais."
   },
-  "box": {
-    "missingDaemon": "O seu nó IPFS está em execução?",
-    "runningDaemon": "Você precisa de <1>um nó executando</1> para adicionar arquivos ao IPFS",
-    "configureDaemon": "Certifique-se de <1>configurar a sua API IPFS</1> para permitir solicitações de origem cruzada (CORS):",
-    "runDaemon": "Então, inicie um daemon IPFS no seu terminal:",
-    "largeFilesWarning": "Se tiver problemas para baixar arquivos maiores de 1 GB, instale o <1>IPFS Desktop</1> ou o <3>Suplemento IPFS</3> para melhorar o desempenho.",
-    "viewOnGateway": "Ver no IPFS"
+  "helia-error": {
+    "title": "",
+    "message": "",
+    "more-details": "",
+    "refresh-page": "",
+    "open-issue": ""
   },
   "modal": {
     "how": {
@@ -69,11 +69,14 @@
     "labelIndividual": "Compartilhar arquivos individuais",
     "labelAll": "Compartilhar todos os arquivos",
     "footNote": "Este link muda se adicionar mais arquivos, por isso procure sempre compartilhar a versão mais recente.",
+    "publishing": "",
     "copy": "Compartilhar",
     "copied": "Copiado!",
     "qrLabel": "Ou faça uma varredura para compartilhar todos os arquivos"
   },
-  "loader": "Carregando a lista de arquivos...",
+  "loader": {
+    "fileList": "Carregando a lista de arquivos..."
+  },
   "downloadFiles": {
     "download": "Baixar",
     "downloadAll": "Baixar todos",

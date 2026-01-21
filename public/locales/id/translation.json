@@ -1,0 +1,88 @@
+{
+  "pageTitle": {
+    "ipfs": "Berbagi IPFS",
+    "add": "Bagikan Berkas",
+    "download": "Unduh Berkas"
+  },
+  "header": "Bagikan",
+  "footer": "Berlisensi <1>CC-BY 3.0</1> kecuali seperti <3>yang disebutkan</3>",
+  "powered-by-helia": "Didukung oleh <1>Helia</1>",
+  "info": {
+    "add": {
+      "title": "Bagikan berkas menggunakan IPFS",
+      "subtitle": "Bagikan langsung dari perangkat Anda — tidak perlu awan.",
+      "labelAdd": "Tambahkan berkas Anda",
+      "copyAdd": "Tambahkan berkas untuk berbagi langsung dari perangkat Anda melalui jaringan IPFS. Siapa pun yang memiliki kode unik di tautan berbagi Anda dapat unduh berkas Anda, jadi jangan tambahkan materi sensitif atau berhak cipta.",
+      "labelKeepPage": "Biarkan halaman ini tetap terbuka!",
+      "labelKeepDaemon": "Jaga agar node IPFS Anda tetap berjalan!",
+      "copyKeepPage": "Karena Anda berbagi langsung dari perangkat Anda, penting untuk menjaga halaman ini tetap terbuka sampai penerima mengunduh berkas. Jika Anda berbagi dengan grup, orang lain dalam grup dapat membantu Anda menghosting bersama berkas dengan juga membuka halaman berbagi di browser mereka.",
+      "copyKeepDaemon": "Karena Anda berbagi langsung dari perangkat Anda, penting untuk menjaga node IPFS Anda berjalan sampai penerima mengunduh berkas. Jika Anda berbagi dengan grup, siapa pun di grup dapat membantu menghost berkas bersama dengan menjaga halaman berbagi tetap terbuka di peramban mereka, atau jika mereka menjalankan node IPFS, menyematkan pengidentifikasi konten (CID) dari tautan berbagi Anda ke node mereka.",
+      "labelSend": "Bagikan tautannya",
+      "copySend": "Setiap tautan berbagi berisi sidik jari unik yang disebut CID yang memungkinkan perangkat penerima menemukan konten itu di jaringan IPFS."
+    },
+    "download": {
+      "title": "Anda mendapat berkas!",
+      "subtitle": "Unduh langsung dari pengirim — tidak perlu awan.",
+      "labelHow": "Bagaimana cara kerja Berbagi IPFS?",
+      "copyHow": "Berbagi IPFS menggunakan jaringan IPFS global untuk memungkinkan orang berbagi berkas secara langsung satu sama lain — tidak diperlukan awan atau server pihak ketiga. Dan karena berkas di IPFS diidentifikasi berdasarkan isinya, bukan lokasinya, Anda dapat yakin apa yang Anda unduh adalah konten yang sama dengan yang dimaksudkan pengirim.",
+      "labelKeep": "Ingin berbagi berkas ini dengan orang lain?",
+      "copyKeepPage": "Anda dapat menjadi bagian dari jaringan IPFS dan membagikan berkas-berkas ini langsung dari perangkat Anda hanya dengan membiarkan halaman ini tetap terbuka. Cukup bagikan tautan yang Anda terima, dan jangan tutup halaman ini sampai penerima mengunduh berkas.",
+      "copyKeepDaemon": "Anda dapat membagikan berkas-berkas ini langsung dari perangkat Anda hanya dengan menjaga node IPFS Anda tetap berjalan. Cukup bagikan tautan yang Anda terima, dan pastikan node Anda tetap berjalan hingga penerima mengunduh berkas."    },
+    "learnMore": "Belajarlah lagi."
+  },
+  "helia-error": {
+    "title": "Terjadi kesalahan saat mencoba menginisialisasi node Helia.",
+    "message": "Kesalahan:{message}",
+    "more-details": "Jejak tumpukan kesalahan tersedia di konsol peramban.",
+    "refresh-page": "Anda mungkin perlu <1>menyegarkan halaman</1> untuk mencoba membuat ulang node Helia Anda.",
+    "open-issue": "Jika masalah berlanjut, silakan <1>buka masalah</1>."
+  },
+  "modal": {
+    "how": {
+      "title": "Cara kerja Berbagi IPFS",
+      "ariaLabel": "Modal menjelaskan cara kerja Berbagi IPFS",
+      "copy": "IPFS Share adalah cara sederhana dan gratis untuk berbagi berkas tanpa harus bergantung pada layanan yang dijalankan oleh perusahaan besar. Sebagai gantinya, ia menggunakan protokol IPFS peer-to-peer untuk berbagi langsung antar perangkat. IPFS dibangun di sekitar pengalamatan konten — melacak berkas berdasarkan apa yang dikandungnya, bukan di mana lokasinya — yang berarti bahwa berkas tidak dapat dimodifikasi tanpa mengubah alamatnya juga. Dengan kata lain, saat Anda mengunduh berkas menggunakan IPFS, Anda dapat yakin bahwa berkas tersebut sama persis dengan yang diinginkan pengirim.",
+      "learnMore": "Pelajari bagaimana IPFS mengubah internet dengan mengunjungi <1>situs web IPFS</1>. Ingin tahu tentang cara kerja pengalamatan konten? Kunjungi <3>ProtoSchool</3> untuk tutorial dan sumber daya lainnya."
+    },
+      "reprovide": {
+      "title": "Berbagi ulang berkas yang Anda terima",
+      "ariaLabel": "Modal menjelaskan cara berbagi berkas ini dengan orang lain",
+      "copy": "Sangat mudah untuk berbagi berkas ini dengan orang lain dengan menjadikan perangkat Anda bagian dari jaringan IPFS. Yang perlu Anda lakukan adalah menjaga halaman ini tetap terbuka; dengan melakukannya, perangkat Anda menjadi node di jaringan dan membuat berkas-berkas itu tersedia langsung untuk orang lain. Kemudian, bagikan tautan yang Anda terima — dan pastikan untuk tetap membuka halaman ini hingga Anda mengetahui bahwa penerima telah mengunduh berkas tersebut.",
+      "learnMore": "Penasaran bagaimana ini bekerja di bawah tenda? Lihat <1>dokumentasi IPFS resmi</1> untuk semuanya, mulai dari penjelasan dasar hingga alat pengembang."
+    },
+    "privacy": {
+      "title": "Berbagi berkas di IPFS",
+      "ariaLabel": "Modal yang menjelaskan berbagi dan privasi di IPFS",
+      "copy": "Situs ini menggunakan IPFS, protokol peer-to-peer untuk menyimpan dan berbagi data secara langsung antar pengguna tanpa bergantung pada penyimpanan awan atau layanan lain yang dijalankan oleh perusahaan besar. Karena IPFS adalah jaringan publik, saat Anda berbagi konten menggunakan Berbagi IPFS, Anda memungkinkan siapa saja yang mengetahui CID unik di tautan berbagi Anda untuk mengambilnya. Ini berarti Anda harus menghindari berbagi berkas sensitif atau materi berhak cipta.",
+      "learnMore": "Ingin mempelajari lebih lanjut tentang IPFS? Kunjungi <1>situs web</1> untuk mengetahui dasar-dasarnya, atau gali detail IPFS dan privasi dalam <3>dokumentasi resmi</3>."
+    },
+    "cid": {
+      "title": "Apa itu CID?",
+      "ariaLabel": "Modal yang menjelaskan pengidentifikasi konten",
+      "copy": "Pengidentifikasi konten (CID) adalah sidik jari yang dihasilkan secara kriptografis yang memungkinkan IPFS menemukan dan mengirimkan berkas. Karena IPFS mengidentifikasi berkas berdasarkan isinya, bukan lokasinya, CID tidak hanya menunjuk ke berkas tertentu, tetapi juga versi tertentu — jika berkas diubah, CID juga berubah. Saat Anda membagikan berkas menggunakan Berbagi IPFS, Anda dapat melihat CID-nya dengan melihat di berbagi tautan untuk rangkaian karakter yang panjang dimulai dengan \"bafy\".",
+      "learnMore": "Ingin menggali lebih dalam tentang cara kerja pengidentifikasi konten? Kunjungi <1>ProtoSchool</1> untuk tutorial dan sumber daya lainnya tentang teknologi web terdesentralisasi yang membuat IPFS tergerak."
+    }
+  },
+  "addFiles": "Tambahkan berkas",
+  "addFolder": "Atau tambahkan map",
+  "copyLink": {
+    "labelIndividual": "Bagikan berkas individual",
+    "labelAll": "Bagikan semua berkas",
+    "footNote": "Tautan ini berubah jika Anda menambahkan lebih banyak berkas, jadi pastikan untuk membagikan versi terbaru.",
+    "publishing": "Penerbitan...",
+    "copy": "Bagikan",
+    "copied": "Disalin!",
+    "qrLabel": "Atau pindai untuk membagikan semua berkas"
+  },
+  "loader": {
+    "fileList": "Memuat daftar berkas…"
+  },
+  "downloadFiles": {
+    "download": "Unduh",
+    "downloadAll": "Unduh semua",
+    "downloading": "Mengunduh…"
+  },
+  "dropdown": {
+    "clickLabel": "Klik di sini untuk membuka tarik-turun"
+  }
+}

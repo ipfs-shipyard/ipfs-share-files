@@ -6,6 +6,7 @@
   },
   "header": "Partager",
   "footer": "Licence <1>CC-BY 3.0</1> sauf <3>mention contraire</3>",
+  "powered-by-helia": "Fonctionne grâce à <1>Helia</1>",
   "info": {
     "add": {
       "title": "Partager des fichiers grâce à IPFS",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "Vous pouvez partager ces fichiers directement depuis votre appareil en gardant votre nœud IPFS actif. Partagez juste le lien que vous avez reçu, et gardez votre nœud actif jusqu'à ce que le destinataire ait téléchargé les fichiers."    },
     "learnMore": "En savoir plus."
   },
-  "box": {
-    "missingDaemon": "Votre nœud IPFS est-il actif ?",
-    "runningDaemon": "Vous avez besoin d'un <1>nœud actif</1> pour ajouter des fichiers dans IPFS.",
-    "configureDaemon": "Assurez-vous de <1>configurer votre API IPFS </1> pour autoriser les demandes CORS (cross-origin):",
-    "runDaemon": "Ensuite, démarrez un daemon IPFS dans votre terminal :",
-    "largeFilesWarning": "Si vous avez des problèmes pour télécharger des fichiers de plus d'1 GB, installer <1>IPFS Desktop</1> ou <3>IPFS Companion</3> peut améliorer les performances.",
-    "viewOnGateway": "Voir sur IPFS"
+  "helia-error": {
+    "title": "Une erreur est apparue en essayant d'initialiser le nœud Helia.",
+    "message": "Erreur : {message}",
+    "more-details": "La trace de la pile d'erreur est disponible dans la console du navigateur.",
+    "refresh-page": "Vous avez peut-être besoin de <1>rafraîchir la page</1> pour réinstancier votre nœud Helia.",
+    "open-issue": "Si le problème persiste, merci d'<1>ouvrir un ticket</1>."
   },
   "modal": {
     "how": {
@@ -47,8 +47,8 @@
       "reprovide": {
       "title": "Repartager les fichiers que vous avez reçus",
       "ariaLabel": "Fenêtre modale expliquant comment partager ces fichiers avec quelqu'un d'autre",
-      "copy": "Il est simple de partager ces fichiers avec une autre personne en intégrant votre appareil au réseau IPFS. Tout ce que vous devez faire, c'est garder cette page ouverte. En faisant cela, votre appareil devient un nœud sur le réseau et rend ces fichiers disponibles directement pour les autres. Ensuite, partagez simplement le lien que vous avez reçu, et veillez à garder cette page ouverte jusqu'à ce que vous soyez sûr(e) que le destinataire a téléchargé le fichier.",
-      "learnMore": "Curieux de savoir comment ça marche en coulisse? Allez voir la <1>documentation officielle d\"IPFS</1> pour tout savoir, des simples explications aux outils pour les développeurs."
+      "copy": "Il est facile de partager ces fichiers avec une autre personne en intégrant votre appareil au réseau IPFS. Tout ce que vous devez faire, c'est garder cette page ouverte. En faisant cela, votre appareil devient un nœud sur le réseau et rend ces fichiers disponibles directement pour les autres. Ensuite, partagez simplement le lien que vous avez reçu, et veillez à garder cette page ouverte jusqu'à ce que vous soyez sûr(e) que le destinataire ait téléchargé le fichier.",
+      "learnMore": "Curieux de savoir comment ça marche en coulisse? Allez voir la <1>documentation officielle d'IPFS</1> pour tout savoir, des explications simples aux outils pour développeurs."
     },
     "privacy": {
       "title": "Partager des fichiers avec IPFS",
@@ -69,11 +69,14 @@
     "labelIndividual": "Partagez des fichiers",
     "labelAll": "Partager tous les fichiers",
     "footNote": "Ce lien change si vous ajoutez d'autres fichiers. Vérifiez que vous partagez la dernière version.",
+    "publishing": "Publication...",
     "copy": "Partager",
     "copied": "Copié !",
     "qrLabel": "Ou scanner pour partager tous les fichiers"
   },
-  "loader": "Chargement de la liste des fichiers...",
+  "loader": {
+    "fileList": "Chargement de la liste des fichiers..."
+  },
   "downloadFiles": {
     "download": "Télécharger",
     "downloadAll": "Tout télécharger",

@@ -1,0 +1,88 @@
+{
+  "pageTitle": {
+    "ipfs": "IPFS Share",
+    "add": "Udostępnij pliki",
+    "download": "Pobierz pliki"
+  },
+  "header": "Udostępnij",
+  "footer": "Licencja <1>CC-BY 3.0</1> z wyjątkami <3>opisanymi tutaj</3>",
+  "powered-by-helia": "Napędzane przez <1>Helia</1>",
+  "info": {
+    "add": {
+      "title": "Udostępniaj pliki przez IPFS",
+      "subtitle": "Udostępniaj bezpośrednio ze swojego urządzenia, bez chmury.",
+      "labelAdd": "Dodaj pliki",
+      "copyAdd": "Dodaj pliki, aby udostępnić je bezpośrednio ze swojego urządzenia przez sieć IPFS. Każdy, kto zna unikalny kod w linku, może pobrać twoje pliki, więc nie dodawaj wrażliwych ani chronionych prawem autorskim materiałów.",
+      "labelKeepPage": "Nie zamykaj tej strony!",
+      "labelKeepDaemon": "Nie wyłączaj swojego węzła IPFS!",
+      "copyKeepPage": "Ponieważ udostępniasz pliki bezpośrednio ze swojego urządzenia, ważne jest, aby ta strona pozostała otwarta, dopóki odbiorca nie pobierze plików. Jeśli udostępniasz grupie, inni mogą pomóc w hostowaniu plików, również trzymając tę stronę otwartą w swoich przeglądarkach.",
+      "copyKeepDaemon": "Ponieważ udostępniasz pliki bezpośrednio ze swojego urządzenia, ważne jest, aby twój węzeł IPFS był uruchomiony, dopóki odbiorca nie pobierze plików. Jeśli udostępniasz grupie, każdy może pomóc w hostowaniu plików, trzymając tę stronę otwartą w swojej przeglądarce lub przypinając identyfikator zawartości (CID) z twojego linku do swojego węzła.",
+      "labelSend": "Wyślij link",
+      "copySend": "Każdy link zawiera unikalny odcisk palca zwany CID, który pozwala urządzeniu odbiorcy znaleźć tę zawartość w sieci IPFS."
+    },
+    "download": {
+      "title": "Masz pliki do pobrania!",
+      "subtitle": "Pobieraj bezpośrednio od nadawcy, bez chmury.",
+      "labelHow": "Jak działa IPFS Share?",
+      "copyHow": "IPFS Share korzysta z globalnej sieci IPFS, aby umożliwić ludziom udostępnianie plików bezpośrednio między sobą, bez chmury ani zewnętrznych serwerów. A ponieważ pliki w IPFS są identyfikowane przez swoją zawartość, a nie lokalizację, masz pewność, że pobierasz dokładnie to, co wysłał nadawca.",
+      "labelKeep": "Chcesz udostępnić te pliki komuś innemu?",
+      "copyKeepPage": "Możesz stać się częścią sieci IPFS i udostępniać te pliki bezpośrednio ze swojego urządzenia, po prostu nie zamykając tej strony. Wyślij otrzymany link i trzymaj tę stronę otwartą, dopóki odbiorca nie pobierze plików.",
+      "copyKeepDaemon": "Możesz udostępniać te pliki bezpośrednio ze swojego urządzenia, po prostu nie wyłączając swojego węzła IPFS. Wyślij otrzymany link i nie wyłączaj węzła, dopóki odbiorca nie pobierze plików."    },
+    "learnMore": "Dowiedz się więcej."
+  },
+  "helia-error": {
+    "title": "Wystąpił błąd podczas inicjalizacji węzła Helia.",
+    "message": "Błąd: {message}",
+    "more-details": "Szczegóły błędu są dostępne w konsoli przeglądarki.",
+    "refresh-page": "Może być konieczne <1>odświeżenie strony</1>, aby ponownie zainicjować węzeł Helia.",
+    "open-issue": "Jeśli problem się powtarza, <1>zgłoś błąd</1>."
+  },
+  "modal": {
+    "how": {
+      "title": "Jak działa IPFS Share",
+      "ariaLabel": "Okno wyjaśniające jak działa IPFS Share",
+      "copy": "IPFS Share to prosty, darmowy sposób na udostępnianie plików bez polegania na usługach wielkich korporacji. Zamiast tego wykorzystuje protokół peer-to-peer IPFS do bezpośredniego udostępniania między urządzeniami. IPFS opiera się na adresowaniu zawartości, czyli śledzeniu plików na podstawie ich zawartości, a nie lokalizacji. Oznacza to, że pliki nie mogą zostać zmodyfikowane bez zmiany ich adresów. Innymi słowy, pobierając plik przez IPFS, masz pewność, że jest dokładnie taki, jaki wysłał nadawca.",
+      "learnMore": "Dowiedz się, jak IPFS zmienia internet, odwiedzając <1>stronę IPFS</1>. Ciekawi cię, jak działa adresowanie zawartości? Odwiedź <3>ProtoSchool</3>, aby poznać tutoriale i inne materiały."
+    },
+      "reprovide": {
+      "title": "Przekazywanie otrzymanych plików dalej",
+      "ariaLabel": "Okno wyjaśniające jak udostępnić te pliki komuś innemu",
+      "copy": "Łatwo możesz udostępnić te pliki komuś innemu, czyniąc swoje urządzenie częścią sieci IPFS. Wystarczy nie zamykać tej strony; w ten sposób twoje urządzenie staje się węzłem sieci i udostępnia pliki bezpośrednio innym. Następnie wyślij otrzymany link i trzymaj tę stronę otwartą, dopóki odbiorca nie pobierze plików.",
+      "learnMore": "Ciekawi cię, jak to działa od środka? Sprawdź <1>oficjalną dokumentację IPFS</1>, gdzie znajdziesz wszystko od podstawowych wyjaśnień po narzędzia deweloperskie."
+    },
+    "privacy": {
+      "title": "Udostępnianie plików przez IPFS",
+      "ariaLabel": "Okno opisujące udostępnianie i prywatność w IPFS",
+      "copy": "Ta strona korzysta z IPFS, protokołu peer-to-peer do przechowywania i udostępniania danych bezpośrednio między użytkownikami, bez polegania na chmurze lub usługach wielkich korporacji. Ponieważ IPFS to sieć publiczna, udostępniając zawartość przez IPFS Share, umożliwiasz jej pobranie każdemu, kto zna unikalny CID w twoim linku. Oznacza to, że nie należy udostępniać wrażliwych plików ani materiałów chronionych prawem autorskim.",
+      "learnMore": "Chcesz dowiedzieć się więcej o IPFS? Odwiedź <1>stronę główną</1>, aby poznać podstawy, lub zagłęb się w szczegóły dotyczące IPFS i prywatności w <3>oficjalnej dokumentacji</3>."
+    },
+    "cid": {
+      "title": "Co to jest CID?",
+      "ariaLabel": "Okno opisujące identyfikatory zawartości",
+      "copy": "Identyfikatory zawartości (CID) to kryptograficznie generowane odciski palców, które pozwalają IPFS znajdować i dostarczać pliki. Ponieważ IPFS identyfikuje pliki przez ich zawartość, a nie lokalizację, CID wskazuje nie tylko na konkretny plik, ale też na jego konkretną wersję. Jeśli plik zostanie zmodyfikowany, zmieni się też CID. Udostępniając plik przez IPFS Share, możesz zobaczyć jego CID w linku jako długi ciąg znaków zaczynający się od \"bafy\".",
+      "learnMore": "Chcesz zagłębić się w działanie identyfikatorów zawartości? Odwiedź <1>ProtoSchool</1>, aby poznać tutoriale i inne materiały o zdecentralizowanych technologiach webowych, które napędzają IPFS."
+    }
+  },
+  "addFiles": "Dodaj pliki",
+  "addFolder": "Lub dodaj folder",
+  "copyLink": {
+    "labelIndividual": "Udostępnij pojedyncze pliki",
+    "labelAll": "Udostępnij wszystkie pliki",
+    "footNote": "Ten link zmieni się, jeśli dodasz więcej plików, więc upewnij się, że wysyłasz najnowszą wersję.",
+    "publishing": "Publikowanie...",
+    "copy": "Udostępnij",
+    "copied": "Skopiowano!",
+    "qrLabel": "Lub zeskanuj, aby udostępnić wszystkie pliki"
+  },
+  "loader": {
+    "fileList": "Wczytywanie listy plików..."
+  },
+  "downloadFiles": {
+    "download": "Pobierz",
+    "downloadAll": "Pobierz wszystko",
+    "downloading": "Pobieranie..."
+  },
+  "dropdown": {
+    "clickLabel": "Kliknij, aby otworzyć menu rozwijane"
+  }
+}

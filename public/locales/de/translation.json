@@ -6,6 +6,7 @@
   },
   "header": "Teilen",
   "footer": "<1>CC-BY 3.0</1>-lizensiert, außer wie <3>beschrieben</3>",
+  "powered-by-helia": "",
   "info": {
     "add": {
       "title": "Teile Dateien mit IPFS",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "Du kannst diese Dateien direkt von Deinem Gerät aus teilen, indem Du einfach deinen IPFS-Knoten weiter laufen lässt. Teile dann den erhaltenen Link und lasse deinen IPFS-Knoten laufen, bis der Empfänger die Dateien heruntergeladen hat."    },
     "learnMore": "Mehr erfahren."
   },
-  "box": {
-    "missingDaemon": "Läuft Dein IPFS-Knoten?",
-    "runningDaemon": "Du benötigst einen <1>laufenden Knoten</1>, um Dateien zu IPFS hinzuzufügen.",
-    "configureDaemon": "Stelle sicher, dass <1>Deine IPFS-API so konfiguriert ist</1>, dass sie Cross-Origin-Anfragen (CORS) erlaubt:",
-    "runDaemon": "Starte danach einen IPFS-Daemon in Deinem Terminal:",
-    "largeFilesWarning": "Falls Du Probleme beim Herunterladen von Dateien hast, die größer als 1 GB sind, kann die Installation von <1>IPFS Desktop</1> oder <3>IPFS Companion</3> die Leistung verbessern.",
-    "viewOnGateway": "Auf IPFS anzeigen"
+  "helia-error": {
+    "title": "",
+    "message": "",
+    "more-details": "",
+    "refresh-page": "",
+    "open-issue": ""
   },
   "modal": {
     "how": {
@@ -69,11 +69,14 @@
     "labelIndividual": "Einzelne Dateien teilen",
     "labelAll": "Alle Dateien teilen",
     "footNote": "Dieser Link ändert sich, wenn Du weitere Dateien hinzufügst. Stelle also sicher, dass Du die neueste Version teilst.",
+    "publishing": "",
     "copy": "Teilen",
     "copied": "Kopiert!",
     "qrLabel": "Oder scanne, um alle Dateien zu teilen"
   },
-  "loader": "Dateiliste wird geladen…",
+  "loader": {
+    "fileList": "Dateiliste wird geladen…"
+  },
   "downloadFiles": {
     "download": "Herunterladen",
     "downloadAll": "Alles herunterladen",

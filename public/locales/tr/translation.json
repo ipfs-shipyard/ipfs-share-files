@@ -1,0 +1,88 @@
+{
+  "pageTitle": {
+    "ipfs": "IPFS Paylaş",
+    "add": "Dosyaları Paylaş",
+    "download": "Dosyaları İndir"
+  },
+  "header": "Paylaş",
+  "footer": "<1>CC-BY 3.0</1>ile lisanslanmıştır, <3>belirtilenler</3> dışında",
+  "powered-by-helia": "",
+  "info": {
+    "add": {
+      "title": "IPFS ile dosya paylaşımı",
+      "subtitle": "Dosyaları doğrudan cihazınızdan paylaşın — bulut gerekmez.",
+      "labelAdd": "Dosyalarınızı ekleyin",
+      "copyAdd": "IPFS ağı üzerinden doğrudan cihazınızdan paylaşmak için dosyalar ekleyin. Paylaşım bağlantınızda benzersiz koda sahip olan herkes dosyalarınızı indirebilir, bu nedenle hassas veya telif hakkıyla korunan materyalleri eklemeyin.",
+      "labelKeepPage": "Bu sayfayı açık tut!",
+      "labelKeepDaemon": "IPFS node'unuzu çalışır durumda tutun!",
+      "copyKeepPage": "Doğrudan cihazınızdan paylaşımda bulunduğunuz için, alıcı dosyaları indirene kadar bu sayfanın açık tutulması önemlidir. Bir grupla paylaşımda bulunuyorsanız, gruptaki diğer kişiler, paylaşım sayfasını tarayıcılarında da açık tutarak dosyaları birlikte barındırmanıza yardımcı olabilir.",
+      "copyKeepDaemon": "Doğrudan cihazınızdan paylaşımda bulunduğunuz için, alıcı dosyaları indirene kadar IPFS düğümünüzü çalışır durumda tutmanız önemlidir. Bir grupla paylaşım yapıyorsanız, gruptaki herkes, paylaşım sayfasını tarayıcılarında açık tutarak veya bir IPFS düğümü çalıştırıyorlarsa, içerik tanımlayıcısını (CID) düğümlerine bağlantı paylaşımınızdan sabitleyerek dosyaların birlikte barındırılmasına yardımcı olabilir.",
+      "labelSend": "Bağlantıyı paylaş",
+      "copySend": "Her paylaşım bağlantısı, alıcının cihazının IPFS ağında bu içeriği bulmasını sağlayan, CID adı verilen benzersiz bir parmak izi içerir."
+    },
+    "download": {
+      "title": "Dosyaların var!",
+      "subtitle": "Doğrudan gönderenden indirin - bulut gerekmez.",
+      "labelHow": "IPFS Paylaşımı nasıl çalışır?",
+      "copyHow": "IPFS Share, insanların dosyaları doğrudan birbirleriyle paylaşmasını sağlamak için küresel IPFS ağını kullanır; bulut veya üçüncü taraf sunucu gerekmez. Ve IPFS'deki dosyalar bulundukları yere göre değil, içerdiklerine göre tanımlandığından, indirdiğiniz içeriğin gönderenin amaçladığı içerikle aynı olduğundan emin olabilirsiniz.",
+      "labelKeep": "Bu dosyaları başka biriyle paylaşmak ister misiniz?",
+      "copyKeepPage": "Sadece bu sayfayı açık tutarak IPFS ağının bir parçası olabilir ve bu dosyaları doğrudan cihazınızdan paylaşabilirsiniz. Aldığınız bağlantıyı paylaşın ve alıcı dosyaları indirene kadar bu sayfayı kapatmayın.",
+      "copyKeepDaemon": "IPFS düğümünüzü çalışır durumda tutarak bu dosyaları doğrudan cihazınızdan paylaşabilirsiniz. Aldığınız bağlantıyı paylaşın ve alıcı dosyaları indirene kadar düğümünüzü çalışır durumda tuttuğunuzdan emin olun."    },
+    "learnMore": "Daha fazla bilgi edin."
+  },
+  "helia-error": {
+    "title": "",
+    "message": "",
+    "more-details": "",
+    "refresh-page": "",
+    "open-issue": ""
+  },
+  "modal": {
+    "how": {
+      "title": "IPFS Paylaşımı nasıl çalışır?",
+      "ariaLabel": "IPFS Share'in nasıl çalıştığını açıklayan modal",
+      "copy": "IPFS Share, büyük şirketler tarafından yürütülen hizmetlere güvenmek zorunda kalmadan dosyaları paylaşmanın basit ve ücretsiz bir yoludur. Bunun yerine, cihazlar arasında doğrudan paylaşım için eşler arası IPFS protokolünü kullanır. IPFS, içerik adresleme üzerine kuruludur - dosyaları bulundukları yere göre değil, içerdiklerine göre takip eder - bu, dosyaların adresleri değiştirilmeden değiştirilemeyeceği anlamına gelir. Başka bir deyişle, IPFS kullanarak bir dosya indirdiğinizde, dosyanın gönderenin amaçladığı ile tamamen aynı olduğundan emin olabilirsiniz.",
+      "learnMore": "<1>IPFS web sitesini</1> ziyaret ederek IPFS'nin interneti nasıl değiştirdiğini öğrenin.  İçerik adreslemenin nasıl çalıştığını merak mı ediyorsunuz? Eğitimler ve diğer kaynaklar için <3>ProtoSchool</3>'u ziyaret edin."
+    },
+      "reprovide": {
+      "title": "Aldığınız dosyaları yeniden paylaşma",
+      "ariaLabel": "Bu dosyaların başka biriyle nasıl paylaşılacağını açıklayan Modal",
+      "copy": "Cihazınızı IPFS ağının bir parçası yaparak bu dosyaları başka biriyle paylaşmak kolaydır. Tek yapmanız gereken bu sayfayı açık tutmak; bunu yaparak, cihazınız ağda bir düğüm haline gelir ve bu dosyaları doğrudan başkalarının kullanımına sunar. Ardından, aldığınız bağlantıyı paylaşın ve alıcınızın dosyaları indirdiğini öğrenene kadar bu sayfayı açık tuttuğunuzdan emin olun.",
+      "learnMore": "Bunun kaputun altında nasıl çalıştığını merak ediyor musunuz? Temel açıklayıcılardan geliştirici araçlarına kadar her şey için <1>resmi IPFS belgelerine</1> göz atın."
+    },
+    "privacy": {
+      "title": "IPFS'de dosya paylaşma",
+      "ariaLabel": "IPFS'de paylaşımı ve gizliliği açıklayan mod",
+      "copy": "Bu site, bulut depolamaya veya büyük şirketler tarafından yürütülen diğer hizmetlere güvenmeden verileri doğrudan kullanıcılar arasında depolamak ve paylaşmak için eşler arası bir protokol olan IPFS'yi kullanır. IPFS genel bir ağ olduğundan, IPFS Paylaşımı kullanarak içerik paylaştığınızda, paylaşım bağlantınızdaki benzersiz CID'yi bilen herkesin onu almasına olanak tanırsınız. Bu, hassas dosyaları veya telif hakkıyla korunan materyalleri paylaşmaktan kaçınmanız gerektiği anlamına gelir.",
+      "learnMore": "IPFS hakkında daha fazla bilgi edinmek ister misiniz? Temel bilgiler için<1>websitesini</1> ziyaret edin veya <3>resmi belgelerde</3> IPFS ve gizliliğin ayrıntılarını inceleyin."
+    },
+    "cid": {
+      "title": "CID nedir?",
+      "ariaLabel": "İçerik tanımlayıcılarını açıklayan modal",
+      "copy": "İçerik tanımlayıcıları (CID'ler), IPFS'nin dosyaları bulmasına ve teslim etmesine izin veren kriptografik olarak oluşturulmuş parmak izleridir. IPFS, dosyaları bulundukları yere göre değil, içerdiklerine göre tanımladığından, bir CID yalnızca belirli bir dosyaya değil, aynı zamanda belirli bir sürüme de işaret eder - dosya değiştirilirse CID de değişir. IPFS Paylaşımı kullanarak bir dosya paylaştığınızda, \"bafy\" ile başlayan uzun karakter dizisi için paylaşım bağlantısına bakarak CID'sini görebilirsiniz.",
+      "learnMore": "İçerik tanımlayıcıların nasıl çalıştığını daha derinlemesine incelemek ister misiniz? IPFS'yi harekete geçiren merkezi olmayan web teknolojisiyle ilgili eğitimler ve diğer kaynaklar için <1>ProtoSchool</1>'u ziyaret edin."
+    }
+  },
+  "addFiles": "Dosyaları ekle",
+  "addFolder": "Veya bir klasör ekleyin",
+  "copyLink": {
+    "labelIndividual": "Tek tek dosyaları paylaşın",
+    "labelAll": "Tüm dosyaları paylaş",
+    "footNote": "Daha fazla dosya eklerseniz bu bağlantı değişir, bu nedenle en son sürümü paylaştığınızdan emin olun.",
+    "publishing": "",
+    "copy": "Paylaş",
+    "copied": "Kopyalandı!",
+    "qrLabel": "Veya tüm dosyaları paylaşmak için tarayın"
+  },
+  "loader": {
+    "fileList": "Dosya listesi yükleniyor…"
+  },
+  "downloadFiles": {
+    "download": "İndir",
+    "downloadAll": "Hepsini indir",
+    "downloading": "İndiriliyor…"
+  },
+  "dropdown": {
+    "clickLabel": "Açılır menüyü açmak için burayı tıklayın"
+  }
+}

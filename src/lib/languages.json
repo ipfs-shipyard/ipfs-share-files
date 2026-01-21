@@ -4,6 +4,16 @@
     "nativeName": "العربية",
     "englishName": "Arabic"
   },
+  "bg": {
+    "locale": "bg",
+    "nativeName": "Български",
+    "englishName": "Bulgarian"
+  },
+  "cs": {
+    "locale": "cs",
+    "nativeName": "Čeština",
+    "englishName": "Czech"
+  },
   "de": {
     "locale": "de",
     "nativeName": "Deutsch",
@@ -19,15 +29,28 @@
     "nativeName": "Français",
     "englishName": "French"
   },
+  "id": {
+    "locale": "id",
+    "nativeName": "Bahasa Indonesia",
+    "englishName": "Indonesian"
+  },
   "it": {
     "locale": "it",
     "nativeName": "Italiano",
     "englishName": "Italian"
   },
+  "ja_JP": {
+    "locale": "ja_JP"
+  },
   "ml": {
     "locale": "ml",
     "nativeName": "മലയാളം",
     "englishName": "Malayalam"
+  },
+  "pl": {
+    "locale": "pl",
+    "nativeName": "Polski",
+    "englishName": "Polish"
   },
   "pt": {
     "locale": "pt",
@@ -38,6 +61,11 @@
     "locale": "pt-BR",
     "nativeName": "Português (Brasil)",
     "englishName": "Portuguese (Brazil)"
+  },
+  "tr": {
+    "locale": "tr",
+    "nativeName": "Türkçe",
+    "englishName": "Turkish"
   },
   "zh-CN": {
     "locale": "zh-CN",

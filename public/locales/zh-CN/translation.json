@@ -6,6 +6,7 @@
   },
   "header": "共享",
   "footer": "除非另有<3>说明</3>, 否则内容遵守<1>CC-BY 3.0</1>许可协议",
+  "powered-by-helia": "由<1>Helia</1>提供支持",
   "info": {
     "add": {
       "title": "通过IPFS共享文件",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "您只需保持 IPFS 节点运行，就可以直接从设备共享这些文件。只需将共享链接发送给您的期望的接收者，并在接受者下载文件完毕之前不要关闭此页面。"    },
     "learnMore": "学到更多。"
   },
-  "box": {
-    "missingDaemon": "您的 IPFS 节点是否正在运行？",
-    "runningDaemon": "您需要一个<1>正在运行中的节点</1>来添加文件到 IPFS。",
-    "configureDaemon": "请确认你的 <1>IPFS API 设置</1>允许跨域（CORS）请求：",
-    "runDaemon": "然后，在终端中启动IPFS守护程序：",
-    "largeFilesWarning": "如果您在下载大于1GB的文件时遇到问题，请安装 <1>IPFS 桌面</1> 或 <3>IPFS 伴侣</3> 来提高性能。",
-    "viewOnGateway": "在 IPFS 中查看"
+  "helia-error": {
+    "title": "尝试初始化Helia节点时出现错误",
+    "message": "错误:{message}",
+    "more-details": "可以在浏览器控制台中追踪错误堆栈",
+    "refresh-page": "您可能需要<1>刷新页面</1>以尝试重新初始化您的 Helia 节点。",
+    "open-issue": "如果问题仍然存在，您可以<1>上报故障</1>。"
   },
   "modal": {
     "how": {
@@ -69,11 +69,14 @@
     "labelIndividual": "共享单个文件",
     "labelAll": "共享所有文件",
     "footNote": "如果您新增更多的文件此链接会被改变，所以请确保您分享的是最新版本",
+    "publishing": "发布中...",
     "copy": "共享",
     "copied": "已复制！",
     "qrLabel": "或者扫描以共享所有文件"
   },
-  "loader": "加载文件列表中...",
+  "loader": {
+    "fileList": "加载文件列表中..."
+  },
   "downloadFiles": {
     "download": "下载",
     "downloadAll": "下载全部",
