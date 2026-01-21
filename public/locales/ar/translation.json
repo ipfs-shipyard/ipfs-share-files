@@ -6,6 +6,7 @@
   },
   "header": "مشاركة ",
   "footer": "مرخص <1>CC-BY 3.0</1> except as <3>noted</3>",
+  "powered-by-helia": "",
   "info": {
     "add": {
       "title": "مشاركة الملفات باستخدام IPFS",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "يمكنك مشاركة هذه الملفات مباشرة من جهازك ببساطة عن طريق الحفاظ على تشغيل عقدة IPFS. ما عليك سوى مشاركة الرابط الذي تلقيته ، وتأكد من استمرار تشغيل العقدة حتى يقوم المستلم بتنزيل الملفات."    },
     "learnMore": "أعرف أكثر."
   },
-  "box": {
-    "missingDaemon": "هل عقدة IPFS تعمل؟",
-    "runningDaemon": "أنت بحاجة إلى<1> عقدة قيد التشغيل</1> لإضافة ملفات إلى IPFS.",
-    "configureDaemon": "تأكد من <1>  تكوين IPFS API  </1> للسماح بطلبات عبر المصدر (CORS):",
-    "runDaemon": "بعد ذلك ، ابدأ برنامج IPFS الخفي في جهازك.",
-    "largeFilesWarning": "إذا كنت تواجه مشكلات في تنزيل ملفات أكبر من 1 جيجابايت ، فيمكن أن يؤدي تثبيت<1> IPFS Desktop </1>أو <3>IPFS </3>Companion إلى تحسين الأداء.",
-    "viewOnGateway": "عرض على IPFS"
+  "helia-error": {
+    "title": "",
+    "message": "",
+    "more-details": "",
+    "refresh-page": "",
+    "open-issue": ""
   },
   "modal": {
     "how": {
@@ -69,11 +69,14 @@
     "labelIndividual": "مشاركة الملفات الفردية",
     "labelAll": "شارك كل الملفات",
     "footNote": "يتغير هذا الارتباط إذا أضفت المزيد من الملفات ، لذا تأكد من مشاركة أحدث إصدار.",
+    "publishing": "",
     "copy": "مشاركة ",
     "copied": "نسخ!",
     "qrLabel": "أو امسح لمشاركة جميع الملفات"
   },
-  "loader": "جارٍ تحميل قائمة الملفات ...",
+  "loader": {
+    "fileList": "جارٍ تحميل قائمة الملفات ..."
+  },
   "downloadFiles": {
     "download": "تحميل",
     "downloadAll": "تحميل الكل",

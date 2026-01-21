@@ -1,0 +1,88 @@
+{
+  "pageTitle": {
+    "ipfs": "IPFS Share",
+    "add": "Sdílet soubory",
+    "download": "Stáhnout soubory"
+  },
+  "header": "Sdílet",
+  "footer": "Licence <1>CC-BY 3.0</1> s výjimkou případů, kdy je <3>uvedeno</3> jinak.",
+  "powered-by-helia": "Běží na <1>Helia</1>",
+  "info": {
+    "add": {
+      "title": "Sdílení souborů pomocí IPFS",
+      "subtitle": "Sdílejte přímo ze svého zařízení - není potřeba žádný cloud.",
+      "labelAdd": "Přidat vaše soubory",
+      "copyAdd": "Přidejte soubory a sdílejte je přímo ze zařízení prostřednictvím sítě IPFS. Soubory si může stáhnout kdokoli, kdo zná jedinečný kód v odkazu na sdílení, proto nepřidávejte citlivé materiály nebo materiály chráněné autorskými právy.",
+      "labelKeepPage": "Tuto stránku nechte otevřenou!",
+      "labelKeepDaemon": "Udržujte uzel IPFS v provozu!",
+      "copyKeepPage": "Protože sdílíte přímo ze svého zařízení, je důležité, abyste tuto stránku nechali otevřenou, dokud si příjemce soubory nestáhne. Pokud soubory sdílíte se skupinou, mohou vám ostatní členové skupiny pomoci při společném hostování souborů tím, že ve svých prohlížečích také nechají otevřenou stránku pro sdílení.",
+      "copyKeepDaemon": "Protože sdílíte přímo ze svého zařízení, je důležité, aby uzel IPFS běžel, dokud si příjemce soubory nestáhne. Pokud soubory sdílíte se skupinou, může kdokoli ze skupiny pomoci se spoluhospodařením souborů tím, že nechá sdílenou stránku otevřenou ve svém prohlížeči, nebo pokud má spuštěný uzel IPFS, připne identifikátor obsahu (CID) z vašeho odkazu na sdílení do svého uzlu.",
+      "labelSend": "Sdílet odkaz",
+      "copySend": "Každý odkaz na sdílení obsahuje jedinečný otisk prstu zvaný CID, který umožňuje zařízení příjemce najít daný obsah v síti IPFS."
+    },
+    "download": {
+      "title": "Máte tu soubory!",
+      "subtitle": "Stahování přímo od odesílatele - není potřeba žádný cloud.",
+      "labelHow": "Jak IPFS Share funguje?",
+      "copyHow": "Služba IPFS Share využívá globální síť IPFS a umožňuje lidem sdílet soubory přímo mezi sebou - není potřeba žádný cloud ani server třetí strany. A protože jsou soubory v systému IPFS identifikovány podle toho, co obsahují, nikoli podle toho, kde jsou umístěny, můžete si být jisti, že stahovaný obsah je stejný, jaký zamýšlel odesílatel.",
+      "labelKeep": "Chcete tyto soubory sdílet s někým jiným?",
+      "copyKeepPage": "Můžete se stát součástí sítě IPFS a sdílet tyto soubory přímo ze svého zařízení, stačí mít otevřenou tuto stránku. Stačí sdílet odkaz, který jste obdrželi, a nezavírat tuto stránku, dokud si příjemce soubory nestáhne.",
+      "copyKeepDaemon": "Tyto soubory můžete sdílet přímo ze zařízení jednoduše tak, že necháte uzel IPFS spuštěný. Stačí sdílet odkaz, který jste obdrželi, a nezapomeňte nechat uzel běžet, dokud si příjemce soubory nestáhne."    },
+    "learnMore": "Zjistit více."
+  },
+  "helia-error": {
+    "title": "Při pokusu o inicializaci uzlu Helia došlo k chybě.",
+    "message": "Chyba: {message}",
+    "more-details": "Sledování zásobníku chyb je k dispozici v konzole prohlížeče.",
+    "refresh-page": "Možná bude nutné <1>obnovit stránku</1> a zkusit uzel Helia znovu nainstalovat.",
+    "open-issue": "Pokud problém přetrvává, <1>otevřete problém</1>."
+  },
+  "modal": {
+    "how": {
+      "title": "Jak funguje IPFS Share",
+      "ariaLabel": "Modální okno vysvětlující, jak funguje sdílení IPFS",
+      "copy": "IPFS Share je jednoduchý a bezplatný způsob sdílení souborů, aniž byste se museli spoléhat na služby provozované velkými společnostmi. Místo toho používá protokol IPFS peer-to-peer pro sdílení přímo mezi zařízeními. Systém IPFS je postaven na adresování obsahu - sleduje soubory na základě toho, co obsahují, nikoliv kde jsou umístěny - což znamená, že soubory nelze měnit, aniž by se změnila i jejich adresa. Jinými slovy, když stahujete soubor pomocí systému IPFS, můžete si být jisti, že je přesně takový, jaký zamýšlel odesílatel.",
+      "learnMore": "Navštivte <1>webové stránky IPFS</1> a zjistěte, jak IPFS mění internet. Zajímá vás, jak funguje adresování obsahu? Navštivte <3>ProtoSchool</3>, kde najdete výukové programy a další zdroje."
+    },
+      "reprovide": {
+      "title": "Opětovné sdílení přijatých souborů",
+      "ariaLabel": "Modální okno vysvětlující, jak tyto soubory sdílet s někým jiným",
+      "copy": "Tyto soubory můžete snadno sdílet s někým jiným, pokud své zařízení zapojíte do sítě IPFS. Stačí, když budete mít tuto stránku otevřenou; tím se vaše zařízení stane uzlem sítě a zpřístupní tyto soubory přímo ostatním. Poté sdílejte odkaz, který jste obdrželi - a nezapomeňte tuto stránku nechat otevřenou, dokud nebudete vědět, že příjemce soubory stáhl.",
+      "learnMore": "Zajímá vás, jak to funguje pod kapotou? Podívejte se do <1>oficiální dokumentace IPFS</1>, kde najdete vše od základních vysvětlivek až po nástroje pro vývojáře."
+    },
+    "privacy": {
+      "title": "Sdílení souborů na IPFS",
+      "ariaLabel": "Modální popis sdílení a soukromí na systému IPFS",
+      "copy": "Tento web používá protokol IPFS, který je určen k ukládání a sdílení dat přímo mezi uživateli, aniž by se spoléhal na cloudová úložiště nebo jiné služby provozované velkými společnostmi. Protože systém IPFS je veřejná síť, umožňujete při sdílení obsahu pomocí služby IPFS Share každému, kdo zná jedinečný identifikátor CID v odkazu na sdílení, jeho načtení. To znamená, že byste se měli vyhnout sdílení citlivých souborů nebo materiálů chráněných autorskými právy.",
+      "learnMore": "Chcete se o systému IPFS dozvědět více? Navštivte <1>webové stránky</1>, kde najdete základní informace, nebo se podívejte na podrobnosti o systému IPFS a ochraně osobních údajů v <3>oficiální dokumentaci</3>."
+    },
+    "cid": {
+      "title": "Co je to CID?",
+      "ariaLabel": "Modální popis identifikátorů obsahu",
+      "copy": "Identifikátory obsahu (CID) jsou kryptograficky generované otisky prstů, které umožňují systému IPFS vyhledávat a doručovat soubory. Protože systém IPFS identifikuje soubory podle toho, co obsahují, a ne podle toho, kde jsou umístěny, ukazuje identifikátor CID nejen na konkrétní soubor, ale také na konkrétní verzi - pokud je soubor změněn, změní se i identifikátor CID. Když sdílíte soubor pomocí služby IPFS Share, můžete zjistit jeho CID tak, že v odkazu na sdílení vyhledáte dlouhý řetězec znaků začínající na \"bafy\".",
+      "learnMore": "Chcete proniknout hlouběji do fungování identifikátorů obsahu? Navštivte <1>ProtoSchool</1>, kde najdete výukové programy a další zdroje o decentralizovaných webových technologiích, díky nimž IPFS funguje."
+    }
+  },
+  "addFiles": "Přidat soubory",
+  "addFolder": "Nebo přidejte složku",
+  "copyLink": {
+    "labelIndividual": "Sdílet jednotlivé soubory",
+    "labelAll": "Sdílet všechny soubory",
+    "footNote": "Tento odkaz se změní, pokud přidáte další soubory, takže nezapomeňte sdílet nejnovější verzi.",
+    "publishing": "Zveřejňování...",
+    "copy": "Sdílet",
+    "copied": "Zkopírováno!",
+    "qrLabel": "Nebo naskenujte a sdílejte všechny soubory"
+  },
+  "loader": {
+    "fileList": "Načítání seznamu souborů..."
+  },
+  "downloadFiles": {
+    "download": "Stáhnout",
+    "downloadAll": "Stáhnout vše",
+    "downloading": "Stahování..."
+  },
+  "dropdown": {
+    "clickLabel": "Kliknutím sem otevřete rozbalovací nabídku"
+  }
+}

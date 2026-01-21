@@ -6,6 +6,7 @@
   },
   "header": "Condividi",
   "footer": "Rilasciato sotto licenza <1>CC-BY 3.0</1> tranne se <3>segnalato</3> diversamente",
+  "powered-by-helia": "",
   "info": {
     "add": {
       "title": "Condividi file via IPFS",
@@ -29,13 +30,12 @@
       "copyKeepDaemon": "Puoi condividere questi file direttamente dal tuo dispositivo semplicemente mantenendo il tuo nodo IPFS in funzione. Basta condividere il link che hai ricevuto, e assicurarti di mantenere il tuo nodo in funzione fino a quando il destinatario non scarica i file."    },
     "learnMore": "Per saperne di più."
   },
-  "box": {
-    "missingDaemon": "Il tuo nodo IPFS è in funzione?",
-    "runningDaemon": "Hai bisogno di un <1>nodo in funzione</1> per aggiungere file a IPFS.",
-    "configureDaemon": "Assicurati di <1>configurare la tua API IPFS</1> per permettere le richieste cross-origin (CORS):",
-    "runDaemon": "Quindi, avvia un demone IPFS nel tuo terminale:",
-    "largeFilesWarning": "Se hai problemi a scaricare file più grandi di 1GB, installare <1>IPFS Desktop</1> o <3>IPFS Companion</3> può migliorare le prestazioni.",
-    "viewOnGateway": "Visualizza su IPFS"
+  "helia-error": {
+    "title": "",
+    "message": "",
+    "more-details": "",
+    "refresh-page": "",
+    "open-issue": ""
   },
   "modal": {
     "how": {
@@ -60,26 +60,29 @@
       "title": "Che cos'è un CID?",
       "ariaLabel": "Modale che descrive gli identificatori di contenuto",
       "copy": "Gli identificatori di contenuto (CID) sono impronte digitali generate crittograficamente che permettono a IPFS di trovare e consegnare i file. Poiché IPFS identifica i file in base a ciò che contengono, non a dove si trovano, un CID punta non solo ad un particolare file, ma anche ad una specifica versione - se il file viene modificato, cambia anche il CID. Quando condividi un file usando IPFS Share, puoi vedere il suo CID cercando nel link di condivisione la lunga stringa di caratteri che inizia con \"bafy\".",
-      "learnMore": "Vuoi scavare più a fondo su come funzionano gli identificatori di contenuto? Visita <1>ProtoSchool</1> per tutorial e altre risorse sulla tecnologia web decentralizzata che fa funzionare IPFS."
+      "learnMore": "Vuoi scavare più a fondo su come funzionano gli identificatori di contenuto? Visita <1>ProtoSchool</1> per tutorial e altre risorse sulla tecnologia web decentralizzata che rende funzionante IPFS."
     }
   },
   "addFiles": "Aggiungi file",
   "addFolder": "O aggiungi una cartella",
   "copyLink": {
-    "labelIndividual": "Condividere singoli file",
+    "labelIndividual": "Condividi singoli file",
     "labelAll": "Condividi tutti i file",
     "footNote": "Questo collegamento cambia se aggiungi altri file, quindi assicurati di condividere l'ultima versione.",
+    "publishing": "",
     "copy": "Condividi",
     "copied": "Copiato!",
     "qrLabel": "O scansionare per condividere tutti i file"
   },
-  "loader": "Caricamento elenco file…",
+  "loader": {
+    "fileList": "Caricamento elenco file…"
+  },
   "downloadFiles": {
     "download": "Scarica",
     "downloadAll": "Scarica tutto",
     "downloading": "Scaricamento in corso…"
   },
   "dropdown": {
-    "clickLabel": "Clicca qui per aprire il menu a tendina"
+    "clickLabel": "Clicca qui per aprire il menù a tendina"
   }
 }
