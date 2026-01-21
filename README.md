@@ -114,13 +114,7 @@ To build IPFS Share for production to the `build` folder:
 
 ### Deployment
 
-We use CI for automatic deployments when merged to the following branches:
-- Branch `main` is automatically deployed to [dev.share.ipfs.io](https://dev.share.ipfs.io)
-- Branch `production` is automatically deployed to [share.ipfs.io](https://share.ipfs.io)
-
-If you just want to PR `main` to `production` for go-live, there's a handy shortcut for that [here](https://github.com/ipfs-shipyard/ipfs-share-files/compare/production...main?expand=1).
-
-Note that it's always a good idea to clear one's caches when double-checking a successful deployment.
+Changes merged to `main` are automatically deployed to [share.ipfs.io](https://share.ipfs.io).
 
 ## Translations
 
