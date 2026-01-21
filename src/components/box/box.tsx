@@ -36,7 +36,8 @@ export const BoxDownload = (): React.JSX.Element => {
 export const BoxAdd = (): React.JSX.Element => {
   const dispatch = useFilesDispatch()
   const heliaState = useHelia()
-  const doAddFiles = useAddFiles(dispatch, heliaState)
+  const filesState = useFiles()
+  const doAddFiles = useAddFiles(dispatch, heliaState, filesState)
   const [{ isOver }, drop] = useDrop<{ files: File[], type: string }, Promise<void>, { isOver: boolean }>({
     accept: [NativeTypes.FILE],
     collect: (monitor) => ({
