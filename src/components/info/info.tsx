@@ -101,7 +101,7 @@ export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Elemen
         >
             <p>{t('modal.how.copy')}</p>
             <p><Trans i18nKey='modal.how.learnMore'>
-              Learn how IPFS is changing the internet by visiting the <a className='no-underline underline-hover teal' href='https://ipfs.io' target='_blank' rel='noopener noreferrer'>IPFS website</a>. Curious about how content addressing works? Visit <a className='no-underline underline-hover teal' href='https://proto.school/content-addressing' target='_blank' rel='noopener noreferrer'>ProtoSchool</a> for tutorials and other resources.
+              Learn how IPFS is changing the internet by visiting the <a className='no-underline underline-hover teal' href='https://ipfs.tech' target='_blank' rel='noopener noreferrer'>IPFS website</a>. Curious about how content addressing works? Check out the <a className='no-underline underline-hover teal' href='https://docs.ipfs.tech/concepts/content-addressing/' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a>.
             </Trans></p>
         </Modal>
         <Modal // controlled by reprovideLink
@@ -113,7 +113,7 @@ export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Elemen
         >
             <p>{t('modal.reprovide.copy')}</p>
             <p><Trans i18nKey='modal.reprovide.learnMore'>
-            Curious how this works under the hood? Check out the <a className='no-underline underline-hover teal' href='https://docs.ipfs.io' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a> for everything from basic explainers to developer tools.
+            Curious how this works under the hood? Check out the <a className='no-underline underline-hover teal' href='https://docs.ipfs.tech' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a> for everything from basic explainers to developer tools.
             </Trans></p>
         </Modal>
       </div>
@@ -175,7 +175,7 @@ export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Elemen
         >
             <p>{t('modal.privacy.copy')}</p>
             <p><Trans i18nKey='modal.privacy.learnMore'>
-              Want to learn more about IPFS? Visit the <a className='no-underline underline-hover teal' href='https://ipfs.io' target='_blank' rel='noopener noreferrer'>website</a> for the basics, or dig into the details of IPFS and privacy in the <a className='no-underline underline-hover teal' href='https://docs.ipfs.io/concepts/privacy/' target='_blank' rel='noopener noreferrer'>official documentation</a>.
+              Want to learn more about IPFS? Visit the <a className='no-underline underline-hover teal' href='https://ipfs.tech' target='_blank' rel='noopener noreferrer'>website</a> for the basics, or dig into the details of IPFS and privacy in the <a className='no-underline underline-hover teal' href='https://docs.ipfs.tech/concepts/privacy-and-encryption/' target='_blank' rel='noopener noreferrer'>official documentation</a>.
             </Trans></p>
         </Modal>
         <Modal // controlled by cidLink
@@ -187,7 +187,7 @@ export const Info = ({ isDownload }: { isDownload?: boolean }): React.JSX.Elemen
         >
             <p>{t('modal.cid.copy')}</p>
             <p><Trans i18nKey='modal.cid.learnMore'>
-              Want to dig deeper into how content identifiers work? Visit <a className='no-underline underline-hover teal' href='https://proto.school/content-addressing' target='_blank' rel='noopener noreferrer'>ProtoSchool</a> for tutorials and other resources on the decentralized web tech that makes IPFS tick.
+              Want to dig deeper into how content identifiers work? Check out the <a className='no-underline underline-hover teal' href='https://docs.ipfs.tech/concepts/content-addressing/' target='_blank' rel='noopener noreferrer'>official IPFS documentation</a> to learn about the decentralized web tech that makes IPFS tick.
             </Trans></p>
         </Modal>
       </div>

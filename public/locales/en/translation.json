@@ -42,7 +42,7 @@
       "title": "How IPFS Share works",
       "ariaLabel": "Modal explaining how IPFS Share works",
       "copy": "IPFS Share is a simple, free way to share files without needing to rely on services run by big corporations. Instead, it uses the peer-to-peer IPFS protocol for sharing directly between devices. IPFS is built around content addressing — keeping track of files based on what they contain, not where they're located — which means that files can't be modified without changing their addresses too. In other words, when you download a file using IPFS, you can be sure that it's exactly the same as the sender intended.",
-      "learnMore": "Learn how IPFS is changing the internet by visiting the <1>IPFS website</1>. Curious about how content addressing works? Visit <3>ProtoSchool</3> for tutorials and other resources."
+      "learnMore": "Learn how IPFS is changing the internet by visiting the <1>IPFS website</1>. Curious about how content addressing works? Check out the <3>official IPFS documentation</3>."
     },
       "reprovide": {
       "title": "Re-sharing files you've received",
@@ -60,7 +60,7 @@
       "title": "What's a CID?",
       "ariaLabel": "Modal describing content identifiers",
       "copy": "Content identifiers (CIDs) are cryptographically generated fingerprints that allow IPFS to find and deliver files. Because IPFS identifies files by what they contain, not where they're located, a CID points not only to a particular file, but also a specific version — if the file is modified, the CID changes too. When you share a file using IPFS Share, you can see its CID by looking in the share link for the long string of characters starting with \"bafy\".",
-      "learnMore": "Want to dig deeper into how content identifiers work? Visit <1>ProtoSchool</1> for tutorials and other resources on the decentralized web tech that makes IPFS tick."
+      "learnMore": "Want to dig deeper into how content identifiers work? Check out the <1>official IPFS documentation</1> to learn about the decentralized web tech that makes IPFS tick."
     }
   },
   "addFiles": "Add files",
