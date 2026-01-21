@@ -118,25 +118,17 @@ Changes merged to `main` are automatically deployed to [share.ipfs.io](https://s
 
 ## Translations
 
-The entire IPFS project, including IPFS Share, uses [Transifex](https://www.transifex.com/) to help us source and manage translations. We very much welcome your contributions! Simply go to the [project page on Transifex](https://www.transifex.com/ipfs/ipfs-share-files/translate/), create an account, pick a language and start translating.
+Contributing translations in your language is particularly valuable! We use Transifex to manage internationalization, which means you don't need to change a single line of code to add your translations:
 
-On the app side, translations are stored in [`public/locales`](./public/locales), and the English version is the source of truth. Transifex automatically syncs new translations into that directory, so if you want to add translations, do so in Transifex — **not** this repo.
+- https://explore.transifex.com/ipfs/ipfs-share-files/
 
-### To sync translations
+*Note for developers: English is the source of truth. Add new text to [`public/locales/en/translation.json`](./public/locales/en/translation.json) and it will automatically propagate to Transifex for other languages. Translations are synced back via CI workflow.*
 
-1. Install and set up the [command-line client (` tx `)](https://docs.transifex.com/client/installing-the-client)
-2. Download new translations from Transifex with `tx pull -a`
-    - This creates/updates the files in [`public/locales/*`](./public/locales) that need to be committed
-    - If a new language is created, remember to
-      - add it to [`src/i18n.js`](./src/i18n.js)
-      - run `npx -q @olizilla/lol public/locales > src/lib/languages.json`
+### Manual sync (if CI is unavailable)
 
-### To add or update English source-of-truth translation keys
-
-1. Change **only** the source file ([`public/locales/en/translation.json`](./public/locales/en/translation.json))
-2. Commit your changes; changes from the `main` branch are fetched by Transifex automatically once a day
-
-To learn more about internationalization on the IPFS project as a whole, or contribute translations to other IPFS repos, check out [ipfs/i18n](https://github.com/ipfs/i18n).
+1. Install the [Transifex CLI](https://github.com/transifex/cli)
+2. Download translations with `tx pull -a`
+3. Regenerate languages list: `npx -q @olizilla/lol@2 public/locales > src/lib/languages.json`
 
 ## REFRESH - TODO
 

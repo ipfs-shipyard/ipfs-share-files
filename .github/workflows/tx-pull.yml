@@ -36,6 +36,8 @@ jobs:
           # --minimum-perc 75: only pulls files that are at least 75% translated
           # Empty strings will fallback to English at runtime via i18next
           ./tx --token "${{ secrets.TX_TOKEN }}" pull --all --force --mode onlytranslated --minimum-perc 75
+      - name: Regenerate languages.json
+        run: npx -q @olizilla/lol@2 public/locales > src/lib/languages.json
       - name: Commit and push changes
         id: commit
         run: |
@@ -43,8 +45,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add translation files
-          git add -A public/locales
+          # Add translation files and regenerated languages.json
+          git add -A public/locales src/lib/languages.json
 
           # Check if there are changes to commit
           if git diff --staged --quiet; then
