@@ -244,20 +244,28 @@ function filesReducer (state: FilesState, action: FilesAction): FilesState {
         })
       }
 
-    case 'publish_success':
+    case 'publish_success': {
+      const cidStr = action.cid.toString()
+      // Don't create entries for CIDs not in files (e.g., directory roots on receiver side)
+      if (state.files[cidStr] == null) {
+        return {
+          ...state,
+          filesToPublish: state.filesToPublish.filter(f => !f.cid.equals(action.cid))
+        }
+      }
       return {
         ...state,
         files: {
           ...state.files,
-          [action.cid.toString()]: {
-            ...state.files[action.cid.toString()],
+          [cidStr]: {
+            ...state.files[cidStr],
             cid: action.cid,
             published: true
           }
         },
-        // remove the file from filesToPublish
         filesToPublish: state.filesToPublish.filter(f => !f.cid.equals(action.cid))
       }
+    }
 
     case 'publish_reset_dir':
       return {
