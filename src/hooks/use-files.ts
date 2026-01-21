@@ -19,15 +19,10 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
   const isFirstAdd = Object.keys(filesState.files).length === 0
 
   return (files: File[]) => {
-    // BUGFIX: clear MFS when UI state is empty to prevent sharing files from previous sessions.
-    //
+    // BUGFIX: clear MFS only when starting fresh (no files in UI yet).
     // MFS is persisted in IndexedDB and survives page reloads and tab closes.
-    // Without this clear, old files remain in MFS and get included in the share
-    // link (which is generated from `mfs.stat('/')` CID covering ALL files in MFS root).
-    //
-    // NOTE: if this code is ever refactored, consider making UI state reflect MFS
-    // state from the start, to avoid risk of generating share link with EXTRA
-    // files from previous uploads that user is not aware of.
+    // Without this clear, old files would be included in the share link.
+    // Note: isFirstAdd is false when user clicks "Add files" again, so existing files are preserved.
     const clearIfNeeded = isFirstAdd
       ? (async () => {
           for await (const entry of mfs.ls('/')) {
@@ -36,10 +31,13 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
         })()
       : Promise.resolve()
 
+    // Process files sequentially to ensure directory imports work correctly.
+    // MFS cannot handle parallel writes - only the last file would appear in the directory.
+    let chain = clearIfNeeded
     for (const _file of files) {
       const name = _file.name
 
-      clearIfNeeded.then(async () => {
+      chain = chain.then(async () => {
         const content = blobToIt(_file)
         await mfs.writeByteStream(content, name)
         const { cid } = await mfs.stat(`/${name}`)
@@ -54,7 +52,6 @@ export function useAddFiles (dispatch: Dispatch<FilesAction>, heliaState: HeliaC
         }
         dispatch({ type: 'add_start', ...file })
         dispatch({ type: 'add_success', id: cid.toString(), cid })
-        return cid
       }).catch((err: Error) => {
         console.error('error adding a file', err)
         // dispatch({ type: 'add_fail', id, error: err })
