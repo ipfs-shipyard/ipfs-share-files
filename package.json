@@ -114,7 +114,7 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-helmet": "^6.1.11",
     "@types/react-modal": "^3.16.3",
-    "@types/shortid": "^0.0.32",
+    "@types/shortid": "^2.2.0",
     "@vitejs/plugin-react": "^4.3.2",
     "aegir": "^44.1.2",
     "ecstatic": "^4.1.4",
