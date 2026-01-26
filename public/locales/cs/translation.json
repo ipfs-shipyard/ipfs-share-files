@@ -42,7 +42,7 @@
       "title": "Jak funguje IPFS Share",
       "ariaLabel": "Modální okno vysvětlující, jak funguje sdílení IPFS",
       "copy": "IPFS Share je jednoduchý a bezplatný způsob sdílení souborů, aniž byste se museli spoléhat na služby provozované velkými společnostmi. Místo toho používá protokol IPFS peer-to-peer pro sdílení přímo mezi zařízeními. Systém IPFS je postaven na adresování obsahu - sleduje soubory na základě toho, co obsahují, nikoliv kde jsou umístěny - což znamená, že soubory nelze měnit, aniž by se změnila i jejich adresa. Jinými slovy, když stahujete soubor pomocí systému IPFS, můžete si být jisti, že je přesně takový, jaký zamýšlel odesílatel.",
-      "learnMore": "Navštivte <1>webové stránky IPFS</1> a zjistěte, jak IPFS mění internet. Zajímá vás, jak funguje adresování obsahu? Navštivte <3>ProtoSchool</3>, kde najdete výukové programy a další zdroje."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Opětovné sdílení přijatých souborů",
@@ -60,7 +60,7 @@
       "title": "Co je to CID?",
       "ariaLabel": "Modální popis identifikátorů obsahu",
       "copy": "Identifikátory obsahu (CID) jsou kryptograficky generované otisky prstů, které umožňují systému IPFS vyhledávat a doručovat soubory. Protože systém IPFS identifikuje soubory podle toho, co obsahují, a ne podle toho, kde jsou umístěny, ukazuje identifikátor CID nejen na konkrétní soubor, ale také na konkrétní verzi - pokud je soubor změněn, změní se i identifikátor CID. Když sdílíte soubor pomocí služby IPFS Share, můžete zjistit jeho CID tak, že v odkazu na sdílení vyhledáte dlouhý řetězec znaků začínající na \"bafy\".",
-      "learnMore": "Chcete proniknout hlouběji do fungování identifikátorů obsahu? Navštivte <1>ProtoSchool</1>, kde najdete výukové programy a další zdroje o decentralizovaných webových technologiích, díky nimž IPFS funguje."
+      "learnMore": ""
     }
   },
   "addFiles": "Přidat soubory",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Kliknutím sem otevřete rozbalovací nabídku"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

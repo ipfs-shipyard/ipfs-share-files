@@ -42,7 +42,7 @@
       "title": "Jak działa IPFS Share",
       "ariaLabel": "Okno wyjaśniające jak działa IPFS Share",
       "copy": "IPFS Share to prosty, darmowy sposób na udostępnianie plików bez polegania na usługach wielkich korporacji. Zamiast tego wykorzystuje protokół peer-to-peer IPFS do bezpośredniego udostępniania między urządzeniami. IPFS opiera się na adresowaniu zawartości, czyli śledzeniu plików na podstawie ich zawartości, a nie lokalizacji. Oznacza to, że pliki nie mogą zostać zmodyfikowane bez zmiany ich adresów. Innymi słowy, pobierając plik przez IPFS, masz pewność, że jest dokładnie taki, jaki wysłał nadawca.",
-      "learnMore": "Dowiedz się, jak IPFS zmienia internet, odwiedzając <1>stronę IPFS</1>. Ciekawi cię, jak działa adresowanie zawartości? Odwiedź <3>ProtoSchool</3>, aby poznać tutoriale i inne materiały."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Przekazywanie otrzymanych plików dalej",
@@ -60,7 +60,7 @@
       "title": "Co to jest CID?",
       "ariaLabel": "Okno opisujące identyfikatory zawartości",
       "copy": "Identyfikatory zawartości (CID) to kryptograficznie generowane odciski palców, które pozwalają IPFS znajdować i dostarczać pliki. Ponieważ IPFS identyfikuje pliki przez ich zawartość, a nie lokalizację, CID wskazuje nie tylko na konkretny plik, ale też na jego konkretną wersję. Jeśli plik zostanie zmodyfikowany, zmieni się też CID. Udostępniając plik przez IPFS Share, możesz zobaczyć jego CID w linku jako długi ciąg znaków zaczynający się od \"bafy\".",
-      "learnMore": "Chcesz zagłębić się w działanie identyfikatorów zawartości? Odwiedź <1>ProtoSchool</1>, aby poznać tutoriale i inne materiały o zdecentralizowanych technologiach webowych, które napędzają IPFS."
+      "learnMore": ""
     }
   },
   "addFiles": "Dodaj pliki",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Kliknij, aby otworzyć menu rozwijane"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

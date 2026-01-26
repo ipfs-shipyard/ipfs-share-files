@@ -42,7 +42,7 @@
       "title": "IPFS Share 是如何工作的？",
       "ariaLabel": "解释 IPFS Share 是如何工作的",
       "copy": "IPFS Share 是一种简单、免费的文件共享方式，无需依赖那些大型公司的服务。相反，它使用点对点 IPFS 协议在设备之间直接共享。 IPFS 是围绕内容寻址而构建的——根据文件所包含的内容而不是文件所在的位置来跟踪文件——只要文件的地址不变，此文件也不会被修改。换句话说，当您使用 IPFS 下载一个文件时，您可以确保它与发送者所期望的完全相同。",
-      "learnMore": "通过访问 <1>IPFS 站点</1>了解IPFS是如何改变互联网的。您想知道内容寻址是如何工作的吗？访问 <3>ProtoSchool</3> 获取教程和其他资源。"
+      "learnMore": ""
     },
       "reprovide": {
       "title": "正在共享您收到的文件",
@@ -60,7 +60,7 @@
       "title": "CID 是什么？",
       "ariaLabel": "描述内容标识符 (CID)",
       "copy": "内容标识符（Content identifiers，CID）是通过加密生成的指纹以允许IPFS查找和传递文件。由于 IPFS 是通过文件的内容而不是位置来标识文件，所以 CID 不仅指向特定的文件，而且还指向特定的版本—如果文件被修改，CID 也会随之更改。当您使用 IPFS Share 共享文件时，您可以通过在共享链接中查找以“bafy”开头的长字符串来查看其 CID。",
-      "learnMore": "想深入了解内容标识符 (CID) 的工作原理吗？访问 <1>ProtoSchool</1> 获取教程和其他去中心化网络技术教程以推动IPFS的发展。"
+      "learnMore": ""
     }
   },
   "addFiles": "添加文件",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "点击此处展开下拉菜单"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }
