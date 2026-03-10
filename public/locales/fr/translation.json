@@ -42,7 +42,7 @@
       "title": "Comment fonctionne IPFS Share",
       "ariaLabel": "Fenêtre modale expliquant comment fonctionne IPFS",
       "copy": "iPFS Share est un moyen simple et gratuit de partager des fichiers sans utiliser de services tiers opéré par de grosses entreprises. À la place, il utilise le protocole pair-à-pair IPFS pour échanger directement entre les appareil. IPFS est construit autour de l'adressage par le contenu (gérer les fichiers en fonction de ce qu'ils contiennent, pas d'où ils se trouvent), ce qui veut dire que les fichiers ne peuvent pas être modifiés sans que leur adresse change aussi. En d'autres termes, quand vous téléchargez un fichier grâce à IPFS, vous pouvez être sûr(e) qu'il s'agit du fichier exact envoyé par l'envoyeur.",
-      "learnMore": "Apprenez comment IPFS est en train de changer Internet en visitant le <1>site web d'IPFS</1>. Vous êtes curieux de savoir comment fonctionne l'adressage par le contenu? Allez sur <3>ProtoSchool</3> pour trouver des tutoriaux et d'autres ressources."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Repartager les fichiers que vous avez reçus",
@@ -60,7 +60,7 @@
       "title": "Qu'est-ce qu'un CID?",
       "ariaLabel": "Fenêtre modale décrivant les identifiants de contenu",
       "copy": "Les \"Content Identifiers\" (Identifiants de Contenu, ou CID) sont des empreintes cryptographiques générées pour permettre à IPFS de trouver et transmettre des fichiers. Puisqu'IPFS identifie les fichiers par ce qu'ils contiennent et non par l'endroit où ils se trouvent, un CID pointe non seulement vers un fichier en particulier, mais vers une version spécifique. Si le fichier est modifié, le CID change aussi. Quand vous partagez un fichier avec IPFS Share, vous pouvez voir son CID en regardant dans le lien de partage la longue suite de charactères commençant par \"bafy\".",
-      "learnMore": "Vous voulez en savoir encore plus sur le fonctionnement des Identifiants de Contenu? Allez sur <1>ProtoSchool</1> pour trouver des tutoriaux et d'autres ressources sur les technologies du web decentralisé qui font fonctionner IPFS."
+      "learnMore": ""
     }
   },
   "addFiles": "Ajouter des fichiers",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Cliquez ici pour dérouler le menu"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

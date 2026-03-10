@@ -42,7 +42,7 @@
       "title": "Como o IPFS Share funciona",
       "ariaLabel": "Como o IPFS Share funciona",
       "copy": "O IPFS Share é uma maneira simples e gratuita de compartilhar arquivos sem a necessidade de depender de serviços executados por grandes corporações. Em vez disso, ele usa o protocolo IPFS ponto a ponto para compartilhar diretamente entre dispositivos. O IPFS é construído em torno do endereçamento de conteúdo - mantendo o controle dos arquivos com base no que eles contêm, não onde estão localizados - o que significa que os arquivos não podem ser modificados sem alterar seus endereços também. Em outras palavras, ao baixar um arquivo usando IPFS, você pode ter certeza de que é exatamente o mesmo que o remetente pretendia.",
-      "learnMore": "Aprenda como o IPFS está mudando a Internet visitando o <1>site do IPFS</1>. Quer saber como funciona o endereçamento de conteúdo? Visite a <3>ProtoSchool</3> para tutoriais e outros recursos."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Compartilhando novamente os arquivos que você recebeu",
@@ -60,7 +60,7 @@
       "title": "O que é CID?",
       "ariaLabel": "Explicação de identificadores",
       "copy": "Identificadores de conteúdo (CIDs) são impressões digitais geradas criptograficamente que permitem que o IPFS encontre e entregue arquivos. Como o IPFS identifica os arquivos pelo que eles contêm, não onde estão localizados, um CID aponta não apenas para um arquivo específico, mas também para uma versão específica - se o arquivo for modificado, o CID também mudará. Ao compartilhar um arquivo usando o Compartilhamento IPFS, você pode ver seu CID procurando no link de compartilhamento a longa sequência de caracteres que começa com \"bafy\".",
-      "learnMore": "Quer se aprofundar em como funcionam os identificadores de conteúdo? Visite a <1>ProtoSchool</1> para obter tutoriais e outros recursos sobre a tecnologia web descentralizada que faz o IPFS funcionar."
+      "learnMore": ""
     }
   },
   "addFiles": "Adicionar arquivos",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Clique aqui para abrir o menu suspenso"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

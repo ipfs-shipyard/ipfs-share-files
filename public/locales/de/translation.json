@@ -42,7 +42,7 @@
       "title": "So funktioniert IPFS Share",
       "ariaLabel": "Modal zur Erklärung der Funktionsweise von IPFS Share",
       "copy": "IPFS Share ist eine einfache, kostenlose Möglichkeit, Dateien freizugeben, ohne sich auf Dienste großer Unternehmen verlassen zu müssen. Stattdessen verwendet es das Peer-to-Peer IPFS-Protokoll für die direkte Freigabe zwischen Geräten. IPFS basiert auf Inhaltsadressierung — es behält den Überblick über Dateien basierend auf ihrem Inhalt und nicht auf ihrem Speicherort — was bedeutet, dass Dateien nicht geändert werden können, ohne auch ihre Adressen zu ändern. Mit anderen Worten, wenn Du eine Datei mit IPFS herunterlädst, kannst du sicher sein, dass sie genau die gleiche ist, die der Absender auch teilen wollte.",
-      "learnMore": "Erfahre, wie IPFS das Internet verändert, indem Du die <1>IPFS-Website</1> besuchst. Möchtest Du wissen, wie die Inhaltsadressierung funktioniert? Besuche <3>ProtoSchool</3> für Tutorials und andere Ressourcen."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Erhaltene Dateien weiter teilen",
@@ -60,7 +60,7 @@
       "title": "Was ist eine CID?",
       "ariaLabel": "Modal zur Beschreibung von Inhaltskennungen (CID)",
       "copy": "Inhaltsadressierer (CIDs) sind kryptografisch generierte Fingerabdrücke, die es IPFS ermöglichen, Dateien zu finden und zu übertragen. Da IPFS Dateien nach ihrem Inhalt und nicht nach ihrem Speicherort identifiziert, verweist ein CID nicht nur auf eine bestimmte Datei, sondern auch auf eine bestimmte Version — wenn die Datei geändert wird, ändert sich auch die CID. Wenn Du eine Datei mit IPFS Share freigibst, kannst Du ihre CID sehen, indem Du im Freigabelink nach der langen Zeichenfolge suchst, die mit \"bafy\" beginnt.",
-      "learnMore": "Du möchtest mehr über die Funktionsweise von Inhaltskennungen erfahren? Besuche <1>ProtoSchool</1> für Tutorials und andere Ressourcen zur dezentralisierten Webtechnologie, die IPFS antreibt."
+      "learnMore": ""
     }
   },
   "addFiles": "Dateien hinzufügen",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Klicke hier, um das Dropdown-Menü zu öffnen"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

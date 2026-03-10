@@ -42,7 +42,7 @@
       "title": "Come funziona IPFS Share",
       "ariaLabel": "Modale che spiega come funziona IPFS Share",
       "copy": "IPFS Share è un modo semplice e gratuito per condividere file senza dover fare affidamento su servizi gestiti da grandi aziende. Invece, utilizza il protocollo peer-to-peer IPFS per la condivisione direttamente tra i dispositivi. IPFS è costruito intorno all'indirizzamento dei contenuti - tenendo traccia dei file in base a ciò che contengono, non dove si trovano - il che significa che i file non possono essere modificati senza cambiare anche i loro indirizzi. In altre parole, quando scarichi un file usando IPFS, puoi essere sicuro che è esattamente lo stesso che il mittente intendeva.",
-      "learnMore": "Scopri come IPFS sta cambiando Internet visitando il <1>sito web IPFS</1>. Sei curioso di sapere come funziona l'indirizzamento dei contenuti? Visita <3>ProtoSchool</3> per tutorial e altre risorse."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Ri-condividi i file che hai ricevuto",
@@ -60,7 +60,7 @@
       "title": "Che cos'è un CID?",
       "ariaLabel": "Modale che descrive gli identificatori di contenuto",
       "copy": "Gli identificatori di contenuto (CID) sono impronte digitali generate crittograficamente che permettono a IPFS di trovare e consegnare i file. Poiché IPFS identifica i file in base a ciò che contengono, non a dove si trovano, un CID punta non solo ad un particolare file, ma anche ad una specifica versione - se il file viene modificato, cambia anche il CID. Quando condividi un file usando IPFS Share, puoi vedere il suo CID cercando nel link di condivisione la lunga stringa di caratteri che inizia con \"bafy\".",
-      "learnMore": "Vuoi scavare più a fondo su come funzionano gli identificatori di contenuto? Visita <1>ProtoSchool</1> per tutorial e altre risorse sulla tecnologia web decentralizzata che rende funzionante IPFS."
+      "learnMore": ""
     }
   },
   "addFiles": "Aggiungi file",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Clicca qui per aprire il menù a tendina"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

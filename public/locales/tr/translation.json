@@ -42,7 +42,7 @@
       "title": "IPFS Paylaşımı nasıl çalışır?",
       "ariaLabel": "IPFS Share'in nasıl çalıştığını açıklayan modal",
       "copy": "IPFS Share, büyük şirketler tarafından yürütülen hizmetlere güvenmek zorunda kalmadan dosyaları paylaşmanın basit ve ücretsiz bir yoludur. Bunun yerine, cihazlar arasında doğrudan paylaşım için eşler arası IPFS protokolünü kullanır. IPFS, içerik adresleme üzerine kuruludur - dosyaları bulundukları yere göre değil, içerdiklerine göre takip eder - bu, dosyaların adresleri değiştirilmeden değiştirilemeyeceği anlamına gelir. Başka bir deyişle, IPFS kullanarak bir dosya indirdiğinizde, dosyanın gönderenin amaçladığı ile tamamen aynı olduğundan emin olabilirsiniz.",
-      "learnMore": "<1>IPFS web sitesini</1> ziyaret ederek IPFS'nin interneti nasıl değiştirdiğini öğrenin.  İçerik adreslemenin nasıl çalıştığını merak mı ediyorsunuz? Eğitimler ve diğer kaynaklar için <3>ProtoSchool</3>'u ziyaret edin."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Aldığınız dosyaları yeniden paylaşma",
@@ -60,7 +60,7 @@
       "title": "CID nedir?",
       "ariaLabel": "İçerik tanımlayıcılarını açıklayan modal",
       "copy": "İçerik tanımlayıcıları (CID'ler), IPFS'nin dosyaları bulmasına ve teslim etmesine izin veren kriptografik olarak oluşturulmuş parmak izleridir. IPFS, dosyaları bulundukları yere göre değil, içerdiklerine göre tanımladığından, bir CID yalnızca belirli bir dosyaya değil, aynı zamanda belirli bir sürüme de işaret eder - dosya değiştirilirse CID de değişir. IPFS Paylaşımı kullanarak bir dosya paylaştığınızda, \"bafy\" ile başlayan uzun karakter dizisi için paylaşım bağlantısına bakarak CID'sini görebilirsiniz.",
-      "learnMore": "İçerik tanımlayıcıların nasıl çalıştığını daha derinlemesine incelemek ister misiniz? IPFS'yi harekete geçiren merkezi olmayan web teknolojisiyle ilgili eğitimler ve diğer kaynaklar için <1>ProtoSchool</1>'u ziyaret edin."
+      "learnMore": ""
     }
   },
   "addFiles": "Dosyaları ekle",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Açılır menüyü açmak için burayı tıklayın"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }

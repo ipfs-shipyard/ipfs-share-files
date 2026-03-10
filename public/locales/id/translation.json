@@ -42,7 +42,7 @@
       "title": "Cara kerja Berbagi IPFS",
       "ariaLabel": "Modal menjelaskan cara kerja Berbagi IPFS",
       "copy": "IPFS Share adalah cara sederhana dan gratis untuk berbagi berkas tanpa harus bergantung pada layanan yang dijalankan oleh perusahaan besar. Sebagai gantinya, ia menggunakan protokol IPFS peer-to-peer untuk berbagi langsung antar perangkat. IPFS dibangun di sekitar pengalamatan konten — melacak berkas berdasarkan apa yang dikandungnya, bukan di mana lokasinya — yang berarti bahwa berkas tidak dapat dimodifikasi tanpa mengubah alamatnya juga. Dengan kata lain, saat Anda mengunduh berkas menggunakan IPFS, Anda dapat yakin bahwa berkas tersebut sama persis dengan yang diinginkan pengirim.",
-      "learnMore": "Pelajari bagaimana IPFS mengubah internet dengan mengunjungi <1>situs web IPFS</1>. Ingin tahu tentang cara kerja pengalamatan konten? Kunjungi <3>ProtoSchool</3> untuk tutorial dan sumber daya lainnya."
+      "learnMore": ""
     },
       "reprovide": {
       "title": "Berbagi ulang berkas yang Anda terima",
@@ -60,7 +60,7 @@
       "title": "Apa itu CID?",
       "ariaLabel": "Modal yang menjelaskan pengidentifikasi konten",
       "copy": "Pengidentifikasi konten (CID) adalah sidik jari yang dihasilkan secara kriptografis yang memungkinkan IPFS menemukan dan mengirimkan berkas. Karena IPFS mengidentifikasi berkas berdasarkan isinya, bukan lokasinya, CID tidak hanya menunjuk ke berkas tertentu, tetapi juga versi tertentu — jika berkas diubah, CID juga berubah. Saat Anda membagikan berkas menggunakan Berbagi IPFS, Anda dapat melihat CID-nya dengan melihat di berbagi tautan untuk rangkaian karakter yang panjang dimulai dengan \"bafy\".",
-      "learnMore": "Ingin menggali lebih dalam tentang cara kerja pengidentifikasi konten? Kunjungi <1>ProtoSchool</1> untuk tutorial dan sumber daya lainnya tentang teknologi web terdesentralisasi yang membuat IPFS tergerak."
+      "learnMore": ""
     }
   },
   "addFiles": "Tambahkan berkas",
@@ -84,5 +84,14 @@
   },
   "dropdown": {
     "clickLabel": "Klik di sini untuk membuka tarik-turun"
+  },
+  "nodeInfo": {
+    "peerId": "",
+    "listeningAddrs": "",
+    "listeningAddrsValue": "",
+    "dialable": "",
+    "connections": "",
+    "connectionsValue": "",
+    "provideToDHT": ""
   }
 }
