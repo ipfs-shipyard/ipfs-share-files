@@ -42,7 +42,7 @@
       "title": "Comment fonctionne IPFS Share",
       "ariaLabel": "Fenêtre modale expliquant comment fonctionne IPFS",
       "copy": "iPFS Share est un moyen simple et gratuit de partager des fichiers sans utiliser de services tiers opéré par de grosses entreprises. À la place, il utilise le protocole pair-à-pair IPFS pour échanger directement entre les appareil. IPFS est construit autour de l'adressage par le contenu (gérer les fichiers en fonction de ce qu'ils contiennent, pas d'où ils se trouvent), ce qui veut dire que les fichiers ne peuvent pas être modifiés sans que leur adresse change aussi. En d'autres termes, quand vous téléchargez un fichier grâce à IPFS, vous pouvez être sûr(e) qu'il s'agit du fichier exact envoyé par l'envoyeur.",
-      "learnMore": ""
+      "learnMore": "Découvrez comment IPFS est en train de changer internet en visitant le <1>site d'IPFS</1>. Curieux d'apprendre comment fonctionne l'adressage par le contenu? Consultez la <3>documentation officielle d'IPFS</3>."
     },
       "reprovide": {
       "title": "Repartager les fichiers que vous avez reçus",
@@ -60,7 +60,7 @@
       "title": "Qu'est-ce qu'un CID?",
       "ariaLabel": "Fenêtre modale décrivant les identifiants de contenu",
       "copy": "Les \"Content Identifiers\" (Identifiants de Contenu, ou CID) sont des empreintes cryptographiques générées pour permettre à IPFS de trouver et transmettre des fichiers. Puisqu'IPFS identifie les fichiers par ce qu'ils contiennent et non par l'endroit où ils se trouvent, un CID pointe non seulement vers un fichier en particulier, mais vers une version spécifique. Si le fichier est modifié, le CID change aussi. Quand vous partagez un fichier avec IPFS Share, vous pouvez voir son CID en regardant dans le lien de partage la longue suite de charactères commençant par \"bafy\".",
-      "learnMore": ""
+      "learnMore": "Envie de creuser comment fonctionnent les identifiants de contenu ? Consultez la <1>documentation officielle d'IPFS</1> pour découvrir le web décentralisé qui fait marcher IPFS."
     }
   },
   "addFiles": "Ajouter des fichiers",
@@ -86,12 +86,12 @@
     "clickLabel": "Cliquez ici pour dérouler le menu"
   },
   "nodeInfo": {
-    "peerId": "",
-    "listeningAddrs": "",
-    "listeningAddrsValue": "",
-    "dialable": "",
-    "connections": "",
-    "connectionsValue": "",
-    "provideToDHT": ""
+    "peerId": "ID du pair",
+    "listeningAddrs": "Addresses d'écoute",
+    "listeningAddrsValue": "{total} (relayés: {relayed}, WebRTC: {webRtc}, Secure WebSockets: {secureWs}, WebRTC Direct: {webRtcDirect}, WebTransport: {webTransport}, WebSockets:{ws})",
+    "dialable": "Contactable depuis d'autres navigateurs",
+    "connections": "Connexions",
+    "connectionsValue": "{total} ({inbound}entrant, {outbound} sortant, {unlimited} illimité/direct)",
+    "provideToDHT": "Annoncez des CIDs sur la DHT Amino"
   }
 }
